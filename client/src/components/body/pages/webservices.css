@@ -1,0 +1,45 @@
+.webservices-page {
+  background-color: #ffc560;
+  padding: 1rem 1rem;
+}
+
+.page-tittle {
+  height: 4rem;
+  width: 24rem;
+  margin: 0px auto;
+  padding: 0.5rem 0.5rem;
+  background-color: #ffffff;
+  text-align: center;
+  border: 0.5rem solid #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+}
+
+.contents {
+  width: 80%;
+  height: 27rem;
+  background-color: #fff;
+  margin: 1rem auto;
+  border: 0.1rem solid #000;
+  border-radius: 0.5rem;
+  padding: 1rem 1rem;
+}
+
+.contents h3 {
+  text-align: center;
+  /* font-size: 1.4rem; */
+  margin: 1rem 1rem;
+}
+
+.details p,
+.contents p {
+  margin: 1rem 0px;
+  color: #fff;
+}
+
+.contents .details {
+  background-color: #000;
+  color: #fff;
+  border-radius: 1rem;
+  padding: 0.1rem 0.5rem;
+}

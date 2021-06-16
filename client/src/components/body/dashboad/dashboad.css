@@ -1,0 +1,4 @@
+.dashboad_page {
+  display: flex;
+  flex-wrap: wrap;
+}

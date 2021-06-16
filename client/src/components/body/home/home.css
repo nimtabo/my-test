@@ -1,0 +1,163 @@
+/* Hero start */
+.home_page .hero {
+  width: 100%;
+  height: 650px;
+  left: 0px;
+
+  background: url(../../../img/motorpatsyards.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* mix-blend-mode: darken; */
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-text,
+.hero-form {
+  width: 45%;
+  height: 25rem;
+  /* background-color: aqua; */
+  margin: 2%;
+}
+
+.hero-text {
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 5rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.hero-text h3 {
+  margin: 2rem auto;
+}
+
+.hero-form form {
+  background: #ffffff;
+  mix-blend-mode: normal;
+  border: 5px solid #000000;
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 0.1rem 1rem;
+}
+
+.hero-form form div {
+  width: 100%;
+  /* height: 4rem; */
+  padding: 1rem;
+}
+
+.hero-form form div label {
+  display: inline-block;
+  width: 20%;
+}
+
+.hero-form form div select,
+.hero-form form div input {
+  width: 60%;
+  height: 2rem;
+}
+
+.hero-form-pricing {
+  background-color: #000;
+  color: #fff;
+  border-radius: 5px;
+  margin: 0.5rem 0px;
+}
+
+.hero-form-pricing h2 {
+  text-align: center;
+  /* margin-top: -1rem; */
+}
+
+.hero-form-pricing h4 {
+  width: 20%;
+  color: #fff;
+  display: inline-block;
+}
+
+.hero-form-pricing p {
+  display: inline-block;
+  color: #fff;
+  margin-left: 25%;
+}
+
+.pay_success_head {
+  color: #29b260;
+  text-align: center;
+}
+
+#pay_success_text {
+  text-align: center;
+  margin-left: 0px;
+  margin: 10%;
+  font-size: 20px;
+  line-height: 40px;
+}
+/* .hero-form form div .hero-make,
+.hero-form form div .hero-year,
+.hero-form form div .hero-part {
+  margin-left: 12%;
+} */
+
+/* .hero-form form div .hero-model {
+  margin-left: 9%;
+} */
+/* 
+.hero-form form div input {
+  margin-left: 6%;
+} */
+
+.hero-form form div button {
+  margin-left: 55%;
+  background: #ffc560;
+  border: 1px solid #000000;
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  width: 8rem;
+  height: 1.8rem;
+}
+
+.hero-form form div button > a {
+  color: #000;
+}
+
+.home_page .subscribe {
+  background: #ffc560;
+  height: 5rem;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.home_page .subscribe .sub-text {
+  width: 40%;
+  font-weight: 800;
+  text-align: left;
+  padding-left: 4rem;
+}
+
+.home_page .subscribe input {
+  width: 30%;
+}
+
+.home_page .subscribe .sub-btn {
+  /* width: 10%; */
+  margin-left: 3rem;
+  padding: 1rem 1.3rem;
+
+  background: #000201;
+  color: #fff;
+  border: 1px solid #1b1b1b;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.home_page .subscribe .sub-btn:hover {
+  cursor: pointer;
+}

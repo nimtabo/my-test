@@ -1,0 +1,67 @@
+.about-us-page {
+  background-color: #ffc560;
+  padding: 1rem 1rem;
+}
+
+.page-title {
+  height: 8rem;
+  width: 25rem;
+  margin: 0px auto;
+  background-color: #ffffff;
+  text-align: center;
+  border: 0.5rem solid #fff;
+  border-radius: 0.5rem;
+}
+/* .top-container,
+.bottom-container {
+  width: 100%;
+} */
+
+.top-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.left-item,
+.right-item {
+  height: 15rem;
+  background-color: #fff;
+  border: 0.1rem solid #000;
+  width: 38.5%;
+  margin: 0.1rem 1rem;
+  border-radius: 1rem;
+  padding: 1rem 1rem;
+}
+
+.left-item p {
+  margin: 1rem auto;
+}
+.bottom-container {
+  background-color: #fff;
+  margin: 1rem auto;
+  width: 80%;
+  border-radius: 1rem;
+  border: 0.1rem solid #000;
+  padding: 1rem 1rem;
+}
+
+.profiles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bottom-container h3 {
+  text-align: center;
+}
+
+.team-profile {
+  margin: 1rem 1rem;
+  height: 15rem;
+  width: 15rem;
+  background-color: #000;
+}
