@@ -29,10 +29,6 @@ function HomeWebConfirm() {
                 We will contact you soon via email.
               </p>
             </div>
-
-            <div>
-              <button type="submit">Search</button>
-            </div>
           </form>
         </div>
       </div>

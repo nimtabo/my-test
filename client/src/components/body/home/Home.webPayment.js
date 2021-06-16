@@ -38,7 +38,7 @@ function HomeWebPayment() {
 
 
             <div>
-              <button type="submit"><Link to="/webs_confirms">Submit</Link></button>
+              <button><Link to="/webs_confirms">Submit</Link></button>
             </div>
           </form>
         </div>

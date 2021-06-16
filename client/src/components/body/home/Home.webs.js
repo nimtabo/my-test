@@ -36,7 +36,7 @@ function HomeWebs() {
             </div>
 
             <div>
-              <button type="submit"><Link to="/webs_plans">NEXT</Link></button>
+              <button><Link to="/webs_plans">NEXT</Link></button>
             </div>
           </form>
         </div>

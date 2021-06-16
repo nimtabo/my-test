@@ -47,7 +47,7 @@ function HomeWebPrice() {
             </div>
 
             <div>
-              <button type="submit"><Link to="/webs_pay">PAYMENT</Link></button>
+              <button><Link to="/webs_pay">PAYMENT</Link></button>
             </div>
           </form>
         </div>
