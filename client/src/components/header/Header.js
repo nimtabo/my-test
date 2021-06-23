@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 
+import logo from '../../img/fiaraalogo.PNG'
+
 
 function Header() {
     const auth = useSelector(state => state.auth)
@@ -31,6 +33,18 @@ function Header() {
 
     const userLink = () => {
         return <>
+            <div className="service_dropdown">
+                <button className="dropbtn">Services</button>
+                <div className="dropdown-content">
+                    <Link to="/">FIND YOUR PART</Link>
+                    <Link to="/get_website">WEBSITE SERVICES</Link>
+                    <Link to="/#">SELL YOUR USED CAR</Link>
+                </div>
+            </div>
+            <li className="register"><Link to="/pricing">Pricing</Link></li>
+            <li className="register"><Link to="/about">About Us</Link></li>
+            <li className="register"><Link to="/contacts">Contact Us</Link></li>
+            {/* ******************** */}
             <li className="drop-nav">
                 <Link to="#" className="avatar">
                     <img src={user.avatar} alt="" /> {user.name} <i className="fas fa-angle-down"></i>
@@ -51,16 +65,7 @@ function Header() {
     return (
         <header className="topnav" id="myTopnav">
             <div className="logo">
-                <h1><Link to="/">Fiaraa</Link></h1>
-            </div>
-
-            <div className="service_dropdown">
-                <button className="dropbtn">Services</button>
-                <div className="dropdown-content">
-                    <Link to="/">FIND YOUR PART</Link>
-                    <Link to="/get_website">WEBSITE SERVICES</Link>
-                    <Link to="/#">SELL YOUR USED CAR</Link>
-                </div>
+                <Link to="/"><img src={logo} alt="fiaraa-logo" /></Link>
             </div>
 
             <ul style={transForm}>
@@ -68,6 +73,18 @@ function Header() {
                     isLogged
                         ? userLink()
                         : <>
+                            <div className="service_dropdown">
+                                <button className="dropbtn">Services</button>
+                                <div className="dropdown-content">
+                                    <Link to="/">FIND YOUR PART</Link>
+                                    <Link to="/get_website">WEBSITE SERVICES</Link>
+                                    <Link to="/#">SELL YOUR USED CAR</Link>
+                                </div>
+                            </div>
+                            <li className="register"><Link to="/pricing">Pricing</Link></li>
+                            <li className="register"><Link to="/about">About Us</Link></li>
+                            <li className="register"><Link to="/contacts">Contact Us</Link></li>
+                            {/* ************** */}
                             <li className="register"><Link to="/register">Register</Link></li>
                             <li className="login"><Link to="/login"><i className="fas fa-user"></i> Sign in</Link></li>
                             {/* <Link className="icon" onClick={handleMenu}>menu</Link> */}

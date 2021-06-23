@@ -8,6 +8,12 @@ header {
   flex-wrap: wrap;
   padding: 0 30px;
 }
+
+.topnav .logo img {
+  max-height: 50px;
+  max-width: 200px;
+}
+
 header a {
   color: #000201;
   text-transform: uppercase;
@@ -56,6 +62,9 @@ header ul li img {
   font-weight: 800;
   border: none;
   cursor: pointer;
+
+  /* background-color: #000201; */
+  /* border-radius: 20px; */
 }
 
 /* The container <div> - needed to position the dropdown content */

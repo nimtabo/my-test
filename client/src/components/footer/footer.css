@@ -25,6 +25,7 @@
 .footer_page .left p {
   text-align: center;
   line-height: 2em;
+  color: #fff;
 }
 
 .footer_page h3 {
@@ -47,6 +48,8 @@
 
 .footer_page .right p {
   line-height: 2em;
+  color: #fff;
+  text-align: left;
 }
 
 .footer_page .socials {

@@ -10,7 +10,7 @@ function Footer() {
         <h1>LOGO</h1>
 
         <p>
-          At kar-Part.com we aim to put <br />
+          At fiaraa.com we aim to put <br />
           customer at forefront and provide <br />
           quality products at doorstep
         </p>
@@ -23,10 +23,10 @@ function Footer() {
           <li><Link to="/terms">Terms & Conditions</Link></li>
           <li><Link to="/privacy">Privacy Policy</Link></li>
           <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/contacts">Contact Us</Link></li>
-          <li><Link to="/services">Services Offered</Link></li>
           <li><Link to="/pricing">Pricing</Link></li>
-          <li><Link to="/websites">Website Services</Link></li>
+          <li><Link to="/contacts">Contact Us</Link></li>
+          {/* <li><Link to="/services">Services Offered</Link></li> */}
+          {/* <li><Link to="/websites">Website Services</Link></li> */}
         </ul>
       </div>
       {/* *** */}
