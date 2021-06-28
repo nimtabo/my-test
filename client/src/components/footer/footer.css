@@ -18,13 +18,18 @@
 }
 
 .footer_page .item h1 {
-  margin: 10px 0;
+  /* margin: 5px 0; */
   text-align: center;
+}
+
+.footer_page img {
+  width: 80px;
+  height: 80px;
 }
 
 .footer_page .left p {
   text-align: center;
-  line-height: 2em;
+  line-height: 1.5em;
   color: #fff;
 }
 
