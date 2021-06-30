@@ -32,7 +32,7 @@ function HomeWebs() {
             </div>
 
             <div>
-              <p><a href="#"> Know in detail about website service</a></p>
+              <p><Link to="/websites"> Know in detail about website service</Link></p>
             </div>
 
             <div>

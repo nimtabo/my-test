@@ -4,7 +4,7 @@ import './about.css'
 function About() {
   return (
     <div className="about-us-page">
-      <div className="page-title">
+      <div className="page-title_about">
         <h1>About Us</h1>
         <p>We’re Fiaraa and we’re transforming the used parts bying experience across US</p>
       </div>
@@ -18,7 +18,7 @@ function About() {
             Our online tools are powerful to help connect sellers to buyers in the most cost effective way at your fingertips.
           </p>
         </div>
-        <div className="right-item">Item right</div>
+        {/* <div className="right-item">Item right</div> */}
       </div>
       <div className="bottom-container">
         <h3>Our Team</h3>

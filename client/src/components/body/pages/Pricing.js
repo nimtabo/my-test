@@ -17,21 +17,74 @@ function Pricing() {
             <h3>Free</h3>
             <h3>$0/month</h3>
             <hr />
+
+            <div>
+              <p>
+                Permitted
+                <br />
+                To
+                <br />
+                Upload
+                <br />
+                Maximum
+                <br />
+                2 Parts
+              </p>
+            </div>
           </div>
           <div className="price-card">
             <h3>Bronze</h3>
-            <h3>$100/month</h3>
+            <h3>$10/month</h3>
             <hr />
+            <div>
+              <p>
+                Permitted
+                <br />
+                To
+                <br />
+                Upload
+                <br />
+                Maximum
+                <br />
+                5 Parts
+              </p>
+            </div>
           </div>
           <div className="price-card">
             <h3>Silver</h3>
-            <h3>$150/month</h3>
+            <h3>$15/month</h3>
             <hr />
+            <div>
+              <p>
+                Permitted
+                <br />
+                To
+                <br />
+                Upload
+                <br />
+                Maximum
+                <br />
+                10 Parts
+              </p>
+            </div>
           </div>
           <div className="price-card">
             <h3>Gold</h3>
-            <h3>$200/month</h3>
+            <h3>$20/month</h3>
             <hr />
+            <div>
+              <p>
+                Permitted
+                <br />
+                To
+                <br />
+                Upload
+                <br />
+                Maximum
+                <br />
+                15 Parts
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -47,8 +100,11 @@ function Pricing() {
             <hr />
             <p>
               Your website url will be a subdomain.
+              <br />
               (e.g. yourstorename.carparts.com)
+              <br />
               + 2 free changes per month
+              <br />
               (additional change $3)
             </p>
           </div>
@@ -60,8 +116,11 @@ function Pricing() {
             <p>
               Your website url will be a new domain
               of your choice.
+              <br />
               (e.g. yourstorename.com)
+              <br />
               + 2 free changes per month
+              <br />
               (additional change $3)
             </p>
           </div>
