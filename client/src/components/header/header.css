@@ -62,12 +62,9 @@ header ul li img {
 }
 
 .dropbtn {
-  /* background-color: #ffc560; */
-  /* color: white; */
-
-  padding: 8px;
-  font-size: 20px;
-  /* font-weight: 800; */
+  /* padding: 8px; */
+  padding: 10px 20px;
+  font-size: 16px;
   text-transform: uppercase;
   border: none;
   cursor: pointer;

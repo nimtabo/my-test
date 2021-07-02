@@ -15,7 +15,7 @@ function Footer() {
 
         <p>
           At fiaraa.com we aim to put <br />
-          customer at forefront and provide <br />
+          customers at forefront and provide <br />
           quality products at doorstep
         </p>
       </div>
@@ -27,9 +27,9 @@ function Footer() {
           <li><Link to="/terms">Terms & Conditions</Link></li>
           <li><Link to="/privacy">Privacy Policy</Link></li>
           <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/contacts">Contact Us</Link></li>
+          <li><Link to="/services">Services Offered</Link></li>
+          {/* <li><Link to="/contacts">Contact Us</Link></li> */}
           {/* <li><Link to="/pricing">Pricing</Link></li> */}
-          {/* <li><Link to="/services">Services Offered</Link></li> */}
           {/* <li><Link to="/websites">Website Services</Link></li> */}
         </ul>
       </div>
@@ -38,9 +38,9 @@ function Footer() {
         <h3>NEED HELP ?</h3>
 
         <p>
-          Email: info@domain.com
+          Email: info@fiaraa.com
           <br />
-          Phone No.:+1-(234)-567438
+          Phone No.: +1-(234)-567438
         </p>
 
         <div className="socials">

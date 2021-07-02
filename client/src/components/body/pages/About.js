@@ -22,12 +22,37 @@ function About() {
       </div>
       <div className="bottom-container">
         <h3>Our Team</h3>
+
         <div className="profiles">
-          <div className="team-profile">profile</div>
-          <div className="team-profile">profile</div>
-          <div className="team-profile">profile</div>
-          <div className="team-profile">profile</div>
-          <div className="team-profile">profile</div>
+          <div className="team-profile">
+            <div className="team_image"></div>
+            <p className="team_name">Nicholas Mtabo</p>
+            <p className="team_title">Co-Founder, CTO</p>
+          </div>
+
+          <div className="team-profile">
+            <div className="team_image"></div>
+            <p className="team_name">Upendra Gandhi </p>
+            <p className="team_title">Founder and CEO</p>
+          </div>
+
+          <div className="team-profile">
+            <div className="team_image"></div>
+            <p className="team_name">Zack Tyler</p>
+            <p className="team_title">Co-Founder, SVP of Operations</p>
+          </div>
+
+          <div className="team-profile">
+            <div className="team_image"></div>
+            <p className="team_name">Sambit Mohanty </p>
+            <p className="team_title">Co-Founder, SVP of Website Services</p>
+          </div>
+
+          <div className="team-profile">
+            <div className="team_image"></div>
+            <p className="team_name">Anusha Tripathi</p>
+            <p className="team_title">Co-Founder, SVP of Marketing</p>
+          </div>
         </div>
       </div>
     </div>
