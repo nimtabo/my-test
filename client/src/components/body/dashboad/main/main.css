@@ -2,6 +2,9 @@
   transition: margin-left 0.5s;
   padding: 16px;
   display: inline-block;
+  /* width: min-content; */
+  width: 100%;
+  min-height: 65vh;
 }
 
 .openbtn {

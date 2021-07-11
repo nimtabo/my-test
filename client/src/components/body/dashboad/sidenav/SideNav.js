@@ -9,13 +9,13 @@ function SideNav({ handleOpenNav, width }) {
 
   return (
     <>
-      <div class="sidebar" style={{ width: width }}>
-        <button class="closebtn" onClick={handleOpenNav}>X</button>
-        <Link>Dashboad</Link>
+      <div className="sidebar" style={{ width: width }}>
+        <button className="closebtn" onClick={handleOpenNav}>X</button>
+        <Link to="/dashboad">Dashboad</Link>
         <Link to="/shops">Shops</Link>
-        <Link>Products</Link>
-        <Link>Users</Link>
-        <Link>Settings</Link>
+        <Link to="#">Products</Link>
+        <Link to="#">Users</Link>
+        <Link to="#">Settings</Link>
       </div>
 
       {/* <div id="main" style={{ marginLeft: leftMargin }}>

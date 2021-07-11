@@ -100,27 +100,15 @@
   font-size: 20px;
   line-height: 40px;
 }
-/* .hero-form form div .hero-make,
-.hero-form form div .hero-year,
-.hero-form form div .hero-part {
-  margin-left: 12%;
-} */
-
-/* .hero-form form div .hero-model {
-  margin-left: 9%;
-} */
-/* 
-.hero-form form div input {
-  margin-left: 6%;
-} */
 
 .hero-form form div button {
-  margin-left: 30%;
+  margin: 0px 30%;
+  /* margin-left: 30%; */
   background: #ffc560;
   border: 1px solid #000000;
   box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  width: 15rem;
+  width: 40%;
   height: 2.5rem;
   font-weight: 500;
   font-size: 20px;

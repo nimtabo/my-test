@@ -28,7 +28,7 @@
 
 .left-item,
 .right-item {
-  height: 15rem;
+  /* height: 15rem; */
   background-color: #fff;
   border: 0.1rem solid #000;
   width: 45%;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Login from './auth/Login'
 import Register from './auth/Register'
@@ -28,10 +28,18 @@ import HomeWebs from './home/Home.webs'
 import HomeWebPrice from './home/Home.webPrice'
 import HomeWebPay from './home/Home.webPayment'
 import HomeWebConfirm from './home/Home.webConfirm'
+import Shops from './dashboad/pages/Shops'
 
 function Body() {
     const auth = useSelector(state => state.auth)
-    const { isLogged, isAdmin } = auth
+    const { isLogged, isAdmin } = auth;
+
+    const [width, setWidth] = useState("0px");
+
+    const handleOpenNav = () => {
+        setWidth(width === "0px" ? "250px" : "0px")
+    }
+
     return (
         <section>
             <Switch>
@@ -48,7 +56,13 @@ function Body() {
                 <Route path="/profile" component={isLogged ? Profile : NotFound} exact />
                 <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
 
-                <Route path="/dashboad" component={isLogged ? Dashboad : NotFound} exact />
+                {/* USER DASHBOARD */}
+                <Route path="/dashboad" exact>
+                    {isLogged ? <Dashboad handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                </Route>
+                <Route path="/shops" exact >
+                    {isLogged ? <Shops handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                </Route>
 
                 {/* PAGES */}
                 <Route path="/about" component={About} exact />

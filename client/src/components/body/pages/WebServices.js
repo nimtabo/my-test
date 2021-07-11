@@ -22,7 +22,7 @@ function WebServices() {
             <li>We can do upto 2 changes per month in website(like updating any content etc.).  For additional changes you have to pay 3$ per update.</li>
           </ul>
 
-          <p>Pro plan(17.77$/month)</p>
+          <p>Pro plan(27.77$/month)</p>
           <ul>
             <li>In this plan you will get a website consist of landing page, contact us page, about us page, terms and conditions page.</li>
             <li>Your website url will be a new domain. e.g.(www.storename.com)</li>
@@ -39,3 +39,8 @@ function WebServices() {
 }
 
 export default WebServices
+
+
+//TODO screen compatibilities Texts // Responsive design// mobile first
+//TODO Pricing on this page
+//TODO Logic moves

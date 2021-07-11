@@ -8,7 +8,7 @@ function NotFound() {
                 <h1>ERROR</h1>
             </div>
 
-            <div className="pricing-plan-parts-container">
+            <div className="error-container">
                 <div className="pricing-plan-tittle">
                     <h3>THE PAGE OR RESOURCE YOU ARE LOOKING FOR IS NOT AVAILABLE</h3>
                 </div>

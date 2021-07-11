@@ -128,6 +128,12 @@ header ul li img {
 .drop-nav .dropdown li {
   display: block;
 }
+
+.drop-nav .dropdown li:hover {
+  background-color: #fff;
+  opacity: 1;
+}
+
 .drop-nav:hover .dropdown {
   display: block;
 }

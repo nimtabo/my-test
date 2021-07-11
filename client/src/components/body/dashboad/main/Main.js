@@ -16,7 +16,7 @@ function Main({ handleOpenNav, width }) {
   return (
     <>
       <div id="main" style={{ marginLeft: width }}>
-        <button class="openbtn" onClick={handleOpenNav}>☰ Open Sidebar</button>
+        <button className="openbtn" onClick={handleOpenNav}>☰ Open Sidebar</button>
         <div>
           <Switch>
             <Route path="/shops" component={isLogged ? Shops : NotFound} exact />

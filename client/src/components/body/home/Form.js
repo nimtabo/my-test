@@ -51,8 +51,3 @@ const Form = () => {
 
 export default Form
 
-//TODO fix footer > remove contact us, add customers, email --- all texts
-// restore services link
-//TODO About us Team
-//TODO HEADER == services dropdown btn
-//TODO Search btn HERO SECTION
