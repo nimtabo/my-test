@@ -80,11 +80,20 @@
   border-radius: 25px;
 }
 
+/* .image-rigt,
+.image-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
+
 .image-side img,
 .image-rigt img {
   width: 100%;
   /* max-width: 100%; */
   height: auto;
+  padding: 20px 0;
 }
 
 .top-head {

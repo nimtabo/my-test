@@ -38,7 +38,7 @@ function Header() {
                 <div className="dropdown-content">
                     <Link to="/">FIND YOUR PART</Link>
                     <Link to="/get_website">WEBSITE SERVICES</Link>
-                    <Link to="/#">SELL YOUR USED CAR</Link>
+                    {/* <Link to="/#">SELL YOUR USED CAR</Link> */}
                 </div>
             </div>
             <li className="login"><Link to="/pricing">Pricing</Link></li>
@@ -76,7 +76,7 @@ function Header() {
                                 <div className="dropdown-content">
                                     <Link to="/">FIND YOUR PART</Link>
                                     <Link to="/get_website">WEBSITE SERVICES</Link>
-                                    <Link to="/#">SELL YOUR USED CAR</Link>
+                                    {/* <Link to="/#">SELL YOUR USED CAR</Link> */}
                                 </div>
                             </div>
                             <li className="login"><Link to="/pricing">Pricing</Link></li>

@@ -17,17 +17,17 @@ function HomeWebs() {
               <h2>WEBSITE SERVICES</h2>
             </div>
             <div>
-              <label htmlFor="zip-code" className="labels">NAME: </label>
+              <label htmlFor="zip-code" className="labels">NAME<span className="asterick"><sup>*</sup></span>: </label>
               <input id="zip-code" />
             </div>
 
             <div>
-              <label htmlFor="zip-code" className="labels">EMAIL: </label>
+              <label htmlFor="zip-code" className="labels">EMAIL<span className="asterick"><sup>*</sup></span>: </label>
               <input id="zip-code" />
             </div>
 
             <div>
-              <label htmlFor="zip-code" className="labels">PHONE NO: </label>
+              <label htmlFor="zip-code" className="labels">PHONE NO<span className="asterick"><sup>*</sup></span>: </label>
               <input id="zip-code" />
             </div>
 

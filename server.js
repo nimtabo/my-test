@@ -16,7 +16,7 @@ app.use(cookieParser())
 app.use(fileUpload({
     useTempFiles: true
 }))
-app.use(morgan('common'));
+app.use(morgan('dev'));
 
 // Routes
 app.use('/user', require('./routes/userRouter'))
