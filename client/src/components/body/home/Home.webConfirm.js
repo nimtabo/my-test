@@ -1,13 +1,15 @@
 import React from 'react'
 import './home.css'
 
+import hero_text from '../../../img/hero_text.svg'
+
 function HomeWebConfirm() {
   return (
     <div className="home_page">
       <div className="hero">
 
         <div className="hero-text">
-          <h3>Wide Selection Of Auto Parts At Lowest Price</h3>
+          <h3>Wide Selection Of Auto Parts At Lowest Price <br /><img src={hero_text} /></h3>
         </div>
 
         <div className="hero-form">
