@@ -42,6 +42,7 @@ function Footer() {
           <br />
           Phone No.: +1-(234)-567438
         </p>
+        <p id="chat_request"><i class="fas fa-comment-dots"></i> Chat Request</p>
 
         <div className="socials">
           <i className="fab fa-facebook"></i>

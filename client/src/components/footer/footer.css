@@ -58,7 +58,7 @@
 }
 
 .footer_page .socials {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .footer_page .socials i {
@@ -70,4 +70,19 @@
   cursor: pointer;
 }
 
+#chat_request {
+  color: #1b1b1b;
+  background-color: #ffc560;
+  width: 163px;
+  height: 36px;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  text-align: center;
+  padding: 1px;
+}
+
+#chat_request:hover {
+  cursor: pointer;
+}
 /* Footer Ends */ ;
