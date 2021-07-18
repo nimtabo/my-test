@@ -5,14 +5,14 @@ const carCtrl = {
   addCar: async (req, res) => {
     try {
       const {
-        make, model, years, engine, category, parts
+        make, model, year, engine, category, parts
       } = req.body;
 
-      if (!make || !model || !years || !engine || !category || !parts)
+      if (!make || !model || !year || !engine || !category || !parts)
         return res.status(400).json({ msg: "Please fill in all fields." })
 
       const newCar = new Car({
-        make, model, years, engine, category, parts
+        make, model, year, engine, category, parts
       });
       const savedCar = await newCar.save();
       res.json({ msg: "Car Created Successfully!", car: savedCar })
@@ -88,7 +88,7 @@ const carCtrl = {
   getModels: async (req, res) => {
     try {
       const { make } = req.params;
-      const models = await Car.find({ make: make }, { model: 1, _id: 0 })
+      const models = await Car.distinct("model", { make })
       if (!models) {
         return res.status(400).json({
           message: "No Model exist!",
@@ -102,7 +102,7 @@ const carCtrl = {
   getYears: async (req, res) => {
     try {
       const { make, model } = req.params;
-      const years = await Car.find({ make: make, model: model }, { years: 1, _id: 0 })
+      const years = await Car.distinct("year", { make: make, model: model })
       if (!years) {
         return res.status(400).json({
           message: "No Years exist!",
@@ -116,7 +116,7 @@ const carCtrl = {
   getEngine: async (req, res) => {
     try {
       const { make, model, year } = req.params;
-      const engine = await Car.find({ make: make, model: model, year: year }, { engine: 1, _id: 0 })
+      const engine = await Car.distinct("engine", { make: make, model: model, year: year })
       if (!engine) {
         return res.status(400).json({
           message: "No Engine exist!",
@@ -130,7 +130,7 @@ const carCtrl = {
   getCategory: async (req, res) => {
     try {
       const { make, model, year, engine } = req.params;
-      const category = await Car.find({ make: make, model: model, year: year, engine: engine }, { category: 1, _id: 0 })
+      const category = await Car.distinct("partcategory", { make: make, model: model, year: year, engine: engine })
       if (!category) {
         return res.status(400).json({
           message: "No Category exist!",
@@ -144,13 +144,13 @@ const carCtrl = {
   getParts: async (req, res) => {
     try {
       const { make, model, year, engine, category } = req.params;
-      const parts = await Car.find({ make: make, model: model, year: year, engine: engine, category: category }, { parts: 1, _id: 0 })
+      const parts = await Car.find({ make: make, model: model, year: year, engine: engine, partcategory: category }, { parts: 1, _id: 0 })
       if (!parts) {
         return res.status(400).json({
           message: "No Parts exist!",
         });
       }
-      res.status(200).json(parts);
+      res.status(200).json(parts[0]);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }

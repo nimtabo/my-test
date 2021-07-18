@@ -23,7 +23,11 @@ const carSchema = new mongoose.Schema({
     trim: true,
   },
   parts: [],
-  years: [],
+  year: {
+    type: String,
+    required: [true, "Please enter car category!"],
+    trim: true,
+  },
 }, {
   timestamps: true
 })

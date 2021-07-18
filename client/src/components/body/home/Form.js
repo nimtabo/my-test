@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Form = () => {
+  const [makes, setMakes] = useState([])
+  const [models, setModels] = useState([])
+  const [year, setYear] = useState([])
+
   return (
     <div>
       <form>

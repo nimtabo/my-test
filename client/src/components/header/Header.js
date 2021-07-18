@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 
 import logo from '../../img/fiaraalogo.svg'
+import services_arrow from '../../img/services_arrow.svg'
 
 
 function Header() {
@@ -72,7 +73,8 @@ function Header() {
                         ? userLink()
                         : <>
                             <div className="service_dropdown">
-                                <button className="dropbtn">Services <i className="fas fa-caret-down"></i></button>
+                                {/* <button className="dropbtn">Services <i className="fas fa-caret-down"></i></button> */}
+                                <button className="dropbtn">Services <img src={services_arrow} /></button>
                                 <div className="dropdown-content">
                                     <Link to="/">FIND YOUR PART</Link>
                                     <Link to="/get_website">WEBSITE SERVICES</Link>
