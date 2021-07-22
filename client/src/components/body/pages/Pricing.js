@@ -10,12 +10,12 @@ function Pricing() {
 
       <div className="pricing-plan-parts-container">
         <div className="pricing-plan-tittle">
-          <h3>Pricing and Plans For Used Auto Parts Sellers</h3>
+          <h2>Pricing and Plans For Used Auto <br /> <span>Parts Sellers</span> </h2>
         </div>
         <div className="pricing-plan-parts">
           <div className="price-card">
             <h3>Free</h3>
-            <h3>$0/month</h3>
+            <h2>$0 <sub className="sub_text">/month</sub> </h2>
             <hr />
 
             <div>
@@ -34,7 +34,7 @@ function Pricing() {
           </div>
           <div className="price-card">
             <h3>Bronze</h3>
-            <h3>$10/month</h3>
+            <h2>$10 <sub className="sub_text">/month</sub> </h2>
             <hr />
             <div>
               <p>
@@ -52,7 +52,7 @@ function Pricing() {
           </div>
           <div className="price-card">
             <h3>Silver</h3>
-            <h3>$15/month</h3>
+            <h2>$15 <sub className="sub_text">/month</sub> </h2>
             <hr />
             <div>
               <p>
@@ -70,7 +70,7 @@ function Pricing() {
           </div>
           <div className="price-card">
             <h3>Gold</h3>
-            <h3>$20/month</h3>
+            <h2>$20 <sub className="sub_text">/month</sub> </h2>
             <hr />
             <div>
               <p>
@@ -91,17 +91,17 @@ function Pricing() {
 
       <div className="pricing-plan-parts-container">
         <div className="pricing-plan-tittle">
-          <h3>Pricing and Plans For Website Services</h3>
+          <h2>Pricing and Plans For Website <br />Services </h2>
         </div>
         <div className="pricing-plan-parts">
           <div className="price-card">
             <h3>Basic</h3>
-            <h3>$17.77/month</h3>
+            <h2>$17.77 <sub className="sub_text">/month</sub> </h2>
             <hr />
             <p>
               Your website url will be a subdomain.
               <br />
-              (e.g. yourstorename.carparts.com)
+              (e.g. yourstorename.fiaraa.com)
               <br />
               + 2 free changes per month
               <br />
@@ -111,7 +111,7 @@ function Pricing() {
 
           <div className="price-card">
             <h3>Pro</h3>
-            <h3>$27.77/month</h3>
+            <h2>$27.77 <sub className="sub_text">/month</sub> </h2>
             <hr />
             <p>
               Your website url will be a new domain

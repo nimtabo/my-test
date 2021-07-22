@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import './footer.css'
 
 import logo_f from '../../img/logo_f.svg'
+import fb from '../../img/fb.svg'
+import ig from '../../img/ig.svg'
+import twitter from '../../img/twitter.svg'
+import youtube from '../../img/youtube.svg'
 
 function Footer() {
   return (
@@ -42,11 +46,21 @@ function Footer() {
           <br />
           Phone No.: +1-(234)-567438
         </p>
-        <p id="chat_request"><i class="fas fa-comment-dots"></i> Chat Request</p>
+        <p id="chat_request"><i className="fas fa-comment-dots"></i> Chat Request</p>
 
         <div className="socials">
-          <i className="fab fa-facebook"></i>
-          <i className="fab fa-twitter"></i>
+          <span>
+            <img alt="" src={fb} />
+          </span>
+          <span>
+            <img alt="" src={twitter} />
+          </span>
+          <span>
+            <img alt="" src={youtube} />
+          </span>
+          <span>
+            <img alt="" src={ig} />
+          </span>
         </div>
       </div>
     </div>

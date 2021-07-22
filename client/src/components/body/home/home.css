@@ -19,7 +19,7 @@
 .hero-text,
 .hero-form {
   width: 45%;
-  height: 25rem;
+  /* height: 25rem; */
   /* background-color: aqua; */
   margin: 2%;
 }
@@ -85,12 +85,25 @@
   width: 20%;
   color: #fff;
   display: inline-block;
+  font-size: 14px;
 }
 
 .hero-form-pricing p {
   display: inline-block;
   color: #fff;
   margin-left: 25%;
+  font-size: 12px;
+}
+
+.hero-form-pricing .check_p {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-left: 95%;
+}
+
+.hero-form-pricing .vertical_line {
+  border-right: thick solid #fff;
 }
 
 .pay_success_head {

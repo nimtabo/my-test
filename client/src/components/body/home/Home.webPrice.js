@@ -10,7 +10,7 @@ function HomeWebPrice() {
       <div className="hero">
 
         <div className="hero-text">
-          <h3>Wide Selection Of Auto Parts At Lowest Price <br /><img src={hero_text} /></h3>
+          <h3>Wide Selection Of Auto Parts At Lowest Price <br /><img alt="" src={hero_text} /></h3>
         </div>
 
         <div className="hero-form">
@@ -25,16 +25,22 @@ function HomeWebPrice() {
 
             <div className="hero-form-pricing">
               <h4>$17.77/month</h4>
+              <span className="vertical_line"></span>
+
               <p>
                 Your website url will be a subdomain.
-                (e.g. yourstorename.carparts.com)
+                (e.g. yourstorename.fiaraa.com)
                 + 2 free changes per month
                 (additional change $3)
+              </p>
+              <p className="check_p">
+                <input type="checkbox" />
               </p>
             </div>
 
             <div className="hero-form-pricing">
               <h4>$27.77/month</h4>
+              <span className="vertical_line"></span>
               <p>
                 Your website url will be a new domain
                 of your choice.
@@ -42,10 +48,16 @@ function HomeWebPrice() {
                 + 2 free changes per month
                 (additional change $3)
               </p>
+              <p className="check_p">
+                <input type="checkbox" />
+              </p>
             </div>
 
             <div className="hero-form-pricing">
               I agree by checking this contract  that I will use your service for at least one year.
+              <p className="check_p">
+                <input type="checkbox" />
+              </p>
             </div>
 
             <div>

@@ -14,7 +14,7 @@ const Contacts = () => {
       <div className="contacts-content">
         <div className="contact-item">
           <div className="contact-circle">
-            <img src={address} alt="address-image" />
+            <img src={address} alt="address" />
           </div>
           <h3>ADDRESS</h3>
           <p>California,USA</p>
@@ -22,7 +22,7 @@ const Contacts = () => {
 
         <div className="contact-item">
           <div className="contact-circle">
-            <img src={phone} alt="phone-image" />
+            <img src={phone} alt="phone" />
           </div>
           <h3>PHONE</h3>
           <p>+1-(123)-234567</p>
@@ -30,7 +30,7 @@ const Contacts = () => {
 
         <div className="contact-item">
           <div className="contact-circle">
-            <img src={email} alt="email-image" />
+            <img src={email} alt="email" />
           </div>
           <h3>EMAIL</h3>
           <p>support@domain.com</p>

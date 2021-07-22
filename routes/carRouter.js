@@ -12,7 +12,7 @@ router.patch('/update/:id', auth, authAdmin, carCtrl.updatCar)
 router.get('/delete/:id', auth, authAdmin, carCtrl.deleteCar)
 
 // *********
-router.get('/make', carCtrl.getMakes)
+router.get('/makes', carCtrl.getMakes)
 router.post('/:make', carCtrl.getModels)
 router.post('/:make/:model', carCtrl.getYears)
 router.post('/:make/:model/:year', carCtrl.getEngine)

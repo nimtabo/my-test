@@ -9,7 +9,7 @@ function HomeWebConfirm() {
       <div className="hero">
 
         <div className="hero-text">
-          <h3>Wide Selection Of Auto Parts At Lowest Price <br /><img src={hero_text} /></h3>
+          <h3>Wide Selection Of Auto Parts At Lowest Price <br /><img src={hero_text} alt="" /></h3>
         </div>
 
         <div className="hero-form">

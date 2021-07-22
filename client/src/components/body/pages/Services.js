@@ -21,11 +21,11 @@ function Services() {
           </div>
           <div className="text-side">
             <p>
-              FIARAA is your one-stop shop for replacement of high quality used OEM automotive parts and
+              Fiaraa is your one-stop shop for replacement of high quality used OEM automotive parts and
               accessories.
             </p>
             <p>
-              FIARAA is a used auto parts locator through its friendly digital marketplace platform for sellers and
+              Fiaraa is a used auto parts locator through its friendly digital marketplace platform for sellers and
               buyers. Search through live inventories of used car part salvage yards and suppliers online and buy the
               used parts you need for your car. You have a wide selection of used auto parts across the country with
               the best prices to chose from. We provide a no-nonsense to purchasing used auto parts with easy to
@@ -37,20 +37,50 @@ function Services() {
 
       <div>
         <div className="container-head">
-          <h3 className="top-head">SELL YOUR USED CAR</h3>
+          <h3 className="top-head">WEBSITE SERVICES</h3>
         </div>
         <div className="container-top">
           <div className="text-left">
             <p>
-              Why should I sell my car on Kar-Part?
+              We assist you to "Maximize Your Revenue Through Online Presence"
             </p>
             <p>
-              Reach millions of customers every day and week looking for cars for sale near you. Get more for your
+              In today’s digital world, your website is the first interaction consumers have with your business.Without
+              online exposure in todays digital world it will be harder to reach a wide consumer needs for selling your
+              inventory of Used Auto Parts.
             </p>
             <p>
+              That's why almost 95% of a user’s first impression relates to web design. It’s also why web design
+              services can have an immense impact on your company’s bottom line.
+            </p>
+            <p>
+              That’s why more companies who have no website are being offered WEBSITE SERVICES at a nominal
+              monthly subscription rate and an exposure to world - wide customers.Current customers are not only
+              reevaluating their website’s design but also partnering with Fiaraa, the web design agency that’s highly
+              experienced and here to support you and grow your revenue.            </p>
+            <p>
+              With over web design development and operations team we're confident we can design a custom
+              website that drives sales for your unique business.
+            </p>
+          </div>
+          <div className="image-rigt">
+            <img src={services3} alt="services3-image" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div className="container-head">
+          <h3 className="top-head">SELL YOUR USED CAR</h3>
+        </div>
+        <div className="container-top">
+          <div className="text-side">
+            <p>
+              Why should I sell my car on Fiaraa ?
+            </p>
+            <p>
+              Reach millions of customers every day and week looking for cars for sale near you.Get more for your
               used car or truck when you sell it yourself by exposure of your vehicle to our subsribers and public who
-            </p>
-            <p>
               visit our website.
             </p>
             <p>
@@ -67,53 +97,16 @@ function Services() {
             </p>
             <p>
               Use Kelley Blue Book’s trusted vehicle pricing guidance to help you set the right price
-            </p>
-            <p>
               Get double the exposure as we attract our website to thousands of individuals across the globe
             </p>
           </div>
-          <div className="image-rigt">
+          <div className="image-side">
             <img src={services2} alt="services2-image" />
           </div>
         </div>
       </div>
 
-      <div>
-        <div className="container-head">
-          <h3 className="top-head">WEBSITE SERVICES</h3>
-        </div>
-        <div className="container-top">
-          <div className="image-side">
-            <img src={services3} alt="services3-image" />
-          </div>
-          <div className="text-side">
-            <p>
-              We assist you to "Maximize Your Revenue Through Online Presence"
-            </p>
-            <p>
-              In today’s digital world, your website is the first interaction consumers have with your business. Without
-              online exposure in todays digital world it will be harder to reach a wide consumer needs for selling your
-              inventory of Used Auto Parts.
-            </p>
-            <p>
-              That's why almost 95% of a user’s first impression relates to web design. It’s also why web design
-              services can have an immense impact on your company’s bottom line.
-            </p>
-            <p>
-              That’s why more companies who have no website are being offered WEBSITE SERVICES at a nominal
-            </p>
-            <p>
-              monthly subscription rate and an exposure to world-wide customers. Current customers are not only
-              reevaluating their website’s design but also partnering with Kar-Part, the web design agency that’s highly
-              experienced and here to support you and grow your revenue.
-            </p>
-            <p>
-              With over web design development and operations team we're confident we can design a custom
-              website that drives sales for your unique business.
-            </p>
-          </div>
-        </div>
-      </div>
+
     </div>
   )
 }

@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SideNav from './sidenav/SideNav'
-import Main from './main/Main'
 import './dashboad.css'
 
 function Dashboad({ handleOpenNav, width }) {
