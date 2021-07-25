@@ -48,8 +48,8 @@
 
 .price-card {
   height: 25rem;
-  width: 17rem;
-  margin: 1rem;
+  width: 24%;
+  /* margin: 0.5rem; */
   background: #000201;
   border: 2px solid #ffffff;
   box-sizing: border-box;
@@ -88,19 +88,19 @@
 }
 @media (max-width: 976px) {
   .price-card {
-    width: 23rem;
+    width: 48%;
   }
 }
 
 @media (max-width: 864px) {
   .price-card {
-    width: 20rem;
+    width: 48%;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 450px) {
   .price-card {
-    width: 18rem;
+    width: 98%;
   }
 }
 

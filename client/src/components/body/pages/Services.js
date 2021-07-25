@@ -17,7 +17,7 @@ function Services() {
         </div>
         <div className="container-top">
           <div className="image-side">
-            <img src={services1} alt="services1-image" />
+            <img src={services1} alt="services1" />
           </div>
           <div className="text-side">
             <p>
@@ -64,7 +64,7 @@ function Services() {
             </p>
           </div>
           <div className="image-rigt">
-            <img src={services3} alt="services3-image" />
+            <img src={services3} alt="services3" />
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ function Services() {
             </p>
           </div>
           <div className="image-side">
-            <img src={services2} alt="services2-image" />
+            <img src={services2} alt="services2" />
           </div>
         </div>
       </div>

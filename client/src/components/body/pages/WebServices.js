@@ -1,6 +1,9 @@
 import React from 'react'
 import './webservices.css'
 
+import left_vector from "../../../img/w_service_left.svg"
+import right_vector from "../../../img/w_service_right.svg"
+
 function WebServices() {
   return (
     <div className="webservices-page">
@@ -8,7 +11,15 @@ function WebServices() {
         <h2>Website Services In Detail</h2>
       </div>
       <div className="webservices_contents">
-        <h3>Fiaraa will be happy to create a website for your business</h3>
+        <h3>Fiaraa will be happy to create a website for your business
+          <br></br>
+          <span className="web_vector_img">
+            <img alt="" src={left_vector} />
+          </span>
+          {/* <span className="web_vector_img">
+            <img src={right_vector} alt="" />
+          </span> */}
+        </h3>
 
         <div className="webservices_details">
           <p>

@@ -74,7 +74,7 @@ function Header() {
                         : <>
                             <div className="service_dropdown">
                                 {/* <button className="dropbtn">Services <i className="fas fa-caret-down"></i></button> */}
-                                <button className="dropbtn">Services <img src={services_arrow} /></button>
+                                <button className="dropbtn">Services <img src={services_arrow} alt="" /></button>
                                 <div className="dropdown-content">
                                     <Link to="/">FIND YOUR PART</Link>
                                     <Link to="/get_website">WEBSITE SERVICES</Link>

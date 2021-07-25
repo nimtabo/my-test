@@ -226,7 +226,7 @@ const Form = () => {
           </select>
         </div>
 
-        <div>
+        {/* <div>
           <label htmlFor="PART" className="labels">ENGINE<span className="asterisk"><sup>*</sup></span>: </label>
           <select id="PART" className="hero-part"
             value={engine}
@@ -239,9 +239,9 @@ const Form = () => {
               })
             }
           </select>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <label htmlFor="PART" className="labels">CATEGORY<span className="asterisk"><sup>*</sup></span>: </label>
           <select id="PART" className="hero-part"
             value={category}
@@ -254,7 +254,7 @@ const Form = () => {
               })
             }
           </select>
-        </div>
+        </div> */}
 
         <div>
           <label htmlFor="PART" className="labels">PART<span className="asterisk"><sup>*</sup></span>: </label>
@@ -271,10 +271,10 @@ const Form = () => {
           </select>
         </div>
 
-        <div>
+        {/* <div>
           <label htmlFor="zip-code" className="labels">ZIP CODE<span className="asterisk"><sup>*</sup></span>: </label>
           <input id="zip-code" value={zipcode} onChange={(e) => { setZipcode(e.target.value) }} />
-        </div>
+        </div> */}
 
         <div>
           <button type="submit">Search</button>

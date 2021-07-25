@@ -32,6 +32,13 @@
   margin: 1rem 1rem;
 }
 
+.web_vector_img img {
+  /* display: inline-block; */
+  /* width: 60px; */
+  /* padding: 0px;
+  margin: 0px; */
+}
+
 .webservices_details p,
 .webservices_contents p {
   margin: 1rem 0px;
