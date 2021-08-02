@@ -13,7 +13,7 @@ function SideNav({ handleOpenNav, width }) {
         <button className="closebtn" onClick={handleOpenNav}>X</button>
         <Link to="/dashboad">Dashboad</Link>
         <Link to="/shops">Shops</Link>
-        <Link to="#">Products</Link>
+        <Link to="/products">Products</Link>
         <Link to="#">Users</Link>
         <Link to="#">Settings</Link>
       </div>

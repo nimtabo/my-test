@@ -19,5 +19,7 @@ router.post('/:make/:model/:year', carCtrl.getEngine)
 router.post('/:make/:model/:year/:engine', carCtrl.getCategory)
 router.post('/:make/:model/:year/:engine/:category', carCtrl.getParts)
 
+router.get('/parts/:make/:model/:year', carCtrl.getPartsMin)
+
 
 module.exports = router

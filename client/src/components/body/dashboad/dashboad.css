@@ -2,3 +2,20 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+.content_window {
+  min-height: 500px;
+}

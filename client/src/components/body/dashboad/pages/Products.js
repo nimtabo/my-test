@@ -4,12 +4,12 @@ import SideNav from '../sidenav/SideNav'
 
 
 import './shop.css'
-import ShopForm from './ShopForm'
+import ProductForm from './ProductForm'
 
 
 
 
-function Shops({ handleOpenNav, width }) {
+function Products({ handleOpenNav, width }) {
   // *********
   // **********
   return (
@@ -19,9 +19,9 @@ function Shops({ handleOpenNav, width }) {
       <div id="main">
         <button className="openbtn" onClick={handleOpenNav}>☰ Open Menu</button>
         <div className="shop_window">
-          <h1>Create Your Business</h1>
+          <h1>create product Ad</h1>
           {/* **** */}
-          <ShopForm />
+          <ProductForm />
           {/* **** */}
         </div>
       </div>
@@ -29,4 +29,4 @@ function Shops({ handleOpenNav, width }) {
   )
 }
 
-export default Shops
+export default Products

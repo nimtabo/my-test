@@ -1,4 +1,65 @@
+#main {
+  transition: margin-left 0.5s;
+  /* padding: 16px; */
+  /* display: inline-block; */
+  width: 100%;
+}
+
+#main h1 {
+  text-align: center;
+}
+
 .shop_window {
   background-color: blueviolet;
+  min-height: 500px;
+  padding: 1rem;
+}
+
+.shop_form_items {
+  width: 60%;
+  margin: 0 auto;
+  background-color: cornflowerblue;
+}
+
+.shop_form_item {
+  margin-bottom: 2rem;
+}
+
+.shop_form_item label,
+.shop_form_item input,
+.shop_form_item select,
+.shop_form_item textarea {
+  display: inline-block;
+  font-size: 19px;
+}
+
+.shop_form_item label {
+  width: 35%;
+}
+
+.shop_form_item input,
+.shop_form_item select,
+.shop_form_item textarea {
+  outline: none;
+  width: 65%;
+}
+
+.shop_form_items .btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.shop_form_items .btn button {
+  padding: 0.7rem;
+  width: 100px;
+  /* border-radius: 15px; */
+}
+
+.shop_form_item div {
+  display: inline-block;
+}
+
+.shop_form_item div button {
+  /* display: inline-block; */
   width: 100%;
 }

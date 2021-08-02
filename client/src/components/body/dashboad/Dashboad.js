@@ -17,7 +17,7 @@ function Dashboad({ handleOpenNav, width }) {
         {/* Content */}
         <div id="main">
           <button className="openbtn" onClick={handleOpenNav}>☰ Open Menu</button>
-          <div>
+          <div className="content_window">
             <h3>Dashboad Charts</h3>
             <h3>Dashboad Graphs</h3>
           </div>

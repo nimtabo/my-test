@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 import { showErrMsg } from '../../utils/notification/Notification'
 
@@ -19,7 +20,7 @@ const Form = () => {
   const [zipcode, setZipcode] = useState("")
   const [err, setErr] = useState("")
 
-
+  let history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,51 +90,10 @@ const Form = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const engine = await axios.post(`/api/cars/${make}/${model}/${year}`);
-        setEngines([...engine.data])
-        categories.splice(0, categories.length)
-        parts.splice(0, parts.length)
-        setCategories([...categories])
-        setParts([...parts])
-        // Reset Choices
-        setEngine('')
-        setCategory('')
-        setPart('')
-      } catch (error) {
-        // console.log("An Error occured Getting Categories")
-        return setCategories([...[]])
-      }
-    }
-    fetchData();
-  }, [year]);
+        const res = await axios.get(`api/cars/parts/${make}/${model}/${year}`);
+        setParts([...res.data])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const category = await axios.post(`/api/cars/${make}/${model}/${year}/${engine}`);
-        setCategories([...category.data])
-        parts.splice(0, parts.length)
-        setParts([...parts])
-        // Reset Choices
-        setCategory('')
-        setPart('')
-      } catch (error) {
-        // console.log("An Error occured Getting Egines")
-        return setEngines([...[]])
-      }
-    }
-    fetchData();
-  }, [engine]);
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const part = await axios.post(`/api/cars/${make}/${model}/${year}/${engine}/${category}`);
-        parts.splice(0, parts.length)
-        setParts([...parts])
-        setParts([...part.data.parts])
-        // Reset Choices
+        // Reset part
         setPart('')
       } catch (error) {
         // console.log("An Error occured Getting Parts")
@@ -141,36 +101,36 @@ const Form = () => {
       }
     }
     fetchData();
-  }, [category]);
+  }, [year]);
 
   useEffect(() => {
-    const data = { make, model, year, engine, category, part }
+    const data = { make, model, year, part }
     setData({ ...data })
   }, [part]);
 
 
-  useEffect(() => {
-    setData({ ...data, zipcode })
-    console.log(zipcode)
-  }, [zipcode]);
+  // useEffect(() => {
+  //   setData({ ...data, zipcode })
+  //   console.log(zipcode)
+  // }, [zipcode]);
 
 
-  useEffect(() => {
-    console.log(data)
-  }, [data]);
+  // useEffect(() => {
+  //   console.log(data)
+  // }, [data]);
 
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (engine === "" || engine === "Select a year" || engine === "Select engine") || (category === "" || category === "select engine" || category === "Select category") || (part === "" || part === "Select category" || part === "Select part")) {
-      const data = { make, model, year, engine, category, part }
-      console.log(data)
+    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part")) {
+      // const data = { make, model, year, engine, category, part }
+      // console.log(data)
       return setErr("All marked fields are required");
     } else {
-      const data = { make, model, year, engine, category, part }
-      console.log(data)
-      return setErr("Go to LISTING PAGE")
-
+      const data = { make, model, year, part }
+      // console.log(data)
+      // setErr("Go to LISTING PAGE")
+      return history.push({ pathname: "/listing", state: data })
     }
 
   }
@@ -262,7 +222,7 @@ const Form = () => {
             value={part}
             onChange={(e) => { setPart(e.target.value) }}
           >
-            {parts.length === 0 ? <option>Select category</option> : <option>Select part</option>}
+            {parts.length === 0 ? <option>Select Year</option> : <option>Select part</option>}
             {
               parts.map(part => {
                 return <option key={part}>{part}</option>

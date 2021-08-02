@@ -154,6 +154,21 @@ const carCtrl = {
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }
+  },
+  getPartsMin: async (req, res) => {
+    try {
+      const { make, model, year } = req.params;
+      const parts = await Car.distinct('parts', { make: make, model: model, year: year });
+      // const parts = await Car.find({ make: make, model: model, year: year }, { parts: 1, _id: 0 })
+      if (!parts) {
+        return res.status(400).json({
+          message: "No Parts exist!",
+        });
+      }
+      return res.status(200).json(parts);
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
   }
 
 }

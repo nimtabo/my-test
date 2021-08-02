@@ -29,6 +29,8 @@ import HomeWebPrice from './home/Home.webPrice'
 import HomeWebPay from './home/Home.webPayment'
 import HomeWebConfirm from './home/Home.webConfirm'
 import Shops from './dashboad/pages/Shops'
+import Listing from './pages/Listing'
+import Products from './dashboad/pages/Products'
 
 function Body() {
     const auth = useSelector(state => state.auth)
@@ -63,6 +65,9 @@ function Body() {
                 <Route path="/shops" exact >
                     {isLogged ? <Shops handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
                 </Route>
+                <Route path="/products" exact >
+                    {isLogged ? <Products handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                </Route>
 
                 {/* PAGES */}
                 <Route path="/about" component={About} exact />
@@ -72,6 +77,7 @@ function Body() {
                 <Route path="/terms" component={Terms} exact />
                 <Route path="/privacy" component={Privacy} exact />
                 <Route path="/contacts" component={Contacts} exact />
+                <Route path="/listing" component={Listing} exact />
 
                 {/* OTHER HOME PARTS */}
                 <Route path="/get_website" component={HomeWebs} exact />
