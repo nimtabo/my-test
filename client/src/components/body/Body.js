@@ -31,6 +31,7 @@ import HomeWebConfirm from './home/Home.webConfirm'
 import Shops from './dashboad/pages/Shops'
 import Listing from './pages/Listing'
 import Products from './dashboad/pages/Products'
+import Users from './dashboad/pages/Users'
 
 function Body() {
     const auth = useSelector(state => state.auth)
@@ -68,6 +69,11 @@ function Body() {
                 <Route path="/products" exact >
                     {isLogged ? <Products handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
                 </Route>
+
+                <Route path="/users" exact >
+                    {isAdmin ? <Users handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                </Route>
+
 
                 {/* PAGES */}
                 <Route path="/about" component={About} exact />

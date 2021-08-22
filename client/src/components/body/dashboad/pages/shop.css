@@ -63,3 +63,18 @@
   /* display: inline-block; */
   width: 100%;
 }
+
+/* add_product_btn */
+.add_product_btn {
+  padding: 0.5rem;
+  /* display: flex; */
+  /* align-items: flex-end; */
+  /* align-content: flex-end; */
+  background-color: darkslategray;
+}
+
+.add_product_btn button {
+  padding: 0.5rem;
+  color: black;
+  background-color: darkorange;
+}

@@ -5,6 +5,7 @@ import SideNav from '../sidenav/SideNav'
 
 import './shop.css'
 import ShopForm from './ShopForm'
+import ShopTable from './ShopTable'
 
 
 
@@ -19,9 +20,13 @@ function Shops({ handleOpenNav, width }) {
       <div id="main">
         <button className="openbtn" onClick={handleOpenNav}>☰ Open Menu</button>
         <div className="shop_window">
-          <h1>Create Your Business</h1>
+          <h1>Businesses</h1>
+          <div className="add_product_btn">
+            <button>Add Business</button>
+          </div>
           {/* **** */}
-          <ShopForm />
+          {/* <ShopForm /> */}
+          <ShopTable />
           {/* **** */}
         </div>
       </div>

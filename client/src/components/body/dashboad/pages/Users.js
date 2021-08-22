@@ -2,17 +2,11 @@ import React from 'react'
 import SideNav from '../sidenav/SideNav'
 
 
-
 import './shop.css'
-import ProductForm from './ProductForm'
-import ProductsTable from './ProductsTable'
+import UserTable from './UserTable'
 
 
-
-
-function Products({ handleOpenNav, width }) {
-  // *********
-  // **********
+const Users = ({ handleOpenNav, width }) => {
   return (
     <div className="dashboad_page">
       <SideNav className="side_menu" handleOpenNav={handleOpenNav} width={width} />
@@ -20,13 +14,13 @@ function Products({ handleOpenNav, width }) {
       <div id="main">
         <button className="openbtn" onClick={handleOpenNav}>☰ Open Menu</button>
         <div className="shop_window">
-          <h1>Products Ads</h1>
+          <h1>Users</h1>
           {/* **** */}
           <div className="add_product_btn">
-            <button>Add product</button>
+            <button>Add User</button>
           </div>
           {/* <ProductForm /> */}
-          <ProductsTable />
+          <UserTable />
           {/* **** */}
         </div>
       </div>
@@ -34,4 +28,4 @@ function Products({ handleOpenNav, width }) {
   )
 }
 
-export default Products
+export default Users

@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
-const {google} = require('googleapis')
-const {OAuth2} = google.auth;
+const { google } = require('googleapis')
+const { OAuth2 } = google.auth;
 const OAUTH_PLAYGROUND = 'https://developers.google.com/oauthplayground'
 
 const {
@@ -18,12 +18,12 @@ const oauth2Client = new OAuth2(
 )
 
 // send mail
-const sendEmail = (to, url, txt) => {
+const sendEmail = async (to, url, txt) => {
     oauth2Client.setCredentials({
         refresh_token: MAILING_SERVICE_REFRESH_TOKEN
     })
 
-    const accessToken = oauth2Client.getAccessToken()
+    const accessToken = await oauth2Client.getAccessToken()
     const smtpTransport = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -36,14 +36,29 @@ const sendEmail = (to, url, txt) => {
         }
     })
 
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            type: 'OAuth2',
+            user: SENDER_EMAIL_ADDRESS,
+            clientId: MAILING_SERVICE_CLIENT_ID,
+            clientSecret: MAILING_SERVICE_CLIENT_SECRET,
+            refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
+            accessToken: accessToken,
+            expires: 1484314697598
+        }
+    });
+
     const mailOptions = {
         from: SENDER_EMAIL_ADDRESS,
         to: to,
-        subject: "CareCare",
+        subject: "Fiaraa",
         html: `
             <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
-            <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the CareCare.</h2>
-            <p>Congratulations! You're almost set to start using CarCare services.
+            <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the Fiaraa.</h2>
+            <p>Congratulations! You're almost set to start using Fiaraa services.
                 Just click the button below to validate your email address.
             </p>
             
@@ -56,9 +71,24 @@ const sendEmail = (to, url, txt) => {
         `
     }
 
-    smtpTransport.sendMail(mailOptions, (err, infor) => {
-        if(err) return err;
-        return infor
+    // smtpTransport.sendMail(mailOptions, (err, info) => {
+    //     // if (err)
+    //     //     return err;
+    //     // return infor;
+    //     if (err)
+    //         console.log(err.message);
+    //     else
+    //         console.log(`Message sent: ${info.response}`);
+    // })
+
+    smtpTransport.sendMail(mailOptions, (err, info) => {
+        // if (err)
+        //     return err;
+        // return infor;
+        if (err)
+            console.log(err.message);
+        else
+            console.log(`Message sent: ${info.response}`);
     })
 }
 
