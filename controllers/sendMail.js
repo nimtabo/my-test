@@ -7,7 +7,8 @@ const {
     MAILING_SERVICE_CLIENT_ID,
     MAILING_SERVICE_CLIENT_SECRET,
     MAILING_SERVICE_REFRESH_TOKEN,
-    SENDER_EMAIL_ADDRESS
+    SENDER_EMAIL_ADDRESS,
+    SENDER_EMAIL_PASS
 } = process.env
 
 const oauth2Client = new OAuth2(
@@ -19,37 +20,49 @@ const oauth2Client = new OAuth2(
 
 // send mail
 const sendEmail = async (to, url, txt) => {
-    oauth2Client.setCredentials({
-        refresh_token: MAILING_SERVICE_REFRESH_TOKEN
-    })
+    // oauth2Client.setCredentials({
+    //     refresh_token: MAILING_SERVICE_REFRESH_TOKEN
+    // })
 
-    const accessToken = await oauth2Client.getAccessToken()
+    // const accessToken = await oauth2Client.getAccessToken()
+    // const smtpTransport = nodemailer.createTransport({
+    //     service: 'gmail',
+    //     auth: {
+    //         type: 'OAuth2',
+    //         user: SENDER_EMAIL_ADDRESS,
+    //         clientId: MAILING_SERVICE_CLIENT_ID,
+    //         clientSecret: MAILING_SERVICE_CLIENT_SECRET,
+    //         refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
+    //         accessToken
+    //     }
+    // })
+
     const smtpTransport = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            type: 'OAuth2',
-            user: SENDER_EMAIL_ADDRESS,
-            clientId: MAILING_SERVICE_CLIENT_ID,
-            clientSecret: MAILING_SERVICE_CLIENT_SECRET,
-            refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
-            accessToken
-        }
-    })
-
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
+        pool: true,
+        host: "giow1128.siteground.us",
         port: 465,
-        secure: true,
+        secure: true, // use TLS
         auth: {
-            type: 'OAuth2',
             user: SENDER_EMAIL_ADDRESS,
-            clientId: MAILING_SERVICE_CLIENT_ID,
-            clientSecret: MAILING_SERVICE_CLIENT_SECRET,
-            refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
-            accessToken: accessToken,
-            expires: 1484314697598
-        }
+            pass: SENDER_EMAIL_PASS,
+        },
     });
+
+
+    // let transporter = nodemailer.createTransport({
+    //     host: 'smtp.gmail.com',
+    //     port: 465,
+    //     secure: true,
+    //     auth: {
+    //         type: 'OAuth2',
+    //         user: SENDER_EMAIL_ADDRESS,
+    //         clientId: MAILING_SERVICE_CLIENT_ID,
+    //         clientSecret: MAILING_SERVICE_CLIENT_SECRET,
+    //         refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
+    //         accessToken: accessToken,
+    //         expires: 1484314697598
+    //     }
+    // });
 
     const mailOptions = {
         from: SENDER_EMAIL_ADDRESS,
