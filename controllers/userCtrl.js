@@ -64,7 +64,8 @@ const userCtrl = {
             res.json({ msg: "Account has been activated!" })
 
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            // return res.status(500).json({ msg: err.message })
+            return res.status(400).json({ msg: "Activation link expired!, Please register again" })
         }
     },
     login: async (req, res) => {
@@ -113,7 +114,7 @@ const userCtrl = {
             const url = `${CLIENT_URL}/user/reset/${access_token}`
 
             sendMail(email, url, "Reset your password")
-            res.json({ msg: "Re-send the password, please check your email." })
+            res.json({ msg: "Please check your email, to Re-set the password." })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
@@ -305,7 +306,7 @@ function validateEmail(email) {
 }
 
 const createActivationToken = (payload) => {
-    return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: '5m' })
+    return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: '1d' })
 }
 
 const createAccessToken = (payload) => {
