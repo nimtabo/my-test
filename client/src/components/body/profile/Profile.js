@@ -8,6 +8,7 @@ import { fetchAllUsers, dispatchGetAllUsers } from '../../../redux/actions/users
 
 const initialState = {
     name: '',
+    phone: '',
     password: '',
     cf_password: '',
     err: '',
@@ -22,7 +23,7 @@ function Profile() {
 
     const { user, isAdmin } = auth
     const [data, setData] = useState(initialState)
-    const { name, password, cf_password, err, success } = data
+    const { name, phone, password, cf_password, err, success } = data
 
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -76,7 +77,8 @@ function Profile() {
         try {
             axios.patch('/user/update', {
                 name: name ? name : user.name,
-                avatar: avatar ? avatar : user.avatar
+                avatar: avatar ? avatar : user.avatar,
+                phone: phone ? phone : user.phone
             }, {
                 headers: { Authorization: token }
             })
@@ -106,7 +108,7 @@ function Profile() {
     }
 
     const handleUpdate = () => {
-        if (name || avatar) updateInfor()
+        if (name || avatar || phone) updateInfor()
         if (password) updatePassword()
     }
 
@@ -158,6 +160,12 @@ function Profile() {
                         <label htmlFor="email">Email</label>
                         <input type="email" name="email" id="email" defaultValue={user.email}
                             placeholder="Your email address" disabled />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="phone">Phone</label>
+                        <input type="text" name="phone" id="phone" defaultValue={user.phone}
+                            placeholder="Your Phone" onChange={handleChange} />
                     </div>
 
                     <div className="form-group">

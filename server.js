@@ -36,7 +36,7 @@ mongoose.connect(URI, {
     useUnifiedTopology: true
 }, err => {
     if (err) throw err;
-    console.log(`Connected to DB: ${URI}`)
+    console.log(`DB Connected...`)
 })
 
 if (process.env.NODE_ENV === 'production') {

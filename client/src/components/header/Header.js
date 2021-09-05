@@ -50,7 +50,7 @@ function Header() {
                 </Link>
                 <ul className="dropdown">
                     <li><Link to="/profile">Profile</Link></li>
-                    <li><Link to="/dashboad">Dashboad</Link></li>
+                    <li><Link to="/shops">Dashboad</Link></li>
                     <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
                 </ul>
             </li>

@@ -25,9 +25,9 @@ function SideNav({ handleOpenNav, width }) {
           </>
           :
           <>
-            <Link to="/dashboad">Dashboad</Link>
+            {/* <Link to="/dashboad">Dashboad</Link> */}
+            <Link to="/shops">My Store</Link>
             <Link to="/products">Products</Link>
-            <Link to="/shops">Business info</Link>
             <Link to="#">Settings</Link>
           </>
         }

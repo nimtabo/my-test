@@ -19,7 +19,7 @@ const oauth2Client = new OAuth2(
 )
 
 // send mail
-const sendEmail = async (to, url, txt) => {
+const sendEmail = async (to, url, txt, type) => {
     // oauth2Client.setCredentials({
     //     refresh_token: MAILING_SERVICE_REFRESH_TOKEN
     // })
@@ -63,16 +63,19 @@ const sendEmail = async (to, url, txt) => {
     //         expires: 1484314697598
     //     }
     // });
-
-    const mailOptions = {
-        from: SENDER_EMAIL_ADDRESS,
-        to: to,
-        subject: "Fiaraa",
-        html: `
+    let mailOptions;
+    if (type === "register") {
+        mailOptions = {
+            from: SENDER_EMAIL_ADDRESS,
+            to: to,
+            subject: "Account Registration",
+            html: `
             <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
             <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to Fiaraa.</h2>
-            <p>Congratulations! You're almost set to start using Fiaraa services.
-                Just click the button below to validate your email address.
+            <p>Congratulations!</p>
+
+            <p>
+            You're almost set to start using Fiaraa services. Click the button below to validate your email address.
             </p>
             
             <a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">${txt}</a>
@@ -80,9 +83,71 @@ const sendEmail = async (to, url, txt) => {
             <p>If the button doesn't work for any reason, you can also click on the link below:</p>
         
             <div>${url}</div>
+
+            <br />
+            <br />
+
+            <p>Thank you,</p>
+            <p>The Fiaraa team</p>
+            <p><a href="mailto:support@fiaraa.com">support@fiaraa.com</a></p>
             </div>
-        `
+            `
+        }
+    } else {
+        mailOptions = {
+            from: SENDER_EMAIL_ADDRESS,
+            to: to,
+            subject: "Password Reset",
+            html: `
+            <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+            <h2 style="text-align: center; text-transform: uppercase;color: teal;">You Forgot Your Password</h2>
+
+            <p>
+            A request has been received to change the password of your Fiaraa account.
+            </p>
+            
+            <a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">${txt}</a>
+        
+            <p>If the button doesn't work for any reason, you can also click on the link below:</p>
+        
+            <div>${url}</div>
+
+            <p>
+            If you did not initiate this request, please contact us immediately at
+            </p>
+            <p><a href="mailto:support@fiaraa.com">support@fiaraa.com</a></p>
+
+
+            <br />
+            <br />
+
+            <p>Thank you,</p>
+            <p>The Fiaraa team</p>
+            <p><a href="mailto:support@fiaraa.com">support@fiaraa.com</a></p>
+            </div>
+            `
+        }
     }
+
+    // const mailOptions = {
+    //     from: SENDER_EMAIL_ADDRESS,
+    //     to: to,
+    //     subject: "FIARAA",
+    //     html: `
+    //         <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+    //         <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to Fiaraa.</h2>
+    //         <p>Congratulations! You're almost set to start using Fiaraa services.
+    //             Just click the button below to validate your email address.
+    //         </p>
+
+    //         <a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">${txt}</a>
+
+    //         <p>If the button doesn't work for any reason, you can also click on the link below:</p>
+
+    //         <div>${url}</div>
+    //         </div>
+    //     `
+    // }
 
     // smtpTransport.sendMail(mailOptions, (err, info) => {
     //     // if (err)

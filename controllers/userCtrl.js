@@ -37,7 +37,7 @@ const userCtrl = {
             const activation_token = createActivationToken(newUser)
 
             const url = `${CLIENT_URL}/user/activate/${activation_token}`
-            sendMail(email, url, "Verify your email address")
+            sendMail(email, url, "Verify your email address", "register")
 
 
             res.json({ msg: "Register Success! Please activate your email to start." })
@@ -113,7 +113,7 @@ const userCtrl = {
             const access_token = createAccessToken({ id: user._id })
             const url = `${CLIENT_URL}/user/reset/${access_token}`
 
-            sendMail(email, url, "Reset your password")
+            sendMail(email, url, "Reset your password", "reset")
             res.json({ msg: "Please check your email, to Re-set the password." })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -162,9 +162,9 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const { name, avatar } = req.body
+            const { name, avatar, phone } = req.body
             await Users.findOneAndUpdate({ _id: req.user.id }, {
-                name, avatar
+                name, avatar, phone
             })
 
             res.json({ msg: "Update Success!" })
