@@ -46,11 +46,13 @@ function Header() {
             {/* ******************** */}
             <li className="drop-nav">
                 <Link to="#" className="avatar">
-                    <img src={user.avatar} alt="" /> {user.name} <i className="fas fa-angle-down"></i>
+                    <img src={user.avatar} alt="" /> {user.firstName} <i className="fas fa-angle-down"></i>
                 </Link>
                 <ul className="dropdown">
                     <li><Link to="/profile">Profile</Link></li>
-                    <li><Link to="/shops">Dashboad</Link></li>
+                    <li><Link to="/shops">My Store</Link></li>
+                    <li><Link to="#">Payments</Link></li>
+                    <li><Link to="#">Settings</Link></li>
                     <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
                 </ul>
             </li>

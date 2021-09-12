@@ -1,5 +1,6 @@
 const Users = require('../models/userModel')
 const bcrypt = require('bcrypt')
+const cryptoRandomString = require('crypto-random-string')
 const jwt = require('jsonwebtoken')
 const sendMail = require('./sendMail')
 
@@ -14,9 +15,9 @@ const { CLIENT_URL } = process.env
 const userCtrl = {
     register: async (req, res) => {
         try {
-            const { name, email, password } = req.body
+            const { firstName, lastName, email, password } = req.body
 
-            if (!name || !email || !password)
+            if (!firstName || !lastName || !email || !password)
                 return res.status(400).json({ msg: "Please fill in all fields." })
 
             if (!validateEmail(email))
@@ -31,7 +32,7 @@ const userCtrl = {
             const passwordHash = await bcrypt.hash(password, 12)
 
             const newUser = {
-                name, email, password: passwordHash
+                firstName, lastName, email, password: passwordHash
             }
 
             const activation_token = createActivationToken(newUser)
@@ -50,13 +51,23 @@ const userCtrl = {
             const { activation_token } = req.body
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
 
-            const { name, email, password } = user
+            const { firstName, lastName, email, password } = user
 
             const check = await Users.findOne({ email })
             if (check) return res.status(400).json({ msg: "This email already exists." })
 
+            // RANDOM CODE GENERATOR
+            const numCode = cryptoRandomString({ length: 6, type: 'numeric' });
+            //=> '8314659141'
+
+            const alphaCode = cryptoRandomString({ length: 6, type: 'distinguishable' });
+            //=> 'CDEHKM'
+
+            const code = `${alphaCode}${numCode}`;
+            console.log(code)
+            // *******************
             const newUser = new Users({
-                name, email, password
+                firstName, lastName, email, password, code
             })
 
             await newUser.save()
@@ -64,8 +75,8 @@ const userCtrl = {
             res.json({ msg: "Account has been activated!" })
 
         } catch (err) {
-            // return res.status(500).json({ msg: err.message })
-            return res.status(400).json({ msg: "Activation link expired!, Please register again" })
+            return res.status(500).json({ msg: err.message })
+            // return res.status(400).json({ msg: "Activation link expired!, Please register again" })
         }
     },
     login: async (req, res) => {
@@ -162,9 +173,9 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const { name, avatar, phone } = req.body
+            const { firstName, lastName, avatar, phone, store, street, city, zipcode, state, storeWebsite } = req.body
             await Users.findOneAndUpdate({ _id: req.user.id }, {
-                name, avatar, phone
+                firstName, lastName, avatar, phone, store, street, city, zipcode, state, storeWebsite
             })
 
             res.json({ msg: "Update Success!" })
@@ -306,7 +317,7 @@ function validateEmail(email) {
 }
 
 const createActivationToken = (payload) => {
-    return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: '1d' })
+    return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, { expiresIn: '7d' })
 }
 
 const createAccessToken = (payload) => {

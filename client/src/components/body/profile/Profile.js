@@ -156,11 +156,97 @@ function Profile() {
                             placeholder="Your name" onChange={handleChange} />
                     </div>
 
+                    {/*  */}
+                    <div className="col-double">
+                        <div className="form-group">
+                            <label htmlFor="name">First Name</label>
+                            <input type="text" name="name" id="name" defaultValue={user.name}
+                                placeholder="Your name" onChange={handleChange} />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="name">Last Name</label>
+                            <input type="text" name="name" id="name" defaultValue={user.name}
+                                placeholder="Your name" onChange={handleChange} />
+                        </div>
+                    </div>
+
+                    {/*  */}
+
+
                     <div className="form-group">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="name">My Store Name</label>
+                        <input type="text" name="name" id="name" defaultValue={user.name}
+                            placeholder="Your name" onChange={handleChange} />
+                    </div>
+
+                    {/* ADDRESS */}
+
+                    <div className="store_address">
+                        <h3>Store Address</h3>
+                        <div className="form-group">
+                            <label htmlFor="name">Street Name</label>
+                            <input type="text" name="name" id="name" defaultValue={user.name}
+                                placeholder="Your name" onChange={handleChange} />
+                        </div>
+
+                        <div className="col-double">
+                            <div className="form-group">
+                                <label htmlFor="name">City</label>
+                                <select>
+                                    <option>LA</option>
+                                    <option>NY</option>
+                                    <option>OH</option>
+                                    <option>CH</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="name">State</label>
+                                <input type="text" name="name" id="name" defaultValue={user.name}
+                                    placeholder="Your name" onChange={handleChange} />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="name">Zipcode</label>
+                                <input type="text" name="name" id="name" defaultValue={user.name}
+                                    placeholder="Your name" onChange={handleChange} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="name">Store Website</label>
+                        <input type="text" name="name" id="name" defaultValue={user.name}
+                            placeholder="Your name" onChange={handleChange} />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="email">Email Address</label>
                         <input type="email" name="email" id="email" defaultValue={user.email}
                             placeholder="Your email address" disabled />
                     </div>
+
+                    <div className="col-double">
+                        <div className="form-group">
+                            <label htmlFor="phone">Phone</label>
+                            <input type="text" name="phone" id="phone" defaultValue={user.phone}
+                                placeholder="Your Phone" onChange={handleChange} />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="phone">Fiaraa ID</label>
+                            <input type="text" name="phone" id="phone" defaultValue={user.phone}
+                                placeholder="Your Phone" onChange={handleChange} />
+                        </div>
+                    </div>
+
+                    <div className="col-double">
+                        <button disabled={loading} onClick={handleUpdate}>Update</button>
+                        <button disabled={loading} onClick={handleUpdate}>Update</button>
+                    </div>
+
+                    {/*  */}
 
                     <div className="form-group">
                         <label htmlFor="phone">Phone</label>
@@ -189,6 +275,8 @@ function Profile() {
 
                     <button disabled={loading} onClick={handleUpdate}>Update</button>
                 </div>
+
+
 
 
                 {/* <div className="col-right">

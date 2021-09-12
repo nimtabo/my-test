@@ -82,14 +82,16 @@ const sendEmail = async (to, url, txt, type) => {
         
             <p>If the button doesn't work for any reason, you can also click on the link below:</p>
         
-            <div>${url}</div>
+            <div>
+            <a href=${url} style="overflow-wrap: break-word; word-wrap: break-word;"> ${url} </a>
+            </div>
 
             <br />
             <br />
 
             <p>Thank you,</p>
             <p>The Fiaraa team</p>
-            <p><a href="mailto:support@fiaraa.com">support@fiaraa.com</a></p>
+            <p><a href="#">support@fiaraa.com</a></p>
             </div>
             `
         }
@@ -110,20 +112,21 @@ const sendEmail = async (to, url, txt, type) => {
         
             <p>If the button doesn't work for any reason, you can also click on the link below:</p>
         
-            <div>${url}</div>
+            <div>
+            <a href=${url} style="overflow-wrap: break-word; word-wrap: break-word;"> ${url} </a>
+            </div>
+            
 
             <p>
             If you did not initiate this request, please contact us immediately at
+            <span style="margin-left: 10px;"><a href="#">support@fiaraa.com</a></span>
             </p>
-            <p><a href="mailto:support@fiaraa.com">support@fiaraa.com</a></p>
-
 
             <br />
             <br />
 
             <p>Thank you,</p>
             <p>The Fiaraa team</p>
-            <p><a href="mailto:support@fiaraa.com">support@fiaraa.com</a></p>
             </div>
             `
         }
