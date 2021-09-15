@@ -2,16 +2,6 @@ const mongoose = require('mongoose')
 
 
 const userSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
-        required: [true, "Please enter your First name!"],
-        trim: true
-    },
-    lastName: {
-        type: String,
-        required: [true, "Please enter your Last name!"],
-        trim: true
-    },
     email: {
         type: String,
         required: [true, "Please enter your email!"],
@@ -22,19 +12,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-    street: {
-        type: String,
-        trim: true,
-    },
     city: {
-        type: String,
-        trim: true,
-    },
-    state: {
-        type: String,
-        trim: true,
-    },
-    zipcode: {
         type: String,
         trim: true,
     },

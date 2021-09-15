@@ -6,14 +6,13 @@ import { isLength, isMatch } from '../../utils/validation/Validation'
 import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
 import { fetchAllUsers, dispatchGetAllUsers } from '../../../redux/actions/usersAction'
 
+// 
+// import { CustomDialog, useDialog } from 'react-st-modal';
+import { ModalContent, ModalFooter, ModalButton, useDialog, CustomDialog } from 'react-st-modal';
+
 const initialState = {
-  firstName: '',
-  lastName: '',
   store: '',
-  street: '',
   city: '',
-  zipcode: '',
-  state: '',
   storeWebsite: '',
   phone: '',
   password: '',
@@ -31,7 +30,7 @@ function Profile() {
 
   const { user, isAdmin } = auth
   const [data, setData] = useState(initialState)
-  const { firstName, lastName, phone, store, street, city, zipcode, state, storeWebsite, password, cf_password, err, success } = data
+  const { phone, store, city, storeWebsite, password, cf_password, err, success } = data
 
   const [avatar, setAvatar] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -84,15 +83,10 @@ function Profile() {
   const updateInfor = () => {
     try {
       axios.patch('/user/update', {
-        firstName: firstName ? firstName : user.firstName,
-        lastName: lastName ? lastName : user.lastName,
         avatar: avatar ? avatar : user.avatar,
         phone: phone ? phone : user.phone,
         store: store ? store : user.store,
-        street: street ? street : user.street,
         city: city ? city : user.city,
-        zipcode: zipcode ? zipcode : user.zipcode,
-        state: state ? state : user.state,
         storeWebsite: storeWebsite ? storeWebsite : user.storeWebsite,
       }, {
         headers: { Authorization: token }
@@ -123,7 +117,7 @@ function Profile() {
   }
 
   const handleUpdate = () => {
-    if (firstName || lastName || avatar || phone) updateInfor()
+    if (avatar || phone) updateInfor()
     if (password) updatePassword()
   }
 
@@ -166,19 +160,6 @@ function Profile() {
           </div>
 
           {/*  */}
-          <div className="col-double">
-            <div className="form-group">
-              <label htmlFor="firstName">First Name</label>
-              <input type="text" name="firstName" id="firstName" defaultValue={user.firstName}
-                placeholder="Your first Name" onChange={handleChange} />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="lastName">Last Name</label>
-              <input type="text" name="lastName" id="lastName" defaultValue={user.lastName}
-                placeholder="Your last Name" onChange={handleChange} />
-            </div>
-          </div>
 
           {/*  */}
 
@@ -190,39 +171,7 @@ function Profile() {
 
           {/* ADDRESS */}
 
-          <div className="store_address">
-            <h3>Store Address</h3>
-            <div className="form-group">
-              <label htmlFor="street">Street Name</label>
-              <input type="text" name="street" id="street" defaultValue={user.street}
-                placeholder="street name" onChange={handleChange} />
-            </div>
 
-            <div className="col-double">
-              <div className="form-group">
-                <label htmlFor="city">City</label>
-                <select name="city" value={user.city} onChange={handleChange}>
-                  <option value="0">Select city</option>
-                  <option value="LA">LA</option>
-                  <option value="NY">NY</option>
-                  <option value="OH">OH</option>
-                  <option value="CH">CH</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="state">State</label>
-                <input type="text" name="state" id="state" defaultValue={user.state}
-                  placeholder="state" onChange={handleChange} />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="zipcode">Zipcode</label>
-                <input type="text" name="zipcode" id="zipcode" defaultValue={user.zipcode}
-                  placeholder="zipcode" onChange={handleChange} />
-              </div>
-            </div>
-          </div>
 
           <div className="form-group">
             <label htmlFor="storeWebsite">Store Website</label>
@@ -244,21 +193,33 @@ function Profile() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="phone">Fiaraa ID</label>
+              <label htmlFor="phone">Fiaraa Customer ID</label>
               <input type="text" name="phone" id="phone" defaultValue={user.code}
                 placeholder="Your Phone" onChange={handleChange} disabled />
             </div>
           </div>
 
+          <div className="form-group">
+            <label htmlFor="city">City</label>
+            <select name="city" value={user.city} onChange={handleChange}>
+              <option value="0">Select city</option>
+              <option value="LA">LA</option>
+              <option value="NY">NY</option>
+              <option value="OH">OH</option>
+              <option value="CH">CH</option>
+            </select>
+          </div>
+
           <div className="col-double">
-            <button disabled={loading} onClick={updateInfor}>Edit</button>
-            <button disabled={loading} onClick={updateInfor}>Submit</button>
+            {/* <button disabled={loading} onClick={updateInfor}>Edit</button> */}
+            <div></div>
+            <button disabled={loading} onClick={updateInfor}>Update</button>
           </div>
 
           {/*  */}
 
 
-          <div className="change_password">
+          {/* <div className="change_password">
             <h2>RESET PASSWORD</h2>
 
             <div className="form-group">
@@ -281,6 +242,20 @@ function Profile() {
             </div>
 
             <button disabled={loading} onClick={updatePassword}>Reset Password</button>
+          </div> */}
+
+          <div>
+            <button
+              onClick={async () => {
+                const result = await CustomDialog(<CustomDialogContent password={password} cf_password={cf_password} handleChange={handleChange} />, {
+                  title: 'RESET PASSWORD',
+                  showCloseIcon: true,
+                  isCanClose: false,
+                });
+              }}
+            >
+              RESET PASSWORD
+            </button>
           </div>
 
         </div>
@@ -288,51 +263,104 @@ function Profile() {
 
 
 
-        {/* <div className="col-right">
-                <h2>{isAdmin ? "Users" : "My Orders"}</h2>
-
-                <div style={{overflowX: "auto"}}>
-                    <table className="customers">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Admin</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                users.map(user => (
-                                    <tr key={user._id}>
-                                        <td>{user._id}</td>
-                                        <td>{user.name}</td>
-                                        <td>{user.email}</td>
-                                        <td>
-                                            {
-                                                user.role === 1
-                                                ? <i className="fas fa-check" title="Admin"></i>
-                                                : <i className="fas fa-times" title="User"></i>
-                                            }
-                                        </td>
-                                        <td>
-                                            <Link to={`/edit_user/${user._id}`}>
-                                                <i className="fas fa-edit" title="Edit"></i>
-                                            </Link>
-                                            <i className="fas fa-trash-alt" title="Remove"
-                                            onClick={() => handleDelete(user._id)} ></i>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div> */}
+        {/* DIV @ */}
       </div>
     </>
   )
 }
+
+
+function CustomDialogContent({ password, cf_password, handleChange }) {
+  const dialog = useDialog();
+
+  const [value, setValue] = useState();
+
+  return (
+    <div>
+      <ModalContent>
+        <div>New Password:</div>
+        <label>
+
+          <input
+            type="password" name="password" id="password"
+            placeholder="Your password" value={password} onChange={handleChange}
+          />
+        </label>
+      </ModalContent>
+      <ModalContent>
+        <div>Confirm New Password:</div>
+        <label>
+
+          <input
+            type="password" name="cf_password" id="cf_password"
+            placeholder="Confirm password" value={cf_password} onChange={handleChange}
+          />
+        </label>
+      </ModalContent>
+      <ModalFooter>
+        <ModalButton
+          onClick={() => {
+            dialog.close(value);
+          }}
+        >
+          Reset password
+        </ModalButton>
+      </ModalFooter>
+    </div>
+  );
+}
+
+
+// function CustomDialogContent() {
+//   const dialog = useDialog();
+
+//   const [value, setValue] = useState();
+
+//   return (
+//     <div>
+//       <input
+//         type="text"
+//         onChange={(e) => {
+//           setValue(e.target.value);
+//         }}
+//       />
+//       <br />
+
+//       <input
+//         type="text"
+//         onChange={(e) => {
+//           setValue(e.target.value);
+//         }}
+//       />
+
+//       <br />
+//       <button
+//         onClick={() => {
+//           // Сlose the dialog and return the value
+//           dialog.close(value);
+//         }}
+//       >
+//         Custom button
+//       </button>
+//     </div>
+//   );
+// }
+
+// function CustomExample() {
+//   return (
+//     <div>
+//       <button
+//         onClick={async () => {
+//           const result = await CustomDialog(<CustomDialogContent />, {
+//             title: 'Custom Dialog',
+//             showCloseIcon: true,
+//           });
+//         }}
+//       >
+//         Custom
+//       </button>
+//     </div>
+//   );
+// }
 
 export default Profile
