@@ -49,10 +49,10 @@ function Header() {
                     <img src={user.avatar} alt="" /> {user.store ? user.store : user.code} <i className="fas fa-angle-down"></i>
                 </Link>
                 <ul className="dropdown">
-                    <li><Link to="/profile">Profile</Link></li>
+                    <li><Link to="/profile">My Profile</Link></li>
                     <li><Link to="/shops">My Store</Link></li>
-                    <li><Link to="#">Payments</Link></li>
-                    <li><Link to="#">Settings</Link></li>
+                    <li><Link to="/plans">My Plan</Link></li>
+                    {/* <li><Link to="#">Settings</Link></li> */}
                     <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
                 </ul>
             </li>

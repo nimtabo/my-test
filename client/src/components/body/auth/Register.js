@@ -9,6 +9,7 @@ const initialState = {
     phone: '',
     store: '',
     city: '',
+    state: '',
     storeWebsite: '',
     email: '',
     password: '',
@@ -20,7 +21,7 @@ const initialState = {
 function Register() {
     const [user, setUser] = useState(initialState)
 
-    const { store, phone, city, storeWebsite, email, password, cf_password, err, success } = user
+    const { store, phone, city, state, storeWebsite, email, password, cf_password, err, success } = user
 
     const handleChangeInput = e => {
         const { name, value } = e.target
@@ -30,7 +31,8 @@ function Register() {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        if (isEmpty(store) || isEmpty(phone) || isEmpty(city) || isEmpty(storeWebsite) || isEmpty(password))
+        console.log(user)
+        if (isEmpty(store) || isEmpty(phone) || isEmpty(city) || isEmpty(state) || isEmpty(storeWebsite) || isEmpty(password))
             return setUser({ ...user, err: "Please fill in all fields.", success: '' })
 
         if (!isEmail(email))
@@ -44,7 +46,7 @@ function Register() {
 
         try {
             const res = await axios.post('/user/register', {
-                store, phone, city, storeWebsite, email, password
+                store, phone, city, state, storeWebsite, email, password
             })
 
             setUser({ ...user, err: '', success: res.data.msg })
@@ -83,6 +85,17 @@ function Register() {
                     <label htmlFor="storeWebsite">Store Website</label>
                     <input type="text" placeholder="Enter your storeWebsite if you have one" id="storeWebsite"
                         value={storeWebsite} name="storeWebsite" onChange={handleChangeInput} />
+                </div>
+
+                <div>
+                    <label htmlFor="state">State</label>
+                    <select name="state" value={state} onChange={handleChangeInput}>
+                        <option value="0">Select state</option>
+                        <option value="LA">LA</option>
+                        <option value="NY">NY</option>
+                        <option value="OH">OH</option>
+                        <option value="CH">CH</option>
+                    </select>
                 </div>
 
                 <div>

@@ -15,9 +15,9 @@ const { CLIENT_URL } = process.env
 const userCtrl = {
     register: async (req, res) => {
         try {
-            const { store, phone, storeWebsite, city, email, password } = req.body
+            const { store, phone, storeWebsite, city, state, email, password } = req.body
 
-            if (!store || !phone || !!storeWebsite || !!city || !email || !password)
+            if (!store || !phone || !storeWebsite || !city || !state || !email || !password)
                 return res.status(400).json({ msg: "Please fill in all fields." })
 
             if (!validateEmail(email))
@@ -32,7 +32,7 @@ const userCtrl = {
             const passwordHash = await bcrypt.hash(password, 12)
 
             const newUser = {
-                store, phone, storeWebsite, city, email, password: passwordHash
+                store, phone, storeWebsite, city, state, email, password: passwordHash
             }
 
             const activation_token = createActivationToken(newUser)
@@ -51,7 +51,7 @@ const userCtrl = {
             const { activation_token } = req.body
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
 
-            const { store, phone, storeWebsite, city, email, password } = user
+            const { store, phone, storeWebsite, city, state, email, password } = user
 
             const check = await Users.findOne({ email })
             if (check) return res.status(400).json({ msg: "This email already exists." })
@@ -67,7 +67,7 @@ const userCtrl = {
             console.log(code)
             // *******************
             const newUser = new Users({
-                store, phone, storeWebsite, city, email, password, code
+                store, phone, storeWebsite, city, state, email, password, code
             })
 
             await newUser.save()
@@ -173,9 +173,9 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const { avatar, phone, store, city, storeWebsite } = req.body
+            const { avatar, phone, store, city, state, storeWebsite } = req.body
             await Users.findOneAndUpdate({ _id: req.user.id }, {
-                avatar, phone, store, city, storeWebsite
+                avatar, phone, store, city, state, storeWebsite
             })
 
             res.json({ msg: "Update Success!" })

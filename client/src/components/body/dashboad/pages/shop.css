@@ -69,7 +69,7 @@
   padding: 0.5rem;
   /* display: flex; */
   /* align-items: flex-end; */
-  /* align-content: flex-end; */
+  align-content: flex-end;
   background-color: darkslategray;
 }
 
@@ -77,4 +77,6 @@
   padding: 0.5rem;
   color: black;
   background-color: darkorange;
+  /* position: absolute; */
+  /* right: 5px; */
 }

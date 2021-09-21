@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
+    state: {
+        type: String,
+        trim: true,
+    },
     storeWebsite: {
         type: String,
         trim: true,

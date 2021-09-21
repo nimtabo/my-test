@@ -13,6 +13,7 @@ import { ModalContent, ModalFooter, ModalButton, useDialog, CustomDialog } from 
 const initialState = {
   store: '',
   city: '',
+  state: '',
   storeWebsite: '',
   phone: '',
   password: '',
@@ -30,7 +31,7 @@ function Profile() {
 
   const { user, isAdmin } = auth
   const [data, setData] = useState(initialState)
-  const { phone, store, city, storeWebsite, password, cf_password, err, success } = data
+  const { phone, store, city, state, storeWebsite, password, cf_password, err, success } = data
 
   const [avatar, setAvatar] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -87,6 +88,7 @@ function Profile() {
         phone: phone ? phone : user.phone,
         store: store ? store : user.store,
         city: city ? city : user.city,
+        state: state ? state : user.state,
         storeWebsite: storeWebsite ? storeWebsite : user.storeWebsite,
       }, {
         headers: { Authorization: token }
@@ -148,7 +150,7 @@ function Profile() {
       </div>
       <div className="profile_page">
         <div className="col-left">
-          <h2>{isAdmin ? "Admin Profile" : "User Profile"}</h2>
+          <h2>{isAdmin ? "Admin Profile" : "My Profile"}</h2>
 
           <div className="avatar">
             <img src={avatar ? avatar : user.avatar} alt="" />
@@ -187,7 +189,7 @@ function Profile() {
 
           <div className="col-double">
             <div className="form-group">
-              <label htmlFor="phone">Phone</label>
+              <label htmlFor="phone">Phone Number</label>
               <input type="text" name="phone" id="phone" defaultValue={user.phone}
                 placeholder="Your Phone" onChange={handleChange} />
             </div>
@@ -195,8 +197,19 @@ function Profile() {
             <div className="form-group">
               <label htmlFor="phone">Fiaraa Customer ID</label>
               <input type="text" name="phone" id="phone" defaultValue={user.code}
-                placeholder="Your Phone" onChange={handleChange} disabled />
+                placeholder="Your Fiaraa Customer ID" onChange={handleChange} disabled />
             </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="state">State</label>
+            <select name="state" value={user.state} onChange={handleChange}>
+              <option value="0">Select state</option>
+              <option value="LA">LA</option>
+              <option value="NY">NY</option>
+              <option value="OH">OH</option>
+              <option value="CH">CH</option>
+            </select>
           </div>
 
           <div className="form-group">

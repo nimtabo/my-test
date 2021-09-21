@@ -69,13 +69,15 @@ const ProductsTable = () => {
         <thead>
           <tr>
             <th>
-              <select>
+              {/* <select>
                 <option>Select Action</option>
                 <option>Delete</option>
                 <option>Sold out</option>
                 <option>Available</option>
-              </select>
+              </select> */}
+              <input type="checkbox" />
             </th>
+            <th>Image</th>
             <th>Make</th>
             <th>Model</th>
             <th>Year</th>
@@ -91,6 +93,7 @@ const ProductsTable = () => {
         <tbody>
           <tr>
             <td><input type="checkbox" /></td>
+            <td className="part_image"></td>
             <td>ALFA ROMEO</td>
             <td>4C</td>
             <td>2015</td>
@@ -104,6 +107,7 @@ const ProductsTable = () => {
           </tr>
           <tr>
             <td><input type="checkbox" /></td>
+            <td className="part_image"></td>
             <td>ALFA ROMEO</td>
             <td>4C</td>
             <td>2015</td>
@@ -117,6 +121,7 @@ const ProductsTable = () => {
           </tr>
           <tr>
             <td><input type="checkbox" /></td>
+            <td className="part_image"></td>
             <td>ALFA ROMEO</td>
             <td>4C</td>
             <td>2015</td>
@@ -130,6 +135,7 @@ const ProductsTable = () => {
           </tr>
           <tr>
             <td><input type="checkbox" /></td>
+            <td className="part_image"></td>
             <td>ALFA ROMEO</td>
             <td>4C</td>
             <td>2015</td>

@@ -1,13 +1,10 @@
 import React from 'react'
 import SideNav from '../sidenav/SideNav'
-
-
-
+// **********
 import './shop.css'
 import ShopForm from './ShopForm'
 import ShopTable from './ShopTable'
-
-
+import ProductsTable from './ProductsTable'
 
 
 function Shops({ handleOpenNav, width }) {
@@ -20,13 +17,13 @@ function Shops({ handleOpenNav, width }) {
       <div id="main">
         <button className="openbtn" onClick={handleOpenNav}>☰ Open Menu</button>
         <div className="shop_window">
-          <h1>Businesses</h1>
+          <h1>My Ads</h1>
           <div className="add_product_btn">
-            <button>Add Business</button>
+            <button>Create Ad</button>
           </div>
           {/* **** */}
           {/* <ShopForm /> */}
-          <ShopTable />
+          <ProductsTable />
           {/* **** */}
         </div>
       </div>
