@@ -51,7 +51,7 @@ function Header() {
                 <ul className="dropdown">
                     <li><Link to="/profile">My Profile</Link></li>
                     <li><Link to="/shops">My Store</Link></li>
-                    <li><Link to="/plans">My Plan</Link></li>
+                    {/* <li><Link to="/plans">My Plan</Link></li> */}
                     {/* <li><Link to="#">Settings</Link></li> */}
                     <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
                 </ul>

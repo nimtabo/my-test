@@ -201,27 +201,34 @@ function Profile() {
             </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="state">State</label>
-            <select name="state" value={user.state} onChange={handleChange}>
-              <option value="0">Select state</option>
-              <option value="LA">LA</option>
-              <option value="NY">NY</option>
-              <option value="OH">OH</option>
-              <option value="CH">CH</option>
-            </select>
+          <div className="col-double">
+            <div className="form-group">
+              <label htmlFor="city">City</label>
+              <select name="city" value={user.city} onChange={handleChange}>
+                <option value="0">Select city</option>
+                <option value="LA">LA</option>
+                <option value="NY">NY</option>
+                <option value="OH">OH</option>
+                <option value="CH">CH</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="state">State</label>
+              <select name="state" value={user.state} onChange={handleChange}>
+                <option value="0">Select state</option>
+                <option value="LA">LA</option>
+                <option value="NY">NY</option>
+                <option value="OH">OH</option>
+                <option value="CH">CH</option>
+              </select>
+            </div>
+
           </div>
 
-          <div className="form-group">
-            <label htmlFor="city">City</label>
-            <select name="city" value={user.city} onChange={handleChange}>
-              <option value="0">Select city</option>
-              <option value="LA">LA</option>
-              <option value="NY">NY</option>
-              <option value="OH">OH</option>
-              <option value="CH">CH</option>
-            </select>
-          </div>
+
+
+
 
           <div className="col-double">
             {/* <button disabled={loading} onClick={updateInfor}>Edit</button> */}
@@ -260,7 +267,7 @@ function Profile() {
           <div>
             <button
               onClick={async () => {
-                const result = await CustomDialog(<CustomDialogContent password={password} cf_password={cf_password} handleChange={handleChange} />, {
+                const result = await CustomDialog(<CustomDialogContent password={password} cf_password={cf_password} handleChange={handleChange} updatePassword={updatePassword} />, {
                   title: 'RESET PASSWORD',
                   showCloseIcon: true,
                   isCanClose: false,
@@ -283,7 +290,7 @@ function Profile() {
 }
 
 
-function CustomDialogContent({ password, cf_password, handleChange }) {
+function CustomDialogContent({ password, cf_password, handleChange, updatePassword }) {
   const dialog = useDialog();
 
   const [value, setValue] = useState();

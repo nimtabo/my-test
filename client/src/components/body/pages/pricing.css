@@ -5,7 +5,8 @@
 
 .pricing-title {
   height: 3rem;
-  width: 10rem;
+  /* width: 10rem; */
+  max-width: 15rem;
   margin: 0px auto;
   background-color: #ffffff;
   text-align: center;

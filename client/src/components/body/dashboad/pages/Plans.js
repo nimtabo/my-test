@@ -12,12 +12,12 @@ const Plans = ({ handleOpenNav, width }) => {
       <div id="main">
         <button className="openbtn" onClick={handleOpenNav}>☰ Open Menu</button>
         <div className="shop_window">
-          <h1>My Plans</h1>
+          {/* <h1>Subscriptions</h1> */}
 
           {/* **** */}
           <div className="pricing-page">
             <div className="pricing-title">
-              <h1>Pricing</h1>
+              <h1>Subscriptions</h1>
             </div>
 
             <div className="pricing-plan-parts-container">

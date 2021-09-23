@@ -76,8 +76,9 @@
 }
 
 .profile_page .col-left select {
-  min-width: 200px;
+  min-width: 260px;
 }
+
 .profile_page .col-left button {
   background: #333;
   color: white;
