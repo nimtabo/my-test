@@ -10,7 +10,7 @@
 }
 
 .shop_window {
-  background-color: blueviolet;
+  background-color: #d49e3f;
   min-height: 500px;
   padding: 1rem;
 }
@@ -70,13 +70,28 @@
   /* display: flex; */
   /* align-items: flex-end; */
   align-content: flex-end;
-  background-color: darkslategray;
+  /* background-color: darkslategray; */
 }
 
 .add_product_btn button {
   padding: 0.5rem;
-  color: black;
-  background-color: darkorange;
+  color: #fff;
+  background-color: #000;
   /* position: absolute; */
   /* right: 5px; */
+}
+
+.table_controls {
+  display: flex;
+  align-content: space-between;
+  /* align-items: stretch; */
+}
+
+.table_controls .table_search {
+  width: 90%;
+  margin-left: 25%;
+}
+
+.table_controls .add_product_btn {
+  width: 10%;
 }

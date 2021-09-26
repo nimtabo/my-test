@@ -10,7 +10,7 @@ const Plans = ({ handleOpenNav, width }) => {
       <SideNav className="side_menu" handleOpenNav={handleOpenNav} width={width} />
 
       <div id="main">
-        <button className="openbtn" onClick={handleOpenNav}>☰ Open Menu</button>
+        <button className="openbtn" onClick={handleOpenNav}>☰ My Store</button>
         <div className="shop_window">
           {/* <h1>Subscriptions</h1> */}
 

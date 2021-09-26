@@ -25,7 +25,7 @@
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
+  background-color: #c8c8c8;
 }
 
 .styled-table tbody tr:last-of-type {
@@ -33,13 +33,13 @@
 }
 
 .styled-table tbody tr:hover {
-  background-color: cornflowerblue;
+  background-color: rgb(169, 173, 180);
 }
 
 /* table_search */
 .table_search {
   display: flex;
-  background-color: darkslategray;
+  /* background-color: darkslategray; */
   padding: 0.5rem;
 }
 
@@ -51,4 +51,10 @@
 .table_search div select {
   display: inline-block;
   width: 100%;
+}
+
+/* BUTTONS */
+.styled-table tr button {
+  padding: 0.2rem;
+  background-color: #009879;
 }

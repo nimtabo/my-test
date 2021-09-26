@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
 import SideNav from '../sidenav/SideNav'
 // **********
 import './shop.css'
@@ -8,6 +10,9 @@ import ProductsTable from './ProductsTable'
 
 
 function Shops({ handleOpenNav, width }) {
+  const auth = useSelector(state => state.auth)
+
+  const { user, isAdmin } = auth
   // *********
   // **********
   return (
@@ -15,12 +20,12 @@ function Shops({ handleOpenNav, width }) {
       <SideNav className="side_menu" handleOpenNav={handleOpenNav} width={width} />
 
       <div id="main">
-        <button className="openbtn" onClick={handleOpenNav}>☰ Open Menu</button>
+        <button className="openbtn" onClick={handleOpenNav}>☰ My Store</button>
         <div className="shop_window">
-          <h1>My Ads</h1>
-          <div className="add_product_btn">
+          <h1>{user.store}</h1>
+          {/* <div className="add_product_btn">
             <button>Create Ad</button>
-          </div>
+          </div> */}
           {/* **** */}
           {/* <ShopForm /> */}
           <ProductsTable />
