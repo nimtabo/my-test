@@ -1,4 +1,5 @@
 const Users = require('../models/userModel')
+const Shop = require('../models/shopModel')
 const bcrypt = require('bcrypt')
 const cryptoRandomString = require('crypto-random-string')
 const jwt = require('jsonwebtoken')
@@ -64,13 +65,32 @@ const userCtrl = {
             //=> 'CDEHKM'
 
             const code = `${alphaCode}${numCode}`;
-            console.log(code)
             // *******************
+
             const newUser = new Users({
                 store, phone, storeWebsite, city, state, email, password, code
             })
 
-            await newUser.save()
+            const savedUser = await newUser.save()
+
+            // ******* CREATE SHOP/STORE ************
+            // **************************************
+            const newShop = new Shop({
+                name: store,
+                phone,
+                email,
+                city,
+                stateProvince: state,
+                website: storeWebsite,
+                owner: savedUser._id,
+            });
+
+            const savedShop = await newShop.save();
+            const updateUserShops = await Users.findByIdAndUpdate(
+                savedUser._id,
+                { shop: savedShop._id }
+            )
+            // ********** THEN **********************
 
             res.json({ msg: "Account has been activated!" })
 
@@ -178,6 +198,18 @@ const userCtrl = {
                 avatar, phone, store, city, state, storeWebsite
             })
 
+            // ********* UPDATE STORE ****************
+            await Shop.findOneAndUpdate({ owner: req.user.id }, {
+                name: store,
+                phone,
+                email,
+                city,
+                stateProvince: state,
+                website: storeWebsite,
+            })
+
+            //   *****************************************
+
             res.json({ msg: "Update Success!" })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -199,6 +231,11 @@ const userCtrl = {
     deleteUser: async (req, res) => {
         try {
             await Users.findByIdAndDelete(req.params.id)
+
+            // ********* DELETE STORE *********
+            await Shop.findOneAndDelete({ owner: req.user.id })
+
+            // ********************************
 
             res.json({ msg: "Deleted Success!" })
         } catch (err) {

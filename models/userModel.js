@@ -43,9 +43,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
     },
-    shops: {
+    shop: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Shops"
+        ref: "Shop"
     }
 
 }, {

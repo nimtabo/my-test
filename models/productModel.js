@@ -12,14 +12,14 @@ const productSchema = new mongoose.Schema({
     required: [true, "Please enter model!"],
     trim: true,
   },
+  year: {
+    type: String,
+    required: [true, "Please enter year!"],
+    trim: true,
+  },
   part: {
     type: String,
     required: [true, "Please enter part!"],
-    trim: true,
-  },
-  grade: {
-    type: String,
-    required: [true, "Please enter grade!"],
     trim: true,
   },
   price: {
@@ -27,30 +27,40 @@ const productSchema = new mongoose.Schema({
     required: [true, "Please enter price!"],
     trim: true,
   },
-  year: {
+  partNumber: {
     type: String,
-    required: [true, "Please enter year!"],
+    required: [true, "Please enter part number!"],
     trim: true,
   },
-  engine: {
+  description: {
     type: String,
-    required: [true, "Please Enter Engine"],
+    required: [true, "Please enter description!"],
     trim: true,
   },
-  category: {
-    type: String,
-    required: [true, "Please Enter Part Category"],
-    trim: true,
-  },
-  stock: {
-    type: Number,
-    required: [true, "Please enter avilable stocks!"],
-    trim: true,
-  },
+  // grade: {
+  //   type: String,
+  //   required: [true, "Please enter grade!"],
+  //   trim: true,
+  // },
+  // engine: {
+  //   type: String,
+  //   required: [true, "Please Enter Engine"],
+  //   trim: true,
+  // },
+  // category: {
+  //   type: String,
+  //   required: [true, "Please Enter Part Category"],
+  //   trim: true,
+  // },
+  // stock: {
+  //   type: Number,
+  //   required: [true, "Please enter avilable stocks!"],
+  //   trim: true,
+  // },
   shop:
   {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Shops"
+    ref: "Shop"
   }
 }, {
   timestamps: true

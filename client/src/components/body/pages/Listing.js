@@ -40,7 +40,7 @@ const Listing = () => {
         const makes = await axios.get('/api/cars/makes');
         setMakes([...makes.data])
         if (location.state.make && location.state.model && location.state.year && location.state.part) {
-          const prodRes = await axios.get(`/api/product/search/${location.state.make}/${location.state.model}/${location.state.year}/null/null/${location.state.part}`);
+          const prodRes = await axios.get(`/api/product/search/${location.state.make}/${location.state.model}/${location.state.year}/${location.state.part}`);
           // console.log("RES", prodRes.data);
           setProducts([...prodRes.data])
         }
@@ -135,54 +135,53 @@ const Listing = () => {
     fetchData();
   }, [model]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const engine = await axios.post(`/api/cars/${make}/${model}/${year}`);
-        setEngines([...engine.data])
-        categories.splice(0, categories.length)
-        parts.splice(0, parts.length)
-        setCategories([...categories])
-        setParts([...parts])
-        // Reset Choices
-        setEngine('')
-        setCategory('')
-        setPart('')
-      } catch (error) {
-        // console.log("An Error occured Getting Categories")
-        return setCategories([...[]])
-      }
-    }
-    fetchData();
-  }, [year]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const engine = await axios.post(`/api/cars/${make}/${model}/${year}`);
+  //       setEngines([...engine.data])
+  //       categories.splice(0, categories.length)
+  //       parts.splice(0, parts.length)
+  //       setCategories([...categories])
+  //       setParts([...parts])
+  //       // Reset Choices
+  //       setEngine('')
+  //       setCategory('')
+  //       setPart('')
+  //     } catch (error) {
+  //       // console.log("An Error occured Getting Categories")
+  //       return setCategories([...[]])
+  //     }
+  //   }
+  //   fetchData();
+  // }, [year]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const category = await axios.post(`/api/cars/${make}/${model}/${year}/${engine}`);
+  //       setCategories([...category.data])
+  //       parts.splice(0, parts.length)
+  //       setParts([...parts])
+  //       // Reset Choices
+  //       setCategory('')
+  //       setPart('')
+  //     } catch (error) {
+  //       // console.log("An Error occured Getting Egines")
+  //       return setEngines([...[]])
+  //     }
+  //   }
+  //   fetchData();
+  // }, [engine]);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const category = await axios.post(`/api/cars/${make}/${model}/${year}/${engine}`);
-        setCategories([...category.data])
-        parts.splice(0, parts.length)
-        setParts([...parts])
-        // Reset Choices
-        setCategory('')
-        setPart('')
-      } catch (error) {
-        // console.log("An Error occured Getting Egines")
-        return setEngines([...[]])
-      }
-    }
-    fetchData();
-  }, [engine]);
+        const res = await axios.get(`api/cars/parts/${make}/${model}/${year}`);
+        setParts([...res.data])
 
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const part = await axios.post(`/api/cars/${make}/${model}/${year}/${engine}/${category}`);
-        parts.splice(0, parts.length)
-        setParts([...parts])
-        setParts([...part.data.parts])
-        // Reset Choices
+        // Reset part
         setPart('')
       } catch (error) {
         // console.log("An Error occured Getting Parts")
@@ -190,7 +189,7 @@ const Listing = () => {
       }
     }
     fetchData();
-  }, [category]);
+  }, [year]);
 
   // useEffect(() => {
   //   const data = { make, model, year, engine, category, part }
@@ -204,8 +203,8 @@ const Listing = () => {
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (engine === "" || engine === "Select a year" || engine === "Select engine") || (category === "" || category === "select engine" || category === "Select category") || (part === "" || part === "Select category" || part === "Select part")) {
-      const data = { make, model, year, engine, category, part }
+    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part")) {
+      const data = { make, model, year, part }
       console.log("Err", data)
       return setErr("All marked fields are required");
     } else {
@@ -215,7 +214,7 @@ const Listing = () => {
       try {
         // const data = { make, model, year, engine, category, part }
         products.splice(0, years.length)
-        const prodRes = await axios.get(`/api/product/search/${make}/${model}/${year}/${engine}/${category}/${part}`);
+        const prodRes = await axios.get(`/api/product/search/${make}/${model}/${year}/${part}`);
         // console.log("Listing", prodRes.data);
         setProducts([...prodRes.data])
       } catch (error) {
@@ -232,7 +231,7 @@ const Listing = () => {
       <div className="listing_left_filter">
         <form onSubmit={onSubmit}>
           <div>
-            {err ? showErrMsg(err) : <h2>FIND YOUR PARTS NOW</h2>}
+            {err ? showErrMsg(err) : <h2>FILTER SEARCH</h2>}
           </div>
 
           <div className="listing_left_filter_form_item">
@@ -280,7 +279,7 @@ const Listing = () => {
             </select>
           </div>
 
-          <div className="listing_left_filter_form_item">
+          {/* <div className="listing_left_filter_form_item">
             <label htmlFor="engine">Engine: </label>
             <select name="engine"
               value={engine}
@@ -293,9 +292,9 @@ const Listing = () => {
                 })
               }
             </select>
-          </div>
+          </div> */}
 
-          <div className="listing_left_filter_form_item">
+          {/* <div className="listing_left_filter_form_item">
             <label htmlFor="category">Category: </label>
             <select name="category"
               value={category}
@@ -308,7 +307,7 @@ const Listing = () => {
                 })
               }
             </select>
-          </div>
+          </div> */}
 
           <div className="listing_left_filter_form_item">
             <label htmlFor="part">Part: </label>
@@ -335,48 +334,53 @@ const Listing = () => {
       <div className="listing_right_items">
 
         {
-          products.map(prod => {
-            return (
-              <div className="listing_item" key={prod._id}>
-                <div className="listing_item_image">IMAGE SECTION</div>
-                <div>
-                  <p key={prod.make}><span className="text_item">make:</span> <span>{prod.make}</span></p>
-                  <p key={prod.model}> <span className="text_item">model:</span> <span>{prod.model}</span> </p>
-                  <p key={prod.year}><span className="text_item">year:</span> <span>{prod.year}</span> </p>
-                  <p key={prod.part}><span className="text_item">part: </span> <span>{prod.part}</span> </p>
-                  <p key={prod.engine}><span className="text_item">Engine:</span> <span>{prod.engine}</span></p>
-                  <p key={prod.price}><span className="text_item">price:</span> <span> {prod.price}</span></p>
-                  <p key={prod.grade}><span className="text_item">grade:</span> <span>{prod.grade}</span> </p>
-                  <p key={prod.stock}><span className="text_item">Available:</span> {prod.stock}</p>
-                  <p key={prod.category}><span className="text_item">Part Category:</span> <span>{prod.category}</span> </p>
-                </div>
-                <div>
-                  <p key={prod.shop.name}><span className="text_item">Seller name:</span> <span>{prod.shop.name}</span></p>
-                  <p key={prod.shop.city}><span className="text_item">City:</span> <span>{prod.shop.city}</span></p>
-                  <p key={prod.shop.email}><span className="text_item">email:</span> <span>{prod.shop.email}</span></p>
-                  <p key={prod.shop.address}><span className="text_item">Address:</span> <span>{prod.shop.address}</span></p>
-                  <p key={prod.shop.phone}><span className="text_item">Phone:</span> <span>{prod.shop.phone}</span></p>
+          products.length < 1 ? (
+            <div>
+              <h2>No parts Found</h2>
+            </div>
+          ) : (
+            products.map(prod => {
+              return (
+                <div className="listing_item" key={prod._id}>
+                  <div className="listing_item_image">IMAGE SECTION</div>
+                  <div>
+                    <p key={prod.make}><span className="text_item">make:</span> <span>{prod.make}</span></p>
+                    <p key={prod.model}> <span className="text_item">model:</span> <span>{prod.model}</span> </p>
+                    <p key={prod.year}><span className="text_item">year:</span> <span>{prod.year}</span> </p>
+                    <p key={prod.part}><span className="text_item">part: </span> <span>{prod.part}</span> </p>
+                    <p key={prod.description}><span className="text_item">Details:</span> <span>{prod.description}</span> </p>
+                    {/* <p key={prod.engine}><span className="text_item">Engine:</span> <span>{prod.engine}</span></p> */}
+                    <p key={prod.price}><span className="text_item">price:</span> <span> {prod.price}</span></p>
+                    {/* <p key={prod.grade}><span className="text_item">grade:</span> <span>{prod.grade}</span> </p> */}
+                    {/* <p key={prod.stock}><span className="text_item">Available:</span> {prod.stock}</p> */}
+                  </div>
+                  <div>
+                    <p key={prod.shop.name}><span className="text_item">Seller name:</span> <span>{prod.shop.name}</span></p>
+                    <p key={prod.shop.phone}><span className="text_item">Phone:</span> <span>{prod.shop.phone}</span></p>
+                    <p key={prod.shop.email}><span className="text_item">email:</span> <span>{prod.shop.email}</span></p>
+                    <p key={prod.shop.stateProvince}><span className="text_item">Address:</span> <span>{prod.shop.stateProvince}</span></p>
+                    <p key={prod.shop.city}><span className="text_item">City:</span> <span>{prod.shop.city}</span></p>
 
-                  <p>Payment options: </p>
+                    {/* <p>Payment options: </p>
                   <ul>
                     {
                       prod.shop.paymentMethod.map(op => {
                         return (<li key={op.label}>{op.label}</li>)
                       })
                     }
-                  </ul>
-                  <p>Shipment options:</p>
+                  </ul> */}
+                    {/* <p>Shipment options:</p>
                   <ul>
                     {
                       prod.shop.shipmentMethod.map(op => {
                         return (<li key={op.label}>{op.label}</li>)
                       })
                     }
-                  </ul>
+                  </ul> */}
+                  </div>
                 </div>
-              </div>
-            )
-          })
+              )
+            }))
         }
 
       </div>

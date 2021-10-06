@@ -100,17 +100,26 @@ const carCtrl = {
     }
   },
   getYears: async (req, res) => {
+    // try {
+    //   const { make, model } = req.params;
+    //   const years = await Car.distinct("year", { make: make, model: model })
+    //   if (!years) {
+    //     return res.status(400).json({
+    //       message: "No Years exist!",
+    //     });
+    //   }
+    //   res.status(200).json(years);
+    // } catch (err) {
+    //   return res.status(500).json({ msg: err.message })
+    // }
+    // ******************
     try {
       const { make, model } = req.params;
-      const years = await Car.distinct("year", { make: make, model: model })
-      if (!years) {
-        return res.status(400).json({
-          message: "No Years exist!",
-        });
-      }
-      res.status(200).json(years);
+      const years = await Car.find({ make: make, model: model }, { years: 1, _id: 0 })
+      res.status(200).json(years[0].years);
+
     } catch (err) {
-      return res.status(500).json({ msg: err.message })
+      res.status(400).json({ msg: err.message });
     }
   },
   getEngine: async (req, res) => {
@@ -156,18 +165,28 @@ const carCtrl = {
     }
   },
   getPartsMin: async (req, res) => {
+    // try {
+    //   const { make, model, year } = req.params;
+    //   const parts = await Car.distinct('parts', { make: make, model: model, year: year });
+    //   // const parts = await Car.find({ make: make, model: model, year: year }, { parts: 1, _id: 0 })
+    //   if (!parts) {
+    //     return res.status(400).json({
+    //       message: "No Parts exist!",
+    //     });
+    //   }
+    //   return res.status(200).json(parts);
+    // } catch (err) {
+    //   return res.status(500).json({ msg: err.message })
+    // }
+    // *******************
     try {
       const { make, model, year } = req.params;
-      const parts = await Car.distinct('parts', { make: make, model: model, year: year });
-      // const parts = await Car.find({ make: make, model: model, year: year }, { parts: 1, _id: 0 })
-      if (!parts) {
-        return res.status(400).json({
-          message: "No Parts exist!",
-        });
-      }
-      return res.status(200).json(parts);
+
+      const parts = await Car.find({ make, model: model }, { parts: 1, _id: 0 })
+      res.status(200).json(parts[0].parts);
+
     } catch (err) {
-      return res.status(500).json({ msg: err.message })
+      res.status(400).json({ msg: err.message });
     }
   }
 

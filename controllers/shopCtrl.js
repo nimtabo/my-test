@@ -44,13 +44,14 @@ const shopCtrl = {
   },
   getAllShops: async (req, res) => {
     try {
-      const shops = await Shop.find({ owner: req.user.id });
+      const shops = await Shop.findOne({ owner: req.user.id });
       if (!shops) {
         return res.status(400).json({
           message: "No Shop exist!",
         });
       }
-      res.json(shops);
+      // console.log(shops._id)
+      res.json(shops._id);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }
@@ -111,18 +112,19 @@ const shopCtrl = {
   },
   addProduct: async (req, res) => {
     try {
-      const { make, stock, model, part, engine, category, grade, price, year } = req.body;
+      const { make, model, part, partNumber, description, price, year } = req.body;
 
       const newProduct = new Product({
         make,
         model,
-        part,
-        engine,
-        category,
-        grade,
-        price,
         year,
-        stock,
+        part,
+        partNumber,
+        description,
+        price,
+        // category,
+        // grade,
+        // stock,
       });
 
       const { shopId } = req.params;

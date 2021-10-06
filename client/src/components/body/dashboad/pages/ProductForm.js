@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { showErrMsg } from '../../../utils/notification/Notification'
+import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification'
 import axios from "axios";
 
 function ProductForm() {
@@ -19,11 +19,14 @@ function ProductForm() {
   const [category, setCategory] = useState("")
   const [parts, setParts] = useState([])
   const [part, setPart] = useState("")
-  const [grade, setGrade] = useState('')
+  const [partNumber, setPartNumber] = useState("")
+  const [description, setDescription] = useState('')
   const [price, setPrice] = useState("")
+  const [grade, setGrade] = useState('')
   const [stock, setStock] = useState("")
   const [zipcode, setZipcode] = useState("")
   const [err, setErr] = useState("")
+  const [success, setSuccess] = useState("")
 
   const token = useSelector(state => state.token)
 
@@ -35,7 +38,9 @@ function ProductForm() {
         const shops = await axios.get('/api/shop/shops', {
           headers: { Authorization: token }
         });
-        setShops([...shops.data])
+        // console.log(shops.data)
+        setShop(shops.data)
+        // setShops([...shops.data])
         // console.log(shops.data);
       } catch (error) {
         console.log("An Error occured getting makes")
@@ -98,54 +103,53 @@ function ProductForm() {
     fetchData();
   }, [model]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const engine = await axios.post(`/api/cars/${make}/${model}/${year}`);
-        setEngines([...engine.data])
-        categories.splice(0, categories.length)
-        parts.splice(0, parts.length)
-        setCategories([...categories])
-        setParts([...parts])
-        // Reset Choices
-        setEngine('')
-        setCategory('')
-        setPart('')
-      } catch (error) {
-        // console.log("An Error occured Getting Categories")
-        return setCategories([...[]])
-      }
-    }
-    fetchData();
-  }, [year]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const engine = await axios.post(`/api/cars/${make}/${model}/${year}`);
+  //       setEngines([...engine.data])
+  //       categories.splice(0, categories.length)
+  //       parts.splice(0, parts.length)
+  //       setCategories([...categories])
+  //       setParts([...parts])
+  //       // Reset Choices
+  //       setEngine('')
+  //       setCategory('')
+  //       setPart('')
+  //     } catch (error) {
+  //       // console.log("An Error occured Getting Categories")
+  //       return setCategories([...[]])
+  //     }
+  //   }
+  //   fetchData();
+  // }, [year]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const category = await axios.post(`/api/cars/${make}/${model}/${year}/${engine}`);
+  //       setCategories([...category.data])
+  //       parts.splice(0, parts.length)
+  //       setParts([...parts])
+  //       // Reset Choices
+  //       setCategory('')
+  //       setPart('')
+  //     } catch (error) {
+  //       // console.log("An Error occured Getting Egines")
+  //       return setEngines([...[]])
+  //     }
+  //   }
+  //   fetchData();
+  // }, [engine]);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const category = await axios.post(`/api/cars/${make}/${model}/${year}/${engine}`);
-        setCategories([...category.data])
-        parts.splice(0, parts.length)
-        setParts([...parts])
-        // Reset Choices
-        setCategory('')
-        setPart('')
-      } catch (error) {
-        // console.log("An Error occured Getting Egines")
-        return setEngines([...[]])
-      }
-    }
-    fetchData();
-  }, [engine]);
+        const res = await axios.get(`api/cars/parts/${make}/${model}/${year}`);
+        setParts([...res.data])
 
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const part = await axios.post(`/api/cars/${make}/${model}/${year}/${engine}/${category}`);
-        parts.splice(0, parts.length)
-        setParts([...parts])
-        setParts([...part.data.parts])
-        // Reset Choices
+        // Reset part
         setPart('')
       } catch (error) {
         // console.log("An Error occured Getting Parts")
@@ -153,39 +157,51 @@ function ProductForm() {
       }
     }
     fetchData();
-  }, [category]);
+  }, [year]);
 
-  useEffect(() => {
-    const data = { make, model, year, engine, category, part }
-    setData({ ...data })
-  }, [part]);
-
-
-  useEffect(() => {
-    setData({ ...data, zipcode })
-    console.log(zipcode)
-  }, [zipcode]);
+  // useEffect(() => {
+  //   const data = { make, model, year, part }
+  //   setData({ ...data })
+  // }, [part]);
 
 
-  useEffect(() => {
-    console.log(data)
-  }, [data]);
+  // useEffect(() => {
+  //   setData({ ...data, zipcode })
+  //   console.log(zipcode)
+  // }, [zipcode]);
+
+  // useEffect(() => {
+  //   console.log(data)
+  // }, [data]);
+
 
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (engine === "" || engine === "Select a year" || engine === "Select engine") || (category === "" || category === "select engine" || category === "Select category") || (part === "" || part === "Select category" || part === "Select part")) {
-      const data = { shops, make, model, year, engine, category, part, grade, price, stock }
+    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (partNumber === "") || (description === "") || (price === "")) {
+      const data = { make, model, year, part, partNumber, description, price }
       console.log("Err", data)
       return setErr("All marked fields are required");
     } else {
-      const data = { shop, make, model, year, engine, category, part, grade, price, stock }
-      // http://localhost:5000/api/shop/shops/6093a22d5843f1295cae7178/products
-      const product = await axios.post(`/api/shop/shops/${shop}/products`, data, {
-        headers: { Authorization: token }
-      });
-      console.log("Success", product)
-      // return setErr("Go to LISTING PAGE")
+      try {
+        const data = { make, model, year, part, partNumber, description, price, shop }
+        // http://localhost:5000/api/shop/shops/6093a22d5843f1295cae7178/products
+        const product = await axios.post(`/api/shop/shops/${shop}/products`, data, {
+          headers: { Authorization: token }
+        });
+        // console.log("Success", product)
+        setMake('')
+        setModel('')
+        setYear('')
+        setPart('')
+        setPartNumber('')
+        setDescription('')
+        setPrice('')
+        return setSuccess("Part added successfully")
+      } catch (error) {
+        return setErr(error.msg)
+      }
+
 
     }
 
@@ -193,71 +209,101 @@ function ProductForm() {
 
 
   return (
-    <form className="shop_form_items" onSubmit={onSubmit}>
+    <div>
       <div>
-        {err ? showErrMsg(err) : <h2>FIND YOUR PARTS NOW</h2>}
+        {err ? showErrMsg(err) : <h2>Add new parts to sell</h2>}
       </div>
-      <div className="shop_form_item">
-        <label htmlFor="shop">Shop Name: </label>
-        <select name="shop"
-          value={shop}
-          onChange={(e) => { setShop(e.target.value) }}
-        >
-          <option>Select Shop</option>
-          {shops.map(i => {
-            return <option key={i._id} value={i._id}>{i.name}</option>
-          })}
-        </select>
+      <div>
+        {success && showSuccessMsg(success)}
       </div>
+      <form className="shop_form_items" onSubmit={onSubmit}>
+        <div className="shop_form_item_container">
+          <div className="shop_form_item">
+            <label htmlFor="make">make: </label>
+            <select
+              name="make"
+              id="make"
+              className="hero-make"
+              value={make}
+              onChange={(e) => { setMake(e.target.value) }}>
+              <option>Select make</option>
+              {
+                makes.map(make => {
+                  return <option key={make}>{make}</option>
+                })
+              }
+            </select>
+          </div>
 
-      <div className="shop_form_item">
-        <label htmlFor="make">make: </label>
-        <select
-          name="make"
-          id="make"
-          className="hero-make"
-          value={make}
-          onChange={(e) => { setMake(e.target.value) }}>
-          <option>Select make</option>
-          {
-            makes.map(make => {
-              return <option key={make}>{make}</option>
-            })
-          }
-        </select>
-      </div>
+          <div className="shop_form_item">
+            <label htmlFor="model">model: </label>
+            <select name="model"
+              value={model}
+              onChange={(e) => { setModel(e.target.value) }}>
+              {models.length === 0 ? <option>Select a make</option> : <option>Select model</option>}
+              {
+                models.map(model => {
+                  return <option key={model}>{model}</option>
+                })
+              }
+            </select>
+          </div>
 
-      <div className="shop_form_item">
-        <label htmlFor="model">model: </label>
-        <select name="model"
-          value={model}
-          onChange={(e) => { setModel(e.target.value) }}>
-          {models.length === 0 ? <option>Select a make</option> : <option>Select model</option>}
-          {
-            models.map(model => {
-              return <option key={model}>{model}</option>
-            })
-          }
-        </select>
-      </div>
+          <div className="shop_form_item">
+            <label htmlFor="year">year: </label>
+            <select name="year"
+              value={year}
+              onChange={(e) => { setYear(e.target.value) }}>
+              {years.length === 0 ? <option>Select a model</option> : <option>Select year</option>}
+              {
+                years.map(year => {
+                  return <option key={year}>{year}</option>
+                })
+              }
+            </select>
+          </div>
 
-      <div className="shop_form_item">
-        <label htmlFor="year">year: </label>
-        <select name="year"
-          value={year}
-          onChange={(e) => { setYear(e.target.value) }}>
-          {years.length === 0 ? <option>Select a model</option> : <option>Select year</option>}
-          {
-            years.map(year => {
-              return <option key={year}>{year}</option>
-            })
-          }
-        </select>
-      </div>
+          <div className="shop_form_item">
+            <label htmlFor="part">part: </label>
+            <select name="engine"
+              value={part}
+              onChange={(e) => { setPart(e.target.value) }}
+            >
+              {parts.length === 0 ? <option>Select year</option> : <option>Select part</option>}
+              {
+                parts.map(part => {
+                  return <option key={part}>{part}</option>
+                })
+              }
+            </select>
+          </div>
+        </div>
+
+        <div className="shop_form_item_container">
+          <div className="shop_form_item">
+            <label htmlFor="partNumber">Part Number: </label>
+            <input type="number" name="partNumber" value={partNumber} onChange={(e) => { setPartNumber(e.target.value) }} />
+          </div>
+
+          <div className="shop_form_item">
+            <label htmlFor="description">Description: </label>
+            <input type="text" name="description" value={description} onChange={(e) => { setDescription(e.target.value) }} />
+          </div>
+
+          <div className="shop_form_item">
+            <label htmlFor="price">price: </label>
+            <input type="number" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} />
+          </div>
+
+          <div className="shop_form_item btn">
+            <button type="submit">Add part</button>
+          </div>
+        </div>
 
 
 
-      <div className="shop_form_item">
+
+        {/* <div className="shop_form_item">
         <label htmlFor="engine">engine: </label>
         <select name="engine"
           value={engine}
@@ -270,9 +316,9 @@ function ProductForm() {
             })
           }
         </select>
-      </div>
+      </div> */}
 
-      <div className="shop_form_item">
+        {/* <div className="shop_form_item">
         <label htmlFor="category">category: </label>
         <select name="category"
           value={category}
@@ -285,24 +331,11 @@ function ProductForm() {
             })
           }
         </select>
-      </div>
+      </div> */}
 
-      <div className="shop_form_item">
-        <label htmlFor="part">part: </label>
-        <select name="engine"
-          value={part}
-          onChange={(e) => { setPart(e.target.value) }}
-        >
-          {parts.length === 0 ? <option>Select category</option> : <option>Select part</option>}
-          {
-            parts.map(part => {
-              return <option key={part}>{part}</option>
-            })
-          }
-        </select>
-      </div>
 
-      <div className="shop_form_item">
+
+        {/* <div className="shop_form_item">
         <label htmlFor="grade">grade: </label>
         <select name="grade" value={grade} onChange={(e) => { setGrade(e.target.value) }}>
           <option value="A">Select grade</option>
@@ -310,23 +343,19 @@ function ProductForm() {
           <option value="B">B</option>
           <option value="C">C</option>
         </select>
-      </div>
+      </div> */}
 
-      <div className="shop_form_item">
-        <label htmlFor="price">price: </label>
-        <input type="number" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} />
-      </div>
 
-      <div className="shop_form_item">
+
+        {/* <div className="shop_form_item">
         <label htmlFor="stock">stock: </label>
         <input type="number" name="stock" value={stock} onChange={(e) => { setStock(e.target.value) }} />
-      </div>
+      </div> */}
 
-      <div className="shop_form_item btn">
-        <button type="submit">Create</button>
-      </div>
 
-    </form>
+
+      </form>
+    </div>
   )
 }
 

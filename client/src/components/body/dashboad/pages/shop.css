@@ -16,13 +16,21 @@
 }
 
 .shop_form_items {
-  width: 60%;
+  /* width: 60%; */
   margin: 0 auto;
-  background-color: cornflowerblue;
+  padding: 1rem;
+  background-color: #009879;
+  /* *** */
+  display: flex;
+  justify-content: space-between;
+}
+
+.shop_form_item_container {
+  min-width: 45%;
 }
 
 .shop_form_item {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .shop_form_item label,
@@ -30,7 +38,7 @@
 .shop_form_item select,
 .shop_form_item textarea {
   display: inline-block;
-  font-size: 19px;
+  font-size: 18px;
 }
 
 .shop_form_item label {

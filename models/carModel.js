@@ -12,22 +12,18 @@ const carSchema = new mongoose.Schema({
     required: [true, "Please enter car model!"],
     trim: true,
   },
-  engine: {
-    type: String,
-    required: [true, "Please enter car engine!"],
-    trim: true,
-  },
-  category: {
-    type: String,
-    required: [true, "Please enter car category!"],
-    trim: true,
-  },
+  // engine: {
+  //   type: String,
+  //   required: [true, "Please enter car engine!"],
+  //   trim: true,
+  // },
+  // category: {
+  //   type: String,
+  //   required: [true, "Please enter car category!"],
+  //   trim: true,
+  // },
+  years: [],
   parts: [],
-  year: {
-    type: String,
-    required: [true, "Please enter car category!"],
-    trim: true,
-  },
 }, {
   timestamps: true
 })
