@@ -358,8 +358,13 @@ const Listing = () => {
                     <p key={prod.shop.name}><span className="text_item">Seller name:</span> <span>{prod.shop.name}</span></p>
                     <p key={prod.shop.phone}><span className="text_item">Phone:</span> <span>{prod.shop.phone}</span></p>
                     <p key={prod.shop.email}><span className="text_item">email:</span> <span>{prod.shop.email}</span></p>
-                    <p key={prod.shop.stateProvince}><span className="text_item">Address:</span> <span>{prod.shop.stateProvince}</span></p>
-                    <p key={prod.shop.city}><span className="text_item">City:</span> <span>{prod.shop.city}</span></p>
+                    <p key={prod.shop.city}>
+                      <span className="text_item text_item_inner">City:</span> <span>{prod.shop.city}</span>
+                      <span className="span_double">   </span>
+                      <span className="text_item text_item_inner">State:</span> <span>{prod.shop.stateProvince}</span>
+                    </p>
+                    {/* <p key={prod.shop.stateProvince}><span className="text_item">State:</span> <span>{prod.shop.stateProvince}</span></p> */}
+                    <p key={prod.shop.website}><span className="text_item">Website:</span> <span><a href={`http://${prod.shop.website}`} target="_blank">{prod.shop.website}</a></span></p>
 
                     {/* <p>Payment options: </p>
                   <ul>

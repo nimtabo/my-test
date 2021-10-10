@@ -8,13 +8,18 @@ import ProductForm from './ProductForm'
 
 import './table.css'
 import { async } from 'crypto-random-string';
+import ProductTableFilterForm from './ProductTableFilterForm';
+import EditProductForm from './EditProductForm';
 
 const ProductsTable = () => {
   const [showAddPart, setShowAddPart] = useState(false)
+  const [showEditPart, setShowEditPart] = useState(false)
   const [products, setProducts] = useState([])
+  const [product, setProduct] = useState('')
   const [shop, setShop] = useState('')
   const [err, setErr] = useState('')
   const [success, setSuccess] = useState('')
+  const [updateTable, setUpdateTable] = useState(false)
 
   const token = useSelector(state => state.token)
 
@@ -38,7 +43,7 @@ const ProductsTable = () => {
     }
     fetchData();
 
-  }, [])
+  }, [updateTable])
 
 
   const deleteProduct = async (id) => {
@@ -47,59 +52,23 @@ const ProductsTable = () => {
       await axios.delete(`/api/shop/shops/${shop}/products/${id}`, {
         headers: { Authorization: token }
       });
-      setSuccess("Product deleted successfully")
+      setErr("Product deleted successfully")
+      setUpdateTable(!updateTable)
     } catch (error) {
       setErr(error.message)
     }
+  }
+
+  const updateProduct = async (prod) => {
+    setProduct(prod);
+    setShowEditPart(!showEditPart);
   }
 
   return (
     <div>
       <div className="table_controls">
 
-        <div className="table_search">
-          <div>
-            <select>
-              <option>make</option>
-              <option>make</option>
-              <option>make</option>
-            </select>
-          </div>
-
-          <div>
-            <select>
-              <option>model</option>
-              <option>model</option>
-              <option>model</option>
-            </select>
-          </div>
-
-          <div>
-            <select>
-              <option>year</option>
-              <option>year</option>
-              <option>year</option>
-            </select>
-          </div>
-
-          <div>
-            <select>
-              <option>Part Number</option>
-              <option>Part Number</option>
-              <option>Part Number</option>
-            </select>
-          </div>
-
-
-          <div>
-            <select>
-              <option>Part</option>
-              <option>Part</option>
-              <option>Part</option>
-            </select>
-          </div>
-
-        </div>
+        <ProductTableFilterForm />
 
         <div className="add_product_btn">
           <button onClick={() => { setShowAddPart(!showAddPart) }}>Add Part</button>
@@ -108,16 +77,32 @@ const ProductsTable = () => {
 
       <div id="add_parts_container"
         style={showAddPart ? { display: "block" } : { display: "none", }}>
-        <ProductForm />
+        <ProductForm
+          setUpdateTable={setUpdateTable}
+          updateTable={updateTable}
+          setShowAddPart={setShowAddPart}
+          showAddPart={showAddPart}
+        />
+      </div>
+
+      <div id="edit_parts_container"
+        style={showEditPart ? { display: "block" } : { display: "none", }}>
+        <EditProductForm
+          setUpdateTable={setUpdateTable}
+          updateTable={updateTable}
+          product={product}
+          setShowEditPart={setShowEditPart}
+          showEditPart={showEditPart}
+        />
       </div>
 
       <div>
-        {err && showErrMsg}
+        {err && showErrMsg(err) || success && showSuccessMsg(success)}
       </div>
       <div>
-        {success && showSuccessMsg}
+        { }
       </div>
-      <table class="styled-table">
+      <table className="styled-table">
         <thead>
           <tr>
             <th>
@@ -151,7 +136,7 @@ const ProductsTable = () => {
 
           {
             products.map(prod => {
-              return (<tr>
+              return (<tr key={prod._id}>
                 <td><input type="checkbox" /></td>
                 <td className="part_image"></td>
                 <td>{prod.make}</td>
@@ -162,7 +147,9 @@ const ProductsTable = () => {
                 <td>{prod.description}</td>
                 <td>{`$ ${prod.price}`}</td>
                 <td>
-                  <button>Edit</button>
+                  <button onClick={() => {
+                    updateProduct(prod)
+                  }}>Edit</button>
                   <span> </span>
                   <button onClick={() => {
                     deleteProduct(prod._id)

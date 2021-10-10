@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification'
 import axios from "axios";
 
-function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart }) {
+function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart, showEditPart }) {
   const [data, setData] = useState({})
   const [makes, setMakes] = useState([])
   const [make, setMake] = useState("")
@@ -177,6 +177,7 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
 
   const onSubmit = async (e) => {
     e.preventDefault()
+    const productId = product._id;
 
     if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (partNumber === "") || (description === "") || (price === "")) {
       const data = { make, model, year, part, partNumber, description, price }
@@ -185,8 +186,8 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
     } else {
       try {
         const data = { make, model, year, part, partNumber, description, price, shop }
-        // http://localhost:5000/api/shop/shops/6093a22d5843f1295cae7178/products
-        const product = await axios.post(`/api/shop/shops/${shop}/products`, data, {
+        // http://localhost:5000/api/shop/shops/:shopId/products/:productId
+        const product = await axios.patch(`/api/shop/shops/${shop}/products/${productId}`, data, {
           headers: { Authorization: token }
         });
         // console.log("Success", product)
@@ -198,7 +199,7 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
         setDescription('')
         setPrice('')
         setUpdateTable(!updateTable)
-        return setSuccess("Part added successfully")
+        return setSuccess("Add Updated successfully")
       } catch (error) {
         return setErr(error.msg)
       }
@@ -215,29 +216,28 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
         {err ? showErrMsg(err) : <h2>Add new parts to sell</h2>}
       </div> */}
 
-
       <div className="form_header_container">
-        <div><h2>Add new parts to sell</h2></div>
+        <div><h2>Edit Ad</h2></div>
 
         <div>
           <button type="button"
-            onClick={() => { setShowAddPart(!showAddPart) }}
+            onClick={() => { setShowEditPart(!showEditPart) }}
           >X Close</button>
         </div>
       </div>
-
       <div>
         {success && showSuccessMsg(success) || err && showErrMsg(err)}
       </div>
       <form className="shop_form_items" onSubmit={onSubmit}>
         <div className="shop_form_item_container">
           <div className="shop_form_item">
-            <label htmlFor="make">make: </label>
+            <label htmlFor="make">make: {product.make}</label>
             <select
               name="make"
               id="make"
               className="hero-make"
               value={make}
+              // selected={product.make}
               onChange={(e) => { setMake(e.target.value) }}>
               <option>Select make</option>
               {
@@ -249,9 +249,10 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
           </div>
 
           <div className="shop_form_item">
-            <label htmlFor="model">model: </label>
+            <label htmlFor="model">model: {product.model}</label>
             <select name="model"
               value={model}
+              // defaultValue={product.model}
               onChange={(e) => { setModel(e.target.value) }}>
               {models.length === 0 ? <option>Select a make</option> : <option>Select model</option>}
               {
@@ -263,9 +264,10 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
           </div>
 
           <div className="shop_form_item">
-            <label htmlFor="year">year: </label>
+            <label htmlFor="year">year: {product.year}</label>
             <select name="year"
               value={year}
+              // defaultValue={product.year}
               onChange={(e) => { setYear(e.target.value) }}>
               {years.length === 0 ? <option>Select a model</option> : <option>Select year</option>}
               {
@@ -277,9 +279,10 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
           </div>
 
           <div className="shop_form_item">
-            <label htmlFor="part">part: </label>
+            <label htmlFor="part">part: {product.part} </label>
             <select name="engine"
               value={part}
+              // defaultValue={product.part}
               onChange={(e) => { setPart(e.target.value) }}
             >
               {parts.length === 0 ? <option>Select year</option> : <option>Select part</option>}
@@ -295,21 +298,30 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
         <div className="shop_form_item_container">
           <div className="shop_form_item">
             <label htmlFor="partNumber">Part Number: </label>
-            <input type="number" name="partNumber" value={partNumber} onChange={(e) => { setPartNumber(e.target.value) }} />
+            <input type="number" name="partNumber"
+              // value={partNumber} 
+              defaultValue={product.partNumber}
+              onChange={(e) => { setPartNumber(e.target.value) }} />
           </div>
 
           <div className="shop_form_item">
             <label htmlFor="description">Description: </label>
-            <input type="text" name="description" value={description} onChange={(e) => { setDescription(e.target.value) }} />
+            <input type="text" name="description"
+              // value={description}
+              defaultValue={product.description}
+              onChange={(e) => { setDescription(e.target.value) }} />
           </div>
 
           <div className="shop_form_item">
             <label htmlFor="price">price: </label>
-            <input type="number" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} />
+            <input type="number" name="price"
+              // value={price}
+              defaultValue={product.price}
+              onChange={(e) => { setPrice(e.target.value) }} />
           </div>
 
           <div className="shop_form_item btn">
-            <button type="submit">Add part</button>
+            <button type="submit">Update</button>
           </div>
         </div>
 
@@ -372,4 +384,5 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
   )
 }
 
-export default ProductForm
+export default EditProductForm
+

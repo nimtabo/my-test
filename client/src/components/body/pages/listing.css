@@ -79,6 +79,14 @@
   width: 100px;
 }
 
+.text_item_inner {
+  max-width: 60px;
+}
+
+.span_double {
+  margin-right: 20px;
+}
+
 .listing_item_image {
   background-color: darkslateblue;
 }

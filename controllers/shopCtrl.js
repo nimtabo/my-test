@@ -135,7 +135,7 @@ const shopCtrl = {
         shopId,
         { $addToSet: { products: savedProduct._id } }
       )
-      console.log(updateShopProduct)
+      // console.log(updateShopProduct)
       res.json(savedProduct);
     } catch (err) {
       res.status(500).json({ msg: err.message });
@@ -166,8 +166,8 @@ const shopCtrl = {
   },
   updateProduct: async (req, res) => {
     try {
-      const { make, stock, model, part, engine, grade, price, year } = req.body;
-      const updateItems = { make, stock, model, part, engine, grade, price, year };
+      const { make, model, part, partNumber, description, price, year } = req.body;
+      const updateItems = { make, model, part, partNumber, description, price, year };
       const { shopId, productId } = req.params;
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
