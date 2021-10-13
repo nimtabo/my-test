@@ -16,6 +16,7 @@ router.post('/shops/:shopId/products', auth, shopCtrl.addProduct)
 router.get('/shops/:shopId/products', shopCtrl.getAllProducts)
 router.get('/shops/:shopId/products/:productId', auth, shopCtrl.getProduct)
 router.patch('/shops/:shopId/products/:productId', auth, shopCtrl.updateProduct)
+router.patch('/shops/:shopId/products/:productId/available', auth, shopCtrl.updateProductAvailability)
 router.delete('/shops/:shopId/products/:productId', auth, shopCtrl.deleteProduct)
 
 

@@ -166,11 +166,23 @@ const shopCtrl = {
   },
   updateProduct: async (req, res) => {
     try {
-      const { make, model, part, partNumber, description, price, year } = req.body;
-      const updateItems = { make, model, part, partNumber, description, price, year };
+      const { make, model, part, partNumber, description, price, year, isAvailable } = req.body;
+      const updateItems = { make, model, part, partNumber, description, price, year, Number(isAvailable) };
       const { shopId, productId } = req.params;
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
+
+      res.json({ message: "Product Updated successfully." });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
+  updateProductAvailability: async (req, res) => {
+    try {
+      const { isAvailable } = req.body;
+      const { shopId, productId } = req.params;
+
+      const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { isAvailable: Number(isAvailable) });
 
       res.json({ message: "Product Updated successfully." });
     } catch (err) {

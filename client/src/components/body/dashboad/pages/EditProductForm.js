@@ -27,6 +27,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
   const [zipcode, setZipcode] = useState("")
   const [err, setErr] = useState("")
   const [success, setSuccess] = useState("")
+  const [isAvailable, setIsAvailable] = useState('')
 
   const token = useSelector(state => state.token)
 
@@ -179,13 +180,18 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
     e.preventDefault()
     const productId = product._id;
 
-    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (partNumber === "") || (description === "") || (price === "")) {
+    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part")) {
       const data = { make, model, year, part, partNumber, description, price }
       console.log("Err", data)
+      setSuccess('')
       return setErr("All marked fields are required");
     } else {
       try {
         const data = { make, model, year, part, partNumber, description, price, shop }
+        if (isAvailable !== '') {
+          data.isAvailable = isAvailable;
+        }
+
         // http://localhost:5000/api/shop/shops/:shopId/products/:productId
         const product = await axios.patch(`/api/shop/shops/${shop}/products/${productId}`, data, {
           headers: { Authorization: token }
@@ -198,9 +204,12 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
         setPartNumber('')
         setDescription('')
         setPrice('')
+        setIsAvailable('')
         setUpdateTable(!updateTable)
+        setErr('')
         return setSuccess("Add Updated successfully")
       } catch (error) {
+        setSuccess('')
         return setErr(error.msg)
       }
 
@@ -298,7 +307,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
         <div className="shop_form_item_container">
           <div className="shop_form_item">
             <label htmlFor="partNumber">Part Number: </label>
-            <input type="number" name="partNumber"
+            <input type="text" name="partNumber"
               // value={partNumber} 
               defaultValue={product.partNumber}
               onChange={(e) => { setPartNumber(e.target.value) }} />
@@ -314,15 +323,29 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
 
           <div className="shop_form_item">
             <label htmlFor="price">price: </label>
-            <input type="number" name="price"
+            <input type="text" name="price"
               // value={price}
               defaultValue={product.price}
               onChange={(e) => { setPrice(e.target.value) }} />
           </div>
 
+          <div className="shop_form_item">
+            <label htmlFor="part">Availability </label>
+            <select name="availability"
+              value={isAvailable}
+              // defaultValue={product.part}
+              onChange={(e) => { setIsAvailable(e.target.value) }}
+            >
+              <option value="">Select Option</option>
+              <option value="1">Available</option>
+              <option value="0">Sold Out</option>
+            </select>
+          </div>
+
           <div className="shop_form_item btn">
             <button type="submit">Update</button>
           </div>
+
         </div>
 
 

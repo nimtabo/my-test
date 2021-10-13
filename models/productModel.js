@@ -37,6 +37,11 @@ const productSchema = new mongoose.Schema({
     required: [true, "Please enter description!"],
     trim: true,
   },
+  isAvailable: {
+    type: Number,
+    default: 1
+  },
+
   // grade: {
   //   type: String,
   //   required: [true, "Please enter grade!"],

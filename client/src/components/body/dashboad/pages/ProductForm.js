@@ -178,9 +178,10 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (partNumber === "") || (description === "") || (price === "")) {
+    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (price === "")) {
       const data = { make, model, year, part, partNumber, description, price }
       console.log("Err", data)
+      setSuccess('')
       return setErr("All marked fields are required");
     } else {
       try {
@@ -198,8 +199,10 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
         setDescription('')
         setPrice('')
         setUpdateTable(!updateTable)
+        setErr('')
         return setSuccess("Part added successfully")
       } catch (error) {
+        setSuccess('')
         return setErr(error.msg)
       }
 
@@ -295,7 +298,7 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
         <div className="shop_form_item_container">
           <div className="shop_form_item">
             <label htmlFor="partNumber">Part Number: </label>
-            <input type="number" name="partNumber" value={partNumber} onChange={(e) => { setPartNumber(e.target.value) }} />
+            <input type="text" name="partNumber" value={partNumber} onChange={(e) => { setPartNumber(e.target.value) }} />
           </div>
 
           <div className="shop_form_item">
@@ -305,7 +308,7 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
 
           <div className="shop_form_item">
             <label htmlFor="price">price: </label>
-            <input type="number" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} />
+            <input type="text" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} />
           </div>
 
           <div className="shop_form_item btn">

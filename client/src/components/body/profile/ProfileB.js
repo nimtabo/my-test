@@ -8,7 +8,7 @@ import { fetchAllUsers, dispatchGetAllUsers } from '../../../redux/actions/users
 
 // 
 // import { CustomDialog, useDialog } from 'react-st-modal';
-import { ModalContent, ModalFooter, ModalButton, useDialog, CustomDialog } from 'react-st-modal';
+import { ModalContent, ModalFooter, ModalButton, useDialog, CustomDialog, Prompt, Alert } from 'react-st-modal';
 
 const initialState = {
   store: '',
@@ -100,7 +100,7 @@ function Profile() {
     }
   }
 
-  const updatePassword = () => {
+  const updatePassword = ({ password, cf_password }) => {
     if (isLength(password))
       return setData({ ...data, err: "Password must be at least 6 characters.", success: '' })
 
@@ -267,10 +267,14 @@ function Profile() {
           <div>
             <button
               onClick={async () => {
-                const result = await CustomDialog(<CustomDialogContent password={password} cf_password={cf_password} handleChange={handleChange} updatePassword={updatePassword} />, {
+                const result = await CustomDialog(<CustomDialogContent
+                  // handleChange={handleChange}
+                  updatePassword={updatePassword}
+                />, {
                   title: 'RESET PASSWORD',
                   showCloseIcon: true,
                   isCanClose: false,
+                  isBodyScrollLocked: false,
                 });
               }}
             >
@@ -290,11 +294,24 @@ function Profile() {
 }
 
 
-function CustomDialogContent({ password, cf_password, handleChange, updatePassword }) {
+function CustomDialogContent({ updatePassword, }) {
   const dialog = useDialog();
 
   const [value, setValue] = useState();
+  const [data, setData] = useState({
+    password: '',
+    cf_password: '',
+  })
 
+  const handleChange = e => {
+    const { name, value } = e.target
+    setData({ ...data, [name]: value })
+  }
+
+  const handleClick = () => {
+    updatePassword(data)
+    // console.log({ data })
+  }
   return (
     <div>
       <ModalContent>
@@ -303,7 +320,7 @@ function CustomDialogContent({ password, cf_password, handleChange, updatePasswo
 
           <input
             type="password" name="password" id="password"
-            placeholder="Your password" value={password} onChange={handleChange}
+            placeholder="Your password" onChange={handleChange}
           />
         </label>
       </ModalContent>
@@ -313,13 +330,14 @@ function CustomDialogContent({ password, cf_password, handleChange, updatePasswo
 
           <input
             type="password" name="cf_password" id="cf_password"
-            placeholder="Confirm password" value={cf_password} onChange={handleChange}
+            placeholder="Confirm password" onChange={handleChange}
           />
         </label>
       </ModalContent>
       <ModalFooter>
         <ModalButton
           onClick={() => {
+            handleClick()
             dialog.close(value);
           }}
         >
@@ -329,58 +347,5 @@ function CustomDialogContent({ password, cf_password, handleChange, updatePasswo
     </div>
   );
 }
-
-
-// function CustomDialogContent() {
-//   const dialog = useDialog();
-
-//   const [value, setValue] = useState();
-
-//   return (
-//     <div>
-//       <input
-//         type="text"
-//         onChange={(e) => {
-//           setValue(e.target.value);
-//         }}
-//       />
-//       <br />
-
-//       <input
-//         type="text"
-//         onChange={(e) => {
-//           setValue(e.target.value);
-//         }}
-//       />
-
-//       <br />
-//       <button
-//         onClick={() => {
-//           // Сlose the dialog and return the value
-//           dialog.close(value);
-//         }}
-//       >
-//         Custom button
-//       </button>
-//     </div>
-//   );
-// }
-
-// function CustomExample() {
-//   return (
-//     <div>
-//       <button
-//         onClick={async () => {
-//           const result = await CustomDialog(<CustomDialogContent />, {
-//             title: 'Custom Dialog',
-//             showCloseIcon: true,
-//           });
-//         }}
-//       >
-//         Custom
-//       </button>
-//     </div>
-//   );
-// }
 
 export default Profile
