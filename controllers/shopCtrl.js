@@ -167,7 +167,7 @@ const shopCtrl = {
   updateProduct: async (req, res) => {
     try {
       const { make, model, part, partNumber, description, price, year, isAvailable } = req.body;
-      const updateItems = { make, model, part, partNumber, description, price, year, Number(isAvailable) };
+      const updateItems = { make, model, part, partNumber, description, price, year, isAvailable: Number(isAvailable) };
       const { shopId, productId } = req.params;
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
