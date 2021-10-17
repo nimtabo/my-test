@@ -141,10 +141,28 @@ const shopCtrl = {
       res.status(500).json({ msg: err.message });
     }
   },
-  getAllProducts: async (req, res) => {
+  getAvailableProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId });
+      const products = await Product.find({ shop: shopId, isArchived: 0, isAvailable: 1 });
+      res.json(products);
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
+  getArchivedProducts: async (req, res) => {
+    try {
+      const { shopId } = req.params;
+      const products = await Product.find({ shop: shopId, isArchived: 1, });
+      res.json(products);
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
+  getOnHoldProducts: async (req, res) => {
+    try {
+      const { shopId } = req.params;
+      const products = await Product.find({ shop: shopId, isAvailable: 0 });
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -185,6 +203,17 @@ const shopCtrl = {
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { isAvailable: Number(isAvailable) });
 
       res.json({ message: "Product Updated successfully." });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
+  moveProductToArchive: async (req, res) => {
+    console.log(req.params)
+    try {
+      const { shopId, productId } = req.params;
+      await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { isArchived: 1 })
+
+      res.json({ msg: "Product moved to Archives Successfully!" })
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }

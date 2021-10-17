@@ -179,17 +179,19 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
   const onSubmit = async (e) => {
     e.preventDefault()
     const productId = product._id;
+    const selectedProduct = product;
+    // console.log({ selectedProduct })
 
     if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part")) {
-      const data = { make, model, year, part, partNumber, description, price }
-      console.log("Err", data)
-      setSuccess('')
-      return setErr("All marked fields are required");
-    } else {
+
       try {
-        const data = { make, model, year, part, partNumber, description, price, shop }
-        if (isAvailable !== '') {
+        const data = { make: selectedProduct.make, model: selectedProduct.model, year: selectedProduct.year, part: selectedProduct.part, partNumber, description, price }
+        // console.log("Car_not changed", data)
+
+        if (isAvailable !== '' || isAvailable === '0' || isAvailable === '1') {
           data.isAvailable = isAvailable;
+        } else {
+          data.isAvailable = selectedProduct.isAvailable;
         }
 
         // http://localhost:5000/api/shop/shops/:shopId/products/:productId
@@ -207,10 +209,53 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
         setIsAvailable('')
         setUpdateTable(!updateTable)
         setErr('')
-        return setSuccess("Add Updated successfully")
+        setSuccess('')
+        return setTimeout(() => {
+          setSuccess("Add Updated successfully")
+        }, 1000);
+      } catch (error) {
+        // console.log(error.message)
+        setSuccess('')
+        setErr('')
+        return setTimeout(() => {
+          setErr(error.msg)
+        }, 1000);
+      }
+    } else {
+      try {
+        const data = { make, model, year, part, partNumber, description, price, shop }
+        if (isAvailable !== '' || isAvailable === '0' || isAvailable === '1') {
+          data.isAvailable = isAvailable;
+        } else {
+          data.isAvailable = selectedProduct.isAvailable;
+        }
+        // console.log(data)
+
+        // http://localhost:5000/api/shop/shops/:shopId/products/:productId
+        const product = await axios.patch(`/api/shop/shops/${shop}/products/${productId}`, data, {
+          headers: { Authorization: token }
+        });
+        // console.log("Success", product)
+        setMake('')
+        setModel('')
+        setYear('')
+        setPart('')
+        setPartNumber('')
+        setDescription('')
+        setPrice('')
+        setIsAvailable('')
+        setUpdateTable(!updateTable)
+        setErr('')
+        setSuccess('')
+        return setTimeout(() => {
+          setSuccess("Add Updated successfully")
+        }, 1000);
       } catch (error) {
         setSuccess('')
-        return setErr(error.msg)
+        setErr('')
+        return setTimeout(() => {
+          setErr(error.msg)
+        }, 1000);
       }
 
 

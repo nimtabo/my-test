@@ -20,6 +20,7 @@ const ProductsTable = () => {
   const [err, setErr] = useState('')
   const [success, setSuccess] = useState('')
   const [updateTable, setUpdateTable] = useState(false)
+  const [adFilter, setAdFilter] = useState("")
 
   const token = useSelector(state => state.token)
 
@@ -31,7 +32,7 @@ const ProductsTable = () => {
           headers: { Authorization: token }
         });
         setShop(shops.data)
-        const products = await axios.get(`/api/shop/shops/${shops.data}/products`);
+        const products = await axios.get(`/api/shop/shops/${shops.data}/products/available`);
         setProducts([...products.data])
         // console.log(products.data)
 
@@ -49,19 +50,40 @@ const ProductsTable = () => {
   const deleteProduct = async (id) => {
     // url = "/api/shop/shops/6093a22d5843f1295cae7178/products/6093c5c03f72a544f99b18bb"
     try {
-      await axios.delete(`/api/shop/shops/${shop}/products/${id}`, {
+      await axios.patch(`/api/shop/shops/${shop}/products/${id}/archive`, {}, {
         headers: { Authorization: token }
       });
-      setErr("Product deleted successfully")
+      setErr("")
+      setTimeout(() => {
+        setErr("Product moved to Archives")
+      }, 1500);
       setUpdateTable(!updateTable)
     } catch (error) {
-      setErr(error.message)
+      setErr(error.msg)
     }
   }
 
   const updateProduct = async (prod) => {
     setProduct(prod);
     setShowEditPart(!showEditPart);
+  }
+
+  const filterTable = async (filter) => {
+    setAdFilter(filter)
+    // if (adFilter === filter) {
+    // console.log(filter)
+    products.splice(0, products.length)
+    try {
+      const products = await axios.get(`/api/shop/shops/${shop}/products/${filter}`);
+      setProducts([...products.data])
+      console.log({ products: products.data })
+
+    } catch (error) {
+      console.log("An Error occured getting products ADS ")
+      console.log(error.message)
+      return setProducts([...[]])
+    }
+    // }
   }
 
   return (
@@ -123,11 +145,17 @@ const ProductsTable = () => {
             <th>Description</th>
             <th>Price</th>
             <th>
-              <select>
-                <option>Select Action</option>
-                <option>Delete</option>
-                <option>Mark Sold out</option>
-                <option>Mark Available</option>
+              <select
+                name="adFilter"
+                value={""}
+                onChange={(e) => {
+                  filterTable(e.target.value)
+                }}
+              >
+                <option>Filter Ads</option>
+                <option value="archived">Archive </option>
+                <option value="onhold">On hold</option>
+                <option value="available">Available</option>
               </select>
             </th>
           </tr>
@@ -153,7 +181,7 @@ const ProductsTable = () => {
                   <span> </span>
                   <button onClick={() => {
                     deleteProduct(prod._id)
-                  }}>Delete</button>
+                  }}>Archive</button>
                 </td>
               </tr>)
             })

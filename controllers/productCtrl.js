@@ -46,7 +46,7 @@ const productCtrl = {
       //   res.json(products);
       // }
       // console.log(req.params)
-      const products = await Product.find({ make, model, year, part }).populate('shop', { __v: 0, owner: 0 });
+      const products = await Product.find({ make, model, year, part, isArchived: 0, isAvailable: 1 }).sort({ createdAt: -1 }).populate('shop', { __v: 0, owner: 0 });
       if (!products) {
         return res.status(400).json({
           message: "No Products exist!",

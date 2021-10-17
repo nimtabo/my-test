@@ -41,6 +41,10 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 1
   },
+  isArchived: {
+    type: Number,
+    default: 0
+  },
 
   // grade: {
   //   type: String,

@@ -13,10 +13,13 @@ router.delete('/shops/:id', auth, shopCtrl.deleteShop)
 
 // SHOP PRODUCTS
 router.post('/shops/:shopId/products', auth, shopCtrl.addProduct)
-router.get('/shops/:shopId/products', shopCtrl.getAllProducts)
+router.get('/shops/:shopId/products/available', shopCtrl.getAvailableProducts)
+router.get('/shops/:shopId/products/onhold', shopCtrl.getOnHoldProducts)
+router.get('/shops/:shopId/products/archived', shopCtrl.getArchivedProducts)
 router.get('/shops/:shopId/products/:productId', auth, shopCtrl.getProduct)
 router.patch('/shops/:shopId/products/:productId', auth, shopCtrl.updateProduct)
 router.patch('/shops/:shopId/products/:productId/available', auth, shopCtrl.updateProductAvailability)
+router.patch('/shops/:shopId/products/:productId/archive', auth, shopCtrl.moveProductToArchive)
 router.delete('/shops/:shopId/products/:productId', auth, shopCtrl.deleteProduct)
 
 

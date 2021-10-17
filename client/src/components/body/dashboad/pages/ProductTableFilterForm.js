@@ -29,15 +29,6 @@ const ProductTableFilterForm = () => {
 
       <div>
         <select>
-          <option>Part Number</option>
-          <option>Part Number</option>
-          <option>Part Number</option>
-        </select>
-      </div>
-
-
-      <div>
-        <select>
           <option>Part</option>
           <option>Part</option>
           <option>Part</option>

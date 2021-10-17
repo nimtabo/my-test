@@ -182,7 +182,10 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
       const data = { make, model, year, part, partNumber, description, price }
       console.log("Err", data)
       setSuccess('')
-      return setErr("All marked fields are required");
+      setErr('')
+      return setTimeout(() => {
+        setErr("All marked fields are required (make, model, year part and price).");
+      }, 1000);
     } else {
       try {
         const data = { make, model, year, part, partNumber, description, price, shop }
@@ -200,10 +203,16 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
         setPrice('')
         setUpdateTable(!updateTable)
         setErr('')
-        return setSuccess("Part added successfully")
+        setSuccess('')
+        return setTimeout(() => {
+          setSuccess("Part added successfully")
+        }, 1000);
       } catch (error) {
         setSuccess('')
-        return setErr(error.msg)
+        setErr('')
+        return setTimeout(() => {
+          setErr(error.message)
+        }, 1000);
       }
 
 
