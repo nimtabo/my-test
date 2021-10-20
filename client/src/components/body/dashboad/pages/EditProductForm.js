@@ -181,11 +181,18 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
     const productId = product._id;
     const selectedProduct = product;
     // console.log({ selectedProduct })
+    console.log((partNumber === '' ? selectedProduct.partNumber : partNumber))
+    console.log(partNumber)
 
     if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part")) {
 
       try {
-        const data = { make: selectedProduct.make, model: selectedProduct.model, year: selectedProduct.year, part: selectedProduct.part, partNumber, description, price }
+        const data = {
+          make: selectedProduct.make, model: selectedProduct.model, year: selectedProduct.year, part: selectedProduct.part,
+          partNumber: partNumber === '' ? selectedProduct.partNumber : partNumber,
+          description: description === '' ? selectedProduct.description : description,
+          price: price === '' ? selectedProduct.price : price,
+        }
         // console.log("Car_not changed", data)
 
         if (isAvailable !== '' || isAvailable === '0' || isAvailable === '1') {
@@ -199,20 +206,24 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
           headers: { Authorization: token }
         });
         // console.log("Success", product)
-        setMake('')
-        setModel('')
-        setYear('')
-        setPart('')
-        setPartNumber('')
-        setDescription('')
-        setPrice('')
-        setIsAvailable('')
-        setUpdateTable(!updateTable)
-        setErr('')
-        setSuccess('')
-        return setTimeout(() => {
+
+        setTimeout(() => {
           setSuccess("Add Updated successfully")
-        }, 1000);
+        }, 500);
+        return setTimeout(() => {
+          setMake('')
+          setModel('')
+          setYear('')
+          setPart('')
+          setPartNumber('')
+          setDescription('')
+          setPrice('')
+          setIsAvailable('')
+          setUpdateTable(!updateTable)
+          setErr('')
+          setSuccess('')
+          setShowEditPart(!showEditPart)
+        }, 1500);
       } catch (error) {
         // console.log(error.message)
         setSuccess('')
@@ -236,20 +247,24 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
           headers: { Authorization: token }
         });
         // console.log("Success", product)
-        setMake('')
-        setModel('')
-        setYear('')
-        setPart('')
-        setPartNumber('')
-        setDescription('')
-        setPrice('')
-        setIsAvailable('')
-        setUpdateTable(!updateTable)
-        setErr('')
-        setSuccess('')
-        return setTimeout(() => {
+
+        setTimeout(() => {
           setSuccess("Add Updated successfully")
-        }, 1000);
+        }, 500);
+        return setTimeout(() => {
+          setMake('')
+          setModel('')
+          setYear('')
+          setPart('')
+          setPartNumber('')
+          setDescription('')
+          setPrice('')
+          setIsAvailable('')
+          setUpdateTable(!updateTable)
+          setErr('')
+          setSuccess('')
+          setShowEditPart(!showEditPart)
+        }, 1500);
       } catch (error) {
         setSuccess('')
         setErr('')
@@ -271,7 +286,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
       </div> */}
 
       <div className="form_header_container">
-        <div><h2>Edit Ad</h2></div>
+        <div><h2>Update Part</h2></div>
 
         <div>
           <button type="button"
@@ -383,7 +398,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
             >
               <option value="">Select Option</option>
               <option value="1">Available</option>
-              <option value="0">Sold Out</option>
+              <option value="0">Put On-Hold</option>
             </select>
           </div>
 

@@ -85,7 +85,7 @@ function Header() {
                             </div>
                             <li className="login"><Link to="/pricing">Pricing</Link></li>
                             {/* ************** */}
-                            <li className="register"><Link to="/register">Register</Link></li>
+                            <li className="register"><Link to="/register">Register to Sell</Link></li>
                             <li className="login"><Link to="/login"><i className="fas fa-user"></i> Sign in</Link></li>
                             {/* <Link className="icon" onClick={handleMenu}>menu</Link> */}
                         </>

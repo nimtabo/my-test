@@ -103,10 +103,10 @@ const Form = () => {
     fetchData();
   }, [year]);
 
-  useEffect(() => {
-    const data = { make, model, year, part }
-    setData({ ...data })
-  }, [part]);
+  // useEffect(() => {
+  //   const data = { make, model, year, part }
+  //   setData({ ...data })
+  // }, [part]);
 
 
   // useEffect(() => {

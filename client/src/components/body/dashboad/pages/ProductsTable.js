@@ -53,10 +53,10 @@ const ProductsTable = () => {
       await axios.patch(`/api/shop/shops/${shop}/products/${id}/archive`, {}, {
         headers: { Authorization: token }
       });
-      setErr("")
+      setErr("Product moved to Archives")
       setTimeout(() => {
-        setErr("Product moved to Archives")
-      }, 1500);
+        setErr("")
+      }, 2000);
       setUpdateTable(!updateTable)
     } catch (error) {
       setErr(error.msg)
@@ -122,7 +122,7 @@ const ProductsTable = () => {
         {err && showErrMsg(err) || success && showSuccessMsg(success)}
       </div>
       <div>
-        { }
+        {adFilter ? showSuccessMsg(`${adFilter.toUpperCase()} PRODUCTS`) : showSuccessMsg('AVAILABLE PRODUCTS')}
       </div>
       <table className="styled-table">
         <thead>
@@ -154,7 +154,7 @@ const ProductsTable = () => {
               >
                 <option>Filter Ads</option>
                 <option value="archived">Archive </option>
-                <option value="onhold">On hold</option>
+                <option value="onhold">On Hold</option>
                 <option value="available">Available</option>
               </select>
             </th>
