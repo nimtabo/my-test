@@ -125,3 +125,14 @@
 }
 
 /* **************** */
+
+/* table_category_title */
+/* ****************** */
+.table_category_title {
+  margin: 0;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: black;
+  color: #fff;
+}
+/* ************ */

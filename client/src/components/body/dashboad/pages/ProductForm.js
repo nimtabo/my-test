@@ -178,17 +178,25 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (price === "")) {
-      const data = { make, model, year, part, partNumber, description, price }
-      console.log("Err", data)
+    if (isNaN(partNumber) || isNaN(price)) {
       setSuccess('')
-      setErr('')
+      setErr("Part Number and Price Values must be Numbers")
       return setTimeout(() => {
-        setErr("All marked fields are required (make, model, year part and price).");
-      }, 1000);
+        setErr('')
+      }, 2000);
+    }
+
+    if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (price === "")) {
+      // const data = { make, model, year, part, partNumber, description, price }
+      // console.log("Err", data)
+      setSuccess('')
+      setErr("All marked fields are required (make, model, year part and price).");
+      return setTimeout(() => {
+        setErr('')
+      }, 2000);
     } else {
       try {
-        const data = { make, model, year, part, partNumber, description, price, shop }
+        const data = { make, model, year, part, partNumber: Number(partNumber), description, price: Number(price), shop }
         // http://localhost:5000/api/shop/shops/6093a22d5843f1295cae7178/products
         const product = await axios.post(`/api/shop/shops/${shop}/products`, data, {
           headers: { Authorization: token }
@@ -203,16 +211,16 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
         setPrice('')
         setUpdateTable(!updateTable)
         setErr('')
-        setSuccess('')
+        setSuccess("Part added successfully")
         return setTimeout(() => {
-          setSuccess("Part added successfully")
-        }, 1000);
+          setSuccess('')
+        }, 2000);
       } catch (error) {
         setSuccess('')
-        setErr('')
+        setErr(error.message)
         return setTimeout(() => {
-          setErr(error.message)
-        }, 1000);
+          setErr('')
+        }, 2000);
       }
 
 

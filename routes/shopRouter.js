@@ -14,6 +14,7 @@ router.delete('/shops/:id', auth, shopCtrl.deleteShop)
 // SHOP PRODUCTS
 router.post('/shops/:shopId/products', auth, shopCtrl.addProduct)
 router.get('/shops/:shopId/products/available', shopCtrl.getAvailableProducts)
+router.get('/shops/:shopId/products/soldout', shopCtrl.getSoldOutProducts)
 router.get('/shops/:shopId/products/onhold', shopCtrl.getOnHoldProducts)
 router.get('/shops/:shopId/products/archived', shopCtrl.getArchivedProducts)
 router.get('/shops/:shopId/products/:productId', auth, shopCtrl.getProduct)

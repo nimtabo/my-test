@@ -29,12 +29,12 @@ const productSchema = new mongoose.Schema({
   },
   partNumber: {
     type: String,
-    required: [true, "Please enter part number!"],
+    // required: [true, "Please enter part number!"],
     trim: true,
   },
   description: {
     type: String,
-    required: [true, "Please enter description!"],
+    // required: [true, "Please enter description!"],
     trim: true,
   },
   isAvailable: {
@@ -42,6 +42,10 @@ const productSchema = new mongoose.Schema({
     default: 1
   },
   isArchived: {
+    type: Number,
+    default: 0
+  },
+  isOnHold: {
     type: Number,
     default: 0
   },

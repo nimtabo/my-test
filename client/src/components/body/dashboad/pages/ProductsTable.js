@@ -121,8 +121,8 @@ const ProductsTable = () => {
       <div>
         {err && showErrMsg(err) || success && showSuccessMsg(success)}
       </div>
-      <div>
-        {adFilter ? showSuccessMsg(`${adFilter.toUpperCase()} PRODUCTS`) : showSuccessMsg('AVAILABLE PRODUCTS')}
+      <div className="table_category_title">
+        {adFilter ? `${adFilter.toUpperCase()} PRODUCTS` : 'AVAILABLE PRODUCTS'}
       </div>
       <table className="styled-table">
         <thead>
@@ -153,9 +153,10 @@ const ProductsTable = () => {
                 }}
               >
                 <option>Filter Ads</option>
-                <option value="archived">Archive </option>
-                <option value="onhold">On Hold</option>
                 <option value="available">Available</option>
+                <option value="onhold">On Hold</option>
+                <option value="soldout">Sold Out</option>
+                <option value="archived">Archive </option>
               </select>
             </th>
           </tr>

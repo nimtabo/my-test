@@ -44,7 +44,7 @@ function Footer() {
         <p>
           Email: info@fiaraa.com
           <br />
-          Phone No.: +1-(234)-567438
+          Phone No.: +1 (650) 339-1852
         </p>
         <p id="chat_request"><i className="fas fa-comment-dots"></i> Chat Request</p>
 

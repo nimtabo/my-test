@@ -1,6 +1,7 @@
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;
+  margin-top: 2px;
   font-size: 0.9em;
   /* font-family: sans-serif; */
   width: 100%;

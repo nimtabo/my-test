@@ -181,24 +181,35 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
     const productId = product._id;
     const selectedProduct = product;
     // console.log({ selectedProduct })
-    console.log((partNumber === '' ? selectedProduct.partNumber : partNumber))
-    console.log(partNumber)
+    // console.log((partNumber === '' ? selectedProduct.partNumber : partNumber))
+    // console.log(partNumber)
+
+    if (isNaN(partNumber) || isNaN(price)) {
+      setSuccess('')
+      setErr("Part Number and Price Values must be Numbers")
+      return setTimeout(() => {
+        setErr('')
+      }, 2000);
+    }
 
     if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part")) {
 
       try {
         const data = {
           make: selectedProduct.make, model: selectedProduct.model, year: selectedProduct.year, part: selectedProduct.part,
-          partNumber: partNumber === '' ? selectedProduct.partNumber : partNumber,
+          partNumber: partNumber === '' ? selectedProduct.partNumber : Number(partNumber),
           description: description === '' ? selectedProduct.description : description,
-          price: price === '' ? selectedProduct.price : price,
+          price: price === '' ? selectedProduct.price : Number(price),
         }
         // console.log("Car_not changed", data)
 
         if (isAvailable !== '' || isAvailable === '0' || isAvailable === '1') {
           data.isAvailable = isAvailable;
+        } else if (isAvailable === '2') {
+          data.isOnHold = selectedProduct.isOnHold;
         } else {
           data.isAvailable = selectedProduct.isAvailable;
+          data.isOnHold = selectedProduct.isOnHold;
         }
 
         // http://localhost:5000/api/shop/shops/:shopId/products/:productId
@@ -208,7 +219,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
         // console.log("Success", product)
 
         setTimeout(() => {
-          setSuccess("Add Updated successfully")
+          setSuccess('')
         }, 500);
         return setTimeout(() => {
           setMake('')
@@ -221,24 +232,33 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
           setIsAvailable('')
           setUpdateTable(!updateTable)
           setErr('')
-          setSuccess('')
+          setSuccess("Add Updated successfully")
           setShowEditPart(!showEditPart)
         }, 1500);
       } catch (error) {
         // console.log(error.message)
         setSuccess('')
-        setErr('')
+        setErr(error.msg)
         return setTimeout(() => {
-          setErr(error.msg)
-        }, 1000);
+          setErr('')
+        }, 2000);
       }
     } else {
       try {
-        const data = { make, model, year, part, partNumber, description, price, shop }
+        const data = { make, model, year, part, partNumber: Number(partNumber), description, price: Number(price), shop }
+        // if (isAvailable !== '' || isAvailable === '0' || isAvailable === '1') {
+        //   data.isAvailable = isAvailable;
+        // } else {
+        //   data.isAvailable = selectedProduct.isAvailable;
+        // }
+
         if (isAvailable !== '' || isAvailable === '0' || isAvailable === '1') {
           data.isAvailable = isAvailable;
+        } else if (isAvailable === '2') {
+          data.isOnHold = selectedProduct.isOnHold;
         } else {
           data.isAvailable = selectedProduct.isAvailable;
+          data.isOnHold = selectedProduct.isOnHold;
         }
         // console.log(data)
 
@@ -249,7 +269,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
         // console.log("Success", product)
 
         setTimeout(() => {
-          setSuccess("Add Updated successfully")
+          setSuccess('')
         }, 500);
         return setTimeout(() => {
           setMake('')
@@ -262,15 +282,15 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
           setIsAvailable('')
           setUpdateTable(!updateTable)
           setErr('')
-          setSuccess('')
+          setSuccess("Add Updated successfully")
           setShowEditPart(!showEditPart)
         }, 1500);
       } catch (error) {
         setSuccess('')
-        setErr('')
+        setErr(error.msg)
         return setTimeout(() => {
-          setErr(error.msg)
-        }, 1000);
+          setErr('')
+        }, 2000);
       }
 
 
@@ -398,7 +418,8 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
             >
               <option value="">Select Option</option>
               <option value="1">Available</option>
-              <option value="0">Put On-Hold</option>
+              <option value="0">Sold Out</option>
+              <option value="2">Put On-Hold</option>
             </select>
           </div>
 
