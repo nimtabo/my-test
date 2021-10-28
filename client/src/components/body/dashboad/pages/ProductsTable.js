@@ -46,9 +46,27 @@ const ProductsTable = () => {
 
   }, [updateTable])
 
-
   const deleteProduct = async (id) => {
+    // api/shop/shops/ISD/products/id
+    try {
+      await axios.delete(`/api/shop/shops/${shop}/products/${id}`, {
+        headers: { Authorization: token }
+      });
+      // setAdFilter('archived')
+      // filterTable("archived")
+      setErr("Product deleted")
+      setTimeout(() => {
+        setErr("")
+      }, 2000);
+      setUpdateTable(!updateTable)
+    } catch (error) {
+      setErr(error.msg)
+    }
+  }
+
+  const arhiveProduct = async (id) => {
     // url = "/api/shop/shops/6093a22d5843f1295cae7178/products/6093c5c03f72a544f99b18bb"
+    // api/shop/shops/ISD/products/id
     try {
       await axios.patch(`/api/shop/shops/${shop}/products/${id}/archive`, {}, {
         headers: { Authorization: token }
@@ -76,11 +94,11 @@ const ProductsTable = () => {
     try {
       const products = await axios.get(`/api/shop/shops/${shop}/products/${filter}`);
       setProducts([...products.data])
-      console.log({ products: products.data })
+      // console.log({ products: products.data })
 
     } catch (error) {
       console.log("An Error occured getting products ADS ")
-      console.log(error.message)
+      // console.log(error.message)
       return setProducts([...[]])
     }
     // }
@@ -181,8 +199,8 @@ const ProductsTable = () => {
                   }}>Edit</button>
                   <span> </span>
                   <button onClick={() => {
-                    deleteProduct(prod._id)
-                  }}>Archive</button>
+                    adFilter === "archived" ? deleteProduct(prod._id) : arhiveProduct(prod._id)
+                  }}>{adFilter === "archived" ? "Delete" : "Archive"}</button>
                 </td>
               </tr>)
             })

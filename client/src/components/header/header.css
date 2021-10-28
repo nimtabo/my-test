@@ -36,6 +36,7 @@ header ul .login {
 header ul .register {
   background-color: #000201;
   border-radius: 20px;
+  text-align: center;
 }
 
 header ul .register a {
