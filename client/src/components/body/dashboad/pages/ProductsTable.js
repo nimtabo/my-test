@@ -133,6 +133,8 @@ const ProductsTable = () => {
           product={product}
           setShowEditPart={setShowEditPart}
           showEditPart={showEditPart}
+          filterTable={filterTable}
+          adFilter={adFilter}
         />
       </div>
 
@@ -140,7 +142,7 @@ const ProductsTable = () => {
         {err && showErrMsg(err) || success && showSuccessMsg(success)}
       </div>
       <div className="table_category_title">
-        {adFilter ? `${adFilter.toUpperCase()} PRODUCTS` : 'AVAILABLE PRODUCTS'}
+        {adFilter ? `${adFilter === 'onhold' ? "ON-HOLD" : adFilter === 'soldout' ? "SOLD-OUT" : adFilter.toUpperCase()} PRODUCTS` : 'AVAILABLE PRODUCTS'}
       </div>
       <table className="styled-table">
         <thead>

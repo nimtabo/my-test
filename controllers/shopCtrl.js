@@ -155,7 +155,7 @@ const shopCtrl = {
   getArchivedProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, isArchived: 1, });
+      const products = await Product.find({ shop: shopId, isArchived: 1, isAvailable: 0 });
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -164,7 +164,7 @@ const shopCtrl = {
   getSoldOutProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, isAvailable: 0 });
+      const products = await Product.find({ shop: shopId, isAvailable: 0, isOnHold: 0, isArchived: 0 });
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -195,12 +195,13 @@ const shopCtrl = {
   },
   updateProduct: async (req, res) => {
     try {
-      const { make, model, part, partNumber, description, price, year, isAvailable } = req.body;
+      const { make, model, part, partNumber, description, price, year, isAvailable, isOnHold } = req.body;
       const { shopId, productId } = req.params;
 
       const updateItems = { make, model, part, partNumber, description, price, year, isAvailable: Number(isAvailable) };
       if (Number(isAvailable) === 1) {
         updateItems.isArchived = 0;
+        updateItems.isOnHold = 0;
       } else if (Number(isAvailable) === 0) {
         updateItems.isArchived = 1;
       }
@@ -208,6 +209,7 @@ const shopCtrl = {
       if (Number(isAvailable) === 2) {
         updateItems.isOnHold = 1;
       }
+
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
 
       res.json({ message: "Product Updated successfully." });
@@ -231,7 +233,7 @@ const shopCtrl = {
     console.log(req.params)
     try {
       const { shopId, productId } = req.params;
-      await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { isArchived: 1 })
+      await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { isArchived: 1, isAvailable: 0 })
 
       res.json({ msg: "Product moved to Archives Successfully!" })
     } catch (err) {

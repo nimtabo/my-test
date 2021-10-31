@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification'
 import axios from "axios";
 
-function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart, showEditPart }) {
+function EditProductForm({ setUpdateTable, updateTable, product, filterTable, adFilter, setShowEditPart, showEditPart }) {
   const [data, setData] = useState({})
   const [makes, setMakes] = useState([])
   const [make, setMake] = useState("")
@@ -43,6 +43,11 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
         setShop(shops.data)
         // setShops([...shops.data])
         // console.log(shops.data);
+        // ***********************
+        // ***********************
+        setPartNumber(product.partNumber)
+        // ***********************
+        // ***********************
       } catch (error) {
         console.log("An Error occured getting makes")
         // console.log(error.message)
@@ -178,6 +183,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
 
   const onSubmit = async (e) => {
     e.preventDefault()
+    // document.getElementById("e_form").reset();
     const productId = product._id;
     const selectedProduct = product;
     // console.log({ selectedProduct })
@@ -216,25 +222,26 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
         const product = await axios.patch(`/api/shop/shops/${shop}/products/${productId}`, data, {
           headers: { Authorization: token }
         });
-        // console.log("Success", product)
+
+        setMake('')
+        setModel('')
+        setYear('')
+        setPart('')
+        setPartNumber('')
+        setDescription('')
+        setPrice('')
+        setIsAvailable('')
+        // setUpdateTable(!updateTable)
+        filterTable(adFilter)
+        setErr('')
+        setSuccess("Add Updated successfully")
 
         setTimeout(() => {
           setSuccess('')
-        }, 500);
-        return setTimeout(() => {
-          setMake('')
-          setModel('')
-          setYear('')
-          setPart('')
-          setPartNumber('')
-          setDescription('')
-          setPrice('')
-          setIsAvailable('')
-          setUpdateTable(!updateTable)
-          setErr('')
-          setSuccess("Add Updated successfully")
-          setShowEditPart(!showEditPart)
         }, 1500);
+        return setTimeout(() => {
+          setShowEditPart(!showEditPart)
+        }, 2000);
       } catch (error) {
         // console.log(error.message)
         setSuccess('')
@@ -268,23 +275,25 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
         });
         // console.log("Success", product)
 
+
+        setMake('')
+        setModel('')
+        setYear('')
+        setPart('')
+        setPartNumber('')
+        setDescription('')
+        setPrice('')
+        setIsAvailable('')
+        // setUpdateTable(!updateTable)
+        filterTable(adFilter)
+        setErr('')
+        setSuccess("Add Updated successfully")
         setTimeout(() => {
           setSuccess('')
-        }, 500);
-        return setTimeout(() => {
-          setMake('')
-          setModel('')
-          setYear('')
-          setPart('')
-          setPartNumber('')
-          setDescription('')
-          setPrice('')
-          setIsAvailable('')
-          setUpdateTable(!updateTable)
-          setErr('')
-          setSuccess("Add Updated successfully")
-          setShowEditPart(!showEditPart)
         }, 1500);
+        return setTimeout(() => {
+          setShowEditPart(!showEditPart)
+        }, 2000);
       } catch (error) {
         setSuccess('')
         setErr(error.msg)
@@ -317,7 +326,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, setShowEditPart
       <div>
         {success && showSuccessMsg(success) || err && showErrMsg(err)}
       </div>
-      <form className="shop_form_items" onSubmit={onSubmit}>
+      <form id="e_form" className="shop_form_items" onSubmit={onSubmit}>
         <div className="shop_form_item_container">
           <div className="shop_form_item">
             <label htmlFor="make">make: {product.make}</label>
