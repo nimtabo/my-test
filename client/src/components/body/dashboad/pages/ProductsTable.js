@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import axios from "axios";
+import { ModalContent, ModalFooter, ModalButton, useDialog, CustomDialog, Prompt, Alert } from 'react-st-modal';
 
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification';
 
@@ -196,8 +197,16 @@ const ProductsTable = () => {
                 <td>{prod.description}</td>
                 <td>{`$ ${prod.price}`}</td>
                 <td>
-                  <button onClick={() => {
+                  {/* <button onClick={() => {
                     updateProduct(prod)
+                  }}>Edit</button> */}
+                  <button onClick={async () => {
+                    const result = await CustomDialog(<CustomDialogContent product={{ partNumber: 25444 }} />, {
+                      title: 'UPDATE PART',
+                      showCloseIcon: true,
+                      isCanClose: false,
+                      isBodyScrollLocked: false,
+                    });
                   }}>Edit</button>
                   <span> </span>
                   <button onClick={() => {
@@ -226,6 +235,100 @@ const ProductsTable = () => {
 
     </div >
   )
+}
+
+function CustomDialogContent({ product }) {
+  const dialog = useDialog();
+  const [partNumber, setPartNumber] = useState("")
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState("")
+  const [isAvailable, setIsAvailable] = useState('')
+
+  const [value, setValue] = useState();
+  const [data, setData] = useState({
+    password: '',
+    cf_password: '',
+  })
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setData({ ...data, [name]: value })
+  }
+
+  const handleClick = () => {
+    // updatePassword(data)
+    console.log({ data })
+  }
+  return (
+    <div>
+      <ModalContent>
+        <div>Part Number:</div>
+        <label>
+
+          <input
+            type="text" name="partNumber"
+            defaultValue={product.partNumber}
+            onChange={(e) => { setPartNumber(e.target.value) }}
+          />
+        </label>
+      </ModalContent>
+
+      <ModalContent>
+        <div>Description:</div>
+        <label>
+
+          <input
+            type="text" name="description"
+            // value={description}
+            defaultValue={product.description}
+            onChange={(e) => { setDescription(e.target.value) }}
+          />
+        </label>
+      </ModalContent>
+
+      <ModalContent>
+        <div>price:</div>
+        <label>
+
+          <input
+            type="text" name="price"
+            // value={price}
+            defaultValue={product.price}
+            onChange={(e) => { setPrice(e.target.value) }}
+          />
+        </label>
+      </ModalContent>
+
+      <ModalContent>
+        <div>Availability:</div>
+        <label>
+
+          <select name="availability"
+            value={isAvailable}
+            // defaultValue={product.part}
+            onChange={(e) => { setIsAvailable(e.target.value) }}
+          >
+            <option value="">Select Option</option>
+            <option value="1">Available</option>
+            <option value="0">Sold Out</option>
+            <option value="2">Put On-Hold</option>
+            <option value="3">Archive</option>
+          </select>
+        </label>
+      </ModalContent>
+
+      <ModalFooter>
+        <ModalButton
+          onClick={() => {
+            handleClick()
+            dialog.close(value);
+          }}
+        >
+          Update
+        </ModalButton>
+      </ModalFooter>
+    </div>
+  );
 }
 
 export default ProductsTable

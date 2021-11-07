@@ -328,6 +328,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, filterTable, ad
       </div>
       <form id="e_form" className="shop_form_items" onSubmit={onSubmit}>
         <div className="shop_form_item_container">
+
           <div className="shop_form_item">
             <label htmlFor="make">make: {product.make}</label>
             <select
@@ -394,6 +395,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, filterTable, ad
         </div>
 
         <div className="shop_form_item_container">
+
           <div className="shop_form_item">
             <label htmlFor="partNumber">Part Number: </label>
             <input type="text" name="partNumber"
