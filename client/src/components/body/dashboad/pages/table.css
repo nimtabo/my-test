@@ -10,7 +10,7 @@
 }
 
 .styled-table thead tr {
-  background-color: #009879;
+  background-color: rgb(15, 14, 14);
   color: #ffffff;
   text-align: left;
 }

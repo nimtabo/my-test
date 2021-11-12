@@ -37,17 +37,21 @@ const productSchema = new mongoose.Schema({
     // required: [true, "Please enter description!"],
     trim: true,
   },
-  isAvailable: {
+  // isAvailable: {
+  //   type: Number,
+  //   default: 1
+  // },
+  // isArchived: {
+  //   type: Number,
+  //   default: 0
+  // },
+  // isOnHold: {
+  //   type: Number,
+  //   default: 0
+  // },
+  availability: {
     type: Number,
-    default: 1
-  },
-  isArchived: {
-    type: Number,
-    default: 0
-  },
-  isOnHold: {
-    type: Number,
-    default: 0
+    default: 0 // 0=available, 1=Sold_Out, 2=On_Hold, 3=Archive
   },
 
   // grade: {

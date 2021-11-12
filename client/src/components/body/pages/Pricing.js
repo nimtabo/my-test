@@ -52,7 +52,7 @@ function Pricing() {
           </div>
           <div className="price-card">
             <h3>Silver</h3>
-            <h2>$15 <sub className="sub_text">/month</sub> </h2>
+            <h2>$20 <sub className="sub_text">/month</sub> </h2>
             <hr />
             <div>
               <p>
@@ -70,7 +70,7 @@ function Pricing() {
           </div>
           <div className="price-card">
             <h3>Gold</h3>
-            <h2>$20 <sub className="sub_text">/month</sub> </h2>
+            <h2>$30 <sub className="sub_text">/month</sub> </h2>
             <hr />
             <div>
               <p>

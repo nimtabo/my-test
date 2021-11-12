@@ -114,7 +114,7 @@ const shopCtrl = {
     try {
       const { make, model, part, partNumber, description, price, year } = req.body;
 
-      if (isNaN(partNumber) || isNaN(price)) return res.status(400).json({ msg: "Part Number and Price must be Number" })
+      if (isNaN(price)) return res.status(400).json({ msg: "Price must be Number" })
 
       const newProduct = new Product({
         make,
@@ -146,7 +146,7 @@ const shopCtrl = {
   getAvailableProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, isArchived: 0, isAvailable: 1 });
+      const products = await Product.find({ shop: shopId, availability: 0 });
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -155,7 +155,7 @@ const shopCtrl = {
   getArchivedProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, isArchived: 1, isAvailable: 0 });
+      const products = await Product.find({ shop: shopId, availability: 3 });
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -164,7 +164,7 @@ const shopCtrl = {
   getSoldOutProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, isAvailable: 0, isOnHold: 0, isArchived: 0 });
+      const products = await Product.find({ shop: shopId, availability: 1 });
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -173,7 +173,7 @@ const shopCtrl = {
   getOnHoldProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, isOnHold: 1 });
+      const products = await Product.find({ shop: shopId, availability: 2 });
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -195,20 +195,20 @@ const shopCtrl = {
   },
   updateProduct: async (req, res) => {
     try {
-      const { make, model, part, partNumber, description, price, year, isAvailable, isOnHold } = req.body;
+      const { partNumber, description, price, availability } = req.body;
       const { shopId, productId } = req.params;
 
-      const updateItems = { make, model, part, partNumber, description, price, year, isAvailable: Number(isAvailable) };
-      if (Number(isAvailable) === 1) {
-        updateItems.isArchived = 0;
-        updateItems.isOnHold = 0;
-      } else if (Number(isAvailable) === 0) {
-        updateItems.isArchived = 1;
-      }
+      const updateItems = { partNumber, description, price, availability: Number(availability) };
+      // if (Number(isAvailable) === 1) {
+      //   updateItems.isArchived = 0;
+      //   updateItems.isOnHold = 0;
+      // } else if (Number(isAvailable) === 0) {
+      //   updateItems.isArchived = 1;
+      // }
 
-      if (Number(isAvailable) === 2) {
-        updateItems.isOnHold = 1;
-      }
+      // if (Number(isAvailable) === 2) {
+      //   updateItems.isOnHold = 1;
+      // }
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
 

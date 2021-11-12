@@ -201,7 +201,13 @@ const ProductsTable = () => {
                     updateProduct(prod)
                   }}>Edit</button> */}
                   <button onClick={async () => {
-                    const result = await CustomDialog(<CustomDialogContent product={{ partNumber: 25444 }} />, {
+                    const result = await CustomDialog(<CustomDialogContent
+                      product={{ ...prod }}
+                      token={token}
+                      shop={shop}
+                      setUpdateTable={setUpdateTable}
+                      updateTable={updateTable}
+                    />, {
                       title: 'UPDATE PART',
                       showCloseIcon: true,
                       isCanClose: false,
@@ -209,26 +215,16 @@ const ProductsTable = () => {
                     });
                   }}>Edit</button>
                   <span> </span>
-                  <button onClick={() => {
+                  {
+                    adFilter === "archived" ? <button onClick={() => { deleteProduct(prod._id) }}>Delete</button> : ''
+                  }
+                  {/* <button onClick={() => {
                     adFilter === "archived" ? deleteProduct(prod._id) : arhiveProduct(prod._id)
-                  }}>{adFilter === "archived" ? "Delete" : "Archive"}</button>
+                  }}>{adFilter === "archived" ? "Delete" : "Archive"}</button> */}
                 </td>
               </tr>)
             })
           }
-          {/* <tr>
-            <td><input type="checkbox" /></td>
-            <td className="part_image"></td>
-            <td>ALFA ROMEO</td>
-            <td>4C</td>
-            <td>2015</td>
-            <td>Machine Screw"</td>
-            <td>222222100</td>
-            <td>Hardware</td>
-            <td>$200</td>
-            <td><button>Edit</button> <button>Delete</button></td>
-          </tr> */}
-
 
         </tbody>
       </table>
@@ -237,7 +233,7 @@ const ProductsTable = () => {
   )
 }
 
-function CustomDialogContent({ product }) {
+function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable }) {
   const dialog = useDialog();
   const [partNumber, setPartNumber] = useState("")
   const [description, setDescription] = useState('')
@@ -246,18 +242,60 @@ function CustomDialogContent({ product }) {
 
   const [value, setValue] = useState();
   const [data, setData] = useState({
-    password: '',
-    cf_password: '',
+    partNumber: '',
+    description: '',
+    price: '',
+    availability: '',
   })
+
+  useEffect(() => {
+    const populateData = async () => {
+      try {
+        setPartNumber(product.partNumber)
+        setDescription(product.description)
+        setPrice(product.price)
+        setIsAvailable(product.availability)
+      } catch (error) {
+        console.log(error.msg)
+      }
+
+    }
+    populateData()
+  })
+
+
 
   const handleChange = e => {
     const { name, value } = e.target
     setData({ ...data, [name]: value })
   }
 
-  const handleClick = () => {
-    // updatePassword(data)
-    console.log({ data })
+  const handleClick = async () => {
+    let newProduct = { ...data }
+
+    if (data.partNumber === '') {
+      newProduct.partNumber = partNumber
+      // console.log({ partNumber })
+    }
+    if (data.description === '') {
+      newProduct.description = description
+    }
+    if (data.price === '') {
+      newProduct.price = price
+    }
+    if (data.availability === '') {
+      newProduct.availability = isAvailable
+    }
+
+    try {
+      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, newProduct, {
+        headers: { Authorization: token }
+      });
+      setUpdateTable(updateTable)
+      // console.log(savedProduct.data)
+    } catch (error) {
+      console.log(error.message)
+    }
   }
   return (
     <div>
@@ -267,8 +305,9 @@ function CustomDialogContent({ product }) {
 
           <input
             type="text" name="partNumber"
-            defaultValue={product.partNumber}
-            onChange={(e) => { setPartNumber(e.target.value) }}
+            defaultValue={partNumber}
+            onChange={handleChange}
+          // onChange={(e) => { setPartNumber(e.target.value) }}
           />
         </label>
       </ModalContent>
@@ -280,8 +319,9 @@ function CustomDialogContent({ product }) {
           <input
             type="text" name="description"
             // value={description}
-            defaultValue={product.description}
-            onChange={(e) => { setDescription(e.target.value) }}
+            defaultValue={description}
+            onChange={handleChange}
+          // onChange={(e) => { setDescription(e.target.value) }}
           />
         </label>
       </ModalContent>
@@ -293,20 +333,22 @@ function CustomDialogContent({ product }) {
           <input
             type="text" name="price"
             // value={price}
-            defaultValue={product.price}
-            onChange={(e) => { setPrice(e.target.value) }}
+            defaultValue={price}
+            onChange={handleChange}
+          // onChange={(e) => { setPrice(e.target.value) }}
           />
         </label>
       </ModalContent>
 
       <ModalContent>
-        <div>Availability:</div>
+        <div>Availability: </div>
         <label>
 
           <select name="availability"
-            value={isAvailable}
-            // defaultValue={product.part}
-            onChange={(e) => { setIsAvailable(e.target.value) }}
+            // value={isAvailable}
+            defaultValue={isAvailable}
+            onChange={handleChange}
+          // onChange={(e) => { setIsAvailable(e.target.value) }}
           >
             <option value="">Select Option</option>
             <option value="1">Available</option>

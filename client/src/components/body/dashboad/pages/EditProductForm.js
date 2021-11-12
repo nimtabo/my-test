@@ -431,6 +431,7 @@ function EditProductForm({ setUpdateTable, updateTable, product, filterTable, ad
               <option value="1">Available</option>
               <option value="0">Sold Out</option>
               <option value="2">Put On-Hold</option>
+              <option value="3">Archive</option>
             </select>
           </div>
 
