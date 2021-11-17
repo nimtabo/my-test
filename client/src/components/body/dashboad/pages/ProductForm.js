@@ -320,12 +320,20 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
 
           <div className="shop_form_item">
             <label htmlFor="description">Description: </label>
-            <input type="text" name="description" value={description} onChange={(e) => { setDescription(e.target.value) }} />
+            <textarea
+              rows="2" cols="10"
+              name="description"
+              value={description}
+              onChange={(e) => { setDescription(e.target.value) }}
+            ></textarea>
+            {/* <input type="text" name="description" value={description} onChange={(e) => { setDescription(e.target.value) }} /> */}
           </div>
 
           <div className="shop_form_item">
             <label htmlFor="price">price: </label>
-            <input type="text" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} />
+            {/* <input type="text" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} /> */}
+            <input type="number" name="price" min="0.00" max="10000.00" step="0.01"
+              onChange={(e) => { setPrice(e.target.value) }} />
           </div>
 
           <div className="shop_form_item btn">

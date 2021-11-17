@@ -21,7 +21,7 @@ const ProductsTable = () => {
   const [err, setErr] = useState('')
   const [success, setSuccess] = useState('')
   const [updateTable, setUpdateTable] = useState(false)
-  const [adFilter, setAdFilter] = useState("")
+  const [adFilter, setAdFilter] = useState("available")
 
   const token = useSelector(state => state.token)
 
@@ -207,6 +207,8 @@ const ProductsTable = () => {
                       shop={shop}
                       setUpdateTable={setUpdateTable}
                       updateTable={updateTable}
+                      deleteProduct={deleteProduct}
+                      adFilter={adFilter}
                     />, {
                       title: 'UPDATE PART',
                       showCloseIcon: true,
@@ -214,10 +216,10 @@ const ProductsTable = () => {
                       isBodyScrollLocked: false,
                     });
                   }}>Edit</button>
-                  <span> </span>
-                  {
+                  {/* <span> </span> */}
+                  {/* {
                     adFilter === "archived" ? <button onClick={() => { deleteProduct(prod._id) }}>Delete</button> : ''
-                  }
+                  } */}
                   {/* <button onClick={() => {
                     adFilter === "archived" ? deleteProduct(prod._id) : arhiveProduct(prod._id)
                   }}>{adFilter === "archived" ? "Delete" : "Archive"}</button> */}
@@ -233,7 +235,7 @@ const ProductsTable = () => {
   )
 }
 
-function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable }) {
+function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable, deleteProduct, adFilter }) {
   const dialog = useDialog();
   const [partNumber, setPartNumber] = useState("")
   const [description, setDescription] = useState('')
@@ -286,7 +288,9 @@ function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable
     if (data.availability === '') {
       newProduct.availability = isAvailable
     }
-
+    if (parseInt(newProduct.availability) === 4) {
+      return deleteProduct(product._id)
+    }
     try {
       const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, newProduct, {
         headers: { Authorization: token }
@@ -297,6 +301,7 @@ function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable
       console.log(error.message)
     }
   }
+
   return (
     <div>
       <ModalContent>
@@ -316,13 +321,18 @@ function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable
         <div>Description:</div>
         <label>
 
-          <input
+          {/* <input
             type="text" name="description"
-            // value={description}
             defaultValue={description}
             onChange={handleChange}
-          // onChange={(e) => { setDescription(e.target.value) }}
-          />
+          /> */}
+          <textarea
+            rows="2" cols="10"
+            name="description"
+            defaultValue={description}
+            onChange={handleChange}
+          >
+          </textarea>
         </label>
       </ModalContent>
 
@@ -331,7 +341,7 @@ function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable
         <label>
 
           <input
-            type="text" name="price"
+            type="number" name="price"
             // value={price}
             defaultValue={price}
             onChange={handleChange}
@@ -351,10 +361,11 @@ function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable
           // onChange={(e) => { setIsAvailable(e.target.value) }}
           >
             <option value="">Select Option</option>
-            <option value="1">Available</option>
-            <option value="0">Sold Out</option>
-            <option value="2">Put On-Hold</option>
-            <option value="3">Archive</option>
+            {!(adFilter === "available") && <option value="0">Available</option>}
+            {!(adFilter === "soldout") && <option value="1">Sold Out</option>}
+            {!(adFilter === "onhold") && <option value="2">Put On-Hold</option>}
+            {!(adFilter === "archived") && <option value="3">Archive</option>}
+            <option value="4">Delete</option>
           </select>
         </label>
       </ModalContent>

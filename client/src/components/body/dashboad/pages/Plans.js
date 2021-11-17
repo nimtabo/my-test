@@ -64,24 +64,6 @@ const Plans = ({ handleOpenNav, width }) => {
                 </div>
                 <div className="price-card">
                   <h3>Silver</h3>
-                  <h2>$15 <sub className="sub_text">/month</sub> </h2>
-                  <hr />
-                  <div>
-                    <p>
-                      Permitted
-                      <br />
-                      To
-                      <br />
-                      Upload
-                      <br />
-                      Maximum
-                      <br />
-                      10 Parts
-                    </p>
-                  </div>
-                </div>
-                <div className="price-card">
-                  <h3>Gold</h3>
                   <h2>$20 <sub className="sub_text">/month</sub> </h2>
                   <hr />
                   <div>
@@ -94,7 +76,25 @@ const Plans = ({ handleOpenNav, width }) => {
                       <br />
                       Maximum
                       <br />
-                      15 Parts
+                      12 Parts
+                    </p>
+                  </div>
+                </div>
+                <div className="price-card">
+                  <h3>Gold</h3>
+                  <h2>$30 <sub className="sub_text">/month</sub> </h2>
+                  <hr />
+                  <div>
+                    <p>
+                      Permitted
+                      <br />
+                      To
+                      <br />
+                      Upload
+                      <br />
+                      Maximum
+                      <br />
+                      20 Parts
                     </p>
                   </div>
                 </div>

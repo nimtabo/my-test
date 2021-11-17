@@ -198,20 +198,20 @@ const shopCtrl = {
       const { partNumber, description, price, availability } = req.body;
       const { shopId, productId } = req.params;
 
-      const updateItems = { partNumber, description, price, availability: Number(availability) };
-      // if (Number(isAvailable) === 1) {
-      //   updateItems.isArchived = 0;
-      //   updateItems.isOnHold = 0;
-      // } else if (Number(isAvailable) === 0) {
-      //   updateItems.isArchived = 1;
+      // if (parseInt(availability) === 4) {
+      //   try {
+      //     await Product.findOneAndDelete({ shop: shopId, _id: productId })
+
+      //     return res.json({ msg: "Product Deleted from Shop Successfully!" })
+      //   } catch (err) {
+      //     return res.status(500).json({ msg: err.message })
+      //   }
       // }
 
-      // if (Number(isAvailable) === 2) {
-      //   updateItems.isOnHold = 1;
-      // }
+      // **********
+      const updateItems = { partNumber, description, price, availability: parseInt(availability) };
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
-
       res.json({ message: "Product Updated successfully." });
     } catch (err) {
       return res.status(500).json({ msg: err.message })
