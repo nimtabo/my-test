@@ -64,7 +64,7 @@ function Pricing() {
                 <br />
                 Maximum
                 <br />
-                10 Parts
+                12 Parts
               </p>
             </div>
           </div>
@@ -82,7 +82,7 @@ function Pricing() {
                 <br />
                 Maximum
                 <br />
-                15 Parts
+                20 Parts
               </p>
             </div>
           </div>

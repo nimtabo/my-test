@@ -47,7 +47,7 @@ const ProductsTable = () => {
 
   }, [updateTable])
 
-  const deleteProduct = async (id) => {
+  const deleteProduct = async (id, filter) => {
     // api/shop/shops/ISD/products/id
     try {
       await axios.delete(`/api/shop/shops/${shop}/products/${id}`, {
@@ -59,7 +59,8 @@ const ProductsTable = () => {
       setTimeout(() => {
         setErr("")
       }, 2000);
-      setUpdateTable(!updateTable)
+      filterTable(filter)
+      // setUpdateTable(!updateTable)
     } catch (error) {
       setErr(error.msg)
     }
@@ -119,10 +120,10 @@ const ProductsTable = () => {
       <div id="add_parts_container"
         style={showAddPart ? { display: "block" } : { display: "none", }}>
         <ProductForm
-          setUpdateTable={setUpdateTable}
-          updateTable={updateTable}
           setShowAddPart={setShowAddPart}
           showAddPart={showAddPart}
+          adFilter={adFilter}
+          filterTable={filterTable}
         />
       </div>
 
@@ -142,8 +143,26 @@ const ProductsTable = () => {
       <div>
         {err && showErrMsg(err) || success && showSuccessMsg(success)}
       </div>
-      <div className="table_category_title">
-        {adFilter ? `${adFilter === 'onhold' ? "ON-HOLD" : adFilter === 'soldout' ? "SOLD-OUT" : adFilter.toUpperCase()} PRODUCTS` : 'AVAILABLE PRODUCTS'}
+
+      <div className="table_category_title_container">
+        <div className="table_category_title">
+          {adFilter ? `${adFilter === 'onhold' ? "ON-HOLD" : adFilter === 'soldout' ? "SOLD-OUT" : adFilter.toUpperCase()} PRODUCTS` : 'AVAILABLE PRODUCTS'}
+        </div>
+
+        <select
+          className="add_filter_options"
+          name="adFilter"
+          value={""}
+          onChange={(e) => {
+            filterTable(e.target.value)
+          }}
+        >
+          <option>Filter Ads</option>
+          <option value="available">Available</option>
+          <option value="onhold">On Hold</option>
+          <option value="soldout">Sold Out</option>
+          <option value="archived">Archive </option>
+        </select>
       </div>
       <table className="styled-table">
         <thead>
@@ -166,7 +185,7 @@ const ProductsTable = () => {
             <th>Description</th>
             <th>Price</th>
             <th>
-              <select
+              {/* <select
                 name="adFilter"
                 value={""}
                 onChange={(e) => {
@@ -178,7 +197,7 @@ const ProductsTable = () => {
                 <option value="onhold">On Hold</option>
                 <option value="soldout">Sold Out</option>
                 <option value="archived">Archive </option>
-              </select>
+              </select> */}
             </th>
           </tr>
         </thead>
@@ -205,10 +224,11 @@ const ProductsTable = () => {
                       product={{ ...prod }}
                       token={token}
                       shop={shop}
-                      setUpdateTable={setUpdateTable}
-                      updateTable={updateTable}
+                      filterTable={filterTable}
                       deleteProduct={deleteProduct}
                       adFilter={adFilter}
+                      setErr={setErr}
+                      setSuccess={setSuccess}
                     />, {
                       title: 'UPDATE PART',
                       showCloseIcon: true,
@@ -235,7 +255,7 @@ const ProductsTable = () => {
   )
 }
 
-function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable, deleteProduct, adFilter }) {
+function CustomDialogContent({ product, token, shop, filterTable, deleteProduct, adFilter, setSuccess, setErr }) {
   const dialog = useDialog();
   const [partNumber, setPartNumber] = useState("")
   const [description, setDescription] = useState('')
@@ -289,16 +309,24 @@ function CustomDialogContent({ product, token, shop, setUpdateTable, updateTable
       newProduct.availability = isAvailable
     }
     if (parseInt(newProduct.availability) === 4) {
-      return deleteProduct(product._id)
+      return deleteProduct(product._id, adFilter)
     }
     try {
       const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, newProduct, {
         headers: { Authorization: token }
       });
-      setUpdateTable(updateTable)
+      setSuccess(`Part Updated Successfully`)
+      filterTable(adFilter)
       // console.log(savedProduct.data)
+      return setTimeout(() => {
+        setSuccess('')
+      }, 3000);
     } catch (error) {
-      console.log(error.message)
+      // console.log(error.message)
+      setErr(`Part Update Failed`)
+      return setTimeout(() => {
+        setErr('')
+      }, 3000);
     }
   }
 

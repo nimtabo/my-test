@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification'
 import axios from "axios";
 
-function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart }) {
+function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
   const [data, setData] = useState({})
   const [makes, setMakes] = useState([])
   const [make, setMake] = useState("")
@@ -43,9 +43,12 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
         // setShops([...shops.data])
         // console.log(shops.data);
       } catch (error) {
-        console.log("An Error occured getting makes")
+        setErr("An Error occured Loading makes")
+        return setTimeout(() => {
+          setMakes([...[]])
+          setErr('')
+        }, 3000);
         // console.log(error.message)
-        return setMakes([...[]])
       }
     }
     fetchData();
@@ -174,16 +177,19 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
   //   console.log(data)
   // }, [data]);
 
+  const handleReset = () => {
+    Array.from(document.querySelectorAll("input")).forEach(input => (input.value = ""));
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    if (isNaN(partNumber) || isNaN(price)) {
+    if (isNaN(price)) {
       setSuccess('')
-      setErr("Part Number and Price Values must be Numbers")
+      setErr("Part Price Values be Number")
       return setTimeout(() => {
         setErr('')
-      }, 2000);
+      }, 3000);
     }
 
     if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (price === "")) {
@@ -193,7 +199,7 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
       setErr("All marked fields are required (make, model, year part and price).");
       return setTimeout(() => {
         setErr('')
-      }, 2000);
+      }, 3000);
     } else {
       try {
         const data = { make, model, year, part, partNumber: Number(partNumber), description, price: Number(price), shop }
@@ -209,18 +215,19 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
         setPartNumber('')
         setDescription('')
         setPrice('')
-        setUpdateTable(!updateTable)
+        filterTable(adFilter)
         setErr('')
+        handleReset()
         setSuccess("Part added successfully")
         return setTimeout(() => {
           setSuccess('')
-        }, 2000);
+        }, 3000);
       } catch (error) {
         setSuccess('')
         setErr(error.message)
         return setTimeout(() => {
           setErr('')
-        }, 2000);
+        }, 3000);
       }
 
 
@@ -237,7 +244,7 @@ function ProductForm({ setUpdateTable, updateTable, setShowAddPart, showAddPart 
 
 
       <div className="form_header_container">
-        <div><h2>Add new parts to sell</h2></div>
+        <div className="h1"><h2>Add new parts to sell</h2></div>
 
         <div>
           <button type="button"
