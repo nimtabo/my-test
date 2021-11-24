@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification'
+import Upload from '../../../file-upload';
 import axios from "axios";
 
 function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
@@ -342,6 +343,8 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
             <input type="number" name="price" min="0.00" max="10000.00" step="0.01"
               onChange={(e) => { setPrice(e.target.value) }} />
           </div>
+
+          <Upload />
 
           <div className="shop_form_item btn">
             <button type="submit">Add part</button>
