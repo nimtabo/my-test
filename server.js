@@ -8,9 +8,11 @@ const path = require('path')
 const morgan = require('morgan');
 
 
-
 const app = express()
 app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use(cors())
 app.use(cookieParser())
 app.use(fileUpload({
@@ -25,7 +27,8 @@ app.use('/api/cars', require('./routes/carRouter'))
 app.use('/api/shop', require('./routes/shopRouter'))
 app.use('/api/product', require('./routes/productRouter'))
 
-
+// Files Uploads
+app.use('/public', express.static('public'));
 
 // Connect to mongodb
 const URI = process.env.MONGODB_URL

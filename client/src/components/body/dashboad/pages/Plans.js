@@ -26,25 +26,6 @@ const Plans = ({ handleOpenNav, width }) => {
               </div>
               <div className="pricing-plan-parts">
                 <div className="price-card">
-                  <h3>Free</h3>
-                  <h2>$0 <sub className="sub_text">/month</sub> </h2>
-                  <hr />
-
-                  <div>
-                    <p>
-                      Permitted
-                      <br />
-                      To
-                      <br />
-                      Upload
-                      <br />
-                      Maximum
-                      <br />
-                      2 Parts
-                    </p>
-                  </div>
-                </div>
-                <div className="price-card">
                   <h3>Bronze</h3>
                   <h2>$10 <sub className="sub_text">/month</sub> </h2>
                   <hr />

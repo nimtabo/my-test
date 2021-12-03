@@ -215,7 +215,7 @@ const ProductsTable = () => {
                 <td>{prod.year}</td>
                 <td>{prod.part}</td>
                 <td>{prod.partNumber}</td>
-                <td>{prod.description}</td>
+                <td className="cut_text">{prod.description}</td>
                 <td>{`$ ${prod.price}`}</td>
                 <td>
                   {/* <button onClick={() => {
@@ -357,7 +357,7 @@ function CustomDialogContent({ product, token, shop, filterTable, deleteProduct,
             onChange={handleChange}
           /> */}
           <textarea
-            rows="2" cols="10"
+            rows="4" cols="35"
             name="description"
             defaultValue={description}
             onChange={handleChange}

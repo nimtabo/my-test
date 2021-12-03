@@ -48,6 +48,7 @@ const FileUpload = ({
 
   const callUpdateFilesCb = (files) => {
     const filesAsArray = convertNestedObjectToArray(files);
+    console.log({ filesAsArray });
     updateFilesCb(filesAsArray);
   };
 

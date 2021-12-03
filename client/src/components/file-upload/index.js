@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux'
+import axios from 'axios';
 import FileUpload from "./file-upload";
 
 function Upload() {
@@ -6,13 +8,43 @@ function Upload() {
     profileImages: []
   });
 
-  const updateUploadedFiles = (files) =>
-    setNewUserInfo({ ...newUserInfo, profileImages: files });
+  const token = useSelector(state => state.token)
 
-  const handleSubmit = (event) => {
+
+  const updateUploadedFiles = (files) =>
+    setNewUserInfo({ profileImages: [...files] });
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    //logic to create new user...
+    // let formData = new FormData();
+
+    // for (const key of Object.keys(newUserInfo.profileImages)) {
+    //   formData.append('profileImages', newUserInfo.profileImages[key])
+    // }
+    // axios.post("/api/upload_images", formData, {
+    // }).then(response => {
+    //   console.log((response.data))
+    // })
+
+    // let formData = new FormData()
+    // formData.append('profileImages', newUserInfo.profileImages)
+    try {
+      let formData = new FormData();
+
+      for (const key of Object.keys(newUserInfo.profileImages)) {
+        formData.append('profileImages', newUserInfo.profileImages[key])
+      }
+
+      console.log({ formData })
+      const response = await axios.post(`/api/upload_images`, formData, {
+        headers: { 'content-type': 'multipart/form-data', Authorization: token }
+      });
+      console.log({ res: response.data })
+    } catch (error) {
+      console.log({ error })
+    }
   };
+
 
   return (
     <div>
@@ -23,7 +55,7 @@ function Upload() {
           multiple
           updateFilesCb={updateUploadedFiles}
         />
-        {/* <button type="submit">Create New User</button> */}
+        <button type="submit">Upload</button>
       </form>
     </div>
   );

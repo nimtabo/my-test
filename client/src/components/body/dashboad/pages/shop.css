@@ -159,7 +159,8 @@
 .table_category_title {
   margin: 0;
   padding: 0.5rem;
-  text-align: center;
+  padding-left: 45%;
+  /* text-align: center; */
   width: 80%;
 }
 
@@ -172,3 +173,11 @@
   border-radius: unset;
 }
 /* ************ */
+
+/* CUT TEXT LENGTH */
+/* **************** */
+.cut_text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification'
 import Upload from '../../../file-upload';
+import UploadComponent from '../../../file-upload/Upload';
 import axios from "axios";
+
 
 function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
   const [data, setData] = useState({})
@@ -329,7 +331,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
           <div className="shop_form_item">
             <label htmlFor="description">Description: </label>
             <textarea
-              rows="2" cols="10"
+              rows="4" cols="10"
               name="description"
               value={description}
               onChange={(e) => { setDescription(e.target.value) }}
@@ -343,8 +345,6 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
             <input type="number" name="price" min="0.00" max="10000.00" step="0.01"
               onChange={(e) => { setPrice(e.target.value) }} />
           </div>
-
-          <Upload />
 
           <div className="shop_form_item btn">
             <button type="submit">Add part</button>
@@ -406,6 +406,8 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
 
 
       </form>
+      <Upload />
+      {/* <UploadComponent /> */}
     </div>
   )
 }

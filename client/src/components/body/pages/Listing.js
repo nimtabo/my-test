@@ -348,7 +348,7 @@ const Listing = () => {
                     <p key={prod.model}> <span className="text_item">model:</span> <span>{prod.model}</span> </p>
                     <p key={prod.year}><span className="text_item">year:</span> <span>{prod.year}</span> </p>
                     <p key={prod.part}><span className="text_item">part: </span> <span>{prod.part}</span> </p>
-                    <p key={prod.description}><span className="text_item">Details:</span> <span>{prod.description}</span> </p>
+                    <p className="cut_text" key={prod.description}><span className="text_item">Details:</span> <span>{prod.description}</span> </p>
                     {/* <p key={prod.engine}><span className="text_item">Engine:</span> <span>{prod.engine}</span></p> */}
                     <p key={prod.price}><span className="text_item">price:</span> <span> {prod.price}</span></p>
                     {/* <p key={prod.grade}><span className="text_item">grade:</span> <span>{prod.grade}</span> </p> */}
