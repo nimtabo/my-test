@@ -406,7 +406,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
 
 
       </form>
-      <Upload />
+      {/* <Upload /> */}
       {/* <UploadComponent /> */}
     </div>
   )

@@ -11,7 +11,6 @@ import './table.css'
 import { async } from 'crypto-random-string';
 import ProductTableFilterForm from './ProductTableFilterForm';
 import EditProductForm from './EditProductForm';
-import Upload from '../../../file-upload';
 
 
 const ProductsTable = () => {
@@ -398,10 +397,6 @@ function CustomDialogContent({ product, token, shop, filterTable, deleteProduct,
             <option value="4">Delete</option>
           </select>
         </label>
-      </ModalContent>
-
-      <ModalContent>
-        <Upload />
       </ModalContent>
 
       <ModalFooter>
