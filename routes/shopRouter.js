@@ -3,6 +3,7 @@ const router = require('express').Router()
 const shopCtrl = require('../controllers/shopCtrl')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
+// const upload = require('../middleware/upload')
 
 
 router.post('/create', auth, shopCtrl.createShop)
@@ -11,8 +12,31 @@ router.get('/shops/:id', auth, shopCtrl.getShop)
 router.patch('/shops/:id', auth, shopCtrl.updateShop)
 router.delete('/shops/:id', auth, shopCtrl.deleteShop)
 
+// *********
+const multer = require("multer");
+
+let storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    console.log("file", file);
+    callback(null, "./Uploads/");
+  },
+  filename: function (req, file, callback) {
+    // console.log("multer file:", file);
+    callback(null, file.originalname);
+  }
+});
+let maxSize = 1000000 * 1000;
+
+let upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: maxSize
+  }
+});
+
+// ******
 // SHOP PRODUCTS
-router.post('/shops/:shopId/products', auth, shopCtrl.addProduct)
+router.post('/shops/:shopId/products', upload.array('multiple_image', 6), auth, shopCtrl.addProduct)
 router.get('/shops/:shopId/products/available', shopCtrl.getAvailableProducts)
 router.get('/shops/:shopId/products/soldout', shopCtrl.getSoldOutProducts)
 router.get('/shops/:shopId/products/onhold', shopCtrl.getOnHoldProducts)

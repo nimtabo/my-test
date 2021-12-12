@@ -208,13 +208,15 @@ const ProductsTable = () => {
             products.map(prod => {
               return (<tr key={prod._id}>
                 <td><input type="checkbox" /></td>
-                <td className="part_image"></td>
+                <td className="part_image">
+                  <img src={prod.multiple_image[0]} alt='' />
+                </td>
                 <td>{prod.make}</td>
                 <td>{prod.model}</td>
                 <td>{prod.year}</td>
                 <td>{prod.part}</td>
                 <td>{prod.partNumber}</td>
-                <td className="cut_text">{prod.description}</td>
+                <td className="cut_text wide_section">{prod.description}</td>
                 <td>{`$ ${prod.price}`}</td>
                 <td>
                   {/* <button onClick={() => {

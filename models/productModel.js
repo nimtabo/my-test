@@ -78,6 +78,9 @@ const productSchema = new mongoose.Schema({
   {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Shop"
+  },
+  multiple_image: {
+    type: []
   }
 }, {
   timestamps: true

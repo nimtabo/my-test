@@ -1,3 +1,9 @@
+const _ = require("underscore");
+const fs = require("fs");
+const vm = require("v-response");
+const upload = require("../middleware/helper").upload;
+
+// 
 const User = require('../models/userModel')
 const Shop = require('../models/shopModel')
 const Product = require('../models/productModel')
@@ -110,38 +116,88 @@ const shopCtrl = {
       return res.status(500).json({ msg: err.message })
     }
   },
-  addProduct: async (req, res) => {
-    try {
-      const { make, model, part, partNumber, description, price, year } = req.body;
-
-      if (isNaN(price)) return res.status(400).json({ msg: "Price must be Number" })
-
-      const newProduct = new Product({
-        make,
-        model,
-        year,
-        part,
-        partNumber,
-        description,
-        price,
-        // category,
-        // grade,
-        // stock,
-      });
-
-      const { shopId } = req.params;
-      newProduct.shop = shopId;
-
-      const savedProduct = await newProduct.save();
-      const updateShopProduct = await Shop.findByIdAndUpdate(
-        shopId,
-        { $addToSet: { products: savedProduct._id } }
-      )
-      // console.log(updateShopProduct)
-      res.json(savedProduct);
-    } catch (err) {
-      res.status(500).json({ msg: err.message });
+  addProduct: async (req, res, next) => {
+    // 
+    console.log(req.files)
+    if (!req.files || _.isEmpty(req.files)) {
+      return res.status(400)
+        .json(vm.ApiResponse(false, 400, "No Image uploaded'"))
     }
+    const files = req.files;
+
+    try {
+      let urls = [];
+      let multiple = async (path) => await upload(path);
+      for (const file of files) {
+        const { path } = file;
+        console.log("path", file);
+
+        const newPath = await multiple(path);
+        urls.push(newPath);
+        fs.unlinkSync(path);
+      }
+      if (urls) {
+        // *****************
+        const { make, model, part, partNumber, description, price, year } = req.body;
+        if (isNaN(price)) return res.status(400).json({ msg: "Price must be Number" })
+        console.log(req.body)
+        // ****
+        let bodyw = _.extend({ make, model, part, partNumber, description, price, year }, { multiple_image: urls });
+        let newProduct = new Product(bodyw);
+
+        const { shopId } = req.params;
+        newProduct.shop = shopId;
+
+        await newProduct.save()
+          .then(saved => {
+            Shop.findByIdAndUpdate(
+              shopId,
+              { $addToSet: { products: saved._id } }
+            )
+            return res.json(saved);
+          }).catch(error => {
+            return res.json(error);
+          })
+
+      }
+      if (!urls) {
+        return res.status(400)
+          .json(vm.ApiResponse(false, 400, ""))
+      }
+
+    } catch (e) {
+      console.log("err :", e);
+      return next(e);
+    }
+    // 
+    // try {
+    //   const { make, model, part, partNumber, description, price, year } = req.body;
+
+    //   if (isNaN(price)) return res.status(400).json({ msg: "Price must be Number" })
+
+    //   const newProduct = new Product({
+    //     make,
+    //     model,
+    //     year,
+    //     part,
+    //     partNumber,
+    //     description,
+    //     price,
+    //   });
+
+    //   const { shopId } = req.params;
+    //   newProduct.shop = shopId;
+
+    //   const savedProduct = await newProduct.save();
+    //   const updateShopProduct = await Shop.findByIdAndUpdate(
+    //     shopId,
+    //     { $addToSet: { products: savedProduct._id } }
+    //   )
+    //   // console.log(updateShopProduct)
+    //   res.json(savedProduct);
+    // } catch (err) {
+    //   res.status(500).json({ msg: err.message });
+    // }
   },
   getAvailableProducts: async (req, res) => {
     try {

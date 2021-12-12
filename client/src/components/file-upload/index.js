@@ -31,13 +31,22 @@ function Upload() {
     try {
       let formData = new FormData();
 
-      for (const key of Object.keys(newUserInfo.profileImages)) {
-        formData.append('profileImages', newUserInfo.profileImages[key])
+      // for (const key of Object.keys(newUserInfo.profileImages)) {
+      //   formData.append('profileImages', newUserInfo.profileImages[key])
+      // }
+      for (let img of newUserInfo.profileImages) {
+        formData.append('profileImages', img)
+        console.log({ img })
       }
 
+      // axios.post("/api/upload_images", formData, {
+      // }).then(res => {
+      //   console.log(res.data)
+      // }).catch(err => console.log(err.message))
       console.log({ formData })
       const response = await axios.post(`/api/upload_images`, formData, {
-        headers: { 'content-type': 'multipart/form-data', Authorization: token }
+        // headers: { 'content-type': 'multipart/form-data', Authorization: token }
+        headers: { 'content-type': 'multipart/form-data' }
       });
       console.log({ res: response.data })
     } catch (error) {

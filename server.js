@@ -15,9 +15,9 @@ app.use(express.urlencoded({
 }));
 app.use(cors())
 app.use(cookieParser())
-app.use(fileUpload({
-    useTempFiles: true
-}))
+// app.use(fileUpload({
+//     useTempFiles: true
+// }))
 app.use(morgan('dev'));
 
 // Routes
@@ -28,7 +28,8 @@ app.use('/api/shop', require('./routes/shopRouter'))
 app.use('/api/product', require('./routes/productRouter'))
 
 // Files Uploads
-app.use('/public', express.static('public'));
+// app.use('/public', express.static('public'));
+// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Connect to mongodb
 const URI = process.env.MONGODB_URL

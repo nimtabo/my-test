@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification'
-import Upload from '../../../file-upload';
-import UploadComponent from '../../../file-upload/Upload';
+import FileUpload from "../../../file-upload/file-upload";
 import axios from "axios";
 
 
@@ -30,6 +29,12 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
   const [zipcode, setZipcode] = useState("")
   const [err, setErr] = useState("")
   const [success, setSuccess] = useState("")
+  const [newUserInfo, setNewUserInfo] = useState({
+    profileImages: []
+  });
+  const [submission, setSubmission] = useState({
+
+  })
 
   const token = useSelector(state => state.token)
 
@@ -184,6 +189,10 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
     Array.from(document.querySelectorAll("input")).forEach(input => (input.value = ""));
   }
 
+
+  const updateUploadedFiles = (files) =>
+    setNewUserInfo({ profileImages: [...files] });
+
   const onSubmit = async (e) => {
     e.preventDefault()
 
@@ -206,9 +215,17 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
     } else {
       try {
         const data = { make, model, year, part, partNumber: Number(partNumber), description, price: Number(price), shop }
+        const formData = new FormData();
+        newUserInfo.profileImages.forEach(file => {
+          formData.append("multiple_image", file);
+        });
+        for (let key in data) {
+          formData.append(`${key}`, data[key])
+        }
+        // console.log({ formData })
         // http://localhost:5000/api/shop/shops/6093a22d5843f1295cae7178/products
-        const product = await axios.post(`/api/shop/shops/${shop}/products`, data, {
-          headers: { Authorization: token }
+        const product = await axios.post(`/api/shop/shops/${shop}/products`, formData, {
+          headers: { Authorization: token, 'content-type': 'multipart/form-data' }
         });
         // console.log("Success", product)
         setMake('')
@@ -346,6 +363,16 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
               onChange={(e) => { setPrice(e.target.value) }} />
           </div>
 
+          <div className="shop_form_item">
+            <FileUpload
+              accept=".jpg,.png,.jpeg"
+              label="Upload Images"
+              multiple
+              updateFilesCb={updateUploadedFiles}
+            />
+          </div>
+
+
           <div className="shop_form_item btn">
             <button type="submit">Add part</button>
           </div>
@@ -402,12 +429,20 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
         <label htmlFor="stock">stock: </label>
         <input type="number" name="stock" value={stock} onChange={(e) => { setStock(e.target.value) }} />
       </div> */}
+        <br />
+
+        {/* <div className="shop_form_item">
+          <FileUpload
+            accept=".jpg,.png,.jpeg"
+            label="Upload Images"
+            multiple
+            updateFilesCb={updateUploadedFiles}
+          />
+        </div> */}
 
 
 
       </form>
-      {/* <Upload /> */}
-      {/* <UploadComponent /> */}
     </div>
   )
 }
