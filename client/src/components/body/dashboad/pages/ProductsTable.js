@@ -168,7 +168,7 @@ const ProductsTable = () => {
       <table className="styled-table">
         <thead>
           <tr>
-            <th>
+            <th width={'2%'}>
               {/* <select>
                 <option>Select Action</option>
                 <option>Delete</option>
@@ -177,15 +177,15 @@ const ProductsTable = () => {
               </select> */}
               <input type="checkbox" />
             </th>
-            <th>Image</th>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Year</th>
-            <th>Part Name</th>
-            <th>Part Number</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>
+            <th width={'6%'}>Image</th>
+            <th width={'7%'}>Make</th>
+            <th width={'8%'}>Model</th>
+            <th width={'6%'}>Year</th>
+            <th width={'8%'}>Part Name</th>
+            <th width={'7%'}>Part Number</th>
+            <th width={'25%'}>Description</th>
+            <th width={'7%'}>Price</th>
+            <th width={'4%'}>
               {/* <select
                 name="adFilter"
                 value={""}
@@ -225,6 +225,7 @@ const ProductsTable = () => {
                   <button onClick={async () => {
                     const result = await CustomDialog(<CustomDialogContent
                       product={{ ...prod }}
+                      prodImgs={[...prod.multiple_image]}
                       token={token}
                       shop={shop}
                       filterTable={filterTable}
@@ -258,12 +259,13 @@ const ProductsTable = () => {
   )
 }
 
-function CustomDialogContent({ product, token, shop, filterTable, deleteProduct, adFilter, setSuccess, setErr }) {
+function CustomDialogContent({ product, prodImgs, token, shop, filterTable, deleteProduct, adFilter, setSuccess, setErr }) {
   const dialog = useDialog();
   const [partNumber, setPartNumber] = useState("")
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState("")
   const [isAvailable, setIsAvailable] = useState('')
+  const [imgs, setImgs] = useState([])
 
   const [value, setValue] = useState();
   const [data, setData] = useState({
@@ -280,6 +282,7 @@ function CustomDialogContent({ product, token, shop, filterTable, deleteProduct,
         setDescription(product.description)
         setPrice(product.price)
         setIsAvailable(product.availability)
+        // setImgs([...prodImgs])
       } catch (error) {
         console.log(error.msg)
       }
@@ -293,6 +296,27 @@ function CustomDialogContent({ product, token, shop, filterTable, deleteProduct,
   const handleChange = e => {
     const { name, value } = e.target
     setData({ ...data, [name]: value })
+  }
+
+  const deleteImg = async (url) => {
+    console.log({ id: product._id, url })
+    try {
+      const res = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}/delete_image`, { url }, {
+        headers: { Authorization: token }
+      });
+      setSuccess("Image Deleted")
+      // let updatedImages = imgs.filter(item => url !== item)
+      // setImgs([...updatedImages])
+      return setTimeout(() => {
+        setSuccess('')
+      }, 5000);
+    } catch (error) {
+      console.log(error.message)
+      setErr("Image not deleted")
+      return setTimeout(() => {
+        setErr('')
+      }, 5000);
+    }
   }
 
   const handleClick = async () => {
@@ -399,6 +423,15 @@ function CustomDialogContent({ product, token, shop, filterTable, deleteProduct,
             <option value="4">Delete</option>
           </select>
         </label>
+      </ModalContent>
+
+      <ModalContent className='edit_images_container'>
+        {prodImgs.map((i, idx) => {
+          return <div key={idx} className="edit_img_container">
+            <img className='edit_img' src={i} alt='' />
+            <button onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button>
+          </div>
+        })}
       </ModalContent>
 
       <ModalFooter>

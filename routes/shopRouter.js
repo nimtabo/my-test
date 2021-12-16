@@ -3,7 +3,7 @@ const router = require('express').Router()
 const shopCtrl = require('../controllers/shopCtrl')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
-// const upload = require('../middleware/upload')
+const upload = require('../middleware/upload')
 
 
 router.post('/create', auth, shopCtrl.createShop)
@@ -12,29 +12,6 @@ router.get('/shops/:id', auth, shopCtrl.getShop)
 router.patch('/shops/:id', auth, shopCtrl.updateShop)
 router.delete('/shops/:id', auth, shopCtrl.deleteShop)
 
-// *********
-const multer = require("multer");
-
-let storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    console.log("file", file);
-    callback(null, "./Uploads/");
-  },
-  filename: function (req, file, callback) {
-    // console.log("multer file:", file);
-    callback(null, file.originalname);
-  }
-});
-let maxSize = 1000000 * 1000;
-
-let upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: maxSize
-  }
-});
-
-// ******
 // SHOP PRODUCTS
 router.post('/shops/:shopId/products', upload.array('multiple_image', 6), auth, shopCtrl.addProduct)
 router.get('/shops/:shopId/products/available', shopCtrl.getAvailableProducts)
@@ -43,6 +20,7 @@ router.get('/shops/:shopId/products/onhold', shopCtrl.getOnHoldProducts)
 router.get('/shops/:shopId/products/archived', shopCtrl.getArchivedProducts)
 router.get('/shops/:shopId/products/:productId', auth, shopCtrl.getProduct)
 router.patch('/shops/:shopId/products/:productId', auth, shopCtrl.updateProduct)
+router.patch('/shops/:shopId/products/:productId/delete_image', upload.array('multiple_image', 6), auth, shopCtrl.deleteProductImage)
 router.patch('/shops/:shopId/products/:productId/available', auth, shopCtrl.updateProductAvailability)
 router.patch('/shops/:shopId/products/:productId/archive', auth, shopCtrl.moveProductToArchive)
 router.delete('/shops/:shopId/products/:productId', auth, shopCtrl.deleteProduct)

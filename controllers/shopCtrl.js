@@ -118,7 +118,6 @@ const shopCtrl = {
   },
   addProduct: async (req, res, next) => {
     // 
-    console.log(req.files)
     if (!req.files || _.isEmpty(req.files)) {
       return res.status(400)
         .json(vm.ApiResponse(false, 400, "No Image uploaded'"))
@@ -130,7 +129,6 @@ const shopCtrl = {
       let multiple = async (path) => await upload(path);
       for (const file of files) {
         const { path } = file;
-        console.log("path", file);
 
         const newPath = await multiple(path);
         urls.push(newPath);
@@ -140,7 +138,6 @@ const shopCtrl = {
         // *****************
         const { make, model, part, partNumber, description, price, year } = req.body;
         if (isNaN(price)) return res.status(400).json({ msg: "Price must be Number" })
-        console.log(req.body)
         // ****
         let bodyw = _.extend({ make, model, part, partNumber, description, price, year }, { multiple_image: urls });
         let newProduct = new Product(bodyw);
@@ -247,6 +244,23 @@ const shopCtrl = {
       res.json(product);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
+    }
+  },
+  deleteProductImage: async (req, res, next) => {
+    try {
+      const { shopId, productId } = req.params;
+      const { url } = req.body;
+
+      const product = await Product.find({ shop: shopId, _id: productId });
+      // console.log(product[0].multiple_image)
+
+      let updatedImages = product[0].multiple_image.filter(item => url !== item)
+
+      await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { multiple_image: updatedImages })
+      res.json({ message: "image deleted", success: "ok" })
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({ message: "Image not deleted" })
     }
   },
   updateProduct: async (req, res) => {

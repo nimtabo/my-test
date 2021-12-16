@@ -17,7 +17,7 @@ function upload(file) {
         console.log('cloudinary err:', err);
         reject(err);
       } else {
-        console.log('cloudinary res:', res);
+        // console.log('cloudinary res:', res);
         return resolve(res.url);
       }
     });

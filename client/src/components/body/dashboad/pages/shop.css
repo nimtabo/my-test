@@ -181,3 +181,37 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* EDIT IMAGE */
+/* ************* */
+.edit_images_container {
+  border: 1px solid black;
+  margin: 3px;
+  padding: 1px;
+  background-color: #d49e3f;
+}
+
+.edit_img_container {
+  position: relative;
+  text-align: center;
+  color: white;
+  display: inline-block;
+}
+
+.edit_img {
+  margin: 3px;
+  height: 70px;
+  width: 70px;
+  display: inline-block;
+}
+
+/* Centered text */
+.edit_img_centered {
+  background-color: red;
+  color: #fff;
+  padding: 2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -214,7 +214,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
       }, 3000);
     } else {
       try {
-        const data = { make, model, year, part, partNumber: Number(partNumber), description, price: Number(price), shop }
+        const data = { make, model, year, part, partNumber, description, price: Number(price), shop }
         const formData = new FormData();
         newUserInfo.profileImages.forEach(file => {
           formData.append("multiple_image", file);
