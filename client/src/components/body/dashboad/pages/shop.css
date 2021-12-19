@@ -176,11 +176,11 @@
 
 /* CUT TEXT LENGTH */
 /* **************** */
-.cut_text {
+/* .cut_text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
+} */
 
 /* EDIT IMAGE */
 /* ************* */

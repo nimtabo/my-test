@@ -118,10 +118,10 @@ const shopCtrl = {
   },
   addProduct: async (req, res, next) => {
     // 
-    if (!req.files || _.isEmpty(req.files)) {
-      return res.status(400)
-        .json(vm.ApiResponse(false, 400, "No Image uploaded'"))
-    }
+    // if (!req.files || _.isEmpty(req.files)) {
+    //   return res.status(400)
+    //     .json(vm.ApiResponse(false, 400, "No Image uploaded'"))
+    // }
     const files = req.files;
 
     try {
@@ -151,7 +151,7 @@ const shopCtrl = {
               shopId,
               { $addToSet: { products: saved._id } }
             )
-            return res.json(saved);
+            return res.json({ success: true, message: "Product added" });
           }).catch(error => {
             return res.json(error);
           })

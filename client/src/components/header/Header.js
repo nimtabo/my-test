@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 
-import logo from '../../img/fiaraalogo.svg'
+import logo from '../../img/fiaraalogo7.PNG'
 import services_arrow from '../../img/services_arrow.svg'
 
 

@@ -11,6 +11,7 @@ import './table.css'
 import { async } from 'crypto-random-string';
 import ProductTableFilterForm from './ProductTableFilterForm';
 import EditProductForm from './EditProductForm';
+import FileUpload from '../../../file-upload/file-upload';
 
 
 const ProductsTable = () => {
@@ -282,7 +283,7 @@ function CustomDialogContent({ product, prodImgs, token, shop, filterTable, dele
         setDescription(product.description)
         setPrice(product.price)
         setIsAvailable(product.availability)
-        // setImgs([...prodImgs])
+        setImgs([...prodImgs])
       } catch (error) {
         console.log(error.msg)
       }
@@ -299,6 +300,7 @@ function CustomDialogContent({ product, prodImgs, token, shop, filterTable, dele
   }
 
   const deleteImg = async (url) => {
+
     console.log({ id: product._id, url })
     try {
       const res = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}/delete_image`, { url }, {
@@ -432,6 +434,7 @@ function CustomDialogContent({ product, prodImgs, token, shop, filterTable, dele
             <button onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button>
           </div>
         })}
+        <FileUpload />
       </ModalContent>
 
       <ModalFooter>

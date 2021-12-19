@@ -69,7 +69,7 @@ const FileUpload = ({
   return (
     <>
       <FileUploadContainer>
-        <InputLabel>{label}</InputLabel>
+        {/* <InputLabel>{label}</InputLabel> */}
         <DragDropText>Drag and drop your files anywhere or</DragDropText>
         <UploadFileBtn type="button" onClick={handleUploadBtnClick}>
           <i className="fas fa-file-upload" />
