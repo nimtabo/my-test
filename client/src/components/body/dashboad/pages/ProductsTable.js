@@ -283,7 +283,7 @@ function CustomDialogContent({ product, prodImgs, token, shop, filterTable, dele
         setDescription(product.description)
         setPrice(product.price)
         setIsAvailable(product.availability)
-        setImgs([...prodImgs])
+        // setImgs([...prodImgs])
       } catch (error) {
         console.log(error.msg)
       }
@@ -428,7 +428,7 @@ function CustomDialogContent({ product, prodImgs, token, shop, filterTable, dele
       </ModalContent>
 
       <ModalContent className='edit_images_container'>
-        {prodImgs.map((i, idx) => {
+        {product.multiple_image.map((i, idx) => {
           return <div key={idx} className="edit_img_container">
             <img className='edit_img' src={i} alt='' />
             <button onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button>
