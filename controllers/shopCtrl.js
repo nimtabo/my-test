@@ -279,7 +279,7 @@ const shopCtrl = {
       // }
 
       // **********
-      const updateItems = { partNumber, description, price, availability: parseInt(availability) };
+      const updateItems = { partNumber, description, price };
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
       res.json({ message: "Product Updated successfully." });

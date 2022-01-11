@@ -199,10 +199,15 @@
 }
 
 .edit_img {
-  margin: 3px;
-  height: 70px;
-  width: 70px;
+  margin: 5px;
+  height: 100px;
+  width: 100px;
   display: inline-block;
+  border: 1px solid black;
+}
+
+.edit_img:hover {
+  opacity: 0.4;
 }
 
 /* Centered text */
@@ -215,3 +220,95 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+/* EDIT MODAL */
+/* ---------- */
+/* The Modal (background) */
+.modal {
+  /* display: none; */
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal_edit_container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.modal_fields,
+.modal_images {
+  width: 46%;
+  margin: 1rem;
+}
+
+.modal_field {
+  width: 100%;
+  padding: 5px 0;
+}
+
+.modal_field input,
+.modal_field select,
+.modal_field textarea {
+  width: 100%;
+}
+
+.modal_field textarea {
+  height: 150px;
+}
+
+.modal_edit_submit {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: flex-end;
+}
+.modal_edit_submit button {
+  padding: 15px;
+  color: #000;
+  background-color: #d49e3f;
+  border-radius: 15px;
+}
+
+.modal_images {
+  background-color: rgb(195, 195, 195);
+}
+@media only screen and (max-width: 1080px) {
+  .modal_fields,
+  .modal_images {
+    width: 92%;
+  }
+}
+/* EDIT MODAL END */
+/* ----------------- */

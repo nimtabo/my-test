@@ -12,6 +12,7 @@ import { async } from 'crypto-random-string';
 import ProductTableFilterForm from './ProductTableFilterForm';
 import EditProductForm from './EditProductForm';
 import FileUpload from '../../../file-upload/file-upload';
+import EditModal from './EditModal';
 
 
 const ProductsTable = () => {
@@ -129,7 +130,29 @@ const ProductsTable = () => {
         />
       </div>
 
-      <div id="edit_parts_container"
+      {
+        showEditPart && <div id="edit_modal_container"
+          style={showEditPart ? { display: "block" } : { display: "none", }}>
+          <EditModal
+            product={product}
+            filterTable={filterTable}
+            adFilter={adFilter}
+            // 
+            setUpdateTable={setUpdateTable}
+            updateTable={updateTable}
+            setShowEditPart={setShowEditPart}
+            showEditPart={showEditPart}
+            // ****
+            token={token}
+            shop={shop}
+            deleteProduct={deleteProduct}
+            setErr={setErr}
+            setSuccess={setSuccess}
+          />
+        </div>
+      }
+
+      {/* <div id="edit_parts_container"
         style={showEditPart ? { display: "block" } : { display: "none", }}>
         <EditProductForm
           setUpdateTable={setUpdateTable}
@@ -140,7 +163,7 @@ const ProductsTable = () => {
           filterTable={filterTable}
           adFilter={adFilter}
         />
-      </div>
+      </div> */}
 
       <div>
         {err && showErrMsg(err) || success && showSuccessMsg(success)}
@@ -223,7 +246,10 @@ const ProductsTable = () => {
                   {/* <button onClick={() => {
                     updateProduct(prod)
                   }}>Edit</button> */}
-                  <button onClick={async () => {
+                  <button onClick={() => {
+                    updateProduct(prod)
+                  }}>Edit</button>
+                  {/* <button onClick={async () => {
                     const result = await CustomDialog(<CustomDialogContent
                       product={{ ...prod }}
                       prodImgs={[...prod.multiple_image]}
@@ -240,7 +266,7 @@ const ProductsTable = () => {
                       isCanClose: false,
                       isBodyScrollLocked: false,
                     });
-                  }}>Edit</button>
+                  }}>Edit</button> */}
                   {/* <span> </span> */}
                   {/* {
                     adFilter === "archived" ? <button onClick={() => { deleteProduct(prod._id) }}>Delete</button> : ''
