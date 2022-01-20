@@ -159,15 +159,17 @@
 .table_category_title {
   margin: 0;
   padding: 0.5rem;
-  padding-left: 45%;
+  padding-left: 30%;
   /* text-align: center; */
   width: 80%;
 }
 
-.add_filter_options {
+.add_filter_options,
+.select_actions {
   display: inline-block;
   width: 150px;
   margin-right: 1rem;
+  margin-left: 1rem;
   font-size: 15px;
   text-align: center;
   border-radius: unset;

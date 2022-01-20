@@ -197,18 +197,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
               </label>
             </div>
 
-            <div className="modal_field">
-              <div>Part Number:</div>
-              <label>
 
-                <input
-                  type="text" name="partNumber"
-                  defaultValue={partNumber}
-                  onChange={handleChange}
-                // onChange={(e) => { setPartNumber(e.target.value) }}
-                />
-              </label>
-            </div>
 
           </div>
           {/* IMAGES */}

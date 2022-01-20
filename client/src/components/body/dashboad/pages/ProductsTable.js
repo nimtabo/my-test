@@ -25,6 +25,11 @@ const ProductsTable = () => {
   const [success, setSuccess] = useState('')
   const [updateTable, setUpdateTable] = useState(false)
   const [adFilter, setAdFilter] = useState("available")
+  const [checkedState, setCheckedState] = useState(
+    new Array(products.length).fill(false)
+  );
+  const [selectedIds, setSelectedIds] = useState([])
+
 
   const token = useSelector(state => state.token)
 
@@ -109,6 +114,20 @@ const ProductsTable = () => {
     // }
   }
 
+  const handleOnChange = (position) => {
+    // const updatedCheckedState = checkedState.map((item, index) =>
+    //   index === position ? setSelectedIds([...selectedIds, position]) : item
+    // );
+
+    // setCheckedState(updatedCheckedState);
+    selectedIds.includes(position) ? setSelectedIds([]) : setSelectedIds([]);
+  };
+
+  const handleAction = async (action) => {
+    console.log(action);
+    console.log(selectedIds)
+  }
+
   return (
     <div>
       <div className="table_controls">
@@ -170,6 +189,22 @@ const ProductsTable = () => {
       </div>
 
       <div className="table_category_title_container">
+        <select
+          className="select_actions"
+          name="actions"
+          value={""}
+          onChange={(e) => {
+            handleAction(e.target.value)
+          }}
+        >
+          <option>select Action</option>
+          <option value="available">Available</option>
+          <option value="onhold">On Hold</option>
+          <option value="soldout">Sold Out</option>
+          <option value="archived">Archive </option>
+          <option value="delete">delete </option>
+        </select>
+
         <div className="table_category_title">
           {adFilter ? `${adFilter === 'onhold' ? "ON-HOLD" : adFilter === 'soldout' ? "SOLD-OUT" : adFilter.toUpperCase()} PRODUCTS` : 'AVAILABLE PRODUCTS'}
         </div>
@@ -229,9 +264,17 @@ const ProductsTable = () => {
         <tbody>
 
           {
-            products.map(prod => {
+            products.map((prod, index) => {
               return (<tr key={prod._id}>
-                <td><input type="checkbox" /></td>
+                {/* ----------- */}
+                <td><input type="checkbox"
+                  id={`custom-checkbox-${index}`}
+                  name={prod._id}
+                  value={prod._id}
+                  checked={checkedState[index]}
+                  onChange={() => handleOnChange(index)}
+                /></td>
+                {/* ----------- */}
                 <td className="part_image">
                   <img src={prod.multiple_image[0]} alt='' />
                 </td>
