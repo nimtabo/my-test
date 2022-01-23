@@ -4,6 +4,7 @@ const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
 
 router.post('/register', userCtrl.register)
+router.post('/register/buyer', userCtrl.registerBuyer)
 
 router.post('/activation', userCtrl.activateEmail)
 

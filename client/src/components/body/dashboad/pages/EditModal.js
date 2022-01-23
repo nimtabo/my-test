@@ -110,7 +110,8 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
       for (let key in newProduct) {
         formData.append(`${key}`, newProduct[key])
       }
-      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, formData, {
+      console.log({ formData })
+      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, newProduct, {
         headers: { Authorization: token }
       });
       setSuccess(`Part Updated Successfully`)

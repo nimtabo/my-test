@@ -26,7 +26,7 @@ const ProductsTable = () => {
   const [updateTable, setUpdateTable] = useState(false)
   const [adFilter, setAdFilter] = useState("available")
   const [checkedState, setCheckedState] = useState(
-    new Array(products.length).fill(false)
+    new Array(!!products.length && products.length).fill(false)
   );
   const [selectedIds, setSelectedIds] = useState([])
 
@@ -115,17 +115,19 @@ const ProductsTable = () => {
   }
 
   const handleOnChange = (position) => {
-    // const updatedCheckedState = checkedState.map((item, index) =>
-    //   index === position ? setSelectedIds([...selectedIds, position]) : item
-    // );
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
 
-    // setCheckedState(updatedCheckedState);
-    selectedIds.includes(position) ? setSelectedIds([]) : setSelectedIds([]);
+    setCheckedState(updatedCheckedState);
+    console.log(checkedState)
+    console.log(products.length)
+    // selectedIds.includes(position) ? setSelectedIds([]) : setSelectedIds([]);
   };
 
   const handleAction = async (action) => {
     console.log(action);
-    console.log(selectedIds)
+    console.log(checkedState)
   }
 
   return (

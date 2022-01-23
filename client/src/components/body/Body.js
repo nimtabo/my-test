@@ -34,6 +34,7 @@ import Listing from './pages/Listing'
 import Products from './dashboad/pages/Products'
 import Users from './dashboad/pages/Users'
 import Plans from './dashboad/pages/Plans'
+import BuyerSignup from './auth/BuyerSignup'
 
 function Body() {
     const auth = useSelector(state => state.auth)
@@ -52,6 +53,7 @@ function Body() {
 
                 <Route path="/login" component={isLogged ? NotFound : Login} exact />
                 <Route path="/register" component={isLogged ? NotFound : Register} exact />
+                <Route path="/buy" component={isLogged ? NotFound : BuyerSignup} exact />
 
                 <Route path="/forgot_password" component={isLogged ? NotFound : ForgotPass} exact />
                 <Route path="/user/reset/:token" component={isLogged ? NotFound : ResetPass} exact />

@@ -47,6 +47,39 @@ const userCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    registerBuyer: async (req, res) => {
+        try {
+            const { email, password } = req.body
+
+            if (!email || !password)
+                return res.status(400).json({ msg: "Please fill in all fields." })
+
+            if (!validateEmail(email))
+                return res.status(400).json({ msg: "Invalid emails." })
+
+            const user = await Users.findOne({ email })
+            if (user) return res.status(400).json({ msg: "This email already exists." })
+
+            if (password.length < 6)
+                return res.status(400).json({ msg: "Password must be at least 6 characters." })
+
+            const passwordHash = await bcrypt.hash(password, 12)
+
+            const newUser = {
+                email, password: passwordHash
+            }
+
+            const activation_token = createActivationToken(newUser)
+
+            const url = `${CLIENT_URL}/user/activate/${activation_token}`
+            sendMail(email, url, "Verify your email address", "register")
+
+
+            res.json({ msg: "Register Success! Please activate your email to start." })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
     activateEmail: async (req, res) => {
         try {
             const { activation_token } = req.body
@@ -73,6 +106,9 @@ const userCtrl = {
 
             const savedUser = await newUser.save()
 
+            if (!store || !phone || !storeWebsite || !city || !state) {
+                return res.json({ msg: "Account has been activated!" })
+            }
             // ******* CREATE SHOP/STORE ************
             // **************************************
             const newShop = new Shop({

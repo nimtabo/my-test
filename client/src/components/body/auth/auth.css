@@ -88,22 +88,57 @@
   margin-top: 15px;
 }
 /* ---------- Facebook / Google ---------------- */
-.login_page .hr {
+.login_page .hr,
+.login_page .link {
   margin: 15px 0;
   color: crimson;
 }
+.login_page .or_h {
+  color: black;
+  text-align: center;
+}
 
-.login_page .social button {
+.social > button:nth-child(1),
+.kep-login-facebook.metro {
+  width: 100%;
+  margin: 5px 0;
+  letter-spacing: 1.3px;
+  border: 1px solid #000000 !important;
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 20px !important;
+  /* padding: 6px; */
+  background-color: #fff;
+  color: black;
+  text-transform: capitalize;
+}
+
+.social > button:nth-child(1) > div:nth-child(1) {
+  width: 20%;
+  margin-right: 0px !important;
+  border-radius: 0px !important;
+  height: 30px;
+  margin-left: 9px;
+}
+
+.social > button:nth-child(1) > span:nth-child(2) {
+  text-align: center;
+  width: 80%;
+  color: black;
+  font-size: 14px;
+  font-weight: 700 !important;
+  height: 35px;
+}
+
+.kep-login-facebook.metro {
   width: 100%;
   margin: 10px 0;
-  /* height: 30px; */
   font-size: 14px;
-  font-weight: 200;
-  /* text-transform: capitalize; */
   letter-spacing: 1.3px;
-  /* box-shadow: 0 2px 4px #777; */
   border: 1px solid #000000;
   box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
+  border-radius: 20px !important;
   padding: 6px 0px;
+  background-color: #fff;
+  color: black;
+  text-transform: capitalize;
 }

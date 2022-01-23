@@ -222,7 +222,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
         for (let key in data) {
           formData.append(`${key}`, data[key])
         }
-        // console.log({ formData })
+        console.log({ formData })
         // http://localhost:5000/api/shop/shops/6093a22d5843f1295cae7178/products
         const product = await axios.post(`/api/shop/shops/${shop}/products`, formData, {
           headers: { Authorization: token, 'content-type': 'multipart/form-data' }

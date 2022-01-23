@@ -101,7 +101,8 @@ function Login() {
                 </div>
             </form>
 
-            <div className="hr">Or Login With</div>
+            {/* <div className="hr">OR</div> */}
+            <h1 className='or_h'>OR</h1>
 
             <div className="social">
                 <GoogleLogin
@@ -120,7 +121,7 @@ function Login() {
 
             </div>
 
-            <p>New Customer? <Link to="/register">Register</Link></p>
+            <p>New Customer? Sign up as a <Link className='link' to="/buy">Buyer</Link> or <Link className='link' to="/register">Seller</Link></p>
         </div>
     )
 }
