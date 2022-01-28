@@ -25,10 +25,7 @@ const ProductsTable = () => {
   const [success, setSuccess] = useState('')
   const [updateTable, setUpdateTable] = useState(false)
   const [adFilter, setAdFilter] = useState("available")
-  const [checkedState, setCheckedState] = useState(
-    new Array(!!products.length && products.length).fill(false)
-  );
-  const [selectedIds, setSelectedIds] = useState([])
+  const [selectedItems, setSelectedItems] = useState([]);
 
 
   const token = useSelector(state => state.token)
@@ -114,20 +111,73 @@ const ProductsTable = () => {
     // }
   }
 
-  const handleOnChange = (position) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
+  const handleChecked = (id) => {
+    let selected = selectedItems
+    // let find = selected.findIndex(item => item._id === id)
+    let find = selected.indexOf(id)
 
-    setCheckedState(updatedCheckedState);
-    console.log(checkedState)
-    console.log(products.length)
-    // selectedIds.includes(position) ? setSelectedIds([]) : setSelectedIds([]);
-  };
+    if (find > -1) {
+      selected.splice(find, 1)
+    } else {
+      // We can use find to get the item based on its id
+      // selected.push(products.find(item => item._id === id))
+      selected.push(id)
+    }
+    setSelectedItems(selected)
+  }
 
-  const handleAction = async (action) => {
-    console.log(action);
-    console.log(checkedState)
+  const checkAll = (checked) => {
+    let selected = []
+    let ele = document.getElementsByName('chk');
+    if (checked) {
+      for (var i = 0; i < ele.length; i++) {
+        if (ele[i].type == 'checkbox')
+          ele[i].checked = true;
+      }
+      products.map(i => selected.push(i._id))
+      setSelectedItems([...selected])
+    } else {
+      for (var i = 0; i < ele.length; i++) {
+        if (ele[i].type == 'checkbox')
+          ele[i].checked = false;
+      }
+      setSelectedItems([])
+    }
+    return selected
+  }
+
+  const availabilityUpdate = async (id, availability) => {
+    if (parseInt(availability) === 4) {
+      return deleteProduct(id, adFilter)
+    }
+
+    try {
+      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${id}/action`, { availability }, {
+        headers: { Authorization: token }
+      });
+      setSuccess(`Part Updated Successfully`)
+      filterTable(adFilter)
+
+      handleChecked(id)
+      return setTimeout(() => {
+        setSuccess('')
+      }, 5000);
+
+    } catch (error) {
+      // console.log(error.message)
+      setErr(`Part Update Failed`)
+      return setTimeout(() => {
+        setErr('')
+      }, 3000);
+    }
+  }
+
+  const handleAction = (action) => {
+    selectedItems.map(id => {
+      return availabilityUpdate(id, action)
+    })
+    document.getElementsByName('all_chk')[0].checked = false;
+    return checkAll(false)
   }
 
   return (
@@ -197,14 +247,15 @@ const ProductsTable = () => {
           value={""}
           onChange={(e) => {
             handleAction(e.target.value)
+
           }}
         >
           <option>select Action</option>
-          <option value="available">Available</option>
-          <option value="onhold">On Hold</option>
-          <option value="soldout">Sold Out</option>
-          <option value="archived">Archive </option>
-          <option value="delete">delete </option>
+          {!(adFilter === "available") && <option value="0">Available</option>}
+          {!(adFilter === "soldout") && <option value="1">Sold Out</option>}
+          {!(adFilter === "onhold") && <option value="2">Put On-Hold</option>}
+          {!(adFilter === "archived") && <option value="3">Archive</option>}
+          <option value="4">Delete</option>
         </select>
 
         <div className="table_category_title">
@@ -236,7 +287,11 @@ const ProductsTable = () => {
                 <option>Sold out</option>
                 <option>Available</option>
               </select> */}
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onChange={(e) => { checkAll(e.target.checked) }}
+                name='all_chk'
+              />
             </th>
             <th width={'6%'}>Image</th>
             <th width={'7%'}>Make</th>
@@ -270,11 +325,9 @@ const ProductsTable = () => {
               return (<tr key={prod._id}>
                 {/* ----------- */}
                 <td><input type="checkbox"
-                  id={`custom-checkbox-${index}`}
-                  name={prod._id}
-                  value={prod._id}
-                  checked={checkedState[index]}
-                  onChange={() => handleOnChange(index)}
+                  onChange={() => handleChecked(prod._id)}
+                  selected={selectedItems.includes(prod._id)}
+                  name='chk'
                 /></td>
                 {/* ----------- */}
                 <td className="part_image">

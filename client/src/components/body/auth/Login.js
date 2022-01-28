@@ -112,12 +112,18 @@ function Login() {
                     cookiePolicy={'single_host_origin'}
                 />
 
-                <FacebookLogin
-                    appId="511837813532775"
-                    autoLoad={false}
-                    fields="name,email,picture"
-                    callback={responseFacebook}
-                />
+                <div>
+                    <div>
+                        logo
+                    </div>
+
+                    <FacebookLogin
+                        appId="511837813532775"
+                        autoLoad={false}
+                        fields="name,email,picture"
+                        callback={responseFacebook}
+                    />
+                </div>
 
             </div>
 

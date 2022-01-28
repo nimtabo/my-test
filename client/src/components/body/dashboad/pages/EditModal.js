@@ -99,9 +99,9 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
     if (data.availability === '') {
       newProduct.availability = isAvailable
     }
-    if (parseInt(newProduct.availability) === 4) {
-      return deleteProduct(product._id, adFilter)
-    }
+    // if (parseInt(newProduct.availability) === 4) {
+    //   return deleteProduct(product._id, adFilter)
+    // }
     try {
       const formData = new FormData();
       newUserInfo.profileImages.forEach(file => {
@@ -110,7 +110,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
       for (let key in newProduct) {
         formData.append(`${key}`, newProduct[key])
       }
-      console.log({ formData })
+
       const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, newProduct, {
         headers: { Authorization: token }
       });

@@ -268,31 +268,31 @@ const shopCtrl = {
       const { partNumber, description, price, availability } = req.body;
       const { shopId, productId } = req.params;
 
-      // if (parseInt(availability) === 4) {
-      //   try {
-      //     await Product.findOneAndDelete({ shop: shopId, _id: productId })
+      if (parseInt(availability) === 4) {
+        // try {
+        await Product.findOneAndDelete({ shop: shopId, _id: productId })
 
-      //     return res.json({ msg: "Product Deleted from Shop Successfully!" })
-      //   } catch (err) {
-      //     return res.status(500).json({ msg: err.message })
-      //   }
-      // }
+        return res.json({ message: "Product Deleted from Shop Successfully!" })
+        // } catch (err) {
+        //   return res.status(500).json({ msg: err.message })
+        // }
+      }
 
       // **********
-      const updateItems = { partNumber, description, price };
+      const updateItems = { partNumber, description, price, availability };
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
-      res.json({ message: "Product Updated successfully." });
+      return res.json({ message: "Product Updated successfully." });
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }
   },
   updateProductAvailability: async (req, res) => {
     try {
-      const { isAvailable } = req.body;
+      const { availability } = req.body;
       const { shopId, productId } = req.params;
 
-      const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { isAvailable: Number(isAvailable) });
+      const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { availability: Number(availability) });
 
       res.json({ message: "Product Updated successfully." });
     } catch (err) {
