@@ -32,17 +32,33 @@ function Register() {
     const handleSubmit = async e => {
         e.preventDefault()
         console.log(user)
-        if (isEmpty(store) || isEmpty(phone) || isEmpty(city) || isEmpty(state) || isEmpty(storeWebsite) || isEmpty(password))
-            return setUser({ ...user, err: "Please fill in all fields.", success: '' })
+        if (isEmpty(store) || isEmpty(phone) || isEmpty(city) || isEmpty(state) || isEmpty(storeWebsite) || isEmpty(password)) {
+            setUser({ ...user, err: "Please fill in all fields.", success: '' })
+            return setTimeout(() => {
+                setUser({ ...user, err: '', success: '' })
+            }, 5000);
+        }
 
-        if (!isEmail(email))
-            return setUser({ ...user, err: "Invalid emails.", success: '' })
+        if (!isEmail(email)) {
+            setUser({ ...user, err: "Invalid emails.", success: '' })
+            return setTimeout(() => {
+                setUser({ ...user, err: '', success: '' })
+            }, 5000);
+        }
 
-        if (isLength(password))
-            return setUser({ ...user, err: "Password must be at least 6 characters.", success: '' })
+        if (isLength(password)) {
+            setUser({ ...user, err: "Password must be at least 6 characters.", success: '' })
+            return setTimeout(() => {
+                setUser({ ...user, err: '', success: '' })
+            }, 5000);
+        }
 
-        if (!isMatch(password, cf_password))
-            return setUser({ ...user, err: "Password did not match.", success: '' })
+        if (!isMatch(password, cf_password)) {
+            setUser({ ...user, err: "Password did not match.", success: '' })
+            return setTimeout(() => {
+                setUser({ ...user, err: '', success: '' })
+            }, 5000);
+        }
 
         try {
             const res = await axios.post('/user/register', {
@@ -50,9 +66,15 @@ function Register() {
             })
 
             setUser({ ...user, err: '', success: res.data.msg })
+            return setTimeout(() => {
+                setUser({ ...user, err: '', success: '' })
+            }, 5000);
         } catch (err) {
             err.response.data.msg &&
                 setUser({ ...user, err: err.response.data.msg, success: '' })
+            return setTimeout(() => {
+                setUser({ ...user, err: '', success: '' })
+            }, 5000);
         }
     }
 

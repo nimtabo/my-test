@@ -250,7 +250,7 @@ const ProductsTable = () => {
 
           }}
         >
-          <option>select Action</option>
+          <option>Bulk Action</option>
           {!(adFilter === "available") && <option value="0">Available</option>}
           {!(adFilter === "soldout") && <option value="1">Sold Out</option>}
           {!(adFilter === "onhold") && <option value="2">Put On-Hold</option>}
