@@ -7,6 +7,7 @@ import { isEmpty, isEmail, isLength, isMatch } from '../../utils/validation/Vali
 import { dispatchLogin } from '../../../redux/actions/authAction'
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+import { TiSocialFacebook } from 'react-icons/ti';
 
 
 const initialState = {
@@ -158,6 +159,8 @@ function BuyerSignup() {
           autoLoad={false}
           fields="name,email,picture"
           callback={responseFacebook}
+          // cssClass='facebook-button'
+          icon='fa-facebook-square'
         />
 
       </div>

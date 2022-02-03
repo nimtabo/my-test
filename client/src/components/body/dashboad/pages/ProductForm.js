@@ -256,13 +256,134 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
 
 
   return (
-    <div className="product_forms_rwaper">
+    <div className="modal">
+      {/* product_forms_rwaper */}
+      <div className="modal-content">
+        <span onClick={() => { setShowAddPart(!showAddPart) }} className="close">&times;</span>
+        <p>Add new parts to sell</p>
+
+        <form className="modal_edit_container" onSubmit={onSubmit}>
+          <div className="modal_fields">
+            <div className="modal_field">
+              <label htmlFor="make">make: </label>
+              <select
+                name="make"
+                id="make"
+                className="hero-make"
+                value={make}
+                onChange={(e) => { setMake(e.target.value) }}>
+                <option>Select make</option>
+                {
+                  makes.map(make => {
+                    return <option key={make}>{make}</option>
+                  })
+                }
+              </select>
+            </div>
+
+            <div className="modal_field">
+              <label htmlFor="model">model: </label>
+              <select name="model"
+                value={model}
+                onChange={(e) => { setModel(e.target.value) }}>
+                {models.length === 0 ? <option>Select a make</option> : <option>Select model</option>}
+                {
+                  models.map(model => {
+                    return <option key={model}>{model}</option>
+                  })
+                }
+              </select>
+            </div>
+
+            <div className="modal_field">
+              <label htmlFor="year">year: </label>
+              <select name="year"
+                value={year}
+                onChange={(e) => { setYear(e.target.value) }}>
+                {years.length === 0 ? <option>Select a model</option> : <option>Select year</option>}
+                {
+                  years.map(year => {
+                    return <option key={year}>{year}</option>
+                  })
+                }
+              </select>
+            </div>
+
+            <div className="modal_field">
+              <label htmlFor="part">part: </label>
+              <select name="engine"
+                value={part}
+                onChange={(e) => { setPart(e.target.value) }}
+              >
+                {parts.length === 0 ? <option>Select year</option> : <option>Select part</option>}
+                {
+                  parts.map(part => {
+                    return <option key={part}>{part}</option>
+                  })
+                }
+              </select>
+            </div>
+
+          </div>
+
+          <div className="modal_details">
+            <div className="shop_form_item">
+              <label htmlFor="partNumber">Part Number: </label>
+              <input type="text" name="partNumber" value={partNumber} onChange={(e) => { setPartNumber(e.target.value) }} />
+            </div>
+
+            <div className="shop_form_item">
+              <label htmlFor="description">Description: </label>
+              <textarea
+                rows="4" cols="10"
+                name="description"
+                value={description}
+                onChange={(e) => { setDescription(e.target.value) }}
+              ></textarea>
+              {/* <input type="text" name="description" value={description} onChange={(e) => { setDescription(e.target.value) }} /> */}
+            </div>
+
+            <div className="shop_form_item">
+              <label htmlFor="price">price: </label>
+              {/* <input type="text" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} /> */}
+              <input type="number" name="price" min="0.00" max="10000.00" step="0.01"
+                onChange={(e) => { setPrice(e.target.value) }} />
+            </div>
+
+            {/* <div className="shop_form_item">
+              <FileUpload
+                accept=".jpg,.png,.jpeg"
+                label="Upload Images"
+                multiple
+                updateFilesCb={updateUploadedFiles}
+              />
+            </div> */}
+
+            {/* <div className="shop_form_item btn">
+              <button type="submit">Add part</button>
+            </div> */}
+          </div>
+        </form>
+
+        <div className="shop_form_item">
+          <FileUpload
+            accept=".jpg,.png,.jpeg"
+            label="Upload Images"
+            // multiple
+            updateFilesCb={updateUploadedFiles}
+          />
+        </div>
+
+        <div className="modal_edit_submit">
+          <button onClick={onSubmit}>Add part</button>
+        </div>
+      </div>
       {/* <div>
         {err ? showErrMsg(err) : <h2>Add new parts to sell</h2>}
       </div> */}
 
 
-      <div className="form_header_container">
+      {/* <div className="form_header_container">
         <div className="h1"><h2>Add new parts to sell</h2></div>
 
         <div>
@@ -270,13 +391,13 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
             onClick={() => { setShowAddPart(!showAddPart) }}
           >X Close</button>
         </div>
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         {success && showSuccessMsg(success) || err && showErrMsg(err)}
-      </div>
-      <form className="shop_form_items" onSubmit={onSubmit}>
-        <div className="shop_form_item_container">
+      </div> */}
+      {/* <form className="shop_form_items" onSubmit={onSubmit}> */}
+      {/* <div className="shop_form_item_container">
           <div className="shop_form_item">
             <label htmlFor="make">make: </label>
             <select
@@ -336,9 +457,9 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
               }
             </select>
           </div>
-        </div>
+        </div> */}
 
-        <div className="shop_form_item_container">
+      {/* <div className="shop_form_item_container">
           <div className="shop_form_item">
             <label htmlFor="partNumber">Part Number: </label>
             <input type="text" name="partNumber" value={partNumber} onChange={(e) => { setPartNumber(e.target.value) }} />
@@ -352,12 +473,10 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
               value={description}
               onChange={(e) => { setDescription(e.target.value) }}
             ></textarea>
-            {/* <input type="text" name="description" value={description} onChange={(e) => { setDescription(e.target.value) }} /> */}
           </div>
 
           <div className="shop_form_item">
             <label htmlFor="price">price: </label>
-            {/* <input type="text" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} /> */}
             <input type="number" name="price" min="0.00" max="10000.00" step="0.01"
               onChange={(e) => { setPrice(e.target.value) }} />
           </div>
@@ -375,73 +494,8 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
           <div className="shop_form_item btn">
             <button type="submit">Add part</button>
           </div>
-        </div>
-
-
-
-
-        {/* <div className="shop_form_item">
-        <label htmlFor="engine">engine: </label>
-        <select name="engine"
-          value={engine}
-          onChange={(e) => { setEngine(e.target.value) }}
-        >
-          {engines.length === 0 ? <option>Select a year</option> : <option>Select engine</option>}
-          {
-            engines.map(engine => {
-              return <option key={engine}>{engine}</option>
-            })
-          }
-        </select>
-      </div> */}
-
-        {/* <div className="shop_form_item">
-        <label htmlFor="category">category: </label>
-        <select name="category"
-          value={category}
-          onChange={(e) => { setCategory(e.target.value) }}
-        >
-          {categories.length === 0 ? <option>select engine</option> : <option>Select category</option>}
-          {
-            categories.map(category => {
-              return <option key={category}>{category}</option>
-            })
-          }
-        </select>
-      </div> */}
-
-
-
-        {/* <div className="shop_form_item">
-        <label htmlFor="grade">grade: </label>
-        <select name="grade" value={grade} onChange={(e) => { setGrade(e.target.value) }}>
-          <option value="A">Select grade</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-        </select>
-      </div> */}
-
-
-
-        {/* <div className="shop_form_item">
-        <label htmlFor="stock">stock: </label>
-        <input type="number" name="stock" value={stock} onChange={(e) => { setStock(e.target.value) }} />
-      </div> */}
-        <br />
-
-        {/* <div className="shop_form_item">
-          <FileUpload
-            accept=".jpg,.png,.jpeg"
-            label="Upload Images"
-            multiple
-            updateFilesCb={updateUploadedFiles}
-          />
         </div> */}
-
-
-
-      </form>
+      {/* </form> */}
     </div>
   )
 }

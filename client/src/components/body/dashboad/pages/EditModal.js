@@ -74,6 +74,26 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
     }
   }
 
+  const changeImage = async (url) => {
+    try {
+      const res = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}/delete_image`, { url }, {
+        headers: { Authorization: token, 'content-type': 'multipart/form-data' }
+      });
+
+      setSuccess("Image updated")
+      setUpdateTable(!updateTable)
+      return setTimeout(() => {
+        setSuccess('')
+      }, 5000);
+    } catch (error) {
+      console.log(error.message)
+      setErr("Image not changed")
+      return setTimeout(() => {
+        setErr('')
+      }, 5000);
+    }
+  }
+
   const handleReset = () => {
     Array.from(document.querySelectorAll("input")).forEach(input => (input.value = ""));
     document.querySelector("textarea").value = ""
@@ -220,10 +240,16 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
               <FileUpload
                 accept=".jpg,.png,.jpeg"
                 label="Upload Images"
-                multiple
+                // multiple
                 updateFilesCb={updateUploadedFiles}
               />
             </div>
+
+            {/* <div className="dddd">
+              <button onClick={() => {
+                changeImage()
+              }}>Update Image</button>
+            </div> */}
           </div>
         </div>
 

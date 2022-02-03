@@ -112,19 +112,13 @@ function Login() {
                     cookiePolicy={'single_host_origin'}
                 />
 
-                <div>
-                    <div>
-                        logo
-                    </div>
-
-                    <FacebookLogin
-                        appId="511837813532775"
-                        autoLoad={false}
-                        fields="name,email,picture"
-                        callback={responseFacebook}
-                    />
-                </div>
-
+                <FacebookLogin
+                    appId="511837813532775"
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    callback={responseFacebook}
+                    icon='fa-facebook-square'
+                />
             </div>
 
             <p>New Customer? Sign up as a <Link className='link' to="/buy">Buyer</Link> or <Link className='link' to="/register">Seller</Link></p>

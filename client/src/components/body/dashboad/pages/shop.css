@@ -270,7 +270,8 @@
 }
 
 .modal_fields,
-.modal_images {
+.modal_images,
+.modal_details {
   width: 46%;
   margin: 1rem;
 }

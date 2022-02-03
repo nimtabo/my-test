@@ -7,7 +7,6 @@ export const FileUploadContainer = styled.section`
   padding: 35px 20px;
   border-radius: 6px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   background-color: white;
 `;
@@ -131,6 +130,7 @@ export const UploadFileBtn = styled.button`
 
 export const FilePreviewContainer = styled.article`
   margin-bottom: 35px;
+  width: 60%;
 
   span {
     font-size: 14px;
@@ -141,6 +141,7 @@ export const PreviewList = styled.section`
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
+  
 
   @media only screen and (max-width: 400px) {
     flex-direction: column;
@@ -178,7 +179,7 @@ export const RemoveFileIcon = styled.i`
 
 export const PreviewContainer = styled.section`
   padding: 0.25rem;
-  width: 20%;
+  width: 45%;
   height: 120px;
   border-radius: 6px;
   box-sizing: border-box;

@@ -121,7 +121,7 @@
 }
 
 .social > button:nth-child(1) > span:nth-child(2) {
-  text-align: center;
+  /* text-align: center; */
   width: 80%;
   color: black;
   font-size: 14px;
@@ -141,4 +141,14 @@
   background-color: #fff;
   color: black;
   text-transform: capitalize;
+  text-align: left;
+}
+
+.kep-login-facebook.metro .fa {
+  background-color: #fff;
+  color: #395185;
+  display: inline-block;
+  font-size: 24px;
+  margin-left: 30px;
+  margin-right: calc(0.34435vw + 50px);
 }
