@@ -105,6 +105,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
 
   const handleClick = async () => {
     let newProduct = { ...data }
+    newProduct.url = product.multiple_image
 
     if (data.partNumber === '') {
       newProduct.partNumber = partNumber
@@ -131,7 +132,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
         formData.append(`${key}`, newProduct[key])
       }
 
-      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, newProduct, {
+      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, formData, {
         headers: { Authorization: token }
       });
       setSuccess(`Part Updated Successfully`)
@@ -166,6 +167,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
                   type="text" name="partNumber"
                   defaultValue={partNumber}
                   onChange={handleChange}
+                  maxLength="32"
                 // onChange={(e) => { setPartNumber(e.target.value) }}
                 />
               </label>
@@ -179,6 +181,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
                   name="description"
                   defaultValue={description}
                   onChange={handleChange}
+                  maxLength="150"
                 >
                 </textarea>
               </label>
@@ -193,6 +196,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
                   // value={price}
                   defaultValue={price}
                   onChange={handleChange}
+                  maxLength="10"
                 // onChange={(e) => { setPrice(e.target.value) }}
                 />
               </label>
@@ -225,14 +229,15 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
           <div className="modal_images">
             {imgs.length > 0 ? imgs.map((i, idx) => {
               return <div key={idx} className="edit_img_container">
-                <img onMouseOver={() => { setShowDelete(!showDelete) }} className='edit_img' src={i} alt='' />
-                <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button>
+                <img className='edit_img' src={i} alt='' />
+                {/* <img onMouseOver={() => { setShowDelete(!showDelete) }} className='edit_img' src={i} alt='' /> */}
+                {/* <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button> */}
               </div>
             }) :
               product.multiple_image && product.multiple_image.map((i, idx) => {
                 return <div key={idx} className="edit_img_container">
-                  <img onMouseOver={() => { setShowDelete(!showDelete) }} className='edit_img' src={i} alt='' />
-                  <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button>
+                  <img className='edit_img' src={i} alt='' />
+                  {/* <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button> */}
                 </div>
               })}
 

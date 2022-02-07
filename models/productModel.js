@@ -26,16 +26,19 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter price!"],
     trim: true,
+    maxLength: 10
   },
   partNumber: {
     type: String,
     // required: [true, "Please enter part number!"],
     trim: true,
+    maxLength: 32,
   },
   description: {
     type: String,
     // required: [true, "Please enter description!"],
     trim: true,
+    maxLength: 150,
   },
   // isAvailable: {
   //   type: Number,

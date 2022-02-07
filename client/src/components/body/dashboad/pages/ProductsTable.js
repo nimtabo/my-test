@@ -81,7 +81,7 @@ const ProductsTable = () => {
       setErr("Product moved to Archives")
       setTimeout(() => {
         setErr("")
-      }, 2000);
+      }, 5000);
       setUpdateTable(!updateTable)
     } catch (error) {
       setErr(error.msg)
@@ -180,11 +180,50 @@ const ProductsTable = () => {
     return checkAll(false)
   }
 
+  const filterStore = async (data) => {
+    // shops/:shopId/products/filter'
+    data.shop = shop
+
+    switch (adFilter) {
+      case "available":
+        data.availability = 0
+        break;
+      case "soldout":
+        data.availability = 1
+        break;
+      case "onhold":
+        data.availability = 2
+        break;
+      case "archived":
+        data.availability = 3
+        break;
+
+      default:
+        return setErr("Error on filter keywords")
+    }
+
+    try {
+      const res = await axios.post(`/api/shop/shops/${shop}/products/filter`, data);
+      if (res.data.length === 0) {
+        setErr("No Ad matched the search keywords")
+        return setTimeout(() => {
+          setErr('')
+        }, 5000);
+      }
+
+      products.splice(0, products.length)
+      setProducts([...res.data])
+
+    } catch (error) {
+      console.log("An Error occured getting products ADS ")
+      return setProducts([...[]])
+    }
+  }
   return (
     <div>
       <div className="table_controls">
 
-        <ProductTableFilterForm />
+        <ProductTableFilterForm filterStore={filterStore} />
 
         <div className="add_product_btn">
           <button onClick={() => { setShowAddPart(!showAddPart) }}>Add Part</button>
@@ -338,7 +377,7 @@ const ProductsTable = () => {
                 <td>{prod.year}</td>
                 <td>{prod.part}</td>
                 <td>{prod.partNumber}</td>
-                <td className="cut_text wide_section">{prod.description}</td>
+                <td className="wide_section">{prod.description.substring(0, 151)}</td>
                 <td>{`$ ${prod.price}`}</td>
                 <td>
                   {/* <button onClick={() => {

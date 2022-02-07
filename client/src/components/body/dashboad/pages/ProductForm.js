@@ -329,7 +329,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
           <div className="modal_details">
             <div className="shop_form_item">
               <label htmlFor="partNumber">Part Number: </label>
-              <input type="text" name="partNumber" value={partNumber} onChange={(e) => { setPartNumber(e.target.value) }} />
+              <input type="text" name="partNumber" value={partNumber} onChange={(e) => { setPartNumber(e.target.value) }} maxLength="32" />
             </div>
 
             <div className="shop_form_item">
@@ -339,6 +339,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
                 name="description"
                 value={description}
                 onChange={(e) => { setDescription(e.target.value) }}
+                maxLength="150"
               ></textarea>
               {/* <input type="text" name="description" value={description} onChange={(e) => { setDescription(e.target.value) }} /> */}
             </div>
@@ -346,7 +347,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
             <div className="shop_form_item">
               <label htmlFor="price">price: </label>
               {/* <input type="text" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} /> */}
-              <input type="number" name="price" min="0.00" max="10000.00" step="0.01"
+              <input type="number" name="price" min="0.00" max="10000.00" step="0.01" maxLength="10"
                 onChange={(e) => { setPrice(e.target.value) }} />
             </div>
 

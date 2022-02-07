@@ -1,44 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import axios from "axios";
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification'
 
 
-const ProductTableFilterForm = () => {
+const ProductTableFilterForm = ({ filterStore }) => {
   const [data, setData] = useState({})
   const [makes, setMakes] = useState([])
   const [make, setMake] = useState("")
-  const [shops, setShops] = useState([])
-  const [shop, setShop] = useState('')
   const [models, setModels] = useState([])
   const [model, setModel] = useState("")
   const [years, setYears] = useState([])
   const [year, setYear] = useState("")
-  const [engines, setEngines] = useState([])
-  const [engine, setEngine] = useState("")
-  const [categories, setCategories] = useState([])
-  const [category, setCategory] = useState("")
   const [parts, setParts] = useState([])
   const [part, setPart] = useState("")
-  const [partNumber, setPartNumber] = useState("")
-  const [description, setDescription] = useState('')
-  const [price, setPrice] = useState("")
   const [err, setErr] = useState("")
 
-  const token = useSelector(state => state.token)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const makes = await axios.get('/api/cars/makes');
         setMakes([...makes.data])
-        const shops = await axios.get('/api/shop/shops', {
-          headers: { Authorization: token }
-        });
-        // console.log(shops.data)
-        setShop(shops.data)
-        // setShops([...shops.data])
-        // console.log(shops.data);
       } catch (error) {
         setErr("An Error occured Loading makes")
         return setTimeout(() => {
@@ -57,19 +39,13 @@ const ProductTableFilterForm = () => {
         const models = await axios.post(`/api/cars/${make}`);
         setModels([...models.data])
         years.splice(0, years.length)
-        engines.splice(0, engines.length)
-        categories.splice(0, categories.length)
         parts.splice(0, parts.length)
         setYears([...years])
-        setEngines([...engines])
-        setCategories([...categories])
         setParts([...parts])
         // Reste choices
 
         setModel('')
         setYear('')
-        setEngine('')
-        setCategory('')
         setPart('')
       } catch (error) {
         // console.log("An Error occured Getting models")
@@ -77,6 +53,8 @@ const ProductTableFilterForm = () => {
       }
     }
     fetchData();
+    // Start Filter
+    filterStore({ make })
   }, [make]);
 
   useEffect(() => {
@@ -84,16 +62,10 @@ const ProductTableFilterForm = () => {
       try {
         const years = await axios.post(`/api/cars/${make}/${model}`);
         setYears([...years.data])
-        engines.splice(0, engines.length)
-        categories.splice(0, categories.length)
         parts.splice(0, parts.length)
-        setEngines([...engines])
-        setCategories([...categories])
         setParts([...parts])
         // Reset Choices
         setYear('')
-        setEngine('')
-        setCategory('')
         setPart('')
       } catch (error) {
         // console.log("An Error occured Getting Years")
@@ -101,6 +73,8 @@ const ProductTableFilterForm = () => {
       }
     }
     fetchData();
+    // Start Filter
+    filterStore({ make, model })
   }, [model]);
 
   useEffect(() => {
@@ -117,7 +91,13 @@ const ProductTableFilterForm = () => {
       }
     }
     fetchData();
+    // Start Filter
+    filterStore({ make, model, year })
   }, [year]);
+  useEffect(() => {
+    // Start Filter
+    filterStore({ make, model, year, part })
+  }, [part]);
 
   return (
     <div className="table_search">

@@ -8,6 +8,7 @@ const User = require('../models/userModel')
 const Shop = require('../models/shopModel')
 const Product = require('../models/productModel')
 
+
 const shopCtrl = {
   createShop: async (req, res) => {
     try {
@@ -232,6 +233,34 @@ const shopCtrl = {
       return res.status(500).json({ msg: err.message })
     }
   },
+  getFilterProducts: async (req, res) => {
+    try {
+      const { shopId } = req.params;
+      const { make, model, part, year, availability } = req.body;
+
+      let data = { shop: shopId, availability: Number(availability) }
+
+      if (!make) return res.json({ message: "No filter keywords!" })
+
+      if (make) {
+        data.make = make
+      }
+      if (model) {
+        data.model = model
+      }
+      if (year) {
+        data.year = year
+      }
+      if (part) {
+        data.part = part
+      }
+
+      const products = await Product.find(data);
+      res.json(products);
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
   getProduct: async (req, res) => {
     try {
       const { shopId, productId } = req.params;
@@ -264,8 +293,22 @@ const shopCtrl = {
     }
   },
   updateProduct: async (req, res) => {
+    const files = req.files;
+
     try {
-      const { partNumber, description, price, availability } = req.body;
+      let urls = [];
+      let multiple = async (path) => await upload(path);
+      for (const file of files) {
+        const { path } = file;
+
+        const newPath = await multiple(path);
+        urls.push(newPath);
+        fs.unlinkSync(path);
+      }
+
+      // if (urls) {
+      // try {
+      const { partNumber, description, price, availability, url } = req.body;
       const { shopId, productId } = req.params;
 
       if (parseInt(availability) === 4) {
@@ -279,10 +322,19 @@ const shopCtrl = {
       }
 
       // **********
-      const updateItems = { partNumber, description, price, availability };
+      if (urls.length > 0) {
+        let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: urls });
+        // const updateItems = { partNumber, description, price, availability };
+
+        const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
+        return res.json({ message: "Product Updated successfully." });
+      }
+      let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: url });
+      // const updateItems = { partNumber, description, price, availability };
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
       return res.json({ message: "Product Updated successfully." });
+      // }
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }

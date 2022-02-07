@@ -35,12 +35,6 @@ function About() {
 
           <div className="team-profile">
             <div className="team_image"></div>
-            <p className="team_name">Zack Tyler</p>
-            <p className="team_title">Co-Founder, SVP of Operations</p>
-          </div>
-
-          <div className="team-profile">
-            <div className="team_image"></div>
             <p className="team_name">Sambit Mohanty </p>
             <p className="team_title">Co-Founder, SVP of Website Services</p>
           </div>
