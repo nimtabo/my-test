@@ -125,7 +125,10 @@ const Form = () => {
     if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part")) {
       // const data = { make, model, year, engine, category, part }
       // console.log(data)
-      return setErr("All marked fields are required");
+      setErr("All marked fields are required");
+      return setTimeout(() => {
+        setErr('')
+      }, 5000);
     } else {
       const data = { make, model, year, part }
       // console.log(data)

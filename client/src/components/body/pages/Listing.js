@@ -231,11 +231,11 @@ const Listing = () => {
       <div className="listing_left_filter">
         <form onSubmit={onSubmit}>
           <div>
-            {err ? showErrMsg(err) : <h2>FILTER SEARCH</h2>}
+            {err && showErrMsg(err)}
           </div>
 
           <div className="listing_left_filter_form_item">
-            <label htmlFor="make">Make</label>
+            {/* <label htmlFor="make">Make</label> */}
             <select
               name="make"
               id="make"
@@ -252,7 +252,7 @@ const Listing = () => {
           </div>
 
           <div className="listing_left_filter_form_item">
-            <label htmlFor="model">Model: </label>
+            {/* <label htmlFor="model">Model: </label> */}
             <select name="model"
               value={model}
               onChange={(e) => { setModel(e.target.value) }}>
@@ -266,7 +266,7 @@ const Listing = () => {
           </div>
 
           <div className="listing_left_filter_form_item">
-            <label htmlFor="year">Year: </label>
+            {/* <label htmlFor="year">Year: </label> */}
             <select name="year"
               value={year}
               onChange={(e) => { setYear(e.target.value) }}>
@@ -310,7 +310,7 @@ const Listing = () => {
           </div> */}
 
           <div className="listing_left_filter_form_item">
-            <label htmlFor="part">Part: </label>
+            {/* <label htmlFor="part">Part: </label> */}
             <select name="engine"
               value={part}
               onChange={(e) => { setPart(e.target.value) }}
@@ -342,13 +342,13 @@ const Listing = () => {
             products.map(prod => {
               return (
                 <div className="listing_item" key={prod._id}>
-                  <div className="listing_item_image">IMAGE SECTION</div>
-                  <div>
+                  <div className="listing_item_image" alt=''><img src={prod.multiple_image[0]} /></div>
+                  <div className='left_div'>
                     <p key={prod.make}><span className="text_item">make:</span> <span>{prod.make}</span></p>
                     <p key={prod.model}> <span className="text_item">model:</span> <span>{prod.model}</span> </p>
                     <p key={prod.year}><span className="text_item">year:</span> <span>{prod.year}</span> </p>
                     <p key={prod.part}><span className="text_item">part: </span> <span>{prod.part}</span> </p>
-                    <p className="cut_text" key={prod.description}><span className="text_item">Details:</span> <span>{prod.description}</span> </p>
+                    <p className="cut_text" key={prod.description}><span className="text_item">Description:</span> <span>{prod.description}</span> </p>
                     {/* <p key={prod.engine}><span className="text_item">Engine:</span> <span>{prod.engine}</span></p> */}
                     <p key={prod.price}><span className="text_item">price:</span> <span> {prod.price}</span></p>
                     {/* <p key={prod.grade}><span className="text_item">grade:</span> <span>{prod.grade}</span> </p> */}
@@ -360,7 +360,10 @@ const Listing = () => {
                     <p key={prod.shop.email}><span className="text_item">email:</span> <span>{prod.shop.email}</span></p>
                     <p key={prod.shop.city}>
                       <span className="text_item text_item_inner">City:</span> <span>{prod.shop.city}</span>
-                      <span className="span_double">   </span>
+                      {/* <span className="span_double">   </span> */}
+                      {/* <span className="text_item text_item_inner">State:</span> <span>{prod.shop.stateProvince}</span> */}
+                    </p>
+                    <p key={prod.shop.city}>
                       <span className="text_item text_item_inner">State:</span> <span>{prod.shop.stateProvince}</span>
                     </p>
                     {/* <p key={prod.shop.stateProvince}><span className="text_item">State:</span> <span>{prod.shop.stateProvince}</span></p> */}
