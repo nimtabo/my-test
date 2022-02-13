@@ -12,7 +12,6 @@ function Header() {
 
     const { user, isLogged } = auth
 
-
     const handleLogout = async () => {
         try {
             await axios.get('/user/logout')
@@ -50,7 +49,7 @@ function Header() {
                 </Link>
                 <ul className="dropdown">
                     <li><Link to="/profile">My Profile</Link></li>
-                    <li><Link to="/shops">My Store</Link></li>
+                    {user.profile === 0 && <li><Link to="/shops">My Store</Link></li>}
                     {/* <li><Link to="/plans">My Plan</Link></li> */}
                     {/* <li><Link to="#">Settings</Link></li> */}
                     <li><Link to="/" onClick={handleLogout}>Logout</Link></li>

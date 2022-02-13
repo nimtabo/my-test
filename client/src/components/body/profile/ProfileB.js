@@ -165,68 +165,76 @@ function Profile() {
 
           {/*  */}
 
-          <div className="form-group">
-            <label htmlFor="store">My Store Name</label>
-            <input type="text" name="store" id="store" defaultValue={user.store}
-              placeholder="Your store name" onChange={handleChange} />
-          </div>
-
-          {/* ADDRESS */}
-
-
-
-          <div className="form-group">
-            <label htmlFor="storeWebsite">Store Website</label>
-            <input type="text" name="storeWebsite" id="storeWebsite" defaultValue={user.storeWebsite}
-              placeholder="Store Website" onChange={handleChange} />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
-            <input type="email" name="email" id="email" defaultValue={user.email}
-              placeholder="Your email address" disabled />
-          </div>
-
-          <div className="col-double">
-            <div className="form-group">
-              <label htmlFor="phone">Phone Number</label>
-              <input type="text" name="phone" id="phone" defaultValue={user.phone}
-                placeholder="Your Phone" onChange={handleChange} />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="phone">Fiaraa Customer ID</label>
-              <input type="text" name="phone" id="phone" defaultValue={user.code}
-                placeholder="Your Fiaraa Customer ID" onChange={handleChange} disabled />
-            </div>
-          </div>
-
-          <div className="col-double">
-            <div className="form-group">
-              <label htmlFor="city">City</label>
-              <select name="city" value={user.city} onChange={handleChange}>
-                <option value="0">Select city</option>
-                <option value="LA">LA</option>
-                <option value="NY">NY</option>
-                <option value="OH">OH</option>
-                <option value="CH">CH</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="state">State</label>
-              <select name="state" value={user.state} onChange={handleChange}>
-                <option value="0">Select state</option>
-                <option value="LA">LA</option>
-                <option value="NY">NY</option>
-                <option value="OH">OH</option>
-                <option value="CH">CH</option>
-              </select>
-            </div>
-
-          </div>
+          {
+            user.profile === 1 ? (
+              <div className="form-group">
+                <label htmlFor="email">Email Address</label>
+                <input type="email" name="email" id="email" defaultValue={user.email}
+                  placeholder="Your email address" disabled />
+              </div>
+            ) :
+              <>
+                <div className="form-group">
+                  <label htmlFor="store">My Store Name</label>
+                  <input type="text" name="store" id="store" defaultValue={user.store}
+                    placeholder="Your store name" onChange={handleChange} />
+                </div>
 
 
+
+                <div className="form-group">
+                  <label htmlFor="storeWebsite">Store Website</label>
+                  <input type="text" name="storeWebsite" id="storeWebsite" defaultValue={user.storeWebsite}
+                    placeholder="Store Website" onChange={handleChange} />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="email">Email Address</label>
+                  <input type="email" name="email" id="email" defaultValue={user.email}
+                    placeholder="Your email address" disabled />
+                </div>
+
+                <div className="col-double">
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone Number</label>
+                    <input type="text" name="phone" id="phone" defaultValue={user.phone}
+                      placeholder="Your Phone" onChange={handleChange} />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="phone">Fiaraa Customer ID</label>
+                    <input type="text" name="phone" id="phone" defaultValue={user.code}
+                      placeholder="Your Fiaraa Customer ID" onChange={handleChange} disabled />
+                  </div>
+                </div>
+
+                <div className="col-double">
+                  <div className="form-group">
+                    <label htmlFor="city">City</label>
+                    <select name="city" value={user.city} onChange={handleChange}>
+                      <option value="0">Select city</option>
+                      <option value="LA">LA</option>
+                      <option value="NY">NY</option>
+                      <option value="OH">OH</option>
+                      <option value="CH">CH</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="state">State</label>
+                    <select name="state" value={user.state} onChange={handleChange}>
+                      <option value="0">Select state</option>
+                      <option value="LA">LA</option>
+                      <option value="NY">NY</option>
+                      <option value="OH">OH</option>
+                      <option value="CH">CH</option>
+                    </select>
+                  </div>
+
+                </div>
+              </>
+
+          }
 
 
 

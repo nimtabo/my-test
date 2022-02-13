@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 import axios from "axios";
 import { showErrMsg } from '../../utils/notification/Notification'
 import './listing.css'
@@ -31,6 +32,9 @@ const Listing = () => {
 
 
   const location = useLocation();
+  const auth = useSelector(state => state.auth)
+
+  const { user, isLogged } = auth
 
   useEffect(() => {
     const fetchData = async () => {
@@ -242,7 +246,7 @@ const Listing = () => {
               className="hero-make"
               value={make}
               onChange={(e) => { setMake(e.target.value) }}>
-              <option>Select make</option>
+              <option>make</option>
               {
                 makes.map(make => {
                   return <option key={make}>{make}</option>
@@ -256,7 +260,7 @@ const Listing = () => {
             <select name="model"
               value={model}
               onChange={(e) => { setModel(e.target.value) }}>
-              {models.length === 0 ? <option>Select a make</option> : <option>Select model</option>}
+              {models.length === 0 ? <option>make</option> : <option>model</option>}
               {
                 models.map(model => {
                   return <option key={model}>{model}</option>
@@ -270,7 +274,7 @@ const Listing = () => {
             <select name="year"
               value={year}
               onChange={(e) => { setYear(e.target.value) }}>
-              {years.length === 0 ? <option>Select a model</option> : <option>Select year</option>}
+              {years.length === 0 ? <option>model</option> : <option>year</option>}
               {
                 years.map(year => {
                   return <option key={year}>{year}</option>
@@ -315,7 +319,7 @@ const Listing = () => {
               value={part}
               onChange={(e) => { setPart(e.target.value) }}
             >
-              {parts.length === 0 ? <option>Select category</option> : <option>Select part</option>}
+              {parts.length === 0 ? <option>Model</option> : <option>part</option>}
               {
                 parts.map(part => {
                   return <option key={part}>{part}</option>
@@ -335,7 +339,7 @@ const Listing = () => {
 
         {
           products.length < 1 ? (
-            <div>
+            <div className='listing_item'>
               <h2>No parts Found</h2>
             </div>
           ) : (
@@ -355,19 +359,24 @@ const Listing = () => {
                     {/* <p key={prod.stock}><span className="text_item">Available:</span> {prod.stock}</p> */}
                   </div>
                   <div>
-                    <p key={prod.shop.name}><span className="text_item">Seller name:</span> <span>{prod.shop.name}</span></p>
-                    <p key={prod.shop.phone}><span className="text_item">Phone:</span> <span>{prod.shop.phone}</span></p>
-                    <p key={prod.shop.email}><span className="text_item">email:</span> <span>{prod.shop.email}</span></p>
+                    <p key={prod.shop.name}><span className="text_item">Seller name:</span> <span>{isLogged && prod.shop.name}</span></p>
+                    <p key={prod.shop.phone}><span className="text_item">Phone:</span> <span>{isLogged && prod.shop.phone}</span></p>
+                    <p key={prod.shop.email}><span className="text_item">email:</span> <span>{isLogged && prod.shop.email}</span></p>
                     <p key={prod.shop.city}>
-                      <span className="text_item text_item_inner">City:</span> <span>{prod.shop.city}</span>
+                      <span className="text_item text_item_inner">City:</span> <span>{isLogged && prod.shop.city}</span>
                       {/* <span className="span_double">   </span> */}
                       {/* <span className="text_item text_item_inner">State:</span> <span>{prod.shop.stateProvince}</span> */}
                     </p>
                     <p key={prod.shop.city}>
-                      <span className="text_item text_item_inner">State:</span> <span>{prod.shop.stateProvince}</span>
+                      <span className="text_item text_item_inner">State:</span> <span>{isLogged && prod.shop.stateProvince}</span>
                     </p>
                     {/* <p key={prod.shop.stateProvince}><span className="text_item">State:</span> <span>{prod.shop.stateProvince}</span></p> */}
-                    <p key={prod.shop.website}><span className="text_item">Website:</span> <span><a href={`http://${prod.shop.website}`} target="_blank">{prod.shop.website}</a></span></p>
+                    <p key={prod.shop.website}><span className="text_item text_item_inner">Website:</span> <span><a href={isLogged ? `http://${prod.shop.website}` : `#`} target="_blank">{isLogged && prod.shop.website}</a></span>
+                      <span className="span_double">   </span>
+                      {
+                        isLogged && <button className='live_chat'><i class="fa-brands fa-whatsapp"></i> live chat</button>
+                      }
+                    </p>
 
                     {/* <p>Payment options: </p>
                   <ul>
@@ -385,7 +394,15 @@ const Listing = () => {
                       })
                     }
                   </ul> */}
+
+                    {
+                      !isLogged && <div className='login_to_see'>
+                        <p>To Contact Seller Please Sign in</p>
+                        <button>Sign in</button>
+                      </div>
+                    }
                   </div>
+
                 </div>
               )
             }))

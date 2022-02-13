@@ -124,24 +124,25 @@
   /* text-align: center; */
   width: 80%;
   color: black;
-  font-size: 14px;
+  font-size: 16.5px !important;
   font-weight: 700 !important;
-  height: 35px;
+  /* height: 50px; */
 }
 
 .kep-login-facebook.metro {
   width: 100%;
-  margin: 10px 0;
-  font-size: 14px;
-  letter-spacing: 1.3px;
+  /* margin: 10px 0; */
+  font-size: 15px;
+  /* letter-spacing: 1.3px; */
   border: 1px solid #000000;
-  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25); */
   border-radius: 20px !important;
-  padding: 6px 0px;
+  /* padding: 6px 0px; */
   background-color: #fff;
   color: black;
   text-transform: capitalize;
   text-align: left;
+  /* line-height: 20; */
 }
 
 .kep-login-facebook.metro .fa {
@@ -150,5 +151,10 @@
   display: inline-block;
   font-size: 24px;
   margin-left: 30px;
-  margin-right: calc(0.34435vw + 50px);
+  /* margin-right: calc(0.34435vw + 50px); */
+  width: 100px;
+}
+
+.kep-login-facebook {
+  padding: 8px !important;
 }

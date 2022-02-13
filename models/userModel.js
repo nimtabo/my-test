@@ -46,7 +46,11 @@ const userSchema = new mongoose.Schema({
     shop: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Shop"
-    }
+    },
+    profile: {
+        type: Number,
+        default: 0 // 0 = seller, 1 = buyer
+    },
 
 }, {
     timestamps: true

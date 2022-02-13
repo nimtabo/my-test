@@ -114,7 +114,7 @@ function BuyerSignup() {
 
   return (
     <div className="login_page">
-      <h2>Sign in</h2>
+      <h2>Sign Up</h2>
       {err && showErrMsg(err)}
       {success && showSuccessMsg(success)}
 
@@ -164,7 +164,7 @@ function BuyerSignup() {
         />
 
       </div>
-
+      <p>Already an account? <Link to="/login">Login</Link></p>
       {/* <p>New Customer? Sign up as a <Link className='link' to="/register">Buyer</Link> or <Link className='link' to="/register">Seller</Link></p> */}
     </div>
   )

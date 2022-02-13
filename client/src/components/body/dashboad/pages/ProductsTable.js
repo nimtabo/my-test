@@ -184,6 +184,10 @@ const ProductsTable = () => {
     // shops/:shopId/products/filter'
     data.shop = shop
 
+    if (data.make === "Select make") {
+      return filterTable(adFilter)
+    }
+
     switch (adFilter) {
       case "available":
         data.availability = 0
