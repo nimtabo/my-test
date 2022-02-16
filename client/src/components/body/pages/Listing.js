@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import axios from "axios";
 import { showErrMsg } from '../../utils/notification/Notification'
+import locked from "../../../img/locked.png"
 import './listing.css'
 
 
@@ -397,6 +398,7 @@ const Listing = () => {
 
                     {
                       !isLogged && <div className='login_to_see'>
+                        <img src={locked} alt='' />
                         <p>To Contact Seller Please Sign in</p>
                         <button>Sign in</button>
                       </div>

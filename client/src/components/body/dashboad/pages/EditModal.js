@@ -236,10 +236,11 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
             }) :
               product.multiple_image && product.multiple_image.map((i, idx) => {
                 return <div key={idx} className="edit_img_container" >
-                  <img className='edit_img' src={i} alt='' onMouseEnter={() => { setShowDelete(!showDelete) }} onMouseLeave={() => { setShowDelete(!showDelete) }} />
-                  <button className="edit_img_centered" style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)}>Delete</button>
+                  <img className='edit_img' src={i} alt='' />
+                  <button className="edit_img_side" onClick={() => deleteImg(i)}>Delete Image</button>
                   {/* <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button> */}
                 </div>
+
               })}
 
             <div>

@@ -229,9 +229,17 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const { avatar, phone, store, city, state, storeWebsite } = req.body
+            const { avatar, phone, store, city, state, storeWebsite, email, name, profile } = req.body
+
+            if (Number(profile) === 1) {
+                await Users.findOneAndUpdate({ _id: req.user.id }, {
+                    avatar, name
+                })
+                return res.json({ msg: "Update Success!" })
+            }
+
             await Users.findOneAndUpdate({ _id: req.user.id }, {
-                avatar, phone, store, city, state, storeWebsite
+                avatar, phone, store, city, state, storeWebsite,
             })
 
             // ********* UPDATE STORE ****************

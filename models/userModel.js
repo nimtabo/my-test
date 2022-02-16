@@ -51,6 +51,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0 // 0 = seller, 1 = buyer
     },
+    name: {
+        type: String,
+        // trim: true,
+    },
 
 }, {
     timestamps: true

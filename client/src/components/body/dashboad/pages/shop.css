@@ -224,6 +224,15 @@
   cursor: pointer;
 }
 
+.edit_img_side {
+  display: block;
+  background-color: red;
+  color: #fff;
+  padding: 2px;
+  cursor: pointer;
+  margin: auto;
+}
+
 /* EDIT MODAL */
 /* ---------- */
 /* The Modal (background) */

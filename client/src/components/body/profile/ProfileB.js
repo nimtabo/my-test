@@ -19,7 +19,8 @@ const initialState = {
   password: '',
   cf_password: '',
   err: '',
-  success: ''
+  success: '',
+  name: ''
 }
 
 // firstName, lastName, phone, store, street, city, zipcode, state, storeWebsite
@@ -31,7 +32,7 @@ function Profile() {
 
   const { user, isAdmin } = auth
   const [data, setData] = useState(initialState)
-  const { phone, store, city, state, storeWebsite, password, cf_password, err, success } = data
+  const { phone, store, city, state, storeWebsite, password, cf_password, err, success, name } = data
 
   const [avatar, setAvatar] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -90,13 +91,21 @@ function Profile() {
         city: city ? city : user.city,
         state: state ? state : user.state,
         storeWebsite: storeWebsite ? storeWebsite : user.storeWebsite,
+        name: name ? name : user.name,
+        profile: user.profile
       }, {
         headers: { Authorization: token }
       })
 
       setData({ ...data, err: '', success: "Updated Success!" })
+      setTimeout(() => {
+        setData({ ...data, err: '', success: '' })
+      }, 5000);
     } catch (err) {
       setData({ ...data, err: err.response.data.msg, success: '' })
+      setTimeout(() => {
+        setData({ ...data, err: '', success: '' })
+      }, 5000);
     }
   }
 
@@ -150,7 +159,7 @@ function Profile() {
       </div>
       <div className="profile_page">
         <div className="col-left">
-          <h2>{isAdmin ? "Admin Profile" : "My Profile"}</h2>
+          <h2>{isAdmin ? "Admin Profile" : `${user.profile === 0 ? user.store : user.name}`}</h2>
 
           <div className="avatar">
             <img src={avatar ? avatar : user.avatar} alt="" />
@@ -167,11 +176,27 @@ function Profile() {
 
           {
             user.profile === 1 ? (
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input type="email" name="email" id="email" defaultValue={user.email}
-                  placeholder="Your email address" disabled />
-              </div>
+              <>
+                <div className="form-group">
+                  <label htmlFor="names">Name</label>
+                  <input type="text" name="name" id="name" defaultValue={user.name}
+                    placeholder="Your name" onChange={handleChange} />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="email">Email Address</label>
+                  <input type="email" name="email" id="email" defaultValue={user.email}
+                    placeholder="Your email address" disabled />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="phone">Fiaraa Customer ID</label>
+                  <input type="text" name="phone" id="phone" defaultValue={user.code}
+                    placeholder="Your Fiaraa Customer ID" onChange={handleChange} disabled />
+                </div>
+              </>
+
+
             ) :
               <>
                 <div className="form-group">
