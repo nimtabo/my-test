@@ -308,7 +308,7 @@ const shopCtrl = {
 
       // if (urls) {
       // try {
-      const { partNumber, description, price, availability, url } = req.body;
+      const { partNumber, description, price, availability } = req.body;
       const { shopId, productId } = req.params;
 
       if (parseInt(availability) === 4) {
@@ -322,18 +322,18 @@ const shopCtrl = {
       }
 
       // **********
-      if (urls.length > 0) {
-        let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: urls });
-        // const updateItems = { partNumber, description, price, availability };
-
-        const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
-        return res.json({ message: "Product Updated successfully." });
-      }
-      let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: url });
+      // if (urls.length > 0) {
+      let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: urls });
       // const updateItems = { partNumber, description, price, availability };
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
       return res.json({ message: "Product Updated successfully." });
+      // }
+      // let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: url });
+      // const updateItems = { partNumber, description, price, availability };
+
+      // const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
+      // return res.json({ message: "Product Updated successfully." });
       // }
     } catch (err) {
       return res.status(500).json({ msg: err.message })

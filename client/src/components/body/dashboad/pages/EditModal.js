@@ -61,7 +61,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
         headers: { Authorization: token }
       });
       setImgs([newProduct.data.multiple_image])
-      console.log(imgs)
+      // console.log(imgs)
       return setTimeout(() => {
         setSuccess('')
       }, 5000);
@@ -105,7 +105,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
 
   const handleClick = async () => {
     let newProduct = { ...data }
-    newProduct.url = product.multiple_image
+    // newProduct.url = product.multiple_image
 
     if (data.partNumber === '') {
       newProduct.partNumber = partNumber
@@ -243,13 +243,16 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
 
               })}
 
-            <div>
+            <div className='edit_upload_section'>
               <FileUpload
                 accept=".jpg,.png,.jpeg"
                 label="Upload Images"
                 // multiple
                 updateFilesCb={updateUploadedFiles}
               />
+              <div className='edit_upload_sec_image'>
+                <button>Delete Image</button>
+              </div>
             </div>
 
             {/* <div className="dddd">

@@ -314,6 +314,25 @@
   border-radius: 15px;
 }
 
+.edit_upload_section {
+  display: flex;
+}
+
+.edit_upload_sec_image {
+  padding: 2rem;
+  background-color: #fff;
+  height: fit-content;
+  margin: auto;
+}
+
+.edit_upload_sec_image button {
+  padding: 1rem;
+  background-color: red;
+  color: #fff;
+  /* height: fit-content; */
+  margin: auto;
+}
+
 .modal_images {
   background-color: rgb(195, 195, 195);
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import axios from "axios";
 import { showErrMsg } from '../../utils/notification/Notification'
@@ -210,8 +210,11 @@ const Listing = () => {
 
     if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part")) {
       const data = { make, model, year, part }
-      console.log("Err", data)
-      return setErr("All marked fields are required");
+      // console.log("Err", data)
+      setErr("All marked fields are required");
+      return setTimeout(() => {
+        setErr("");
+      }, 5000);
     } else {
       // setData({ ...data })
       // console.log("Success", products)
@@ -223,7 +226,7 @@ const Listing = () => {
         // console.log("Listing", prodRes.data);
         setProducts([...prodRes.data])
       } catch (error) {
-        console.log("An Error occured getting Data")
+        // console.log("An Error occured getting Data")
         // console.log(error.message)
         return setProducts([...[]])
       }
@@ -261,7 +264,8 @@ const Listing = () => {
             <select name="model"
               value={model}
               onChange={(e) => { setModel(e.target.value) }}>
-              {models.length === 0 ? <option>make</option> : <option>model</option>}
+              <option>model</option>
+              {/* {models.length === 0 ? <option>make</option> : <option>model</option>} */}
               {
                 models.map(model => {
                   return <option key={model}>{model}</option>
@@ -275,7 +279,8 @@ const Listing = () => {
             <select name="year"
               value={year}
               onChange={(e) => { setYear(e.target.value) }}>
-              {years.length === 0 ? <option>model</option> : <option>year</option>}
+              <option>year</option>
+              {/* {years.length === 0 ? <option>model</option> : <option>year</option>} */}
               {
                 years.map(year => {
                   return <option key={year}>{year}</option>
@@ -320,7 +325,8 @@ const Listing = () => {
               value={part}
               onChange={(e) => { setPart(e.target.value) }}
             >
-              {parts.length === 0 ? <option>Model</option> : <option>part</option>}
+              <option>part</option>
+              {/* {parts.length === 0 ? <option>Model</option> : <option>part</option>} */}
               {
                 parts.map(part => {
                   return <option key={part}>{part}</option>
@@ -349,30 +355,30 @@ const Listing = () => {
                 <div className="listing_item" key={prod._id}>
                   <div className="listing_item_image" alt=''><img src={prod.multiple_image[0]} /></div>
                   <div className='left_div'>
-                    <p key={prod.make}><span className="text_item">make:</span> <span>{prod.make}</span></p>
-                    <p key={prod.model}> <span className="text_item">model:</span> <span>{prod.model}</span> </p>
-                    <p key={prod.year}><span className="text_item">year:</span> <span>{prod.year}</span> </p>
-                    <p key={prod.part}><span className="text_item">part: </span> <span>{prod.part}</span> </p>
-                    <p className="cut_text" key={prod.description}><span className="text_item">Description:</span> <span>{prod.description}</span> </p>
+                    <p ><span className="text_item">make:</span> <span>{prod.make}</span></p>
+                    <p > <span className="text_item">model:</span> <span>{prod.model}</span> </p>
+                    <p ><span className="text_item">year:</span> <span>{prod.year}</span> </p>
+                    <p ><span className="text_item">part: </span> <span>{prod.part}</span> </p>
+                    <p className="cut_text" ><span className="text_item">Description:</span> <span>{prod.description}</span> </p>
                     {/* <p key={prod.engine}><span className="text_item">Engine:</span> <span>{prod.engine}</span></p> */}
-                    <p key={prod.price}><span className="text_item">price:</span> <span> {prod.price}</span></p>
+                    <p ><span className="text_item">price:</span> <span> {prod.price}</span></p>
                     {/* <p key={prod.grade}><span className="text_item">grade:</span> <span>{prod.grade}</span> </p> */}
                     {/* <p key={prod.stock}><span className="text_item">Available:</span> {prod.stock}</p> */}
                   </div>
                   <div>
-                    <p key={prod.shop.name}><span className="text_item">Seller name:</span> <span>{isLogged && prod.shop.name}</span></p>
-                    <p key={prod.shop.phone}><span className="text_item">Phone:</span> <span>{isLogged && prod.shop.phone}</span></p>
-                    <p key={prod.shop.email}><span className="text_item">email:</span> <span>{isLogged && prod.shop.email}</span></p>
-                    <p key={prod.shop.city}>
+                    <p ><span className="text_item">Seller name:</span> <span>{isLogged && prod.shop.name}</span></p>
+                    <p ><span className="text_item">Phone:</span> <span>{isLogged && prod.shop.phone}</span></p>
+                    <p ><span className="text_item">email:</span> <span>{isLogged && prod.shop.email}</span></p>
+                    <p >
                       <span className="text_item text_item_inner">City:</span> <span>{isLogged && prod.shop.city}</span>
                       {/* <span className="span_double">   </span> */}
                       {/* <span className="text_item text_item_inner">State:</span> <span>{prod.shop.stateProvince}</span> */}
                     </p>
-                    <p key={prod.shop.city}>
+                    <p >
                       <span className="text_item text_item_inner">State:</span> <span>{isLogged && prod.shop.stateProvince}</span>
                     </p>
                     {/* <p key={prod.shop.stateProvince}><span className="text_item">State:</span> <span>{prod.shop.stateProvince}</span></p> */}
-                    <p key={prod.shop.website}><span className="text_item text_item_inner">Website:</span> <span><a href={isLogged ? `http://${prod.shop.website}` : `#`} target="_blank">{isLogged && prod.shop.website}</a></span>
+                    <p><span className="text_item text_item_inner">Website:</span> <span><a href={isLogged ? `http://${prod.shop.website}` : `#`} target="_blank">{isLogged && prod.shop.website}</a></span>
                       <span className="span_double">   </span>
                       {
                         isLogged && <button className='live_chat'><i class="fa-brands fa-whatsapp"></i> live chat</button>
@@ -400,7 +406,7 @@ const Listing = () => {
                       !isLogged && <div className='login_to_see'>
                         <img src={locked} alt='' />
                         <p>To Contact Seller Please Sign in</p>
-                        <button>Sign in</button>
+                        <button><Link to="/login">Sign in</Link></button>
                       </div>
                     }
                   </div>
