@@ -71,3 +71,5 @@ function Upload() {
 }
 
 export default Upload;
+
+// background: #3498db;

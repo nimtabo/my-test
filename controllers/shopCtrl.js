@@ -124,7 +124,6 @@ const shopCtrl = {
     //     .json(vm.ApiResponse(false, 400, "No Image uploaded'"))
     // }
     const files = req.files;
-
     try {
       let urls = [];
       let multiple = async (path) => await upload(path);

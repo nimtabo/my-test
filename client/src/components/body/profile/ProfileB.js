@@ -37,6 +37,7 @@ function Profile() {
   const [avatar, setAvatar] = useState(false)
   const [loading, setLoading] = useState(false)
   const [callback, setCallback] = useState(false)
+  const [updateProfile, setupdateProfile] = useState("")
 
   const dispatch = useDispatch()
 
@@ -58,13 +59,25 @@ function Profile() {
     try {
       const file = e.target.files[0]
 
-      if (!file) return setData({ ...data, err: "No files were uploaded.", success: '' })
+      if (!file) {
+        setData({ ...data, err: "No files were uploaded.", success: '' })
+        return setTimeout(() => {
+          setData({ ...data, err: '', success: '' })
+        }, 5000);
+      }
 
-      if (file.size > 1024 * 1024)
-        return setData({ ...data, err: "Size too large.", success: '' })
-
-      if (file.type !== 'image/jpeg' && file.type !== 'image/png')
-        return setData({ ...data, err: "File format is incorrect.", success: '' })
+      if (file.size > 1024 * 1024) {
+        setData({ ...data, err: "Size too large.", success: '' })
+        return setTimeout(() => {
+          setData({ ...data, err: '', success: '' })
+        }, 5000);
+      }
+      if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+        setData({ ...data, err: "File format is incorrect.", success: '' })
+        return setTimeout(() => {
+          setData({ ...data, err: '', success: '' })
+        }, 5000);
+      }
 
       let formData = new FormData()
       formData.append('file', file)
@@ -78,13 +91,17 @@ function Profile() {
       setAvatar(res.data.url)
 
     } catch (err) {
+      setLoading(false)
       setData({ ...data, err: err.response.data.msg, success: '' })
+      setTimeout(() => {
+        setData({ ...data, err: '', success: '' })
+      }, 5000);
     }
   }
 
-  const updateInfor = () => {
+  const updateInfor = async () => {
     try {
-      axios.patch('/user/update', {
+      let res = await axios.patch('/user/update', {
         avatar: avatar ? avatar : user.avatar,
         phone: phone ? phone : user.phone,
         store: store ? store : user.store,
@@ -97,6 +114,9 @@ function Profile() {
         headers: { Authorization: token }
       })
 
+      if (res.statusText === "OK") {
+        setupdateProfile(name)
+      }
       setData({ ...data, err: '', success: "Updated Success!" })
       setTimeout(() => {
         setData({ ...data, err: '', success: '' })
@@ -159,7 +179,7 @@ function Profile() {
       </div>
       <div className="profile_page">
         <div className="col-left">
-          <h2>{isAdmin ? "Admin Profile" : `${user.profile === 0 ? user.store : user.name}`}</h2>
+          <h2>{updateProfile ? name : isAdmin ? `Admin Profile: ${user.profile}` : `${user.profile === 0 ? user.store : user.name}`}</h2>
 
           <div className="avatar">
             <img src={avatar ? avatar : user.avatar} alt="" />

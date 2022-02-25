@@ -15,9 +15,9 @@ app.use(express.urlencoded({
 }));
 app.use(cors())
 app.use(cookieParser())
-// app.use(fileUpload({
-//     useTempFiles: true
-// }))
+app.use(fileUpload({
+    useTempFiles: true
+}))
 app.use(morgan('dev'));
 
 // Routes
