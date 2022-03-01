@@ -14,6 +14,9 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
   const [newUserInfo, setNewUserInfo] = useState({
     profileImages: []
   });
+  const [avatar, setAvatar] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [imageFile, setImageFile] = useState('')
 
   const [value, setValue] = useState();
   const [data, setData] = useState({
@@ -103,6 +106,11 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
   const updateUploadedFiles = (files) =>
     setNewUserInfo({ profileImages: [...files] });
 
+  const updateImageFile = (e) => {
+    const file = e.target.files[0]
+    setImageFile(file)
+  }
+
   const handleClick = async () => {
     let newProduct = { ...data }
     // newProduct.url = product.multiple_image
@@ -123,26 +131,49 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
     // if (parseInt(newProduct.availability) === 4) {
     //   return deleteProduct(product._id, adFilter)
     // }
+
+
     try {
-      const formData = new FormData();
-      newUserInfo.profileImages.forEach(file => {
-        formData.append("multiple_image", file);
-      });
-      for (let key in newProduct) {
-        formData.append(`${key}`, newProduct[key])
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append('file', imageFile)
+
+        // newUserInfo.profileImages.forEach(file => {
+        //   formData.append("multiple_image", file);
+        // });
+        for (let key in newProduct) {
+          formData.append(`${key}`, newProduct[key])
+        }
+
+        const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, formData, {
+          headers: { Authorization: token, 'content-type': 'multipart/form-data' }
+        });
+        setSuccess(`Part Updated Successfully`)
+        filterTable(adFilter)
+        setImageFile('')
+        // handleReset()
+        // console.log(savedProduct.data)
+        setTimeout(() => {
+          setSuccess('')
+        }, 5000);
+        return setShowEditPart(!showEditPart)
       }
 
-      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, formData, {
-        headers: { Authorization: token }
+      // ***************
+      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, newProduct, {
+        headers: { Authorization: token, 'content-type': 'multipart/form-data' }
       });
       setSuccess(`Part Updated Successfully`)
       filterTable(adFilter)
+      setImageFile('')
       // handleReset()
       // console.log(savedProduct.data)
       setTimeout(() => {
         setSuccess('')
       }, 5000);
       return setShowEditPart(!showEditPart)
+
+
     } catch (error) {
       // console.log(error.message)
       setErr(`Part Update Failed`)
@@ -244,12 +275,21 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
               })}
 
             <div className='edit_upload_section'>
-              <FileUpload
+              {/* <FileUpload
                 accept=".jpg,.png,.jpeg"
                 label="Upload Images"
                 // multiple
                 updateFilesCb={updateUploadedFiles}
-              />
+              /> */}
+
+              <div className="">
+                {/* <img src={avatar ? avatar : user.avatar} alt="" /> */}
+                <span>
+                  <i className="fas fa-camera"></i>
+                  <p>Change</p>
+                  <input type="file" name="file" id="file_up" onChange={updateImageFile} />
+                </span>
+              </div>
               <div className='edit_upload_sec_image'>
                 <button>Delete Image</button>
               </div>

@@ -35,6 +35,9 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
   const [submission, setSubmission] = useState({
 
   })
+  const [avatar, setAvatar] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [imageFile, setImageFile] = useState('')
 
   const token = useSelector(state => state.token)
 
@@ -193,6 +196,11 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
   const updateUploadedFiles = (files) =>
     setNewUserInfo({ profileImages: [...files] });
 
+  const updateImageFile = (e) => {
+    const file = e.target.files[0]
+    setImageFile(file)
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault()
 
@@ -202,6 +210,26 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
       return setTimeout(() => {
         setErr('')
       }, 3000);
+    }
+
+    if (!imageFile) {
+      setErr('No files were uploaded.')
+      return setTimeout(() => {
+        setErr('')
+      }, 5000);
+    }
+
+    if (imageFile.size > 1024 * 1024) {
+      setErr("Size too large.")
+      return setTimeout(() => {
+        setErr('')
+      }, 5000);
+    }
+    if (imageFile.type !== 'image/jpeg' && imageFile.type !== 'image/png') {
+      setErr("File format is incorrect.")
+      return setTimeout(() => {
+        setErr('')
+      }, 5000);
     }
 
     if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (price === "")) {
@@ -216,9 +244,11 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
       try {
         const data = { make, model, year, part, partNumber, description, price: Number(price), shop }
         const formData = new FormData();
-        newUserInfo.profileImages.forEach(file => {
-          formData.append("multiple_image", file);
-        });
+        formData.append('file', imageFile)
+        // newUserInfo.profileImages.forEach(file => {
+        //   formData.append("multiple_image", file);
+        // });
+
         for (let key in data) {
           formData.append(`${key}`, data[key])
         }
@@ -234,6 +264,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
         setPartNumber('')
         setDescription('')
         setPrice('')
+        setImageFile('')
         filterTable(adFilter)
         setErr('')
         handleReset()
@@ -366,13 +397,22 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
           </div>
         </form>
 
-        <div className="shop_form_item">
+        {/* <div className="shop_form_item">
           <FileUpload
             accept=".jpg,.png,.jpeg"
             label="Upload Images"
             // multiple
             updateFilesCb={updateUploadedFiles}
           />
+        </div> */}
+
+        <div className="shop_form_item">
+          {/* <img src={avatar ? avatar : user.avatar} alt="" /> */}
+          <span>
+            <i className="fas fa-camera"></i>
+            <p>Change</p>
+            <input type="file" name="file" id="file_up" onChange={updateImageFile} />
+          </span>
         </div>
 
         <div className="modal_edit_submit">

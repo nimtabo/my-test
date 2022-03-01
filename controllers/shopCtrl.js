@@ -7,6 +7,7 @@ const upload = require("../middleware/helper").upload;
 const User = require('../models/userModel')
 const Shop = require('../models/shopModel')
 const Product = require('../models/productModel')
+const imageUpload = require('../helpers/imageUpload')
 
 
 const shopCtrl = {
@@ -123,24 +124,27 @@ const shopCtrl = {
     //   return res.status(400)
     //     .json(vm.ApiResponse(false, 400, "No Image uploaded'"))
     // }
-    const files = req.files;
+    // const files = req.files;
     try {
-      let urls = [];
-      let multiple = async (path) => await upload(path);
-      for (const file of files) {
-        const { path } = file;
+      // let urls = [];
+      // let multiple = async (path) => await upload(path);
+      // for (const file of files) {
+      //   const { path } = file;
 
-        const newPath = await multiple(path);
-        urls.push(newPath);
-        fs.unlinkSync(path);
-      }
-      if (urls) {
+      //   const newPath = await multiple(path);
+      //   urls.push(newPath);
+      //   fs.unlinkSync(path);
+      // }
+
+      const url = await imageUpload.uploadAvatar(req.files.file)
+      if (url) {
         // *****************
         const { make, model, part, partNumber, description, price, year } = req.body;
         if (isNaN(price)) return res.status(400).json({ msg: "Price must be Number" })
         // ****
-        let bodyw = _.extend({ make, model, part, partNumber, description, price, year }, { multiple_image: urls });
-        let newProduct = new Product(bodyw);
+        // let bodyw = _.extend({ make, model, part, partNumber, description, price, year }, { multiple_image: urls });
+
+        let newProduct = new Product({ make, model, part, partNumber, description, price, year, multiple_image: [url] });
 
         const { shopId } = req.params;
         newProduct.shop = shopId;
@@ -157,14 +161,16 @@ const shopCtrl = {
           })
 
       }
-      if (!urls) {
-        return res.status(400)
-          .json(vm.ApiResponse(false, 400, ""))
+      if (!url) {
+        // return res.status(400)
+        //   .json(vm.ApiResponse(false, 400, ""))
+        return res.json({ success: false, message: "Image URL Error", url });
       }
 
     } catch (e) {
       console.log("err :", e);
       return next(e);
+      // return res.json({ success: false, message: "Image URL Error", error: e });
     }
     // 
     // try {
@@ -291,22 +297,24 @@ const shopCtrl = {
       return res.status(500).json({ message: "Image not deleted" })
     }
   },
-  updateProduct: async (req, res) => {
+  updateProductWithImage: async (req, res) => {
     const files = req.files;
 
     try {
-      let urls = [];
-      let multiple = async (path) => await upload(path);
-      for (const file of files) {
-        const { path } = file;
+      // let urls = [];
+      // let multiple = async (path) => await upload(path);
+      // for (const file of files) {
+      //   const { path } = file;
 
-        const newPath = await multiple(path);
-        urls.push(newPath);
-        fs.unlinkSync(path);
-      }
+      //   const newPath = await multiple(path);
+      //   urls.push(newPath);
+      //   fs.unlinkSync(path);
+      // }
 
       // if (urls) {
       // try {
+      const url = await imageUpload.uploadAvatar(req.files.file)
+
       const { partNumber, description, price, availability } = req.body;
       const { shopId, productId } = req.params;
 
@@ -321,19 +329,51 @@ const shopCtrl = {
       }
 
       // **********
-      // if (urls.length > 0) {
-      let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: urls });
-      // const updateItems = { partNumber, description, price, availability };
+      if (url) {
+        // if (urls.length > 0) {
+        // let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: urls });
+        let updateItems = { partNumber, description, price, availability, multiple_image: [url] };
+
+        // const updateItems = { partNumber, description, price, availability };
+
+        const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
+        return res.json({ message: "Product Updated successfully." });
+        // }
+        // let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: url });
+        // const updateItems = { partNumber, description, price, availability };
+
+        // const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
+        // return res.json({ message: "Product Updated successfully." });
+        // }
+      }
+      let updateItems = { partNumber, description, price, availability };
 
       const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
       return res.json({ message: "Product Updated successfully." });
-      // }
-      // let updateItems = _.extend({ partNumber, description, price, availability }, { multiple_image: url });
-      // const updateItems = { partNumber, description, price, availability };
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
+  updateProduct: async (req, res) => {
+    const files = req.files;
 
-      // const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
-      // return res.json({ message: "Product Updated successfully." });
-      // }
+    try {
+      const url = await imageUpload.uploadAvatar(req.files.file)
+
+      const { partNumber, description, price, availability } = req.body;
+      const { shopId, productId } = req.params;
+
+      if (parseInt(availability) === 4) {
+        await Product.findOneAndDelete({ shop: shopId, _id: productId })
+
+        return res.json({ message: "Product Deleted from Shop Successfully!" })
+      }
+
+      // **********
+      let updateItems = { partNumber, description, price, availability };
+
+      const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, updateItems);
+      return res.json({ message: "Product Updated successfully." });
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }

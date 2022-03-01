@@ -374,7 +374,7 @@ const ProductsTable = () => {
                 /></td>
                 {/* ----------- */}
                 <td className="part_image">
-                  <img src={prod.multiple_image[0]} alt='' />
+                  <img src={prod.multiple_image[0]} alt='' width={60} height={60} />
                 </td>
                 <td>{prod.make}</td>
                 <td>{prod.model}</td>
