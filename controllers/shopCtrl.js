@@ -355,11 +355,8 @@ const shopCtrl = {
     }
   },
   updateProduct: async (req, res) => {
-    const files = req.files;
 
     try {
-      const url = await imageUpload.uploadAvatar(req.files.file)
-
       const { partNumber, description, price, availability } = req.body;
       const { shopId, productId } = req.params;
 

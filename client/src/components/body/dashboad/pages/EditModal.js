@@ -132,9 +132,31 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
     //   return deleteProduct(product._id, adFilter)
     // }
 
+    if (!imageFile) {
+      try {
+        const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, newProduct, {
+          headers: { Authorization: token }
+        });
+        setSuccess(`Part Updated Successfully`)
+        filterTable(adFilter)
+        setImageFile('')
+        // handleReset()
+        // console.log(savedProduct.data)
+        setTimeout(() => {
+          setSuccess('')
+        }, 5000);
+        return setShowEditPart(!showEditPart)
+      } catch (error) {
+        setErr(`Part Update Failed`)
+        return setTimeout(() => {
+          setErr('')
+        }, 3000);
+      }
 
-    try {
-      if (imageFile) {
+    } else {
+      try {
+
+        // ***************
         const formData = new FormData();
         formData.append('file', imageFile)
 
@@ -145,7 +167,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
           formData.append(`${key}`, newProduct[key])
         }
 
-        const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, formData, {
+        const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}/image`, formData, {
           headers: { Authorization: token, 'content-type': 'multipart/form-data' }
         });
         setSuccess(`Part Updated Successfully`)
@@ -157,30 +179,17 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
           setSuccess('')
         }, 5000);
         return setShowEditPart(!showEditPart)
+
+
+      } catch (error) {
+        // console.log(error.message)
+        setErr(`Part Update Failed`)
+        return setTimeout(() => {
+          setErr('')
+        }, 3000);
       }
-
-      // ***************
-      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${product._id}`, newProduct, {
-        headers: { Authorization: token, 'content-type': 'multipart/form-data' }
-      });
-      setSuccess(`Part Updated Successfully`)
-      filterTable(adFilter)
-      setImageFile('')
-      // handleReset()
-      // console.log(savedProduct.data)
-      setTimeout(() => {
-        setSuccess('')
-      }, 5000);
-      return setShowEditPart(!showEditPart)
-
-
-    } catch (error) {
-      // console.log(error.message)
-      setErr(`Part Update Failed`)
-      return setTimeout(() => {
-        setErr('')
-      }, 3000);
     }
+
   }
 
   return (
