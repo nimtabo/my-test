@@ -17,6 +17,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
   const [avatar, setAvatar] = useState(false)
   const [loading, setLoading] = useState(false)
   const [imageFile, setImageFile] = useState('')
+  const [previewImage, setPreviewImage] = useState('')
 
   const [value, setValue] = useState();
   const [data, setData] = useState({
@@ -109,6 +110,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
   const updateImageFile = (e) => {
     const file = e.target.files[0]
     setImageFile(file)
+    setPreviewImage(URL.createObjectURL(e.target.files[0]))
   }
 
   const handleClick = async () => {
@@ -293,12 +295,16 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
 
               <div className="">
                 {/* <img src={avatar ? avatar : user.avatar} alt="" /> */}
-                <span>
-                  <i className="fas fa-camera"></i>
-                  <p>Change</p>
-                  <input type="file" name="file" id="file_up" onChange={updateImageFile} />
-                </span>
+
+                <p>Change</p>
+                <input type="file" name="file" id="file_up" onChange={updateImageFile} />
+
+                <div className='image_preview'>
+                  <img src={previewImage} alt='' />
+                </div>
               </div>
+
+
               <div className='edit_upload_sec_image'>
                 <button>Delete Image</button>
               </div>

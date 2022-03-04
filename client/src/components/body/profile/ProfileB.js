@@ -317,7 +317,7 @@ function Profile() {
             <button disabled={loading} onClick={updatePassword}>Reset Password</button>
           </div> */}
 
-          <div>
+          <div className='password_reset'>
             <button
               onClick={async () => {
                 const result = await CustomDialog(<CustomDialogContent

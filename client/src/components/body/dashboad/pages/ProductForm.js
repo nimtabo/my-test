@@ -38,6 +38,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
   const [avatar, setAvatar] = useState(false)
   const [loading, setLoading] = useState(false)
   const [imageFile, setImageFile] = useState('')
+  const [previewImage, setPreviewImage] = useState('')
 
   const token = useSelector(state => state.token)
 
@@ -199,6 +200,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
   const updateImageFile = (e) => {
     const file = e.target.files[0]
     setImageFile(file)
+    setPreviewImage(URL.createObjectURL(e.target.files[0]))
   }
 
   const onSubmit = async (e) => {
@@ -268,6 +270,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
         filterTable(adFilter)
         setErr('')
         handleReset()
+        setPreviewImage('')
         setSuccess("Part added successfully")
         return setTimeout(() => {
           setSuccess('')
@@ -406,13 +409,18 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
           />
         </div> */}
 
-        <div className="shop_form_item">
-          {/* <img src={avatar ? avatar : user.avatar} alt="" /> */}
-          <span>
-            <i className="fas fa-camera"></i>
-            <p>Change</p>
-            <input type="file" name="file" id="file_up" onChange={updateImageFile} />
-          </span>
+        <div className="shop_form_upload_image">
+          <div>
+            <label htmlFor="file-upload" className="custom-file-upload">
+              Upload Image
+            </label>
+            <input id="file-upload" type="file" name="file" onChange={updateImageFile} />
+          </div>
+
+          <div className='image_preview'>
+            <img src={previewImage} alt='' />
+          </div>
+
         </div>
 
         <div className="modal_edit_submit">
@@ -537,7 +545,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
           </div>
         </div> */}
       {/* </form> */}
-    </div>
+    </div >
   )
 }
 
