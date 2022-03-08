@@ -293,10 +293,10 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
                 updateFilesCb={updateUploadedFiles}
               /> */}
 
-              <div className="">
+              <div className="edit_upload_file">
                 {/* <img src={avatar ? avatar : user.avatar} alt="" /> */}
 
-                <p>Change</p>
+                <label htmlFor='file_up' className='custom-file-upload'>Change (Up to 5MB)</label>
                 <input type="file" name="file" id="file_up" onChange={updateImageFile} />
 
                 <div className='image_preview'>

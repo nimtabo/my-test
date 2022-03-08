@@ -412,7 +412,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
         <div className="shop_form_upload_image">
           <div>
             <label htmlFor="file-upload" className="custom-file-upload">
-              Upload Image
+              Upload Image (Up to 5MB)
             </label>
             <input id="file-upload" type="file" name="file" onChange={updateImageFile} />
           </div>

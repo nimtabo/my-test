@@ -302,7 +302,7 @@ const ProductsTable = () => {
         </select>
 
         <div className="table_category_title">
-          {adFilter ? `${adFilter === 'onhold' ? "ON-HOLD" : adFilter === 'soldout' ? "SOLD-OUT" : adFilter.toUpperCase()} PRODUCTS` : 'AVAILABLE PRODUCTS'}
+          {adFilter ? `${adFilter === `onhold (${products.length})` ? `ON-HOLD (${products.length})` : adFilter === `soldout (${products.length})` ? `SOLD-OUT (${products.length})` : adFilter.toUpperCase()} PRODUCTS (${products.length})` : `AVAILABLE PRODUCTS (${products.length})`}
         </div>
 
         <select

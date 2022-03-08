@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const cryptoRandomString = require('crypto-random-string')
 const jwt = require('jsonwebtoken')
 const sendMail = require('./sendMail')
+const validators = require('../helpers/validators')
 
 const { google } = require('googleapis')
 const { OAuth2 } = google.auth
@@ -236,6 +237,10 @@ const userCtrl = {
                     avatar, name
                 })
                 return res.json({ msg: "Update Success!" })
+            }
+
+            if (!validators.validatePhone(phone)) {
+                return res.status(401).json({ msg: "Invalid Phone Number" })
             }
 
             await Users.findOneAndUpdate({ _id: req.user.id }, {

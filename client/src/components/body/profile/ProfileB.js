@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { isLength, isMatch } from '../../utils/validation/Validation'
+import { isLength, isMatch, validatePhone } from '../../utils/validation/Validation'
 import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
 import { fetchAllUsers, dispatchGetAllUsers } from '../../../redux/actions/usersAction'
 
@@ -39,9 +39,11 @@ function Profile() {
   const [callback, setCallback] = useState(false)
   const [updateProfile, setupdateProfile] = useState("")
 
+
   const dispatch = useDispatch()
 
   useEffect(() => {
+    setData({ ...data, storeWebsite: user.storeWebsite })
     if (isAdmin) {
       fetchAllUsers(token).then(res => {
         dispatch(dispatchGetAllUsers(res))
@@ -100,6 +102,14 @@ function Profile() {
   }
 
   const updateInfor = async () => {
+    if (phone) {
+      if (!validatePhone(phone)) {
+        setData({ ...data, err: 'Enter valid Phone Number', success: "" })
+        return setTimeout(() => {
+          setData({ ...data, err: '', success: '' })
+        }, 5000);
+      }
+    }
     try {
       let res = await axios.patch('/user/update', {
         avatar: avatar ? avatar : user.avatar,
@@ -229,7 +239,7 @@ function Profile() {
 
                 <div className="form-group">
                   <label htmlFor="storeWebsite">Store Website</label>
-                  <input type="text" name="storeWebsite" id="storeWebsite" defaultValue={user.storeWebsite}
+                  <input type="text" name="storeWebsite" id="storeWebsite" defaultValue={storeWebsite}
                     placeholder="Store Website" onChange={handleChange} />
                 </div>
 
@@ -242,8 +252,9 @@ function Profile() {
                 <div className="col-double">
                   <div className="form-group">
                     <label htmlFor="phone">Phone Number</label>
-                    <input type="text" name="phone" id="phone" defaultValue={user.phone}
-                      placeholder="Your Phone" onChange={handleChange} />
+                    <input type="tel" name="phone" id="phone" defaultValue={user.phone}
+                      minLength="10" maxLength="10"
+                      placeholder="1234567890" onChange={handleChange} />
                   </div>
 
                   <div className="form-group">
@@ -286,7 +297,7 @@ function Profile() {
           <div className="col-double">
             {/* <button disabled={loading} onClick={updateInfor}>Edit</button> */}
             <div></div>
-            <button disabled={loading} onClick={updateInfor}>Update</button>
+            <button type='submit' disabled={loading} onClick={updateInfor}>Update</button>
           </div>
 
           {/*  */}
