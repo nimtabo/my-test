@@ -4,6 +4,7 @@ import axios from "axios";
 import { ModalContent, ModalFooter, ModalButton, useDialog, CustomDialog, Prompt, Alert } from 'react-st-modal';
 
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification';
+import Loading from '../../../utils/Loading/Loading'
 
 import ProductForm from './ProductForm'
 
@@ -26,6 +27,7 @@ const ProductsTable = () => {
   const [updateTable, setUpdateTable] = useState(false)
   const [adFilter, setAdFilter] = useState("available")
   const [selectedItems, setSelectedItems] = useState([]);
+  const [loading, setLoading] = useState(false);
 
 
   const token = useSelector(state => state.token)
@@ -95,6 +97,8 @@ const ProductsTable = () => {
 
   const filterTable = async (filter) => {
     setAdFilter(filter)
+    document.getElementsByName('all_chk')[0].checked = false;
+    setSelectedItems([])
     // if (adFilter === filter) {
     // console.log(filter)
     products.splice(0, products.length)
@@ -152,10 +156,12 @@ const ProductsTable = () => {
     }
 
     try {
+      setLoading(true)
       const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${id}/action`, { availability }, {
         headers: { Authorization: token }
       });
-      setSuccess(`Part Updated Successfully`)
+      setSuccess(`Bulk Update Success`)
+      setLoading(false)
       filterTable(adFilter)
 
       handleChecked(id)
@@ -165,7 +171,7 @@ const ProductsTable = () => {
 
     } catch (error) {
       // console.log(error.message)
-      setErr(`Part Update Failed`)
+      setErr(`Bulk Update Failed`)
       return setTimeout(() => {
         setErr('')
       }, 3000);
@@ -173,6 +179,13 @@ const ProductsTable = () => {
   }
 
   const handleAction = (action) => {
+    if (selectedItems.length === 0) {
+      setErr("No Item Selected!!")
+      return setTimeout(() => {
+        setErr("")
+      }, 5000);
+    }
+
     selectedItems.map(id => {
       return availabilityUpdate(id, action)
     })
@@ -203,7 +216,10 @@ const ProductsTable = () => {
         break;
 
       default:
-        return setErr("Error on filter keywords")
+        setErr("Error on filter keywords")
+        return setTimeout(() => {
+          setErr("")
+        }, 5000);
     }
 
     try {
@@ -282,6 +298,9 @@ const ProductsTable = () => {
       <div>
         {err && showErrMsg(err) || success && showSuccessMsg(success)}
       </div>
+      {
+        loading && <Loading type='spokes' color='#d49e3f' />
+      }
 
       <div className="table_category_title_container">
         <select
@@ -381,7 +400,7 @@ const ProductsTable = () => {
                 <td>{prod.year}</td>
                 <td>{prod.part}</td>
                 <td>{prod.partNumber}</td>
-                <td className="wide_section">{prod.description.substring(0, 151)}</td>
+                <td className="wide_section">{prod.description.substring(0, 255)}</td>
                 <td>{`$ ${prod.price}`}</td>
                 <td>
                   {/* <button onClick={() => {

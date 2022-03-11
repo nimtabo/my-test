@@ -349,9 +349,9 @@
 
 .edit_upload_section {
   /* display: flex; */
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   background-color: #fff;
-  margin: 0.5rem;
+  margin: 0 0.5rem;
   display: flex;
 }
 
@@ -361,25 +361,41 @@
   display: inline-block;
   /* padding: 6px 12px; */
   cursor: pointer;
+  width: 100%;
 }
 
 .edit_upload_sec_image,
 .edit_upload_file {
-  padding: 1rem;
+  padding: 0.5rem;
   height: fit-content;
-  margin: auto;
+  /* margin: auto; */
+  /* border: 1px solid black; */
+  width: 50%;
 }
 
 .edit_upload_sec_image button {
-  padding: 1rem;
+  padding: 0.7rem;
   background-color: red;
   color: #fff;
   margin: auto;
+  width: 100%;
 }
 
 .modal_images {
-  background-color: rgb(195, 195, 195);
+  /* background-color: rgb(195, 195, 195); */
 }
+
+.modal_images .edit_img_container {
+  background-color: #fff;
+  width: 96%;
+  margin: 0.5rem;
+}
+
+.modal_images .edit_img_container img {
+  width: 98%;
+  height: 250px;
+}
+
 @media only screen and (max-width: 1080px) {
   .modal_fields,
   .modal_images {

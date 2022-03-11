@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { isLength, isMatch, validatePhone } from '../../utils/validation/Validation'
+import { isLength, isMatch, validatePhone, formatPhoneNumber } from '../../utils/validation/Validation'
 import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
 import { fetchAllUsers, dispatchGetAllUsers } from '../../../redux/actions/usersAction'
 
@@ -43,7 +43,7 @@ function Profile() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setData({ ...data, storeWebsite: user.storeWebsite })
+    setData({ ...data, storeWebsite: user.storeWebsite, phone: user.phone })
     if (isAdmin) {
       fetchAllUsers(token).then(res => {
         dispatch(dispatchGetAllUsers(res))
@@ -53,6 +53,10 @@ function Profile() {
 
   const handleChange = e => {
     const { name, value } = e.target
+    if (name === "phone") {
+      const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+      return setData({ ...data, [name]: formattedPhoneNumber, err: '', success: '' })
+    }
     setData({ ...data, [name]: value, err: '', success: '' })
   }
 
@@ -239,7 +243,7 @@ function Profile() {
 
                 <div className="form-group">
                   <label htmlFor="storeWebsite">Store Website</label>
-                  <input type="text" name="storeWebsite" id="storeWebsite" defaultValue={storeWebsite}
+                  <input type="text" name="storeWebsite" id="storeWebsite" defaultValue={storeWebsite || user.storeWebsite}
                     placeholder="Store Website" onChange={handleChange} />
                 </div>
 
@@ -252,9 +256,9 @@ function Profile() {
                 <div className="col-double">
                   <div className="form-group">
                     <label htmlFor="phone">Phone Number</label>
-                    <input type="tel" name="phone" id="phone" defaultValue={user.phone}
-                      minLength="10" maxLength="10"
-                      placeholder="1234567890" onChange={handleChange} />
+                    <input type="tel" name="phone" id="phone"
+                      value={phone || ''}
+                      placeholder="(004) 411-1425" onChange={handleChange} />
                   </div>
 
                   <div className="form-group">

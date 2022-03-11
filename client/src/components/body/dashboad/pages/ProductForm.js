@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification'
+import Loading from '../../../utils/Loading/Loading'
 import FileUpload from "../../../file-upload/file-upload";
 import axios from "axios";
 
@@ -39,6 +40,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
   const [loading, setLoading] = useState(false)
   const [imageFile, setImageFile] = useState('')
   const [previewImage, setPreviewImage] = useState('')
+  const [disable, setDisable] = useState(false);
 
   const token = useSelector(state => state.token)
 
@@ -206,7 +208,10 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
   const onSubmit = async (e) => {
     e.preventDefault()
 
+    setDisable(true)
+
     if (isNaN(price)) {
+      setDisable(false)
       setSuccess('')
       setErr("Part Price Values be Number")
       return setTimeout(() => {
@@ -215,6 +220,8 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
     }
 
     if (!imageFile) {
+      setDisable(false)
+      setSuccess('')
       setErr('No files were uploaded.')
       return setTimeout(() => {
         setErr('')
@@ -222,12 +229,16 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
     }
 
     if (imageFile.size > 1024 * 1024) {
+      setDisable(false)
+      setSuccess('')
       setErr("Size too large.")
       return setTimeout(() => {
         setErr('')
       }, 5000);
     }
     if (imageFile.type !== 'image/jpeg' && imageFile.type !== 'image/png') {
+      setDisable(false)
+      setSuccess('')
       setErr("File format is incorrect.")
       return setTimeout(() => {
         setErr('')
@@ -237,6 +248,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
     if ((make === "" || make === "Select make") || (model === "" || model === "Select a make" || model === "Select model") || (year === "" || year === "Select a model" || year === "Select year") || (part === "" || part === "Select category" || part === "Select part") || (price === "")) {
       // const data = { make, model, year, part, partNumber, description, price }
       // console.log("Err", data)
+      setDisable(false)
       setSuccess('')
       setErr("All marked fields are required (make, model, year part and price).");
       return setTimeout(() => {
@@ -254,6 +266,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
         for (let key in data) {
           formData.append(`${key}`, data[key])
         }
+        setLoading(true)
         // http://localhost:5000/api/shop/shops/6093a22d5843f1295cae7178/products
         const product = await axios.post(`/api/shop/shops/${shop}/products`, formData, {
           headers: { Authorization: token, 'content-type': 'multipart/form-data' }
@@ -272,15 +285,18 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
         handleReset()
         setPreviewImage('')
         setSuccess("Part added successfully")
+        setDisable(false)
+        setLoading(false)
         return setTimeout(() => {
           setSuccess('')
-        }, 3000);
+        }, 5000);
       } catch (error) {
+        setDisable(false)
         setSuccess('')
         setErr(error.message)
         return setTimeout(() => {
           setErr('')
-        }, 3000);
+        }, 5000);
       }
 
 
@@ -295,6 +311,10 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
       <div className="modal-content">
         <span onClick={() => { setShowAddPart(!showAddPart) }} className="close">&times;</span>
         <p>Add new parts to sell</p>
+        {err && showErrMsg(err) || success && showSuccessMsg(success)}
+        {
+          loading && <Loading type='spokes' color='#d49e3f' />
+        }
 
         <form className="modal_edit_container" onSubmit={onSubmit}>
           <div className="modal_fields">
@@ -424,7 +444,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
         </div>
 
         <div className="modal_edit_submit">
-          <button onClick={onSubmit}>Add part</button>
+          <button disabled={disable} onClick={onSubmit}>Add part</button>
         </div>
       </div>
       {/* <div>

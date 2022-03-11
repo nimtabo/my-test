@@ -223,7 +223,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
                   name="description"
                   defaultValue={description}
                   onChange={handleChange}
-                  maxLength="150"
+                  maxLength="255"
                 >
                 </textarea>
               </label>
@@ -271,15 +271,15 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
           <div className="modal_images">
             {imgs.length > 0 ? imgs.map((i, idx) => {
               return <div key={idx} className="edit_img_container">
-                <img className='edit_img' src={i} alt='' />
+                <img className='edit_img' src={previewImage ? previewImage : i} alt='' />
                 {/* <img onMouseOver={() => { setShowDelete(!showDelete) }} className='edit_img' src={i} alt='' /> */}
                 {/* <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button> */}
               </div>
             }) :
               product.multiple_image && product.multiple_image.map((i, idx) => {
                 return <div key={idx} className="edit_img_container" >
-                  <img className='edit_img' src={i} alt='' />
-                  <button className="edit_img_side" onClick={() => deleteImg(i)}>Delete Image</button>
+                  <img className='edit_img' src={previewImage ? previewImage : i} alt='' />
+                  {/* <button className="edit_img_side" onClick={() => deleteImg(i)}>Delete Image</button> */}
                   {/* <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button> */}
                 </div>
 
@@ -296,17 +296,17 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
               <div className="edit_upload_file">
                 {/* <img src={avatar ? avatar : user.avatar} alt="" /> */}
 
-                <label htmlFor='file_up' className='custom-file-upload'>Change (Up to 5MB)</label>
+                <label htmlFor='file_up' className='custom-file-upload'>Change Image(5MB)</label>
                 <input type="file" name="file" id="file_up" onChange={updateImageFile} />
 
-                <div className='image_preview'>
+                {/* <div className='image_preview'>
                   <img src={previewImage} alt='' />
-                </div>
+                </div> */}
               </div>
 
 
               <div className='edit_upload_sec_image'>
-                <button>Delete Image</button>
+                <button onClick={() => { deleteImg(product.multiple_image[0]) }}>Renove Image</button>
               </div>
             </div>
 

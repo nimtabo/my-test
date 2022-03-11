@@ -45,7 +45,7 @@ function Header() {
             {/* ******************** */}
             <li className="drop-nav">
                 <Link to="#" className="avatar">
-                    <img src={user.avatar} alt="" /> {user.store ? user.store : user.code} <i className="fas fa-angle-down"></i>
+                    <img src={user.avatar} alt="" /> <span>{user.store ? user.store.substring(0, 10) : user.code}</span> <i className="fas fa-angle-down"></i>
                 </Link>
                 <ul className="dropdown">
                     <li><Link to="/profile">My Profile</Link></li>
