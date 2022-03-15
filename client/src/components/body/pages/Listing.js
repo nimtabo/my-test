@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import axios from "axios";
+import { formatValue } from 'react-currency-input-field';
 import { showErrMsg } from '../../utils/notification/Notification'
 import locked from "../../../img/locked.png"
 import './listing.css'
@@ -361,7 +362,12 @@ const Listing = () => {
                     <p ><span className="text_item">part: </span> <span>{prod.part}</span> </p>
                     <p className="cut_text" ><span className="text_item">Description:</span> <span>{prod.description}</span> </p>
                     {/* <p key={prod.engine}><span className="text_item">Engine:</span> <span>{prod.engine}</span></p> */}
-                    <p ><span className="text_item">price:</span> <span> {prod.price}</span></p>
+                    <p ><span className="text_item">price:</span> <span>{formatValue({
+                      value: `${prod.price}`,
+                      groupSeparator: ',',
+                      decimalSeparator: '.',
+                      prefix: '$',
+                    })}</span></p>
                     {/* <p key={prod.grade}><span className="text_item">grade:</span> <span>{prod.grade}</span> </p> */}
                     {/* <p key={prod.stock}><span className="text_item">Available:</span> {prod.stock}</p> */}
                   </div>

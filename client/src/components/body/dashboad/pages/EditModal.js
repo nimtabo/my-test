@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
+import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification';
 import FileUpload from '../../../file-upload/file-upload';
+import CurrencyInput from 'react-currency-input-field';
 
 
-
-function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter, setSuccess, setErr, setShowEditPart, showEditPart, setUpdateTable, updateTable }) {
+function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter, setSuccess, setShowEditPart, showEditPart, setUpdateTable, updateTable }) {
   const [partNumber, setPartNumber] = useState("")
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState("")
   const [isAvailable, setIsAvailable] = useState('')
+  const [err, setErr] = useState('')
   const [imgs, setImgs] = useState([])
   const [showDelete, setShowDelete] = useState(false)
   const [newUserInfo, setNewUserInfo] = useState({
@@ -56,18 +58,21 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
       });
       // if (res.data.success === "ok") {
       // }
-      setSuccess("Image Deleted")
+      setErr("Image Deleted")
       setUpdateTable(!updateTable)
       // let updatedImages = imgs.filter(item => url !== item)
       // imgs.splice(0, imgs.length)
       // setImgs([...updatedImages])
-      const newProduct = await axios.get(`/api/shop/shops/${shop}/products/${product._id}`, {
-        headers: { Authorization: token }
-      });
-      setImgs([newProduct.data.multiple_image])
+      // *********************
+      // const newProduct = await axios.get(`/api/shop/shops/${shop}/products/${product._id}`, {
+      //   headers: { Authorization: token }
+      // });
+      // setImgs([newProduct.data.multiple_image])
       // console.log(imgs)
+      // ***************************
+      setLoading(true)
       return setTimeout(() => {
-        setSuccess('')
+        setErr('')
       }, 5000);
     } catch (error) {
       console.log(error.message)
@@ -110,6 +115,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
   const updateImageFile = (e) => {
     const file = e.target.files[0]
     setImageFile(file)
+    setLoading(false)
     setPreviewImage(URL.createObjectURL(e.target.files[0]))
   }
 
@@ -199,6 +205,8 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
       <div className="modal-content">
         <span onClick={() => { setShowEditPart(!showEditPart) }} className="close">&times;</span>
         <p>EDIT AD</p>
+        {err && showErrMsg(err)}
+
         <div className="modal_edit_container">
           <div className="modal_fields">
             <div className="modal_field">
@@ -233,13 +241,21 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
               <div>price:</div>
               <label>
 
-                <input
+                {/* <input
                   type="number" name="price"
-                  // value={price}
                   defaultValue={price}
                   onChange={handleChange}
                   maxLength="10"
-                // onChange={(e) => { setPrice(e.target.value) }}
+                /> */}
+
+                <CurrencyInput
+                  id="price"
+                  name="price"
+                  placeholder="$0.00"
+                  defaultValue={price}
+                  prefix="$"
+                  decimalsLimit={2}
+                  onValueChange={(value, name) => { handleChange({ target: { value, name } }) }}
                 />
               </label>
             </div>
@@ -269,21 +285,19 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
           </div>
           {/* IMAGES */}
           <div className="modal_images">
-            {imgs.length > 0 ? imgs.map((i, idx) => {
-              return <div key={idx} className="edit_img_container">
-                <img className='edit_img' src={previewImage ? previewImage : i} alt='' />
-                {/* <img onMouseOver={() => { setShowDelete(!showDelete) }} className='edit_img' src={i} alt='' /> */}
-                {/* <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button> */}
-              </div>
-            }) :
+            {/* {
               product.multiple_image && product.multiple_image.map((i, idx) => {
                 return <div key={idx} className="edit_img_container" >
                   <img className='edit_img' src={previewImage ? previewImage : i} alt='' />
-                  {/* <button className="edit_img_side" onClick={() => deleteImg(i)}>Delete Image</button> */}
-                  {/* <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button> */}
+                  <button className="edit_img_side" onClick={() => deleteImg(i)}>Delete Image</button>
+                  <button style={showDelete ? { display: "block" } : { display: "none", }} onClick={() => deleteImg(i)} className="edit_img_centered">Delete</button>
                 </div>
 
-              })}
+              })} */}
+
+            <div className="edit_img_container" >
+              <img className='edit_img' src={loading ? '' : previewImage ? previewImage : product.multiple_image[0]} alt='' />
+            </div>
 
             <div className='edit_upload_section'>
               {/* <FileUpload
@@ -296,7 +310,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
               <div className="edit_upload_file">
                 {/* <img src={avatar ? avatar : user.avatar} alt="" /> */}
 
-                <label htmlFor='file_up' className='custom-file-upload'>Change Image(5MB)</label>
+                <label htmlFor='file_up' className='custom-file-upload'>Change Image</label>
                 <input type="file" name="file" id="file_up" onChange={updateImageFile} />
 
                 {/* <div className='image_preview'>
@@ -306,7 +320,7 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
 
 
               <div className='edit_upload_sec_image'>
-                <button onClick={() => { deleteImg(product.multiple_image[0]) }}>Renove Image</button>
+                <button onClick={() => { deleteImg(product.multiple_image[0]) }}>Remove Image</button>
               </div>
             </div>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import axios from "axios";
 import { ModalContent, ModalFooter, ModalButton, useDialog, CustomDialog, Prompt, Alert } from 'react-st-modal';
+import { formatValue } from 'react-currency-input-field';
 
 import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notification';
 import Loading from '../../../utils/Loading/Loading'
@@ -60,8 +61,8 @@ const ProductsTable = () => {
       await axios.delete(`/api/shop/shops/${shop}/products/${id}`, {
         headers: { Authorization: token }
       });
-      // setAdFilter('archived')
-      // filterTable("archived")
+      // setAdFilter('archive')
+      // filterTable("archive")
       setErr("Product deleted")
       setTimeout(() => {
         setErr("")
@@ -211,7 +212,7 @@ const ProductsTable = () => {
       case "onhold":
         data.availability = 2
         break;
-      case "archived":
+      case "archive":
         data.availability = 3
         break;
 
@@ -276,7 +277,6 @@ const ProductsTable = () => {
             token={token}
             shop={shop}
             deleteProduct={deleteProduct}
-            setErr={setErr}
             setSuccess={setSuccess}
           />
         </div>
@@ -316,12 +316,12 @@ const ProductsTable = () => {
           {!(adFilter === "available") && <option value="0">Available</option>}
           {!(adFilter === "soldout") && <option value="1">Sold Out</option>}
           {!(adFilter === "onhold") && <option value="2">Put On-Hold</option>}
-          {!(adFilter === "archived") && <option value="3">Archive</option>}
+          {!(adFilter === "archive") && <option value="3">Archive</option>}
           <option value="4">Delete</option>
         </select>
 
         <div className="table_category_title">
-          {adFilter ? `${adFilter === `onhold (${products.length})` ? `ON-HOLD (${products.length})` : adFilter === `soldout (${products.length})` ? `SOLD-OUT (${products.length})` : adFilter.toUpperCase()} PRODUCTS (${products.length})` : `AVAILABLE PRODUCTS (${products.length})`}
+          {adFilter ? `${adFilter === "onhold" ? "ON-HOLD" : adFilter === "soldout" ? `SOLD-OUT (${products.length})` : adFilter.toUpperCase()} PRODUCTS (${products.length})` : `AVAILABLE PRODUCTS (${products.length})`}
         </div>
 
         <select
@@ -336,7 +336,7 @@ const ProductsTable = () => {
           <option value="available">Available</option>
           <option value="onhold">On Hold</option>
           <option value="soldout">Sold Out</option>
-          <option value="archived">Archive </option>
+          <option value="archive">Archive </option>
         </select>
       </div>
       <table className="styled-table">
@@ -375,7 +375,7 @@ const ProductsTable = () => {
                 <option value="available">Available</option>
                 <option value="onhold">On Hold</option>
                 <option value="soldout">Sold Out</option>
-                <option value="archived">Archive </option>
+                <option value="archive">Archive </option>
               </select> */}
             </th>
           </tr>
@@ -401,7 +401,12 @@ const ProductsTable = () => {
                 <td>{prod.part}</td>
                 <td>{prod.partNumber}</td>
                 <td className="wide_section">{prod.description.substring(0, 255)}</td>
-                <td>{`$ ${prod.price}`}</td>
+                <td>{formatValue({
+                  value: `${prod.price}`,
+                  groupSeparator: ',',
+                  decimalSeparator: '.',
+                  prefix: '$',
+                })}</td>
                 <td>
                   {/* <button onClick={() => {
                     updateProduct(prod)
@@ -429,11 +434,11 @@ const ProductsTable = () => {
                   }}>Edit</button> */}
                   {/* <span> </span> */}
                   {/* {
-                    adFilter === "archived" ? <button onClick={() => { deleteProduct(prod._id) }}>Delete</button> : ''
+                    adFilter === "archive" ? <button onClick={() => { deleteProduct(prod._id) }}>Delete</button> : ''
                   } */}
                   {/* <button onClick={() => {
-                    adFilter === "archived" ? deleteProduct(prod._id) : arhiveProduct(prod._id)
-                  }}>{adFilter === "archived" ? "Delete" : "Archive"}</button> */}
+                    adFilter === "archive" ? deleteProduct(prod._id) : arhiveProduct(prod._id)
+                  }}>{adFilter === "archive" ? "Delete" : "Archive"}</button> */}
                 </td>
               </tr>)
             })
@@ -607,7 +612,7 @@ function CustomDialogContent({ product, prodImgs, token, shop, filterTable, dele
             {!(adFilter === "available") && <option value="0">Available</option>}
             {!(adFilter === "soldout") && <option value="1">Sold Out</option>}
             {!(adFilter === "onhold") && <option value="2">Put On-Hold</option>}
-            {!(adFilter === "archived") && <option value="3">Archive</option>}
+            {!(adFilter === "archive") && <option value="3">Archive</option>}
             <option value="4">Delete</option>
           </select>
         </label>

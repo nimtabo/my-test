@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification'
-import { isEmpty, isEmail, isLength, isMatch } from '../../utils/validation/Validation'
-
+import { isEmpty, isEmail, isLength, isMatch, validatePhone, formatPhoneNumber } from '../../utils/validation/Validation'
+import { getCities, getStates, getCityState } from '../../utils/state_cities/index'
 
 const initialState = {
     phone: '',
@@ -20,11 +20,19 @@ const initialState = {
 
 function Register() {
     const [user, setUser] = useState(initialState)
+    const [cities, setCities] = useState([])
 
     const { store, phone, city, state, storeWebsite, email, password, cf_password, err, success } = user
 
     const handleChangeInput = e => {
         const { name, value } = e.target
+        if (name === "phone") {
+            const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+            return setUser({ ...user, [name]: formattedPhoneNumber, err: '', success: '' })
+        }
+        if (name === "state") {
+            setCities([...getCities(e.target.value)])
+        }
         setUser({ ...user, [name]: value, err: '', success: '' })
     }
 
@@ -44,6 +52,15 @@ function Register() {
             return setTimeout(() => {
                 setUser({ ...user, err: '', success: '' })
             }, 5000);
+        }
+
+        if (phone) {
+            if (!validatePhone(phone)) {
+                setUser({ ...user, err: 'Enter valid Phone Number', success: "" })
+                return setTimeout(() => {
+                    setUser({ ...user, err: '', success: '' })
+                }, 5000);
+            }
         }
 
         if (isLength(password)) {
@@ -112,22 +129,22 @@ function Register() {
                 <div>
                     <label htmlFor="state">State</label>
                     <select name="state" value={state} onChange={handleChangeInput}>
-                        <option value="0">Select state</option>
-                        <option value="LA">LA</option>
-                        <option value="NY">NY</option>
-                        <option value="OH">OH</option>
-                        <option value="CH">CH</option>
+                        {
+                            getStates().map(stt => {
+                                return <option key={stt} value={stt}>{stt}</option>
+                            })
+                        }
                     </select>
                 </div>
 
                 <div>
                     <label htmlFor="city">City</label>
                     <select name="city" value={city} onChange={handleChangeInput}>
-                        <option value="0">Select city</option>
-                        <option value="LA">LA</option>
-                        <option value="NY">NY</option>
-                        <option value="OH">OH</option>
-                        <option value="CH">CH</option>
+                        {
+                            cities && cities.map(cty => {
+                                return <option key={cty} value={cty}>{cty}</option>
+                            })
+                        }
                     </select>
                 </div>
 

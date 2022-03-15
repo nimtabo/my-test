@@ -362,6 +362,8 @@
   /* padding: 6px 12px; */
   cursor: pointer;
   width: 100%;
+  font-size: 14px;
+  text-align: center;
 }
 
 .edit_upload_sec_image,
@@ -381,9 +383,8 @@
   width: 100%;
 }
 
-.modal_images {
-  /* background-color: rgb(195, 195, 195); */
-}
+/* .modal_images {
+} */
 
 .modal_images .edit_img_container {
   background-color: #fff;

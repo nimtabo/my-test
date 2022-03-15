@@ -4,6 +4,7 @@ import { showErrMsg, showSuccessMsg } from '../../../utils/notification/Notifica
 import Loading from '../../../utils/Loading/Loading'
 import FileUpload from "../../../file-upload/file-upload";
 import axios from "axios";
+import CurrencyInput from 'react-currency-input-field';
 
 
 function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
@@ -398,11 +399,26 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
               {/* <input type="text" name="description" value={description} onChange={(e) => { setDescription(e.target.value) }} /> */}
             </div>
 
-            <div className="shop_form_item">
+            {/* <div className="shop_form_item">
               <label htmlFor="price">price: </label>
-              {/* <input type="text" name="price" value={price} onChange={(e) => { setPrice(e.target.value) }} /> */}
               <input type="number" name="price" min="0.00" max="10000.00" step="0.01" maxLength="10"
                 onChange={(e) => { setPrice(e.target.value) }} />
+            </div> */}
+
+            <div className="shop_form_item">
+              {/* <input type="number" name="price" min="0.00" max="10000.00" step="0.01" maxLength="10"
+                onChange={(e) => { setPrice(e.target.value) }} /> */}
+
+              <label htmlFor="price">price: </label>
+              <CurrencyInput
+                id="price"
+                name="price"
+                placeholder="$0.00"
+                // defaultValue={0.00}
+                prefix="$"
+                decimalsLimit={2}
+                onValueChange={(value, name) => { setPrice(value) }}
+              />
             </div>
 
             {/* <div className="shop_form_item">

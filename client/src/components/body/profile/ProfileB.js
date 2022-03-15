@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Select from 'react-select';
 import { isLength, isMatch, validatePhone, formatPhoneNumber } from '../../utils/validation/Validation'
 import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
 import { fetchAllUsers, dispatchGetAllUsers } from '../../../redux/actions/usersAction'
+import { getCities, getStates, getCityState } from '../../utils/state_cities/index'
 
 // 
 // import { CustomDialog, useDialog } from 'react-st-modal';
@@ -38,6 +40,7 @@ function Profile() {
   const [loading, setLoading] = useState(false)
   const [callback, setCallback] = useState(false)
   const [updateProfile, setupdateProfile] = useState("")
+  const [cities, setCities] = useState([])
 
 
   const dispatch = useDispatch()
@@ -56,6 +59,9 @@ function Profile() {
     if (name === "phone") {
       const formattedPhoneNumber = formatPhoneNumber(e.target.value);
       return setData({ ...data, [name]: formattedPhoneNumber, err: '', success: '' })
+    }
+    if (name === "state") {
+      setCities([...getCities(e.target.value)])
     }
     setData({ ...data, [name]: value, err: '', success: '' })
   }
@@ -258,7 +264,7 @@ function Profile() {
                     <label htmlFor="phone">Phone Number</label>
                     <input type="tel" name="phone" id="phone"
                       value={phone || ''}
-                      placeholder="(004) 411-1425" onChange={handleChange} />
+                      placeholder="(000) 000-0000" onChange={handleChange} />
                   </div>
 
                   <div className="form-group">
@@ -271,23 +277,28 @@ function Profile() {
                 <div className="col-double">
                   <div className="form-group">
                     <label htmlFor="city">City</label>
-                    <select name="city" value={user.city} onChange={handleChange}>
-                      <option value="0">Select city</option>
-                      <option value="LA">LA</option>
+                    <select name="city" value={city || user.city} onChange={handleChange}>
+                      {/* <option value="0">Select city</option> */}
+                      {
+                        cities.length > 0 ? cities.map(cty => {
+                          return <option key={cty} value={cty}>{cty}</option>
+                        }) : <option value={user.city}>{user.city}</option>
+                      }
+                      {/* <option value="LA">LA</option>
                       <option value="NY">NY</option>
                       <option value="OH">OH</option>
-                      <option value="CH">CH</option>
+                      <option value="CH">CH</option> */}
                     </select>
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="state">State</label>
-                    <select name="state" value={user.state} onChange={handleChange}>
-                      <option value="0">Select state</option>
-                      <option value="LA">LA</option>
-                      <option value="NY">NY</option>
-                      <option value="OH">OH</option>
-                      <option value="CH">CH</option>
+                    <select name="state" value={state || user.state} onChange={handleChange}>
+                      {
+                        getStates().map(stt => {
+                          return <option key={stt} value={stt}>{stt}</option>
+                        })
+                      }
                     </select>
                   </div>
 
