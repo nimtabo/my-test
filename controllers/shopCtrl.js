@@ -377,11 +377,15 @@ const shopCtrl = {
   },
   updateProductAvailability: async (req, res) => {
     try {
-      const { availability } = req.body;
+      const { availability, productIds } = req.body;
       const { shopId, productId } = req.params;
 
-      const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { availability: Number(availability) });
-
+      // const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { availability: Number(availability) });
+      const updatedProduct = await Product.updateMany(
+        { shop: shopId, _id: { $in: productIds } },
+        { $set: { availability: Number(availability) } },
+        { multi: true }
+      )
       res.json({ message: "Product Updated successfully." });
     } catch (err) {
       return res.status(500).json({ msg: err.message })

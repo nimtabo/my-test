@@ -151,22 +151,22 @@ const ProductsTable = () => {
     return selected
   }
 
-  const availabilityUpdate = async (id, availability) => {
-    if (parseInt(availability) === 4) {
-      return deleteProduct(id, adFilter)
-    }
+  const availabilityUpdate = async (ids, availability) => {
+    // if (parseInt(availability) === 4) {
+    //   return deleteProduct(id, adFilter)
+    // }
 
     try {
       setLoading(true)
-      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/${id}/action`, { availability }, {
+      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/action`, { availability, productIds: ids }, {
         headers: { Authorization: token }
       });
       setSuccess(`Bulk Update Success`)
       setLoading(false)
       filterTable(adFilter)
 
-      handleChecked(id)
       return setTimeout(() => {
+        setSelectedItems([])
         setSuccess('')
       }, 5000);
 
@@ -174,6 +174,7 @@ const ProductsTable = () => {
       // console.log(error.message)
       setErr(`Bulk Update Failed`)
       return setTimeout(() => {
+        setLoading(false)
         setErr('')
       }, 3000);
     }
@@ -187,9 +188,7 @@ const ProductsTable = () => {
       }, 5000);
     }
 
-    selectedItems.map(id => {
-      return availabilityUpdate(id, action)
-    })
+    availabilityUpdate(selectedItems, action)
     document.getElementsByName('all_chk')[0].checked = false;
     return checkAll(false)
   }
@@ -321,7 +320,7 @@ const ProductsTable = () => {
         </select>
 
         <div className="table_category_title">
-          {adFilter ? `${adFilter === "onhold" ? "ON-HOLD" : adFilter === "soldout" ? `SOLD-OUT (${products.length})` : adFilter.toUpperCase()} PRODUCTS (${products.length})` : `AVAILABLE PRODUCTS (${products.length})`}
+          {adFilter ? `${adFilter === "onhold" ? "ON-HOLD" : adFilter === "soldout" ? "SOLD-OUT" : adFilter.toUpperCase()} PRODUCTS (${products.length})` : `AVAILABLE PRODUCTS (${products.length})`}
         </div>
 
         <select

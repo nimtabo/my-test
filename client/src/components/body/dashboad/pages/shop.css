@@ -376,11 +376,12 @@
 }
 
 .edit_upload_sec_image button {
-  padding: 0.7rem;
+  padding: 0.6rem;
   background-color: red;
   color: #fff;
   margin: auto;
   width: 100%;
+  box-shadow: 2px 2px #000;
 }
 
 /* .modal_images {

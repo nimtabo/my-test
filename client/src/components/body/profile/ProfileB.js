@@ -234,6 +234,31 @@ function Profile() {
                   <input type="text" name="phone" id="phone" defaultValue={user.code}
                     placeholder="Your Fiaraa Customer ID" onChange={handleChange} disabled />
                 </div>
+
+                <div className="col-double">
+                  <div className="form-group">
+                    <label htmlFor="city">City</label>
+                    <select name="city" value={city || user.city} onChange={handleChange}>
+                      {
+                        cities.length > 0 ? cities.map(cty => {
+                          return <option key={cty} value={cty}>{cty}</option>
+                        }) : <option value={user.city}>{user.city}</option>
+                      }
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="state">State</label>
+                    <select name="state" value={state || user.state} onChange={handleChange}>
+                      {
+                        getStates().map(stt => {
+                          return <option key={stt} value={stt}>{stt}</option>
+                        })
+                      }
+                    </select>
+                  </div>
+
+                </div>
               </>
 
 

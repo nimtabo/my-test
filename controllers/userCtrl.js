@@ -234,7 +234,7 @@ const userCtrl = {
 
             if (Number(profile) === 1) {
                 await Users.findOneAndUpdate({ _id: req.user.id }, {
-                    avatar, name
+                    avatar, name, city, state
                 })
                 return res.json({ msg: "Update Success!" })
             }
