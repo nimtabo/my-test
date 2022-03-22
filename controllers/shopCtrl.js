@@ -383,8 +383,7 @@ const shopCtrl = {
       // const updatedProduct = await Product.findOneAndUpdate({ shop: shopId, _id: productId }, { availability: Number(availability) });
       const updatedProduct = await Product.updateMany(
         { shop: shopId, _id: { $in: productIds } },
-        { $set: { availability: Number(availability) } },
-        { multi: true }
+        { $set: { availability: Number(availability) } }
       )
       res.json({ message: "Product Updated successfully." });
     } catch (err) {

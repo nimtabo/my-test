@@ -5,66 +5,72 @@ function Pricing() {
   return (
     <div className="pricing-page">
       <div className="pricing-title">
-        <h1>Pricing</h1>
+        <h1>Subscription Pricing</h1>
       </div>
 
       <div className="pricing-plan-parts-container">
+        <h4>7-DAY MONEY BACK GUARANTEE </h4>
         <div className="pricing-plan-tittle">
-          <h2>Pricing and Plans For Used Auto <br /> <span>Parts Sellers</span> </h2>
+          <h2>Find The Right Seller Plan For You </h2>
         </div>
         <div className="pricing-plan-parts">
           <div className="price-card">
-            <h3>Bronze</h3>
-            <h2>$10 <sub className="sub_text">/month</sub> </h2>
+            <h3>Free Plan</h3>
             <hr />
+            <h2> <sub className="sub_text">$</sub> 10<sub className="sub_text">/month</sub></h2>
             <div>
-              <p>
-                Permitted
-                <br />
-                To
-                <br />
-                Upload
-                <br />
-                Maximum
-                <br />
-                5 Parts
-              </p>
+              <button>Create Account</button>
+              <ul>
+                <li>1 part upload</li>
+                <li>Direct customer contact</li>
+                <li>Acess to our Estore</li>
+              </ul>
             </div>
           </div>
           <div className="price-card">
-            <h3>Silver</h3>
-            <h2>$20 <sub className="sub_text">/month</sub> </h2>
+            <h3>Individual Plan</h3>
             <hr />
+            <h2> <sub className="sub_text">$</sub> 9.99<sub className="sub_text">/month</sub></h2>
             <div>
-              <p>
-                Permitted
-                <br />
-                To
-                <br />
-                Upload
-                <br />
-                Maximum
-                <br />
-                12 Parts
-              </p>
+              <button>Buy Now</button>
+              <ul>
+                <li>30-days free trial</li>
+                <li>5 part uploads</li>
+                <li>Direct customer contact</li>
+                <li>Acess to our Estore</li>
+                <li>Live Chat option with customer</li>
+              </ul>
+            </div>
+          </div>
+          <div className="price-card gold">
+            <button className='popular'>POPULAR</button>
+            <h3>Gold</h3>
+            <hr />
+            <h2> <sub className="sub_text">$</sub> 29.99<sub className="sub_text">/month</sub></h2>
+            <div>
+              <button>Buy Now</button>
+              <ul>
+                <li>30-days free trial</li>
+                <li>20 part uploads</li>
+                <li>Direct customer contact</li>
+                <li>Acess to our Estore</li>
+                <li>Live Chat option with customer</li>
+              </ul>
             </div>
           </div>
           <div className="price-card">
             <h3>Gold</h3>
-            <h2>$30 <sub className="sub_text">/month</sub> </h2>
             <hr />
+            <h2> <sub className="sub_text">$</sub> 49.99<sub className="sub_text">/month</sub></h2>
             <div>
-              <p>
-                Permitted
-                <br />
-                To
-                <br />
-                Upload
-                <br />
-                Maximum
-                <br />
-                20 Parts
-              </p>
+              <button>Buy Now</button>
+              <ul>
+                <li>30-days free trial</li>
+                <li>35 part uploads</li>
+                <li>Direct customer contact</li>
+                <li>Acess to our Estore</li>
+                <li>Live Chat option with customer</li>
+              </ul>
             </div>
           </div>
         </div>

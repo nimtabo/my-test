@@ -6,7 +6,9 @@
 .pricing-title {
   height: 3rem;
   /* width: 10rem; */
-  max-width: 15rem;
+  min-width: 15rem;
+  width: fit-content;
+  padding: 0 1rem;
   margin: 0px auto;
   background-color: #ffffff;
   text-align: center;
@@ -32,9 +34,10 @@
 
 .pricing-plan-parts {
   /* height: 35rem; */
+  margin-top: 80px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -47,15 +50,34 @@
   margin: 1rem;
 }
 
+/* .pricing-plan-tittle h2 {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+} */
+
 .price-card {
   height: 25rem;
-  width: 24%;
+  width: 22%;
   /* margin: 0.5rem; */
   background: #000201;
   border: 2px solid #ffffff;
   box-sizing: border-box;
   box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+}
+
+.gold {
+  background-color: #1d50a8;
+}
+
+.pricing-plan-parts-container h4 {
+  font-weight: 400;
+  font-size: 15px;
+  text-align: center;
 }
 
 .price-card h3,
@@ -78,14 +100,38 @@
   font-size: 14px;
 }
 
+.price-card button {
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: #000201;
+  color: #fff;
+  padding: 0.5rem;
+  margin: auto;
+  display: block;
+  margin-top: 2.5rem;
+}
+
+.gold button {
+  background-color: #f0ac34;
+  border: none;
+}
+
+.price-card .popular {
+  width: 100%;
+  border-radius: 0;
+  margin-top: -38px;
+}
+
 .price-card hr {
-  width: 80%;
   margin: 0px auto;
 }
 
-.price-card p {
+.price-card ul {
   color: #ffffff;
-  margin: 1rem;
+  margin-left: 2.5rem;
+  list-style-type: disc;
+  font-size: 15px;
 }
 @media (max-width: 976px) {
   .price-card {

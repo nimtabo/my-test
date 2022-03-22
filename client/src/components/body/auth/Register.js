@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification'
-import { isEmpty, isEmail, isLength, isMatch, validatePhone, formatPhoneNumber } from '../../utils/validation/Validation'
+import { isEmpty, isEmail, isLength, isMatch, validatePhone, formatPhoneNumber, is_url } from '../../utils/validation/Validation'
 import { getCities, getStates, getCityState } from '../../utils/state_cities/index'
 
 const initialState = {
@@ -57,6 +57,15 @@ function Register() {
         if (phone) {
             if (!validatePhone(phone)) {
                 setUser({ ...user, err: 'Enter valid Phone Number', success: "" })
+                return setTimeout(() => {
+                    setUser({ ...user, err: '', success: '' })
+                }, 5000);
+            }
+        }
+
+        if (storeWebsite) {
+            if (!is_url(storeWebsite)) {
+                setUser({ ...user, err: 'Enter valid Website', success: "" })
                 return setTimeout(() => {
                     setUser({ ...user, err: '', success: '' })
                 }, 5000);

@@ -374,7 +374,7 @@ const Listing = () => {
                   <div>
                     <p ><span className="text_item">Seller name:</span> <span>{isLogged && prod.shop.name}</span></p>
                     <p ><span className="text_item">Phone:</span> <span>{isLogged && prod.shop.phone}</span></p>
-                    <p ><span className="text_item">email:</span> <span>{isLogged && prod.shop.email}</span></p>
+                    <p ><span className="text_item">email:</span> <span>{isLogged && user.email}</span></p>
                     <p >
                       <span className="text_item text_item_inner">City:</span> <span>{isLogged && prod.shop.city}</span>
                       {/* <span className="span_double">   </span> */}
@@ -387,7 +387,7 @@ const Listing = () => {
                     <p><span className="text_item text_item_inner">Website:</span> <span><a href={isLogged ? `http://${prod.shop.website}` : `#`} target="_blank">{isLogged && prod.shop.website}</a></span>
                       <span className="span_double">   </span>
                       {
-                        isLogged && <button className='live_chat'><i class="fa-brands fa-whatsapp"></i> live chat</button>
+                        isLogged && <button className='live_chat'><i className="fa-brands fa-whatsapp"></i> live chat</button>
                       }
                     </p>
 

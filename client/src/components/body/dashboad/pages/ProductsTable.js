@@ -158,7 +158,7 @@ const ProductsTable = () => {
 
     try {
       setLoading(true)
-      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/action`, { availability, productIds: ids }, {
+      const savedProduct = await axios.patch(`/api/shop/shops/${shop}/products/update/bulk_action`, { availability, productIds: ids }, {
         headers: { Authorization: token }
       });
       setSuccess(`Bulk Update Success`)

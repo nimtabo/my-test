@@ -27,7 +27,7 @@ router.get('/shops/:shopId/products/:productId', auth, shopCtrl.getProduct)
 router.patch('/shops/:shopId/products/:productId/image', auth, updateImage, shopCtrl.updateProductWithImage)
 router.patch('/shops/:shopId/products/:productId', auth, shopCtrl.updateProduct)
 router.patch('/shops/:shopId/products/:productId/delete_image', upload.array('multiple_image', 1), auth, shopCtrl.deleteProductImage)
-router.patch('/shops/:shopId/products/action', auth, shopCtrl.updateProductAvailability)
+router.patch('/shops/:shopId/products/update/bulk_action', auth, shopCtrl.updateProductAvailability)
 router.patch('/shops/:shopId/products/:productId/archive', auth, shopCtrl.moveProductToArchive)
 router.delete('/shops/:shopId/products/:productId', auth, shopCtrl.deleteProduct)
 
