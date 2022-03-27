@@ -60,7 +60,8 @@
 } */
 
 .price-card {
-  height: 25rem;
+  /* height: 25rem; */
+  min-height: 25rem;
   width: 22%;
   /* margin: 0.5rem; */
   background: #000201;
@@ -96,7 +97,7 @@
   font-size: 2rem;
 }
 
-.price-card h2 .sub_text {
+.price-card h2 .span_text {
   font-size: 14px;
 }
 
@@ -133,6 +134,11 @@
   list-style-type: disc;
   font-size: 15px;
 }
+
+.card_paragraph {
+  margin: 3rem auto;
+}
+
 @media (max-width: 976px) {
   .price-card {
     width: 48%;

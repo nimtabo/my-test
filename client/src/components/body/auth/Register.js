@@ -139,7 +139,7 @@ function Register() {
                     <label htmlFor="state">State</label>
                     <select name="state" value={state} onChange={handleChangeInput}>
                         {
-                            getStates().map(stt => {
+                            getStates().sort().map(stt => {
                                 return <option key={stt} value={stt}>{stt}</option>
                             })
                         }
@@ -150,7 +150,7 @@ function Register() {
                     <label htmlFor="city">City</label>
                     <select name="city" value={city} onChange={handleChangeInput}>
                         {
-                            cities && cities.map(cty => {
+                            cities && cities.sort().map(cty => {
                                 return <option key={cty} value={cty}>{cty}</option>
                             })
                         }

@@ -374,7 +374,7 @@ const Listing = () => {
                   <div>
                     <p ><span className="text_item">Seller name:</span> <span>{isLogged && prod.shop.name}</span></p>
                     <p ><span className="text_item">Phone:</span> <span>{isLogged && prod.shop.phone}</span></p>
-                    <p ><span className="text_item">email:</span> <span>{isLogged && user.email}</span></p>
+                    <p ><span className="text_item">email:</span> <span>{isLogged && prod.shop.email}</span></p>
                     <p >
                       <span className="text_item text_item_inner">City:</span> <span>{isLogged && prod.shop.city}</span>
                       {/* <span className="span_double">   </span> */}
