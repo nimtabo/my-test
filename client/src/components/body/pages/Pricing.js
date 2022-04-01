@@ -17,13 +17,13 @@ function Pricing() {
           <div className="price-card">
             <h3>Free Plan</h3>
             <hr />
-            <h2> <span className="span_text">$</span> 10<span className="span_text">/month</span></h2>
+            <h2> <span className="span_text">$</span>0<span className="span_text">/month</span></h2>
             <div>
               <button>Create Account</button>
               <ul>
                 <li>1 part upload</li>
                 <li>Direct customer contact</li>
-                <li>Acess to our Estore</li>
+                <li>Access to our Estore</li>
               </ul>
             </div>
           </div>
@@ -37,7 +37,7 @@ function Pricing() {
                 <li>30-days free trial</li>
                 <li>5 part uploads</li>
                 <li>Direct customer contact</li>
-                <li>Acess to our Estore</li>
+                <li>Access to our Estore</li>
                 <li>Live Chat option with customer</li>
               </ul>
             </div>
@@ -53,7 +53,7 @@ function Pricing() {
                 <li>30-days free trial</li>
                 <li>20 part uploads</li>
                 <li>Direct customer contact</li>
-                <li>Acess to our Estore</li>
+                <li>Access to our Estore</li>
                 <li>Live Chat option with customer</li>
               </ul>
             </div>
@@ -68,7 +68,7 @@ function Pricing() {
                 <li>30-days free trial</li>
                 <li>35 part uploads</li>
                 <li>Direct customer contact</li>
-                <li>Acess to our Estore</li>
+                <li>Access to our Estore</li>
                 <li>Live Chat option with customer</li>
               </ul>
             </div>

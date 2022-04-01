@@ -249,7 +249,7 @@ function Profile() {
                     <label htmlFor="state">State</label>
                     <select name="state" value={state || user.state} onChange={handleChange}>
                       {
-                        getStates().map(stt => {
+                        getStates().sort().map(stt => {
                           return <option key={stt} value={stt}>{stt}</option>
                         })
                       }
@@ -260,7 +260,7 @@ function Profile() {
                     <label htmlFor="city">City</label>
                     <select name="city" value={city || user.city} onChange={handleChange}>
                       {
-                        cities.length > 0 ? cities.map(cty => {
+                        cities.length > 0 ? cities.sort().map(cty => {
                           return <option key={cty} value={cty}>{cty}</option>
                         }) : <option value={user.city}>{user.city}</option>
                       }

@@ -360,7 +360,7 @@ const Listing = () => {
                     <p > <span className="text_item">model:</span> <span>{prod.model}</span> </p>
                     <p ><span className="text_item">year:</span> <span>{prod.year}</span> </p>
                     <p ><span className="text_item">part: </span> <span>{prod.part}</span> </p>
-                    <p className="cut_text" ><span className="text_item">Description:</span> <span>{prod.description}</span> </p>
+                    <p className="cut_text" ><span className="text_item">Description:</span> <span className='description'>{prod.description}</span> </p>
                     {/* <p key={prod.engine}><span className="text_item">Engine:</span> <span>{prod.engine}</span></p> */}
                     <p ><span className="text_item">price:</span> <span>{formatValue({
                       value: `${prod.price}`,
@@ -374,7 +374,7 @@ const Listing = () => {
                   <div>
                     <p ><span className="text_item">Seller name:</span> <span>{isLogged && prod.shop.name}</span></p>
                     <p ><span className="text_item">Phone:</span> <span>{isLogged && prod.shop.phone}</span></p>
-                    <p ><span className="text_item">email:</span> <span>{isLogged && prod.shop.email}</span></p>
+                    <p ><span className="text_item">email:</span> <span>{isLogged && prod.shop.owner.email}</span></p>
                     <p >
                       <span className="text_item text_item_inner">City:</span> <span>{isLogged && prod.shop.city}</span>
                       {/* <span className="span_double">   </span> */}

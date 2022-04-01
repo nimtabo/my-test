@@ -67,4 +67,11 @@ const shopSchema = new mongoose.Schema({
   timestamps: true
 })
 
+let autoPopulateOwner = function (next) {
+  this.populate('owner', 'email');
+  next();
+};
+
+shopSchema.pre('find', autoPopulateOwner);
+
 module.exports = mongoose.model("Shop", shopSchema)
