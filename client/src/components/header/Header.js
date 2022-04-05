@@ -10,7 +10,7 @@ import services_arrow from '../../img/services_arrow.svg'
 function Header() {
     const auth = useSelector(state => state.auth)
 
-    const { user, isLogged } = auth
+    const { user, isLogged, isAdmin } = auth
 
     const handleLogout = async () => {
         try {
@@ -48,11 +48,19 @@ function Header() {
                     <img src={user.avatar} alt="" /> <span>{user.store ? user.store.substring(0, 10) : user.code}</span> <i className="fas fa-angle-down"></i>
                 </Link>
                 <ul className="dropdown">
-                    <li><Link to="/profile">My Profile</Link></li>
-                    {user.profile === 0 && <li><Link to="/shops">My Store</Link></li>}
-                    {/* <li><Link to="/plans">My Plan</Link></li> */}
-                    {/* <li><Link to="#">Settings</Link></li> */}
-                    <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
+                    {
+                        isAdmin ? <>
+                            <li><Link to="/profile">My Profile</Link></li>
+                            {user.profile === 0 && <li><Link to="/dashboard">Dashboard</Link></li>}
+                            <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
+                        </>
+                            : <>
+                                <li><Link to="/profile">My Profile</Link></li>
+                                {user.profile === 0 && <li><Link to="/shops">My Store</Link></li>}
+                                <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
+                            </>
+                    }
+
                 </ul>
             </li>
         </>

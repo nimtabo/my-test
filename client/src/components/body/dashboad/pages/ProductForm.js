@@ -417,6 +417,7 @@ function ProductForm({ filterTable, adFilter, setShowAddPart, showAddPart }) {
                 // defaultValue={0.00}
                 prefix="$"
                 decimalsLimit={2}
+                maxLength={6}
                 onValueChange={(value, name) => { setPrice(value) }}
               />
             </div>

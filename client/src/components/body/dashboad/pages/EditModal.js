@@ -248,15 +248,19 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
                   maxLength="10"
                 /> */}
 
-                <CurrencyInput
-                  id="price"
-                  name="price"
-                  placeholder="$0.00"
-                  defaultValue={price}
-                  prefix="$"
-                  decimalsLimit={2}
-                  onValueChange={(value, name) => { handleChange({ target: { value, name } }) }}
-                />
+                {
+                  price && <CurrencyInput
+                    id="price"
+                    name="price"
+                    placeholder="$0.00"
+                    defaultValue={price}
+                    prefix="$"
+                    decimalsLimit={2}
+                    maxLength={6}
+                    onValueChange={(value, name) => { handleChange({ target: { value, name } }) }}
+                  />
+                }
+
               </label>
             </div>
 
