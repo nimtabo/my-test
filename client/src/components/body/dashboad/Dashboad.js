@@ -2,7 +2,7 @@ import React from 'react'
 import SideNav from './sidenav/SideNav'
 import './dashboad.css'
 
-function Dashboad({ handleOpenNav, width }) {
+function Dashboard({ handleOpenNav, width }) {
   // const [width, setWidth] = useState("0px")
 
   // const handleOpenNav = () => {
@@ -18,8 +18,8 @@ function Dashboad({ handleOpenNav, width }) {
         <div id="main">
           <button className="openbtn" onClick={handleOpenNav}>☰ Open Menu</button>
           <div className="content_window">
-            <h3>Dashboad Charts</h3>
-            <h3>Dashboad Graphs</h3>
+            <h3>Dashboard Charts</h3>
+            <h3>Dashboard Graphs</h3>
           </div>
         </div>
       </div>
@@ -27,4 +27,4 @@ function Dashboad({ handleOpenNav, width }) {
   )
 }
 
-export default Dashboad
+export default Dashboard

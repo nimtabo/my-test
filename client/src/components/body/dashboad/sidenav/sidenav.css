@@ -13,7 +13,8 @@
   margin-top: 60px;
 }
 
-.sidebar a {
+.sidebar a,
+.dropdown-btn {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -22,9 +23,25 @@
   transition: 0.3s;
 }
 
-.sidebar a:hover {
+.dropdown-btn {
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+.sidebar a:hover,
+.dropdown-btn:hover {
   color: #f1f1f1;
   background-color: cadetblue;
+}
+
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
 }
 
 .sidebar .closebtn {
@@ -37,6 +54,10 @@
   color: #818181;
 }
 
+.active {
+  color: #f1f1f1 !important;
+  background-color: cadetblue;
+}
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {

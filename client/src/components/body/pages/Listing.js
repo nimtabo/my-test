@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import axios from "axios";
 import { formatValue } from 'react-currency-input-field';
+import { FiLogIn } from 'react-icons/fi';
 import { showErrMsg } from '../../utils/notification/Notification'
 import locked from "../../../img/locked.png"
 import './listing.css'
@@ -343,7 +344,73 @@ const Listing = () => {
         </form>
       </div>
 
-      <div className="listing_right_items">
+      <div className='list_table'>
+        <div className='headers'>
+          <div>IMAGE</div>
+          <div>SELLER</div>
+          <div>CITY</div>
+          <div>STATE</div>
+          <div>PHONE</div>
+          <div>EMAIL</div>
+          <div>DESCRIPTION</div>
+          <div>PRICE</div>
+          <div>LIVE CHAT</div>
+        </div>
+
+        <div className='list_items'>
+
+          {
+            products.length < 1 ? (
+              <div className='listing_item'>
+                <h2>No parts Found</h2>
+              </div>
+            ) : (products.map(prod => {
+              return isLogged ? (
+                <div className='list_item'>
+                  <div><img src={prod.multiple_image[0]} /></div>
+                  <div>{prod.shop.name.substring(0, 13)}...</div>
+                  <div>{prod.shop.city}</div>
+                  <div>{prod.shop.stateProvince}</div>
+                  <div>{prod.shop.phone}</div>
+                  <div>{prod.shop.owner.email}</div>
+                  <div>{prod.description.substring(0, 25)}...</div>
+                  <div>{formatValue({
+                    value: `${prod.price}`,
+                    groupSeparator: ',',
+                    decimalSeparator: '.',
+                    prefix: '$',
+                  })}</div>
+                  <div><i className="fas fa-comment-dots"></i></div>
+                </div>
+              ) : (
+                <div key={prod._id} className='list_item_a'>
+                  <div><img src={prod.multiple_image[0]} /></div>
+                  <div>
+                    <p className='login_hiden'>
+                      <img src={locked} alt='' />
+                      <p>To Contact Seller Please Sign in</p>
+                      <button><FiLogIn /><Link to="/login">Sign in</Link></button>
+                    </p>
+                  </div>
+                  <div>{prod.description.substring(0, 25)}...</div>
+                  <div>{formatValue({
+                    value: `${prod.price}`,
+                    groupSeparator: ',',
+                    decimalSeparator: '.',
+                    prefix: '$',
+                  })}</div>
+                  <div><i className="fas fa-comment-dots"></i></div>
+                </div>
+              )
+            })
+            )}
+
+        </div>
+
+
+      </div>
+
+      {/* <div className="listing_right_items">
 
         {
           products.length < 1 ? (
@@ -361,15 +428,12 @@ const Listing = () => {
                     <p ><span className="text_item">year:</span> <span>{prod.year}</span> </p>
                     <p ><span className="text_item">part: </span> <span>{prod.part}</span> </p>
                     <p className="cut_text" ><span className="text_item">Description:</span> <span className='description'>{prod.description}</span> </p>
-                    {/* <p key={prod.engine}><span className="text_item">Engine:</span> <span>{prod.engine}</span></p> */}
                     <p ><span className="text_item">price:</span> <span>{formatValue({
                       value: `${prod.price}`,
                       groupSeparator: ',',
                       decimalSeparator: '.',
                       prefix: '$',
                     })}</span></p>
-                    {/* <p key={prod.grade}><span className="text_item">grade:</span> <span>{prod.grade}</span> </p> */}
-                    {/* <p key={prod.stock}><span className="text_item">Available:</span> {prod.stock}</p> */}
                   </div>
                   <div>
                     <p ><span className="text_item">Seller name:</span> <span>{isLogged && prod.shop.name}</span></p>
@@ -377,13 +441,10 @@ const Listing = () => {
                     <p ><span className="text_item">email:</span> <span>{isLogged && prod.shop.owner.email}</span></p>
                     <p >
                       <span className="text_item text_item_inner">City:</span> <span>{isLogged && prod.shop.city}</span>
-                      {/* <span className="span_double">   </span> */}
-                      {/* <span className="text_item text_item_inner">State:</span> <span>{prod.shop.stateProvince}</span> */}
                     </p>
                     <p >
                       <span className="text_item text_item_inner">State:</span> <span>{isLogged && prod.shop.stateProvince}</span>
                     </p>
-                    {/* <p key={prod.shop.stateProvince}><span className="text_item">State:</span> <span>{prod.shop.stateProvince}</span></p> */}
                     <p><span className="text_item text_item_inner">Website:</span> <span><a href={isLogged ? `http://${prod.shop.website}` : `#`} target="_blank">{isLogged && prod.shop.website}</a></span>
                       <span className="span_double">   </span>
                       {
@@ -391,22 +452,7 @@ const Listing = () => {
                       }
                     </p>
 
-                    {/* <p>Payment options: </p>
-                  <ul>
-                    {
-                      prod.shop.paymentMethod.map(op => {
-                        return (<li key={op.label}>{op.label}</li>)
-                      })
-                    }
-                  </ul> */}
-                    {/* <p>Shipment options:</p>
-                  <ul>
-                    {
-                      prod.shop.shipmentMethod.map(op => {
-                        return (<li key={op.label}>{op.label}</li>)
-                      })
-                    }
-                  </ul> */}
+                 
 
                     {
                       !isLogged && <div className='login_to_see'>
@@ -422,7 +468,7 @@ const Listing = () => {
             }))
         }
 
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import './sidenav.css'
 
 
 function SideNav({ handleOpenNav, width }) {
+  const [isActive, setIsActive] = useState(false)
   const auth = useSelector(state => state.auth)
 
   const { user, isAdmin } = auth
 
+  const handleDropDown = () => {
+    setIsActive(!isActive)
+  }
 
   return (
     <>
@@ -17,18 +21,26 @@ function SideNav({ handleOpenNav, width }) {
         <button className="closebtn" onClick={handleOpenNav}>X</button>
         {isAdmin ?
           <>
-            <Link to="/dashboad">Dashboad</Link>
-            <Link to="/shops">Shops</Link>
-            <Link to="/products">Products</Link>
-            <Link to="/users">Users</Link>
-            <Link to="#">Settings</Link>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+            <button onClick={handleDropDown} className={`dropdown-btn `}>Stores
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div style={{ display: `${isActive ? "block" : "none"}` }} className="dropdown-container">
+              <NavLink to="/shops">Add store</NavLink>
+              <NavLink to="/shops">All stores</NavLink>
+              <NavLink to="/shops">manage</NavLink>
+            </div>
+            <NavLink to="/products">Products</NavLink>
+            <NavLink to="/users">Users</NavLink>
+            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/settings">Settings</NavLink>
           </>
           :
           <>
-            {/* <Link to="/dashboad">Dashboad</Link> */}
-            <Link to="/shops">{user.store}</Link>
-            <Link to="/plans">Subscriptions</Link>
-            {/* <Link to="#">Settings</Link> */}
+            {/* <NavLink to="/dashboad">Dashboad</NavLink> */}
+            <NavLink to="/shops">{user.store}</NavLink>
+            <NavLink to="/plans">Subscriptions</NavLink>
+            {/* <NavLink to="#">Settings</NavLink> */}
           </>
         }
       </div>

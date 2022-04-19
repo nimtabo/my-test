@@ -14,7 +14,16 @@ const UserTable = () => {
 
           <div>
             <input type="checkbox" />
-            <span>users</span>
+            <span>All users</span>
+          </div>
+
+          <div>
+            <input type="checkbox" />
+            <span>Sellers</span>
+          </div>
+          <div>
+            <input type="checkbox" />
+            <span>Buyers</span>
           </div>
 
           <div>
@@ -46,28 +55,28 @@ const UserTable = () => {
             <td>nicklas Doe</td>
             <td>nicklas@gmail.com</td>
             <td>yes</td>
-            <td><button>Edit</button> <button>Delete</button></td>
+            <td><button>Edit</button> <button>Delete</button> <button>More info</button></td>
           </tr>
           <tr>
             <td><input type="checkbox" /></td>
             <td>nicklas Doe</td>
             <td>nicklas@gmail.com</td>
             <td>yes</td>
-            <td><button>Edit</button> <button>Delete</button></td>
+            <td><button>Edit</button> <button>Delete</button> <button>More info</button></td>
           </tr>
           <tr>
             <td><input type="checkbox" /></td>
             <td>nicklas Doe</td>
             <td>nicklas@gmail.com</td>
             <td>yes</td>
-            <td><button>Edit</button> <button>Delete</button></td>
+            <td><button>Edit</button> <button>Delete</button> <button>More info</button></td>
           </tr>
           <tr>
             <td><input type="checkbox" /></td>
             <td>nicklas Doe</td>
             <td>nicklas@gmail.com</td>
             <td>yes</td>
-            <td><button>Edit</button> <button>Delete</button></td>
+            <td><button>Edit</button> <button>Delete</button> <button>More info</button></td>
           </tr>
 
 

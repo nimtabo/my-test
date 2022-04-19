@@ -13,7 +13,7 @@ import ProfileB from '../body/profile/ProfileB'
 import EditUser from '../body/profile/EditUser'
 
 import Home from '../body/home/Home'
-import Dashboad from '../body/dashboad/Dashboad'
+// import Dashboad from '../body/dashboad/Dashboad'
 
 import { useSelector } from 'react-redux'
 import About from './pages/About'
@@ -35,6 +35,8 @@ import Products from './dashboad/pages/Products'
 import Users from './dashboad/pages/Users'
 import Plans from './dashboad/pages/Plans'
 import BuyerSignup from './auth/BuyerSignup'
+import Dashboard from '../body/dashboad/Dashboad'
+
 
 function Body() {
     const auth = useSelector(state => state.auth)
@@ -65,9 +67,9 @@ function Body() {
                 <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
 
                 {/* USER DASHBOARD */}
-                <Route path="/dashboad" exact>
+                {/* <Route path="/dashboad" exact>
                     {isLogged ? <Dashboad handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
-                </Route>
+                </Route> */}
                 <Route path="/shops" exact >
                     {isLogged ? <Shops handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
                 </Route>
@@ -79,9 +81,14 @@ function Body() {
                     {isLogged ? <Plans handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
                 </Route>
 
+                {/* ADMINS */}
                 <Route path="/users" exact >
                     {isAdmin ? <Users handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
                 </Route>
+                <Route path="/dashboard" exact >
+                    {isAdmin ? <Dashboard handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                </Route>
+
 
 
                 {/* PAGES */}
