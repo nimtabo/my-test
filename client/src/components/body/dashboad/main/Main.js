@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import NotFound from '../../../utils/NotFound/NotFound'
 import Shops from '../pages/Shops'
-
+import Dashboard from '../Dashboad'
 
 import './main.css'
 
@@ -20,6 +20,7 @@ function Main({ handleOpenNav, width }) {
         <div>
           <Switch>
             <Route path="/shops" component={isLogged ? Shops : NotFound} exact />
+            <Route path="/dashboard" component={isLogged ? Dashboard : NotFound} exact />
           </Switch>
         </div>
       </div>

@@ -244,33 +244,38 @@
 }
 
 .list_table .headers div:nth-child(3),
-.list_table .headers div:nth-child(4),
-.list_table .headers div:nth-child(8),
-.list_table .list_items .list_item div:nth-child(3),
-.list_table .list_items .list_item div:nth-child(4),
-.list_table .list_items .list_item div:nth-child(8),
+.list_table .list_items .list_item div:nth-child(3) {
+  width: 20%;
+}
+
+/* .list_table .headers div:nth-child(3), */
+/* .list_table .headers div:nth-child(4), */
+.list_table .headers div:nth-child(7),
+/* .list_table .list_items .list_item div:nth-child(3), */
+/* .list_table .list_items .list_item div:nth-child(4), */
+.list_table .list_items .list_item div:nth-child(7),
 .list_table .list_items .list_item_a div:nth-child(4) {
+  width: 10%;
+}
+
+.list_table .headers div:nth-child(4),
+.list_table .list_items .list_item div:nth-child(4) {
   width: 10%;
 }
 
 .list_table .headers div:nth-child(5),
 .list_table .list_items .list_item div:nth-child(5) {
-  width: 10%;
-}
-
-.list_table .headers div:nth-child(6),
-.list_table .list_items .list_item div:nth-child(6) {
   width: 15%;
 }
 
-.list_table .headers div:nth-child(7),
-.list_table .list_items .list_item div:nth-child(7),
+.list_table .headers div:nth-child(6),
+.list_table .list_items .list_item div:nth-child(6),
 .list_table .list_items .list_item_a div:nth-child(3) {
   width: 22%;
 }
 
-.list_table .headers div:nth-child(9),
-.list_table .list_items .list_item div:nth-child(9),
+.list_table .headers div:nth-child(8),
+.list_table .list_items .list_item div:nth-child(8),
 .list_table .list_items .list_item_a div:nth-child(5) {
   width: 9%;
 }
@@ -347,4 +352,15 @@
 
 .list_table .list_items .login_hiden button a {
   margin-left: 2rem;
+}
+
+.list_table .list_items .load_more {
+  width: fit-content;
+  padding: 5px 15px;
+  margin: 15px auto;
+  background-color: #ffc560;
+  color: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.04)) drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.04)) drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.04));
+  border-radius: 20px;
 }

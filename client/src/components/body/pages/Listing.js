@@ -48,7 +48,6 @@ const Listing = () => {
         setMakes([...makes.data])
         if (location.state.make && location.state.model && location.state.year && location.state.part) {
           const prodRes = await axios.get(`/api/product/search/${location.state.make}/${location.state.model}/${location.state.year}/${location.state.part}`);
-          // console.log("RES", prodRes.data);
           setProducts([...prodRes.data])
         }
       } catch (error) {
@@ -250,7 +249,8 @@ const Listing = () => {
               name="make"
               id="make"
               className="hero-make"
-              value={make}
+              // value={make}
+              defaultValue={location.state.make}
               onChange={(e) => { setMake(e.target.value) }}>
               <option>make</option>
               {
@@ -264,7 +264,8 @@ const Listing = () => {
           <div className="listing_left_filter_form_item">
             {/* <label htmlFor="model">Model: </label> */}
             <select name="model"
-              value={model}
+              // value={model}
+              defaultValue={location.state.model}
               onChange={(e) => { setModel(e.target.value) }}>
               <option>model</option>
               {/* {models.length === 0 ? <option>make</option> : <option>model</option>} */}
@@ -279,7 +280,8 @@ const Listing = () => {
           <div className="listing_left_filter_form_item">
             {/* <label htmlFor="year">Year: </label> */}
             <select name="year"
-              value={year}
+              // value={year}
+              defaultValue={location.state.year}
               onChange={(e) => { setYear(e.target.value) }}>
               <option>year</option>
               {/* {years.length === 0 ? <option>model</option> : <option>year</option>} */}
@@ -324,7 +326,8 @@ const Listing = () => {
           <div className="listing_left_filter_form_item">
             {/* <label htmlFor="part">Part: </label> */}
             <select name="engine"
-              value={part}
+              // value={part}
+              defaultValue={location.state.part}
               onChange={(e) => { setPart(e.target.value) }}
             >
               <option>part</option>
@@ -349,7 +352,7 @@ const Listing = () => {
           <div>IMAGE</div>
           <div>SELLER</div>
           <div>CITY</div>
-          <div>STATE</div>
+          {/* <div>STATE</div> */}
           <div>PHONE</div>
           <div>EMAIL</div>
           <div>DESCRIPTION</div>
@@ -366,13 +369,13 @@ const Listing = () => {
               </div>
             ) : (products.map(prod => {
               return isLogged ? (
-                <div className='list_item'>
+                <div key={prod._id} className='list_item'>
                   <div><img src={prod.multiple_image[0]} /></div>
                   <div>{prod.shop.name.substring(0, 13)}...</div>
-                  <div>{prod.shop.city}</div>
-                  <div>{prod.shop.stateProvince}</div>
+                  <div>{`${prod.shop.city} - ${prod.shop.stateProvince}`.substring(0, 26)}</div>
+                  {/* <div>{prod.shop.stateProvince}</div> */}
                   <div>{prod.shop.phone}</div>
-                  <div>{prod.shop.owner.email}</div>
+                  <div>{prod.shop.owner.email.substring(0, 13)}</div>
                   <div>{prod.description.substring(0, 25)}...</div>
                   <div>{formatValue({
                     value: `${prod.price}`,
@@ -405,6 +408,7 @@ const Listing = () => {
             })
             )}
 
+          <button className='load_more'>Load More...</button>
         </div>
 
 
