@@ -1,3 +1,4 @@
+const { PaginationParameters } = require('mongoose-paginate-v2');
 const Product = require('../models/productModel')
 const Shop = require('../models/shopModel')
 
@@ -27,32 +28,22 @@ const productCtrl = {
   searchProduct: async (req, res) => {
     try {
       const { make, model, year, engine, category, part } = req.params;
-      // if (engine === 'null' && category === 'null') {
-      //   if (make === '' || model === '' || year === '' || part === '') {
-      //     return res.status(404).json({
-      //       message: "All fields are required!",
-      //     });
-      //   }
-      //   // http://localhost:5000/api/product/search/BENTLEY/AZURE/2001/6.7L V8 Turbocharged/Engine/Oil Filter
-      //   const products = await Product.find({ make, model, year, part }).populate('shop', { __v: 0, owner: 0 });
-      //   res.json(products);
-      // } else {
-      //   const products = await Product.find({ make, model, year, engine, category, part }).populate('shop', { __v: 0, owner: 0 });
-      //   if (!products) {
-      //     return res.status(400).json({
-      //       message: "No Products exist!",
-      //     });
-      //   }
-      //   res.json(products);
-      // }
-      // console.log(req.params)
-      const products = await Product.find({ make, model, year, part, availability: 0 }).sort({ createdAt: -1 }).populate('shop', { __v: 0, products: 0 });
-      if (!products.length) {
+      // MONGOOSE PAGNATION
+      // ******************
+      const options = new PaginationParameters(req).get()[1]
+
+      options.populate = 'shop'
+      options.sort = { createdAt: -1 }
+
+      const products = await Product.paginate({ make, model, year, part, availability: 0 }, options);
+
+      if (!products.docs.length) {
         return res.status(400).json({
           message: "No Products exist!",
         });
       }
-      res.json(products);
+
+      res.json(products)
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }

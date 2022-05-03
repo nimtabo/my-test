@@ -1,5 +1,6 @@
 {
   "New York": [
+    "NY",
     "New York",
     "Buffalo",
     "Rochester",
@@ -19,6 +20,7 @@
     "Valley Stream"
   ],
   "California": [
+    "CA",
     "Los Angeles",
     "San Diego",
     "San Jose",
@@ -234,6 +236,7 @@
     "Martinez"
   ],
   "Illinois": [
+    "IL",
     "Chicago",
     "Aurora",
     "Rockford",
@@ -288,6 +291,7 @@
     "Calumet City"
   ],
   "Texas": [
+    "TX",
     "Houston",
     "San Antonio",
     "Dallas",
@@ -373,6 +377,7 @@
     "Weslaco"
   ],
   "Pennsylvania": [
+    "PA",
     "Philadelphia",
     "Pittsburgh",
     "Allentown",
@@ -388,6 +393,7 @@
     "Wilkes-Barre"
   ],
   "Arizona": [
+    "AZ",
     "Phoenix",
     "Tucson",
     "Mesa",
@@ -415,6 +421,7 @@
     "Apache Junction"
   ],
   "Florida": [
+    "FL",
     "Jacksonville",
     "Miami",
     "Tampa",
@@ -489,6 +496,7 @@
     "Aventura"
   ],
   "Indiana": [
+    "IN",
     "Indianapolis",
     "Fort Wayne",
     "Evansville",
@@ -513,6 +521,7 @@
     "Portage"
   ],
   "Ohio": [
+    "OH",
     "Columbus",
     "Cleveland",
     "Cincinnati",
@@ -549,6 +558,7 @@
     "Grove City"
   ],
   "North Carolina": [
+    "NC",
     "Charlotte",
     "Raleigh",
     "Greensboro",
@@ -574,6 +584,7 @@
     "Goldsboro"
   ],
   "Michigan": [
+    "MI",
     "Detroit",
     "Grand Rapids",
     "Warren",
@@ -607,6 +618,7 @@
     "Muskegon"
   ],
   "Tennessee": [
+    "TN",
     "Memphis",
     "Nashville-Davidson",
     "Knoxville",
@@ -626,6 +638,7 @@
     "Brentwood"
   ],
   "Massachusetts": [
+    "MA",
     "Boston",
     "Worcester",
     "Springfield",
@@ -664,6 +677,7 @@
     "Chelsea"
   ],
   "Washington": [
+    "WA",
     "Seattle",
     "Spokane",
     "Tacoma",
@@ -694,6 +708,7 @@
     "Puyallup"
   ],
   "Colorado": [
+    "CO",
     "Denver",
     "Colorado Springs",
     "Aurora",
@@ -716,8 +731,9 @@
     "Littleton",
     "Northglenn"
   ],
-  "District of Columbia": ["Washington"],
+  "District of Columbia": ["DC", "Washington"],
   "Maryland": [
+    "MD",
     "Baltimore",
     "Frederick",
     "Rockville",
@@ -727,6 +743,7 @@
     "Annapolis"
   ],
   "Kentucky": [
+    "KY",
     "Louisville/Jefferson County",
     "Lexington-Fayette",
     "Bowling Green",
@@ -734,6 +751,7 @@
     "Covington"
   ],
   "Oregon": [
+    "OR",
     "Portland",
     "Eugene",
     "Salem",
@@ -750,6 +768,7 @@
     "Keizer"
   ],
   "Oklahoma": [
+    "OK",
     "Oklahoma City",
     "Tulsa",
     "Norman",
@@ -763,6 +782,7 @@
     "Muskogee"
   ],
   "Wisconsin": [
+    "WI",
     "Milwaukee",
     "Madison",
     "Green Bay",
@@ -785,6 +805,7 @@
     "Beloit"
   ],
   "Nevada": [
+    "NV",
     "Las Vegas",
     "Henderson",
     "Reno",
@@ -793,6 +814,7 @@
     "Carson City"
   ],
   "New Mexico": [
+    "NM",
     "Albuquerque",
     "Las Cruces",
     "Rio Rancho",
@@ -802,6 +824,7 @@
     "Clovis"
   ],
   "Missouri": [
+    "MO",
     "Kansas City",
     "St. Louis",
     "Springfield",
@@ -820,6 +843,7 @@
     "Cape Girardeau"
   ],
   "Virginia": [
+    "VA",
     "Virginia Beach",
     "Norfolk",
     "Chesapeake",
@@ -839,6 +863,7 @@
     "Manassas"
   ],
   "Georgia": [
+    "GA",
     "Atlanta",
     "Columbus",
     "Augusta-Richmond County",
@@ -856,8 +881,9 @@
     "Smyrna",
     "Dunwoody"
   ],
-  "Nebraska": ["Omaha", "Lincoln", "Bellevue", "Grand Island"],
+  "Nebraska": ["NE", "Omaha", "Lincoln", "Bellevue", "Grand Island"],
   "Minnesota": [
+    "MN",
     "Minneapolis",
     "St. Paul",
     "Rochester",
@@ -884,6 +910,7 @@
     "Shakopee"
   ],
   "Kansas": [
+    "KS",
     "Wichita",
     "Overland Park",
     "Kansas City",
@@ -897,6 +924,7 @@
     "Hutchinson"
   ],
   "Louisiana": [
+    "LA",
     "New Orleans",
     "Baton Rouge",
     "Shreveport",
@@ -907,9 +935,10 @@
     "Monroe",
     "Alexandria"
   ],
-  "Hawaii": ["Honolulu"],
-  "Alaska": ["Anchorage"],
+  "Hawaii": ["HI", "Honolulu"],
+  "Alaska": ["AK", "Anchorage"],
   "New Jersey": [
+    "NJ",
     "Newark",
     "Jersey City",
     "Paterson",
@@ -934,6 +963,7 @@
     "Atlantic City"
   ],
   "Idaho": [
+    "ID",
     "Boise City",
     "Nampa",
     "Meridian",
@@ -944,6 +974,7 @@
     "Twin Falls"
   ],
   "Alabama": [
+    "AL",
     "Birmingham",
     "Montgomery",
     "Mobile",
@@ -958,6 +989,7 @@
     "Gadsden"
   ],
   "Iowa": [
+    "IA",
     "Des Moines",
     "Cedar Rapids",
     "Davenport",
@@ -973,6 +1005,7 @@
     "Cedar Falls"
   ],
   "Arkansas": [
+    "AR",
     "Little Rock",
     "Fort Smith",
     "Fayetteville",
@@ -985,6 +1018,7 @@
     "Bentonville"
   ],
   "Utah": [
+    "UT",
     "Salt Lake City",
     "West Valley City",
     "Provo",
@@ -1005,6 +1039,7 @@
     "Roy"
   ],
   "Rhode Island": [
+    "RI",
     "Providence",
     "Warwick",
     "Cranston",
@@ -1013,6 +1048,7 @@
     "Woonsocket"
   ],
   "Mississippi": [
+    "MS",
     "Jackson",
     "Gulfport",
     "Southaven",
@@ -1020,8 +1056,9 @@
     "Biloxi",
     "Meridian"
   ],
-  "South Dakota": ["Sioux Falls", "Rapid City"],
+  "South Dakota": ["SD", "Sioux Falls", "Rapid City"],
   "Connecticut": [
+    "CT",
     "Bridgeport",
     "New Haven",
     "Stamford",
@@ -1039,6 +1076,7 @@
     "Shelton"
   ],
   "South Carolina": [
+    "SC",
     "Columbia",
     "Charleston",
     "North Charleston",
@@ -1052,12 +1090,12 @@
     "Florence",
     "Spartanburg"
   ],
-  "New Hampshire": ["Manchester", "Nashua", "Concord"],
-  "North Dakota": ["Fargo", "Bismarck", "Grand Forks", "Minot"],
-  "Montana": ["Billings", "Missoula", "Great Falls", "Bozeman"],
-  "Delaware": ["Wilmington", "Dover"],
-  "Maine": ["Portland"],
-  "Wyoming": ["Cheyenne", "Casper"],
-  "West Virginia": ["Charleston", "Huntington"],
-  "Vermont": ["Burlington"]
+  "New Hampshire": ["NH", "Manchester", "Nashua", "Concord"],
+  "North Dakota": ["ND", "Fargo", "Bismarck", "Grand Forks", "Minot"],
+  "Montana": ["MT", "Billings", "Missoula", "Great Falls", "Bozeman"],
+  "Delaware": ["DE", "Wilmington", "Dover"],
+  "Maine": ["ME", "Portland"],
+  "Wyoming": ["WY", "Cheyenne", "Casper"],
+  "West Virginia": ["WV", "Charleston", "Huntington"],
+  "Vermont": ["Vermont", "Burlington"]
 }

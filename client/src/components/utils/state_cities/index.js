@@ -6,7 +6,13 @@ export const getStates = () => {
 
 export const getCities = (state) => {
   for (const [key, value] of Object.entries(data)) {
-    if (key === state) return value
+    if (key === state) return value.slice(1)
+  }
+}
+
+export const getStateAbriv = (state) => {
+  for (const [key, value] of Object.entries(data)) {
+    if (key === state) return value[0]
   }
 }
 
