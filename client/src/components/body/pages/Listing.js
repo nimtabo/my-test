@@ -12,6 +12,7 @@ import {
 } from 'react-accessible-accordion';
 import { formatValue } from 'react-currency-input-field';
 import { FiLogIn } from 'react-icons/fi';
+import { IoFilterSharp } from 'react-icons/io5';
 import { showErrMsg } from '../../utils/notification/Notification'
 import { getStateAbriv } from '../../utils/state_cities/index'
 import locked from "../../../img/locked.png"
@@ -44,6 +45,7 @@ const Listing = () => {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [hasNextpage, setHasNextpage] = useState(false)
+  const [openFilter, setOpenFilter] = useState(false)
 
 
   const location = useLocation();
@@ -59,7 +61,7 @@ const Listing = () => {
         const makes = await axios.get('/api/cars/makes');
         setMakes([...makes.data])
         if (location.state.make && location.state.model && location.state.year && location.state.part) {
-          const prodRes = await axios.get(`/api/product/search/${location.state.make}/${location.state.model}/${location.state.year}/${location.state.part}`, { params: { page: nextPage, limit: 2 } });
+          const prodRes = await axios.get(`/api/product/search/${location.state.make}/${location.state.model}/${location.state.year}/${location.state.part}`, { params: { page: nextPage, limit: 30 } });
           setProducts([...prodRes.data.docs])
           setNextPage(prodRes.data.nextPage)
           setHasNextpage(prodRes.data.hasNextPage)
@@ -170,7 +172,7 @@ const Listing = () => {
         // const data = { make, model, year, engine, category, part }
         setIsLoading(true)
         products.splice(0, years.length)
-        const prodRes = await axios.get(`/api/product/search/${make}/${model}/${year}/${part}`, { params: { page: nextPage, limit: 2 } });
+        const prodRes = await axios.get(`/api/product/search/${make}/${model}/${year}/${part}`, { params: { page: nextPage, limit: 30 } });
         // console.log("Listing", prodRes.data);
         setProducts([...prodRes.data.docs])
         setNextPage(prodRes.data.nextPage)
@@ -194,7 +196,7 @@ const Listing = () => {
   const loadMore = async () => {
     try {
       setIsLoading(true)
-      const prodRes = await axios.get(`/api/product/search/${make || location.state.make}/${model || location.state.model}/${year || location.state.year}/${part || location.state.part}`, { params: { page: nextPage, limit: 2 } });
+      const prodRes = await axios.get(`/api/product/search/${make || location.state.make}/${model || location.state.model}/${year || location.state.year}/${part || location.state.part}`, { params: { page: nextPage, limit: 30 } });
       setProducts(products => [...products, ...prodRes.data.docs])
       setHasNextpage(prodRes.data.hasNextPage)
       setNextPage(prodRes.data.nextPage)
@@ -209,6 +211,23 @@ const Listing = () => {
 
   }
 
+  const updateFilter = async (e) => {
+    try {
+      const filter = e.target.dataset.filter
+      setIsLoading(true)
+      const prodRes = await axios.get(`/api/product/search/${make || location.state.make}/${model || location.state.model}/${year || location.state.year}/${part || location.state.part}`, { params: { page: nextPage, limit: 30, filter } });
+      setProducts([...prodRes.data.docs])
+      setHasNextpage(prodRes.data.hasNextPage)
+      setNextPage(prodRes.data.nextPage)
+    } catch (error) {
+      setErr("Error Getting Data!");
+      return setTimeout(() => {
+        setErr("");
+      }, 5000);
+    } finally {
+      setIsLoading(false)
+    }
+  }
   return (
     <div className="listing_page">
       <div className="listing_left_filter">
@@ -292,6 +311,25 @@ const Listing = () => {
         </form>
       </div>
 
+      <div className='list_right_filter'
+        onClick={() => { setOpenFilter(!openFilter) }}
+      >
+        <IoFilterSharp />
+        <span>Filter</span>
+      </div>
+      {
+        openFilter
+        &&
+        <ul className='list_right_filter_items'
+          onClick={updateFilter}
+        >
+          <li data-filter="low">lowest price</li>
+          <li data-filter="high">Highest price</li>
+          <li data-filter="date">date</li>
+        </ul>
+      }
+
+
       <div className='list_table'>
         <div className='headers'>
           <div>IMAGE</div>
@@ -302,7 +340,7 @@ const Listing = () => {
           <div>EMAIL</div>
           <div>DESCRIPTION</div>
           <div>PRICE</div>
-          <div>LIVE CHAT</div>
+          <div>CHAT</div>
         </div>
 
         <div className='list_items'>
@@ -321,12 +359,12 @@ const Listing = () => {
                           {({ expanded }) => (expanded ?
                             <div key={prod._id} className='list_item'>
                               <div><img className='expand_img' src={prod.multiple_image[0]} /></div>
-                              <div>{prod.shop.name}</div>
-                              <div>{`${prod.shop.city} - ${getStateAbriv(prod.shop.stateProvince)}`}</div>
+                              <div className='word_break'>{prod.shop.name}</div>
+                              <div>{`${prod.shop.city} , ${getStateAbriv(prod.shop.stateProvince)}`}</div>
                               {/* <div>{prod.shop.stateProvince}</div> */}
                               <div>{prod.shop.phone}</div>
-                              <div>{prod.shop.owner.email}</div>
-                              <div>{prod.description}</div>
+                              <div className='word_break'>{prod.shop.owner.email}</div>
+                              <div className='word_break'>{prod.description}</div>
                               <div>{formatValue({
                                 value: `${prod.price}`,
                                 groupSeparator: ',',
@@ -338,12 +376,12 @@ const Listing = () => {
                             :
                             <div key={prod._id} className='list_item'>
                               <div><img src={prod.multiple_image[0]} /></div>
-                              <div>{prod.shop.name.substring(0, 13)}...</div>
-                              <div>{`${prod.shop.city} - ${getStateAbriv(prod.shop.stateProvince)}`.substring(0, 26)}</div>
+                              <div className='word_break'>{prod.shop.name.substring(0, 13)}...</div>
+                              <div>{`${prod.shop.city} , ${getStateAbriv(prod.shop.stateProvince)}`.substring(0, 26)}</div>
                               {/* <div>{prod.shop.stateProvince}</div> */}
                               <div>{prod.shop.phone}</div>
-                              <div>{prod.shop.owner.email.substring(0, 13)}</div>
-                              <div>{prod.description.substring(0, 25)}...</div>
+                              <div className='word_break'>{prod.shop.owner.email.substring(0, 13)}</div>
+                              <div className='word_break'>{prod.description.substring(0, 25)}...</div>
                               <div>{formatValue({
                                 value: `${prod.price}`,
                                 groupSeparator: ',',
@@ -374,7 +412,7 @@ const Listing = () => {
                                   <button><FiLogIn /><Link to="/login">Sign in</Link></button>
                                 </p>
                               </div>
-                              <div>{prod.description}</div>
+                              <div className='word_break'>{prod.description}</div>
                               <div>{formatValue({
                                 value: `${prod.price}`,
                                 groupSeparator: ',',
@@ -393,7 +431,7 @@ const Listing = () => {
                                   <button><FiLogIn /><Link to="/login">Sign in</Link></button>
                                 </p>
                               </div>
-                              <div>{prod.description.substring(0, 25)}...</div>
+                              <div className='word_break'>{prod.description.substring(0, 25)}...</div>
                               <div>{formatValue({
                                 value: `${prod.price}`,
                                 groupSeparator: ',',

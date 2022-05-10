@@ -23,7 +23,7 @@ function SideNav({ handleOpenNav, width }) {
           <>
             <NavLink to="/dashboard">Dashboard</NavLink>
             <button onClick={handleDropDown} className={`dropdown-btn `}>Stores
-              <i class="fa fa-caret-down"></i>
+              <i className="fa fa-caret-down"></i>
             </button>
             <div style={{ display: `${isActive ? "block" : "none"}` }} className="dropdown-container">
               <NavLink to="/shops">Add store</NavLink>

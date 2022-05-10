@@ -36,6 +36,10 @@ import Users from './dashboad/pages/Users'
 import Plans from './dashboad/pages/Plans'
 import BuyerSignup from './auth/BuyerSignup'
 import Dashboard from '../body/dashboad/Dashboad'
+import UserLayout from './layouts/User'
+import AdminLayout from './layouts/Admin'
+import Overview from './admin/Overview'
+import Store from './admin/Store'
 
 
 function Body() {
@@ -51,63 +55,79 @@ function Body() {
     return (
         <section>
             <Switch>
-                <Route path="/" component={Home} exact />
+                {/* ADMINS */}
+                <Route path='/admin/:path?' exact>
+                    <AdminLayout>
+                        <Switch>
+                            <Route path="/admin/users" exact >
+                                {isAdmin ? <Users /> : <NotFound />}
+                            </Route>
+                            <Route path="/admin/dashboard" exact >
+                                {isAdmin ? <Overview /> : <NotFound />}
+                            </Route>
+                            <Route path="/admin/stores" exact >
+                                {isAdmin ? <Store /> : <NotFound />}
+                            </Route>
+                            <Route path="/*" component={NotFound} exact />
+                        </Switch>
+                    </AdminLayout>
+                </Route>
 
-                <Route path="/login" component={isLogged ? NotFound : Login} exact />
-                <Route path="/register" component={isLogged ? NotFound : Register} exact />
-                <Route path="/buy" component={isLogged ? NotFound : BuyerSignup} exact />
 
-                <Route path="/forgot_password" component={isLogged ? NotFound : ForgotPass} exact />
-                <Route path="/user/reset/:token" component={isLogged ? NotFound : ResetPass} exact />
+                {/* USER ROUTES */}
+                <Route>
+                    <UserLayout>
+                        <Switch>
+                            <Route path="/" component={Home} exact />
 
-                <Route path="/user/activate/:activation_token" component={ActivationEmail} exact />
+                            <Route path="/login" component={isLogged ? NotFound : Login} exact />
+                            <Route path="/register" component={isLogged ? NotFound : Register} exact />
+                            <Route path="/buy" component={isLogged ? NotFound : BuyerSignup} exact />
 
-                {/* <Route path="/profile" component={isLogged ? Profile : NotFound} exact /> */}
-                <Route path="/profile" component={isLogged ? ProfileB : NotFound} exact />
-                <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
+                            <Route path="/forgot_password" component={isLogged ? NotFound : ForgotPass} exact />
+                            <Route path="/user/reset/:token" component={isLogged ? NotFound : ResetPass} exact />
 
-                {/* USER DASHBOARD */}
-                {/* <Route path="/dashboad" exact>
+                            <Route path="/user/activate/:activation_token" component={ActivationEmail} exact />
+                            {/* <Route path="/profile" component={isLogged ? Profile : NotFound} exact /> */}
+                            <Route path="/profile" component={isLogged ? ProfileB : NotFound} exact />
+                            <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
+
+                            {/* USER DASHBOARD */}
+                            {/* <Route path="/dashboad" exact>
                     {isLogged ? <Dashboad handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
                 </Route> */}
-                <Route path="/shops" exact >
-                    {isLogged ? <Shops handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                            <Route path="/shops" exact >
+                                {isLogged ? <Shops handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                            </Route>
+                            <Route path="/products" exact >
+                                {isLogged ? <Products handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                            </Route>
+
+                            <Route path="/plans" exact >
+                                {isLogged ? <Plans handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                            </Route>
+
+                            {/* PAGES */}
+                            <Route path="/about" component={About} exact />
+                            <Route path="/websites" component={WebServices} exact />
+                            <Route path="/services" component={Services} exact />
+                            <Route path="/pricing" component={Pricing} exact />
+                            <Route path="/terms" component={Terms} exact />
+                            <Route path="/privacy" component={Privacy} exact />
+                            <Route path="/contacts" component={Contacts} exact />
+                            <Route path="/listing" component={Listing} exact />
+
+                            {/* OTHER HOME PARTS */}
+                            <Route path="/get_website" component={HomeWebs} exact />
+                            <Route path="/webs_plans" component={HomeWebPrice} exact />
+                            <Route path="/webs_pay" component={HomeWebPay} exact />
+                            <Route path="/webs_confirms" component={HomeWebConfirm} exact />
+
+                            <Route path="/*" component={NotFound} exact />
+                        </Switch>
+                    </UserLayout>
                 </Route>
-                <Route path="/products" exact >
-                    {isLogged ? <Products handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
-                </Route>
 
-                <Route path="/plans" exact >
-                    {isLogged ? <Plans handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
-                </Route>
-
-                {/* ADMINS */}
-                <Route path="/users" exact >
-                    {isAdmin ? <Users handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
-                </Route>
-                <Route path="/dashboard" exact >
-                    {isAdmin ? <Dashboard handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
-                </Route>
-
-
-
-                {/* PAGES */}
-                <Route path="/about" component={About} exact />
-                <Route path="/websites" component={WebServices} exact />
-                <Route path="/services" component={Services} exact />
-                <Route path="/pricing" component={Pricing} exact />
-                <Route path="/terms" component={Terms} exact />
-                <Route path="/privacy" component={Privacy} exact />
-                <Route path="/contacts" component={Contacts} exact />
-                <Route path="/listing" component={Listing} exact />
-
-                {/* OTHER HOME PARTS */}
-                <Route path="/get_website" component={HomeWebs} exact />
-                <Route path="/webs_plans" component={HomeWebPrice} exact />
-                <Route path="/webs_pay" component={HomeWebPay} exact />
-                <Route path="/webs_confirms" component={HomeWebConfirm} exact />
-
-                <Route path="/*" component={NotFound} exact />
             </Switch>
         </section>
     )

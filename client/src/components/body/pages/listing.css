@@ -253,7 +253,14 @@
 .list_table .headers div:nth-child(7),
 /* .list_table .list_items .list_item div:nth-child(3), */
 /* .list_table .list_items .list_item div:nth-child(4), */
-.list_table .list_items .list_item div:nth-child(7),
+.list_table .list_items .list_item div:nth-child(7) {
+  width: 6%;
+}
+
+.list_table .list_items .list_item div:nth-child(7) {
+  margin-left: .2rem;
+}
+
 .list_table .list_items .list_item_a div:nth-child(4) {
   width: 10%;
 }
@@ -271,11 +278,14 @@
 .list_table .headers div:nth-child(6),
 .list_table .list_items .list_item div:nth-child(6),
 .list_table .list_items .list_item_a div:nth-child(3) {
-  width: 22%;
+  width: 30%;
 }
 
 .list_table .headers div:nth-child(8),
-.list_table .list_items .list_item div:nth-child(8),
+.list_table .list_items .list_item div:nth-child(8) {
+  width: 5%;
+}
+
 .list_table .list_items .list_item_a div:nth-child(5) {
   width: 9%;
 }
@@ -382,4 +392,54 @@
 /* -------------- */
 .accordion__panel {
   padding: .1rem !important;
+}
+
+/* WORD BREAK */
+/* ------------ */
+.word_break {
+  word-break: break-all;
+}
+
+/* FILTER SECTION */
+/* ------------------- */
+.list_right_filter {
+  padding: .5rem;
+  background-color: #4F4F4F;
+  color: #FFC560;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+  width: fit-content;
+  position: absolute;
+  right: 1rem;
+  margin-top: -3rem;
+}
+
+.list_right_filter:hover {
+  cursor: pointer;
+}
+
+.list_right_filter span {
+  margin-left: 1rem;
+}
+
+.list_right_filter_items {
+  padding: .2rem;
+  border: none;
+  background-color: #4F4F4F;
+  color: #FFC560;
+  width: fit-content;
+  min-width: 5.4rem;
+  position: absolute;
+  right: 1rem;
+  margin-top: -.4rem;
+}
+
+.list_right_filter_items li {
+  padding: .1rem;
+}
+
+.list_right_filter_items li:hover {
+  background-color: #F2F2F2;
+  color: #000000;
+  cursor: pointer;
 }

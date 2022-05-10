@@ -33,7 +33,7 @@ const productCtrl = {
       const options = new PaginationParameters(req).get()[1]
 
       options.populate = 'shop'
-      options.sort = { createdAt: -1 }
+      options.sort = { price: -1 }
 
       const products = await Product.paginate({ make, model, year, part, availability: 0 }, options);
 

@@ -51,7 +51,7 @@ function Header() {
                     {
                         isAdmin ? <>
                             <li><Link to="/profile">My Profile</Link></li>
-                            {user.profile === 0 && <li><Link to="/dashboard">Dashboard</Link></li>}
+                            {user.profile === 0 && <li><Link to="/admin/dashboard">Dashboard</Link></li>}
                             <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
                         </>
                             : <>

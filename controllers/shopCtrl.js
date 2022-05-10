@@ -205,7 +205,7 @@ const shopCtrl = {
   getAvailableProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, availability: 0 });
+      const products = await Product.find({ shop: shopId, availability: 0 }).sort('-createdAt');
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -214,7 +214,7 @@ const shopCtrl = {
   getArchivedProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, availability: 3 });
+      const products = await Product.find({ shop: shopId, availability: 3 }).sort('-createdAt');
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -223,7 +223,7 @@ const shopCtrl = {
   getSoldOutProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, availability: 1 });
+      const products = await Product.find({ shop: shopId, availability: 1 }).sort('-createdAt');
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -232,7 +232,7 @@ const shopCtrl = {
   getOnHoldProducts: async (req, res) => {
     try {
       const { shopId } = req.params;
-      const products = await Product.find({ shop: shopId, availability: 2 });
+      const products = await Product.find({ shop: shopId, availability: 2 }).sort('-createdAt');
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
@@ -260,7 +260,7 @@ const shopCtrl = {
         data.part = part
       }
 
-      const products = await Product.find(data);
+      const products = await Product.find(data).sort('-createdAt');
       res.json(products);
     } catch (err) {
       return res.status(500).json({ msg: err.message })
