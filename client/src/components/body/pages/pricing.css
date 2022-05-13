@@ -34,10 +34,11 @@
 
 .pricing-plan-parts {
   /* height: 35rem; */
+  margin: 0 3rem;
   margin-top: 80px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -50,45 +51,57 @@
   margin: 1rem;
 }
 
-/* .pricing-plan-tittle h2 {
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 43px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-} */
+.pricing-plan-tittle h2 {
+  font-weight: 500;
+  /* font-size: 36px; */
+  /* line-height: 43px; */
+  /* display: flex; */
+  /* align-items: center;
+  text-align: center; */
+}
 
 .price-card {
-  /* height: 25rem; */
-  min-height: 25rem;
+  height: fit-content;
+  padding-bottom: 1rem;
+  /* min-height: 25rem; */
   width: 22%;
   /* margin: 0.5rem; */
-  background: #000201;
   border: 2px solid #ffffff;
   box-sizing: border-box;
-  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  background: #FFFFFF;
+  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
 }
 
 .gold {
-  background-color: #1d50a8;
+  border: 1px solid #1D50A8;
+  border-radius: 20px;
 }
 
-.pricing-plan-parts-container h4 {
+.website_plans .pricing-plan-parts {
+  margin: 0 10%;
+}
+
+.website_plans .price-card {
+  width: 40%;
+}
+
+/* .pricing-plan-parts-container h4 {
   font-weight: 400;
   font-size: 15px;
   text-align: center;
-}
+} */
 
 .price-card h3,
-.price-card h2 {
+.price-card h2,
+.price-card h4 {
   font-family: Poppins;
   font-weight: 600;
   font-size: 1.5rem;
   line-height: 2rem;
-  text-align: center;
-  color: #ffffff;
+  /* text-align: center; */
   margin: 1rem;
 }
 
@@ -102,41 +115,58 @@
 }
 
 .price-card button {
-  border: 1px solid #ffffff;
-  box-sizing: border-box;
-  border-radius: 10px;
-  background-color: #000201;
   color: #fff;
-  padding: 0.5rem;
+  padding: 0.2rem;
   margin: auto;
   display: block;
-  margin-top: 2.5rem;
+  margin-top: .5rem;
+  min-width: 80%;
+  background-color: #2C2A28;
+  border: 1px solid #B6121B;
+  border-radius: 10px;
 }
 
-.gold button {
+/* .gold button {
   background-color: #f0ac34;
   border: none;
-}
+} */
 
 .price-card .popular {
-  width: 100%;
-  border-radius: 0;
-  margin-top: -38px;
-}
-
-.price-card hr {
-  margin: 0px auto;
+  color: #1D50A8;
 }
 
 .price-card ul {
-  color: #ffffff;
+  /* color: #ffffff; */
   margin-left: 2.5rem;
   list-style-type: disc;
   font-size: 15px;
 }
 
-.card_paragraph {
-  margin: 3rem auto;
+.pricing-plan-parts-container .card_paragraph p,
+.subscriptions_page .card_paragraph h2 {
+  margin: 1rem;
+  text-align: start;
+}
+
+.subscriptions_page .price-card:nth-child(1) button {
+  border: 1px solid #1B1B1B;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.subscriptions_page .price-card:nth-child(2),
+.subscriptions_page .price-card:nth-child(4),
+.subscriptions_page .price-card:nth-child(2) button,
+.subscriptions_page .price-card:nth-child(4) button {
+  border: 1px solid #FFC560;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.subscriptions_page .price-card:nth-child(3) button {
+  border: 1px solid #1D50A8;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 976px) {

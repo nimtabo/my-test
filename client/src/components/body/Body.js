@@ -40,6 +40,7 @@ import UserLayout from './layouts/User'
 import AdminLayout from './layouts/Admin'
 import Overview from './admin/Overview'
 import Store from './admin/Store'
+import Checkout from './pages/Checkout'
 
 
 function Body() {
@@ -106,6 +107,7 @@ function Body() {
                             <Route path="/plans" exact >
                                 {isLogged ? <Plans handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
                             </Route>
+                            <Route path="/checkout" component={Checkout} exact />
 
                             {/* PAGES */}
                             <Route path="/about" component={About} exact />

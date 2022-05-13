@@ -38,7 +38,7 @@ function SideNav({ handleOpenNav, width }) {
           :
           <>
             {/* <NavLink to="/dashboad">Dashboad</NavLink> */}
-            <NavLink to="/shops">{user.store}</NavLink>
+            <NavLink to="/shops">{`${user.store}`.substring(0, 13)}</NavLink>
             <NavLink to="/plans">Subscriptions</NavLink>
             {/* <NavLink to="#">Settings</NavLink> */}
           </>

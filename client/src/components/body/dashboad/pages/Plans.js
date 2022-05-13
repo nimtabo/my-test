@@ -1,10 +1,16 @@
 import React from 'react'
+import { useHistory } from "react-router-dom"
 import SideNav from '../sidenav/SideNav'
 // **********
 import './shop.css'
 
 
 const Plans = ({ handleOpenNav, width }) => {
+  let history = useHistory()
+
+  const checkout = () => {
+    history.push("/checkout")
+  }
   return (
     <div className="dashboad_page">
       <SideNav className="side_menu" handleOpenNav={handleOpenNav} width={width} />
@@ -19,64 +25,73 @@ const Plans = ({ handleOpenNav, width }) => {
             <div className="pricing-title">
               <h1>Subscriptions</h1>
             </div>
-
-            <div className="pricing-plan-parts-container">
+            <div className="pricing-plan-parts-container subscriptions_page">
+              {/* <h4>7-DAY MONEY BACK GUARANTEE </h4> */}
               <div className="pricing-plan-tittle">
-                <h2>Pricing and Plans For Used Auto <br /> <span>Parts Sellers</span> </h2>
               </div>
+              <div className='card_paragraph'>
+                <h2>Select plan that help's grow </h2>
+                <p>
+                  Read all plans or contact us at <a href="mailto:info@fiaraa.com">info@fiaraa.com</a> if you are looking for a bigger plan.
+                </p>
+              </div>
+
               <div className="pricing-plan-parts">
+
                 <div className="price-card">
-                  <h3>Bronze</h3>
-                  <h2>$10 <sub className="sub_text">/month</sub> </h2>
-                  <hr />
+                  <h3>Free Plan</h3>
+                  <h2> $0<span className="span_text">/month</span></h2>
                   <div>
-                    <p>
-                      Permitted
-                      <br />
-                      To
-                      <br />
-                      Upload
-                      <br />
-                      Maximum
-                      <br />
-                      5 Parts
-                    </p>
+                    <ul>
+                      <li>1 part upload</li>
+                      <li>Direct customer contact</li>
+                      <li>Access to our E-store</li>
+                    </ul>
+                    <button onClick={checkout}>Create Account</button>
+                  </div>
+                </div>
+
+                <div className="price-card">
+                  <h3>Individual Plan</h3>
+                  <h2> $9.99<span className="span_text">/month</span></h2>
+                  <div>
+                    <ul>
+                      <li>30-days free trial</li>
+                      <li>5 part uploads</li>
+                      <li>Direct customer contact</li>
+                      <li>Access to our E-store</li>
+                      <li>Live Chat option with customer</li>
+                    </ul>
+                    <button onClick={checkout}>Buy Now</button>
+                  </div>
+                </div>
+                <div className="price-card gold">
+                  <h4 className='popular'>Popular</h4>
+                  <h3>Auto Shop Plan</h3>
+                  <h2> $29.99<span className="span_text">/month</span></h2>
+                  <div>
+                    <ul>
+                      <li>30-days free trial</li>
+                      <li>20 part uploads</li>
+                      <li>Direct customer contact</li>
+                      <li>Access to our E-store</li>
+                      <li>Live Chat option with customer</li>
+                    </ul>
+                    <button onClick={checkout}>Buy Now</button>
                   </div>
                 </div>
                 <div className="price-card">
-                  <h3>Silver</h3>
-                  <h2>$20 <sub className="sub_text">/month</sub> </h2>
-                  <hr />
+                  <h3>Dealership Plan</h3>
+                  <h2>$49.99<span className="span_text">/month</span></h2>
                   <div>
-                    <p>
-                      Permitted
-                      <br />
-                      To
-                      <br />
-                      Upload
-                      <br />
-                      Maximum
-                      <br />
-                      12 Parts
-                    </p>
-                  </div>
-                </div>
-                <div className="price-card">
-                  <h3>Gold</h3>
-                  <h2>$30 <sub className="sub_text">/month</sub> </h2>
-                  <hr />
-                  <div>
-                    <p>
-                      Permitted
-                      <br />
-                      To
-                      <br />
-                      Upload
-                      <br />
-                      Maximum
-                      <br />
-                      20 Parts
-                    </p>
+                    <ul>
+                      <li>30-days free trial</li>
+                      <li>35 part uploads</li>
+                      <li>Direct customer contact</li>
+                      <li>Access to our E-store</li>
+                      <li>Live Chat option with customer</li>
+                    </ul>
+                    <button onClick={checkout}>Buy Now</button>
                   </div>
                 </div>
               </div>

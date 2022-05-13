@@ -1,0 +1,93 @@
+.checkout {
+  padding: 1rem 6rem;
+}
+
+.checkout .checkout_item {
+  width: 100%;
+  margin: 2rem 0;
+  border: 1px solid #1D50A8;
+  border-radius: 10px;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+}
+
+.checkout .checkout_item:nth-child(5) {
+  border: none;
+}
+
+.checkout .checkout_item .form_items {
+  margin-top: .5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.checkout .checkout_item .form_item {
+  width: 49%;
+  margin: .3rem 0;
+}
+
+.checkout .checkout_item .form_item label {
+  display: inline-block;
+  width: 40%;
+}
+
+.checkout .checkout_item .form_item input {
+  display: inline-block;
+  width: 60%;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.checkout .checkout_item .form_item .cvv {
+  width: 10%;
+}
+
+.checkout .checkout_item .form_item p {
+  width: 100%;
+}
+
+.checkout .checkout_item .form_item p input {
+  display: inline-block;
+  margin-right: 3rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.checkout .checkout_item .plan_section {
+  border-bottom: 1px solid #FFC560;
+  transform: rotate(0.06deg);
+}
+
+.checkout .checkout_item .plan_section select {
+  width: 50%;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.checkout .checkout_item .plan_section label span,
+.green_text {
+  color: #4CAF50;
+}
+
+span[class="green_text"] {
+  display: inline-block;
+  width: 100%;
+  text-align: end;
+}
+
+
+.checkout_pay_btn button {
+  display: block;
+  margin: 0 auto;
+  padding: .5rem 1rem;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  background: #FFC560;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+}
