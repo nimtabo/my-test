@@ -3,12 +3,40 @@
   flex-wrap: wrap;
 }
 
+.shop_main_header {
+  background-color: #FFC560;
+  padding: .4rem 1rem;
+}
+
+.shop_main_header .header_links {
+  display: inline-block;
+  margin-left: 1rem;
+  width: fit-content;
+}
+
+.shop_main_header .header_links a {
+  display: inline-block;
+  color: #000000;
+  font-size: 18px;
+  padding: .4rem 2rem;
+}
+
+.shop_main_header .header_links a:hover,
+.shop_main_header .header_links .active {
+  border-bottom: 1px solid #000000;
+}
+
+.shop_main_header .header_links .active {
+  background-color: #FFC560;
+  color: #000000 !important;
+}
+
 .openbtn {
   font-size: 20px;
   cursor: pointer;
   background-color: #111;
   color: white;
-  padding: 10px 15px;
+  padding: 5px 10px;
   border: none;
 }
 

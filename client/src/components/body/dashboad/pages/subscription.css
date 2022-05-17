@@ -1,0 +1,225 @@
+.dashboad_page .subscription_window {
+  background-color: #fff;
+  padding: 2rem 4rem;
+  min-height: 400px;
+}
+
+.dashboad_page .subscription_window .billing_tittle h2 {
+  color: #000000;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43.45px;
+}
+
+.dashboad_page .subscription_window .billing_cards {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card {
+  margin-right: 1rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  width: 35%;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .upper_section {
+  padding: 1rem 1.5rem;
+  background: #FFFFFF;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .logo_edit {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .logo_edit span:first-child {
+  display: inline-block;
+  font-size: 80px;
+  color: #254AA5;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .logo_edit span:last-child {
+  margin-top: 2rem;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .card_number {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 98%;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .card_number span:nth-child(1),
+.dashboad_page .subscription_window .billing_cards .billing_card .card_number span:nth-child(2),
+.dashboad_page .subscription_window .billing_cards .billing_card .card_number span:nth-child(3) {
+  display: inline-block;
+  font-size: 35px;
+  height: 15px;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .card_number span:nth-child(4) {
+  margin-top: .5rem;
+  height: 15px;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .card_footer {
+  background-color: #C4C4C480;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .card_footer .card_priority,
+.dashboad_page .subscription_window .billing_cards .billing_card .card_footer .card_expire {
+  display: inline-block;
+  /* width: 20px; */
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .card_footer .card_priority span:first-child,
+.dashboad_page .subscription_window .billing_cards .billing_card .card_footer .card_expire span:first-child {
+  display: block;
+  font-size: 10px;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .card_footer .card_priority span:last-child,
+.dashboad_page .subscription_window .billing_cards .billing_card .card_footer .card_expire span:last-child {
+  display: inline-block;
+  font-size: 12px;
+}
+
+.dashboad_page .subscription_window .billing_cards .billing_card .card_footer .card_priority span:last-child {
+  color: #1D50A8;
+}
+
+/* Card two */
+.billing_card .add_card {
+  width: fit-content;
+  margin: auto;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.billing_card .add_card div:first-child {
+  color: #1D50A8;
+  font-size: 60px;
+}
+
+.billing_card .add_card div:last-child {
+  font-size: 18px;
+  font-weight: 600;
+  padding: .3rem;
+}
+
+.billing_card .add_card div:last-child:hover {
+  border: 1px solid #1D50A8;
+  cursor: pointer;
+}
+
+/* PAYMENT HISTORY PAGE */
+/* --------------------- */
+.subscription_window .pay_history {
+  margin-top: 2rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.subscription_window .pay_history .dates div {
+  display: inline-block;
+  width: 20%;
+}
+
+.subscription_window .pay_history .dates div label {
+  display: block;
+}
+
+.subscription_window .pay_history .dates div span {
+  display: inline-block;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: .3rem;
+}
+
+.subscription_window .pay_history .dates div span input {
+  border: none;
+  margin-left: 1.5rem;
+}
+
+.subscription_window .pay_history table {
+  margin: 1rem 0;
+  table-layout: fixed;
+  width: 100%;
+  border-bottom: 1px solid #000000;
+}
+
+.subscription_window .pay_history table thead tr {
+  background-color: #C4C4C44D;
+  font-weight: 500;
+}
+
+.subscription_window .pay_history table td,
+.subscription_window .pay_history table th {
+  text-align: start;
+}
+
+/* RENEWALS PAGE */
+/* -------------- */
+.subscription_window .autoparts_plan,
+.subscription_window .website_plan {
+  margin-top: 2rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.subscription_window .autoparts_plan .star {
+  display: inline-block;
+  width: fit-content;
+  font-size: 30px;
+  color: #1D50A8;
+}
+
+.subscription_window .autoparts_plan .plan_name,
+.subscription_window .autoparts_plan .select_plan {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.subscription_window .autoparts_plan .plan_name span {
+  display: block;
+}
+
+.subscription_window .autoparts_plan .plan_name span:first-child {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.subscription_window .autoparts_plan .plan_name span:last-child {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.subscription_window .autoparts_plan .select_plan {
+  margin-left: 20%;
+}
+
+.subscription_window .autoparts_plan .select_plan select {
+  padding: .5rem .5rem;
+  border: 1px solid #000000;
+  border-radius: 5px;
+}
+
+.subscription_window .autoparts_plan .plan_tax {
+  display: inline-block;
+  margin-left: 18%;
+}
+
+.subscription_window .autoparts_plan button {
+  display: inline-block;
+  background: #B6121B;
+  border-radius: 5px;
+  color: #fff;
+  padding: .5rem 1rem;
+  margin-left: 3%;
+}

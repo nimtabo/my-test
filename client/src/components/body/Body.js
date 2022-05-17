@@ -33,21 +33,22 @@ import Shops from './dashboad/pages/Shops'
 import Listing from './pages/Listing'
 import Products from './dashboad/pages/Products'
 import Users from './dashboad/pages/Users'
-import Plans from './dashboad/pages/Plans'
+import Billing from './dashboad/pages/Billing'
 import BuyerSignup from './auth/BuyerSignup'
-import Dashboard from '../body/dashboad/Dashboad'
 import UserLayout from './layouts/User'
 import AdminLayout from './layouts/Admin'
 import Overview from './admin/Overview'
 import Store from './admin/Store'
 import Checkout from './pages/Checkout'
+import PayHistory from './dashboad/pages/PayHistory'
+import Renewals from './dashboad/pages/Renewals'
 
 
 function Body() {
     const auth = useSelector(state => state.auth)
     const { isLogged, isAdmin } = auth;
 
-    const [width, setWidth] = useState("0px");
+    const [width, setWidth] = useState("0px")
 
     const handleOpenNav = () => {
         setWidth(width === "0px" ? "250px" : "0px")
@@ -94,18 +95,21 @@ function Body() {
                             <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
 
                             {/* USER DASHBOARD */}
-                            {/* <Route path="/dashboad" exact>
-                    {isLogged ? <Dashboad handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
-                </Route> */}
                             <Route path="/shops" exact >
                                 {isLogged ? <Shops handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
                             </Route>
                             <Route path="/products" exact >
-                                {isLogged ? <Products handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                                {isLogged ? <Products /> : <NotFound />}
                             </Route>
 
-                            <Route path="/plans" exact >
-                                {isLogged ? <Plans handleOpenNav={handleOpenNav} width={width} /> : <NotFound />}
+                            <Route path="/billing" exact >
+                                {isLogged ? <Billing /> : <NotFound />}
+                            </Route>
+                            <Route path="/payment_history" exact >
+                                {isLogged ? <PayHistory /> : <NotFound />}
+                            </Route>
+                            <Route path="/renew" exact >
+                                {isLogged ? <Renewals /> : <NotFound />}
                             </Route>
                             <Route path="/checkout" component={Checkout} exact />
 
