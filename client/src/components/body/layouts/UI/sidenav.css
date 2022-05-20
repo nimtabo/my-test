@@ -62,7 +62,6 @@
 .admin_main {
   transition: margin-left .5s;
   padding: 20px;
-  background-color: #B6B6B6;
   min-height: 100vh;
 }
 

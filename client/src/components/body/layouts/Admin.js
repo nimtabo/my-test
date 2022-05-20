@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import Main from './UI/Main'
 import SideNav from './UI/SideNav'
+import './admin.css'
 
 const AdminLayout = ({ children }) => {
-  const [width, setWidth] = useState("25%");
+  const [width, setWidth] = useState("22%");
 
   const handleOpenNav = () => {
-    setWidth(width === "25%" ? "10%" : "25%")
+    setWidth(width === "22%" ? "10%" : "22%")
   }
   return (
     <div>

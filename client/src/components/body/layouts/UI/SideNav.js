@@ -18,20 +18,20 @@ const SideNav = ({ handleOpenNav, width }) => {
         <span style={{ display: width === "10%" && 'none' }} className="closebtn" onClick={handleOpenNav}>
           <FaChevronCircleLeft />
         </span>
-        <span style={{ display: width === "25%" && 'none' }} className="closebtn" onClick={handleOpenNav}>
+        <span style={{ display: width === "22%" && 'none' }} className="closebtn" onClick={handleOpenNav}>
           <FaChevronCircleRight />
         </span>
       </div>
-      <Link to="/admin/dashboard"><MdViewQuilt /> Overview</Link>
-      <Link to="/admin/stores"><BiStore /> Stores</Link>
-      <Link to="#"><MdProductionQuantityLimits /> Products</Link>
-      <Link to="#"><MdSell /> Sellers</Link>
-      <Link to="#"><FaCartPlus /> Buyers</Link>
-      <Link to="#"><RiTeamLine /> Team</Link>
-      <Link to="#"><BiStats /> Staticstics</Link>
-      <Link to="#"><MdQueryStats /> Finance</Link>
-      <Link to="#"><ImTicket /> Tickets</Link>
-      <Link to="#"><MdOutlineSettings /> Settings</Link>
+      <Link to="/admin/dashboard"><MdViewQuilt /> {width === "22%" && 'Overview'}</Link>
+      <Link to="/admin/stores"><BiStore /> {width === "22%" && 'Stores'}</Link>
+      <Link to="#"><MdProductionQuantityLimits /> {width === "22%" && 'Products'}</Link>
+      <Link to="#"><MdSell /> {width === "22%" && 'Sellers'}</Link>
+      <Link to="#"><FaCartPlus /> {width === "22%" && 'Buyers'}</Link>
+      <Link to="#"><RiTeamLine /> {width === "22%" && 'Team'}</Link>
+      <Link to="#"><BiStats /> {width === "22%" && 'Staticstics'}</Link>
+      <Link to="#"><MdQueryStats /> {width === "22%" && 'Finance'}</Link>
+      <Link to="#"><ImTicket /> {width === "22%" && 'Tickets'}</Link>
+      <Link to="#"><MdOutlineSettings /> {width === "22%" && 'Settings'}</Link>
     </div >
   )
 }
