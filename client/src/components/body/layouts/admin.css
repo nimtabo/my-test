@@ -133,4 +133,40 @@
 
 .chart_container {
   width: 100%;
+  margin: 1rem 0;
+}
+
+.chart_container .chart_item_headers {
+  display: flex;
+}
+
+.chart_container .chart_item_headers .chart_item_header {
+  width: 50%;
+  height: 50px;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+
+.chart_item_chart .chart_container .chart_item_headers .chart_item_header h3 {
+  font-weight: 600;
+  font-size: 24px;
+  color: #333333;
+}
+
+.chart_container .chart_item_headers .chart_item_header p {
+  font-weight: 400;
+  font-size: 16px;
+  text-align: left;
+  color: #B6B6B6;
+}
+
+.chart_container .chart_item_headers .chart_item_header span {
+  display: inline-block;
+  margin-left: 10px;
+  background: #F2F2F2;
+  color: #828282;
+  border-radius: 10px;
+  /* width: 3px; */
+  /* height: 33px; */
 }

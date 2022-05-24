@@ -1,7 +1,11 @@
 import React from 'react'
 import { FaChevronCircleRight } from 'react-icons/fa';
+import { FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 import Example from './charts/Traffic';
+import MultiChart from './charts/MultiChart';
+import DateRangeSelector from "./datePicker";
+
 
 
 const Overview = () => {
@@ -93,8 +97,78 @@ const Overview = () => {
 
       {/* TRAFFIC CHARTS */}
       <div className='chart_container'>
-        <Example />
+        <div className='chart_item_headers'>
+          <div className='chart_item_header'>
+            <h3>Traffic </h3>
+            <p>No. of visitors come to your website everyday</p>
+          </div>
+          <div className='chart_item_header'>
+            <span>
+              <DateRangeSelector />
+            </span>
+            <span><FiSettings /></span>
+          </div>
+        </div>
+        <div className='chart_item_chart'>
+          <Example />
+        </div>
       </div>
+
+      <div className='chart_container'>
+        <div className='chart_item_headers'>
+          <div className='chart_item_header'>
+            <h3>Revenue </h3>
+            <p>Every month earning</p>
+          </div>
+          <div className='chart_item_header'>
+            <span>
+              <DateRangeSelector />
+            </span>
+            <span><FiSettings /></span>
+          </div>
+        </div>
+        <div className='chart_item_chart'>
+          <Example />
+        </div>
+      </div>
+
+      <div className='chart_container'>
+        <div className='chart_item_headers'>
+          <div className='chart_item_header'>
+            <h3>Stores </h3>
+            <p>No. of active stores every month</p>
+          </div>
+          <div className='chart_item_header'>
+            <span>
+              <DateRangeSelector />
+            </span>
+            <span><FiSettings /></span>
+          </div>
+        </div>
+        <div className='chart_item_chart'>
+          <MultiChart />
+        </div>
+      </div>
+
+      <div className='chart_container'>
+        <div className='chart_item_headers'>
+          <div className='chart_item_header'>
+            <h3>Registered Buyers </h3>
+            <p>No. of Buyers every month</p>
+          </div>
+          <div className='chart_item_header'>
+            <span>
+              <DateRangeSelector />
+            </span>
+            <span><FiSettings /></span>
+          </div>
+        </div>
+        <div className='chart_item_chart'>
+          <Example />
+        </div>
+      </div>
+
+
     </div>
   )
 }
