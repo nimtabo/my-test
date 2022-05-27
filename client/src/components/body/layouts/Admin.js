@@ -7,7 +7,7 @@ const AdminLayout = ({ children }) => {
   const [width, setWidth] = useState("22%");
 
   const handleOpenNav = () => {
-    setWidth(width === "22%" ? "10%" : "22%")
+    setWidth(width === "22%" ? "8%" : "22%")
   }
   return (
     <div>

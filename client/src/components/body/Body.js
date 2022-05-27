@@ -42,6 +42,7 @@ import Store from './admin/Store'
 import Checkout from './pages/Checkout'
 import PayHistory from './dashboad/pages/PayHistory'
 import Renewals from './dashboad/pages/Renewals'
+import Sellers from './admin/sellers/Sellers'
 
 
 function Body() {
@@ -66,6 +67,9 @@ function Body() {
                             </Route>
                             <Route path="/admin/dashboard" exact >
                                 {isAdmin ? <Overview /> : <NotFound />}
+                            </Route>
+                            <Route path="/admin/sellers" exact >
+                                {isAdmin ? <Sellers /> : <NotFound />}
                             </Route>
                             <Route path="/admin/stores" exact >
                                 {isAdmin ? <Store /> : <NotFound />}

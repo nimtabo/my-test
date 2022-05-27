@@ -1,0 +1,112 @@
+.admin_sellers_page {}
+
+.admin_sellers_page_headers {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin_sellers_page_headers h2 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  color: #333333;
+}
+
+.admin_sellers_headers_search {
+  background: #F2F2F2;
+  border: 1px solid #828282;
+  border-radius: 10px;
+  padding: .2rem;
+  color: #B6B6B6;
+  display: flex;
+}
+
+.admin_sellers_headers_search input {
+  border: 0;
+  background: #F2F2F2;
+  display: inline-block;
+}
+
+.admin_sellers_headers_search span {
+  border: 0;
+  background: #F2F2F2;
+  font-weight: 500;
+  font-size: 19px;
+  margin: 0 15px;
+}
+
+.admin_sellers_page_headers .sellers_totals {
+  background: rgba(250, 205, 212, 0.7);
+  border-radius: 10px;
+  padding: .4rem 1rem;
+}
+
+.admin_sellers_page_headers .sellers_totals span:first-child {
+  color: #828282;
+  margin-right: 1rem;
+}
+
+.admin_sellers_page_headers .sellers_totals span:last-child {
+  color: #333333;
+}
+
+.admin_sellers_filters {
+  background-color: #828282;
+  margin-top: 1rem;
+  height: 150px;
+}
+
+/* FILTERS */
+
+/* TABLE */
+.admin_sellers_page .tableFixHead {
+  margin-top: 1rem;
+  overflow-y: auto;
+  /* height: 80%; */
+}
+
+.admin_sellers_page .tableFixHead thead th {
+  position: sticky;
+  top: 0;
+}
+
+.admin_sellers_page table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.admin_sellers_page th,
+.admin_sellers_page td {
+  padding: 8px 16px;
+  border-bottom: 1px solid #ccc;
+}
+
+.admin_sellers_page th {
+  background: #eee;
+}
+
+.admin_table_pagnation {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admin_table_pagnation .pagination {
+  display: inline-block;
+}
+
+.admin_table_pagnation .pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.admin_table_pagnation .pagination a.active {
+  background-color: #1D50A8;
+  color: white;
+}
+
+.admin_table_pagnation .pagination a:hover:not(.active) {
+  background-color: #ddd;
+}

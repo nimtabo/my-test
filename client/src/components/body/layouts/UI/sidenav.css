@@ -16,6 +16,7 @@
 
 .admin_sidenav .side_logo {
   color: #fff;
+  white-space: nowrap;
 }
 
 .admin_sidenav .side_logo .admin_text {
@@ -42,6 +43,11 @@
   display: block;
   border-bottom: 1px solid rgba(182, 182, 182, 0.3);
   transition: 0.3s;
+  white-space: nowrap;
+}
+
+.admin_sidenav a svg {
+  margin-right: 40px;
 }
 
 .admin_sidenav a:hover {
@@ -63,6 +69,51 @@
   transition: margin-left .5s;
   padding: 20px;
   min-height: 100vh;
+}
+
+.admin_sidenav_profile {
+  padding: 1rem .5rem;
+  margin-top: 3rem;
+}
+
+.profile_items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidenav_profile_head {
+  align-items: center;
+  color: rgba(182, 182, 182, 0.3);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+}
+
+.sidenav_profile_head .profile_img {
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+}
+
+.admin_sidenav_profile #profile_names p:first-child {
+  color: #fff;
+}
+
+.admin_sidenav_profile #profile_names p:last-child {
+  color: #B6B6B6;
+}
+
+.admin_sidenav .profile_logout {
+  background: #4F4F4F;
+  border-radius: 15px;
+  color: #B6B6B6;
+  min-width: 200px;
+  padding: .2rem;
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  margin: auto;
 }
 
 @media screen and (max-height: 450px) {
