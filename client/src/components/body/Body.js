@@ -43,6 +43,9 @@ import Checkout from './pages/Checkout'
 import PayHistory from './dashboad/pages/PayHistory'
 import Renewals from './dashboad/pages/Renewals'
 import Sellers from './admin/sellers/Sellers'
+import Buyers from './admin/buyers'
+import Tickets from './admin/tickets'
+import TeamMembers from './admin/teamMembers'
 
 
 function Body() {
@@ -70,6 +73,15 @@ function Body() {
                             </Route>
                             <Route path="/admin/sellers" exact >
                                 {isAdmin ? <Sellers /> : <NotFound />}
+                            </Route>
+                            <Route path="/admin/buyers" exact >
+                                {isAdmin ? <Buyers /> : <NotFound />}
+                            </Route>
+                            <Route path="/admin/tickets" exact >
+                                {isAdmin ? <Tickets /> : <NotFound />}
+                            </Route>
+                            <Route path="/admin/team" exact >
+                                {isAdmin ? <TeamMembers /> : <NotFound />}
                             </Route>
                             <Route path="/admin/stores" exact >
                                 {isAdmin ? <Store /> : <NotFound />}

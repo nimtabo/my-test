@@ -1,0 +1,32 @@
+.admin_tickets_add {
+  padding: 15px 5px;
+  display: flex;
+  justify-content: end;
+}
+
+.admin_tickets_add button {
+  padding: 5px 10px;
+  background: #1D50A8;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  color: #fff;
+}
+
+.tableFixHead.tickets_table table thead th {
+  background: rgba(47, 128, 237, 0.15);
+}
+
+.tickets_filter_by span,
+.tickets_filter_by select {
+  margin-right: 15px;
+}
+
+.tickets_filter_by select {
+  border-radius: 20px;
+  background: #F2F2F2;
+}
+
+.tickets_filter_by .active_filter {
+  background: rgba(47, 128, 237, 0.2);
+  color: #2F80ED;
+}

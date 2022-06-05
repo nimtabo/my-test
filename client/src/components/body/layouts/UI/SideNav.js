@@ -29,11 +29,11 @@ const SideNav = ({ handleOpenNav, width }) => {
       <Link to="/admin/stores"><BiStore />Stores</Link>
       <Link to="#"><MdProductionQuantityLimits />Products</Link>
       <Link to="/admin/sellers"><MdSell />Sellers</Link>
-      <Link to="#"><FaCartPlus />Buyers</Link>
-      <Link to="#"><RiTeamLine />Team</Link>
+      <Link to="/admin/buyers"><FaCartPlus />Buyers</Link>
+      <Link to="/admin/team"><RiTeamLine />Team</Link>
       <Link to="#"><BiStats />Staticstics</Link>
       <Link to="#"><MdQueryStats />Finance</Link>
-      <Link to="#"><ImTicket />Tickets</Link>
+      <Link to="/admin/tickets"><ImTicket />Tickets</Link>
       <Link to="#"><MdOutlineSettings />Settings</Link>
 
       <div className='admin_sidenav_profile'>

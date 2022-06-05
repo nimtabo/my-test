@@ -52,10 +52,60 @@
 }
 
 .admin_sellers_filters {
-  background-color: #828282;
   margin-top: 1rem;
   height: 150px;
+  display: flex;
 }
+
+.admin_sellers_filters .sellers_left_filter {
+  width: 70%;
+  display: flex;
+}
+
+.admin_sellers_filters .sellers_left_filter .admin_sellers_filter_add {
+  width: 20%;
+}
+
+.admin_sellers_filters .sellers_left_filter .admin_sellers_filter_add button {
+  padding: 5px 10px;
+  background: #FFFFFF;
+  border: 1px solid #333333;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+}
+
+.admin_sellers_filters .sellers_left_filter .admin_sellers_filter_selected {
+  width: 80%;
+}
+
+.admin_sellers_filters .sellers_left_filter .admin_sellers_filter_selected span {
+  background: #F2F2F2;
+  border-radius: 10px;
+  color: #333333;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.admin_sellers_filters .sellers_right_filter {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* DATE RANGE */
+.buyers {
+  width: 100%;
+}
+
+.date_range {
+  background: #F2F2F2;
+  border: 1px solid #828282;
+  border-radius: 10px;
+  padding: 5px 10px;
+  width: fit-content;
+}
+
+/* *************** */
 
 /* FILTERS */
 
@@ -80,6 +130,7 @@
 .admin_sellers_page td {
   padding: 8px 16px;
   border-bottom: 1px solid #ccc;
+  text-align: left;
 }
 
 .admin_sellers_page th {
