@@ -1,0 +1,24 @@
+.admin_sellers_page_headers.products_page_headers {
+  width: 100%;
+}
+
+.sellers_totals.products_totals {
+  align-self: flex-end;
+}
+
+.admin_sellers_filters .sellers_left_filter .admin_sellers_filter_add.product_filter_btn {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#product_filter_btn button {
+  height: fit-content;
+}
+
+#product_filter_btn button:first-child {
+  background: #4F4F4F;
+  color: #E0E0E0;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+}

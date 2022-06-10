@@ -1,0 +1,19 @@
+.admin_stores_page .admin_sellers_page_headers.admin_stores_header {
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.tableFixHead.admin_stores_table thead {
+  color: #828282;
+}
+
+.tableFixHead.admin_stores_table thead th {
+  cursor: pointer;
+}
+
+.tableFixHead.admin_stores_table tbody {
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+}

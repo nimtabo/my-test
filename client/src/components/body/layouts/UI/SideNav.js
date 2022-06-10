@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 import { FaChevronCircleLeft, FaChevronCircleRight, FaCartPlus } from 'react-icons/fa';
 import { BiStore, BiStats, BiDotsHorizontalRounded, BiLogOut } from 'react-icons/bi';
 import { RiTeamLine } from 'react-icons/ri';
@@ -14,10 +14,16 @@ const SideNav = ({ handleOpenNav, width }) => {
   const auth = useSelector(state => state.auth)
   const { user, isAdmin } = auth
 
+  const history = useHistory()
+
+  const goHome = () => {
+    history.push('/')
+  }
+
   return (
     <div className="admin_sidenav" style={{ width: width }}>
       <div className='side_logo'>
-        <img src={logo} alt="logo" /><span className='admin_text'>Admin</span> <span className='admin_text_2'> Dashboard</span>
+        <img onClick={goHome} src={logo} alt="logo" /><span className='admin_text'>Admin</span> <span className='admin_text_2'> Dashboard</span>
         <span style={{ display: width === "8%" && 'none' }} className="closebtn" onClick={handleOpenNav}>
           <FaChevronCircleLeft />
         </span>
@@ -27,7 +33,7 @@ const SideNav = ({ handleOpenNav, width }) => {
       </div>
       <Link to="/admin/dashboard"><MdViewQuilt />Overview</Link>
       <Link to="/admin/stores"><BiStore />Stores</Link>
-      <Link to="#"><MdProductionQuantityLimits />Products</Link>
+      <Link to="/admin/products"><MdProductionQuantityLimits />Products</Link>
       <Link to="/admin/sellers"><MdSell />Sellers</Link>
       <Link to="/admin/buyers"><FaCartPlus />Buyers</Link>
       <Link to="/admin/team"><RiTeamLine />Team</Link>

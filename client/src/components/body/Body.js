@@ -38,7 +38,7 @@ import BuyerSignup from './auth/BuyerSignup'
 import UserLayout from './layouts/User'
 import AdminLayout from './layouts/Admin'
 import Overview from './admin/overview/Overview'
-import Store from './admin/Store'
+import Stores from './admin/stores'
 import Checkout from './pages/Checkout'
 import PayHistory from './dashboad/pages/PayHistory'
 import Renewals from './dashboad/pages/Renewals'
@@ -46,6 +46,7 @@ import Sellers from './admin/sellers/Sellers'
 import Buyers from './admin/buyers'
 import Tickets from './admin/tickets'
 import TeamMembers from './admin/teamMembers'
+import AdminProducts from './admin/products'
 
 
 function Body() {
@@ -84,7 +85,10 @@ function Body() {
                                 {isAdmin ? <TeamMembers /> : <NotFound />}
                             </Route>
                             <Route path="/admin/stores" exact >
-                                {isAdmin ? <Store /> : <NotFound />}
+                                {isAdmin ? <Stores /> : <NotFound />}
+                            </Route>
+                            <Route path="/admin/products" exact >
+                                {isAdmin ? <AdminProducts /> : <NotFound />}
                             </Route>
                             <Route path="/*" component={NotFound} exact />
                         </Switch>

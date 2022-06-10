@@ -76,6 +76,10 @@
 
 .admin_sellers_filters .sellers_left_filter .admin_sellers_filter_selected {
   width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .admin_sellers_filters .sellers_left_filter .admin_sellers_filter_selected span {
@@ -84,6 +88,7 @@
   color: #333333;
   padding: 5px 10px;
   cursor: pointer;
+  height: fit-content;
 }
 
 .admin_sellers_filters .sellers_right_filter {
@@ -110,30 +115,35 @@
 /* FILTERS */
 
 /* TABLE */
-.admin_sellers_page .tableFixHead {
+.admin_sellers_page .tableFixHead,
+.admin_stores_page .tableFixHead {
   margin-top: 1rem;
   overflow-y: auto;
   /* height: 80%; */
 }
 
-.admin_sellers_page .tableFixHead thead th {
+.admin_sellers_page .tableFixHead thead th,
+.admin_stores_page .tableFixHead thead th {
   position: sticky;
   top: 0;
 }
 
-.admin_sellers_page table {
+.admin_sellers_page table,
+.admin_stores_page table {
   border-collapse: collapse;
   width: 100%;
 }
 
 .admin_sellers_page th,
-.admin_sellers_page td {
+.admin_stores_page th,
+.admin_sellers_page td,
+.admin_stores_page td {
   padding: 8px 16px;
   border-bottom: 1px solid #ccc;
   text-align: left;
 }
 
-.admin_sellers_page th {
+.admin_sellers_page th .admin_stores_page th {
   background: #eee;
 }
 
