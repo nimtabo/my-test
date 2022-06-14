@@ -1,8 +1,8 @@
 import React from 'react'
 import { FiSearch, FiCalendar } from 'react-icons/fi'
-import { BiDotsHorizontalRounded } from 'react-icons/bi'
-import { MdAdd, MdKeyboardArrowDown } from 'react-icons/md'
+import { MdAdd, MdKeyboardArrowDown, MdOutlineMoreHoriz } from 'react-icons/md'
 import { GrClose } from 'react-icons/gr'
+import { IoMdArrowDropdown } from 'react-icons/io'
 import './styles.css'
 
 const Sellers = () => {
@@ -11,7 +11,7 @@ const Sellers = () => {
       <div className='admin_sellers_page_headers products_page_headers'>
         <h2>Products</h2>
 
-        <span className='admin_sellers_headers_search'>
+        <span className='admin_products_selects'>
           <select>
             <option>Make</option>
           </select>
@@ -24,7 +24,7 @@ const Sellers = () => {
           <select>
             <option>Part</option>
           </select>
-          <button className='search_'>Search <MdKeyboardArrowDown /></button>
+          <button className='search_'>Search</button>
         </span>
 
         <div className='sellers_totals products_totals'>
@@ -59,7 +59,72 @@ const Sellers = () => {
       </div>
 
       <div className="tableFixHead">
-
+        <table>
+          <thead>
+            <tr>
+              <th><input type='checkbox' /></th>
+              <th>Image<IoMdArrowDropdown /></th>
+              <th>Make<IoMdArrowDropdown /></th>
+              <th>Model<IoMdArrowDropdown /></th>
+              <th>Year<IoMdArrowDropdown /></th>
+              <th>Part<IoMdArrowDropdown /></th>
+              <th>Part No.<IoMdArrowDropdown /></th>
+              <th>Description<IoMdArrowDropdown /></th>
+              <th>Price <IoMdArrowDropdown /></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type='checkbox' /></td>
+              <td>IMAGE</td>
+              <td>Acura</td>
+              <td>CSX</td>
+              <td>200</td>
+              <td>AC-Compressor</td>
+              <td>2405</td>
+              <td>Front bumper/22k...</td>
+              <td>$821</td>
+              <td><MdOutlineMoreHoriz /></td>
+            </tr>
+            <tr>
+              <td><input type='checkbox' /></td>
+              <td>IMAGE</td>
+              <td>Acura</td>
+              <td>CSX</td>
+              <td>200</td>
+              <td>AC-Compressor</td>
+              <td>2405</td>
+              <td>Front bumper/22k...</td>
+              <td>$821</td>
+              <td><MdOutlineMoreHoriz /></td>
+            </tr>
+            <tr>
+              <td><input type='checkbox' /></td>
+              <td>IMAGE</td>
+              <td>Acura</td>
+              <td>CSX</td>
+              <td>200</td>
+              <td>AC-Compressor</td>
+              <td>2405</td>
+              <td>Front bumper/22k...</td>
+              <td>$821</td>
+              <td><MdOutlineMoreHoriz /></td>
+            </tr>
+            <tr>
+              <td><input type='checkbox' /></td>
+              <td>IMAGE</td>
+              <td>Acura</td>
+              <td>CSX</td>
+              <td>200</td>
+              <td>AC-Compressor</td>
+              <td>2405</td>
+              <td>Front bumper/22k...</td>
+              <td>$821</td>
+              <td><MdOutlineMoreHoriz /></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div className='admin_table_pagnation'>
         <div className="pagination">

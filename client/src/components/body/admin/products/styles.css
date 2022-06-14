@@ -2,6 +2,31 @@
   width: 100%;
 }
 
+.admin_sellers_page_headers .admin_products_selects {
+  padding: 0 20px;
+  display: flex;
+  gap: 15px;
+  width: 70%;
+}
+
+.admin_sellers_page_headers .admin_products_selects select {
+  padding: 0 20px;
+  color: #828282;
+  background: #F2F2F2;
+  border: 1px solid #828282;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin_sellers_page_headers .admin_products_selects button {
+  background: #2C2A28;
+  color: #FFFFFF;
+  padding: 0 25px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+  margin-left: 40px;
+}
+
 .sellers_totals.products_totals {
   align-self: flex-end;
 }
