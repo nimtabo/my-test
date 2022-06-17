@@ -38,3 +38,7 @@
 .tableFixHead.team_members table tr:nth-child(even) {
   background: rgba(242, 242, 242, 0.5);
 }
+
+.tableFixHead.team_members table .table_editors {
+  cursor: pointer;
+}

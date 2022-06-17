@@ -1,13 +1,53 @@
-import React from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { FiSearch, FiCalendar } from 'react-icons/fi'
 import { BiDotsHorizontalRounded } from 'react-icons/bi'
 import { MdAdd } from 'react-icons/md'
 import { GrClose } from 'react-icons/gr'
+import { fetchAllUsers, dispatchGetAllUsers } from '../../../../redux/actions/usersAction'
+import Add from './Add'
+import Edit from './Edit'
 import './styles.css'
 
 const Sellers = () => {
+  const [callback, setCallback] = useState(false)
+  const [showAddPart, setShowAddPart] = useState(false)
+  const [showEdit, setShowEdit] = useState(false)
+
+  const users = useSelector(state => state.users)
+  const auth = useSelector(state => state.auth)
+  const token = useSelector(state => state.token)
+
+  const dispatch = useDispatch()
+
+  const { user, isAdmin } = auth
+
+  useEffect(() => {
+    if (isAdmin) {
+      fetchAllUsers(token).then(res => {
+        dispatch(dispatchGetAllUsers(res))
+      })
+    }
+  }, [token, isAdmin, dispatch, callback])
+
   return (
     <div className='admin_sellers_page'>
+      {/* MODALS START */}
+      <div id="add_parts_container"
+        style={showAddPart ? { display: "block" } : { display: "none", }}>
+        <Add
+          setShowAddPart={setShowAddPart}
+          showAddPart={showAddPart}
+        />
+      </div>
+      <div id="add_parts_container"
+        style={showEdit ? { display: "block" } : { display: "none", }}>
+        <Edit
+          setShowEdit={setShowEdit}
+          showEdit={showEdit}
+        />
+      </div>
+      {/* MODALS END */}
       <div className='admin_sellers_page_headers'>
         <h2>Sellers</h2>
 
@@ -40,7 +80,7 @@ const Sellers = () => {
               <FiCalendar /> <span>1 Jan 22 - 13 Jan 22</span>
             </div>
             <div className='admin_buyers_add'>
-              <button> <MdAdd /> Add buyer</button>
+              <button onClick={() => { setShowAddPart(!showAddPart) }}> <MdAdd /> Add Seller</button>
             </div>
           </div>
         </div>
@@ -60,42 +100,19 @@ const Sellers = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><input type='checkbox' /></td>
-              <td>Sam Auto Parts</td>
-              <td>WWKTWK214151</td>
-              <td>sambitmohanty903@gmail.com</td>
-              <td>(897)2345-6754</td>
-              <td>Auto Shop</td>
-              <td><BiDotsHorizontalRounded /></td>
-            </tr>
-            <tr>
-              <td><input type='checkbox' /></td>
-              <td>Sam Auto Parts</td>
-              <td>WWKTWK214151</td>
-              <td>sambitmohanty903@gmail.com</td>
-              <td>(897)2345-6754</td>
-              <td>Auto Shop</td>
-              <td><BiDotsHorizontalRounded /></td>
-            </tr>
-            <tr>
-              <td><input type='checkbox' /></td>
-              <td>Sam Auto Parts</td>
-              <td>WWKTWK214151</td>
-              <td>sambitmohanty903@gmail.com</td>
-              <td>(897)2345-6754</td>
-              <td>Auto Shop</td>
-              <td><BiDotsHorizontalRounded /></td>
-            </tr>
-            <tr>
-              <td><input type='checkbox' /></td>
-              <td>Sam Auto Parts</td>
-              <td>WWKTWK214151</td>
-              <td>sambitmohanty903@gmail.com</td>
-              <td>(897)2345-6754</td>
-              <td>Auto Shop</td>
-              <td><BiDotsHorizontalRounded /></td>
-            </tr>
+            {
+              users.map(user => {
+                return user.profile === 0 && (<tr>
+                  <td><input type='checkbox' /></td>
+                  <td>{user.store}</td>
+                  <td>{user._id}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  <td>plan Name</td>
+                  <td><BiDotsHorizontalRounded /></td>
+                </tr>)
+              })
+            }
 
           </tbody>
         </table>

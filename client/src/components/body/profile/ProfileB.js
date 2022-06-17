@@ -111,21 +111,24 @@ function Profile() {
   }
 
   const updateInfor = async () => {
-    if (phone) {
-      if (!validatePhone(phone)) {
-        setData({ ...data, err: 'Enter valid Phone Number', success: "" })
-        return setTimeout(() => {
-          setData({ ...data, err: '', success: '' })
-        }, 5000);
+    if (user.role === 0) {
+      console.log(user)
+      if (phone) {
+        if (!validatePhone(phone)) {
+          setData({ ...data, err: 'Enter valid Phone Number', success: "" })
+          return setTimeout(() => {
+            setData({ ...data, err: '', success: '' })
+          }, 5000);
+        }
       }
-    }
 
-    if (storeWebsite) {
-      if (!is_url(storeWebsite)) {
-        setData({ ...data, err: 'Enter valid Website', success: "" })
-        return setTimeout(() => {
-          setData({ ...data, err: '', success: '' })
-        }, 5000);
+      if (storeWebsite) {
+        if (!is_url(storeWebsite)) {
+          setData({ ...data, err: 'Enter valid Website', success: "" })
+          return setTimeout(() => {
+            setData({ ...data, err: '', success: '' })
+          }, 5000);
+        }
       }
     }
 
@@ -224,7 +227,7 @@ function Profile() {
           {/*  */}
 
           {
-            user.profile === 1 ? (
+            user.role === 1 ? (
               <>
                 <div className="form-group">
                   <label htmlFor="names">Name</label>
@@ -238,11 +241,11 @@ function Profile() {
                     placeholder="Your email address" disabled />
                 </div>
 
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label htmlFor="phone">Fiaraa Customer ID</label>
                   <input type="text" name="phone" id="phone" defaultValue={user.code}
                     placeholder="Your Fiaraa Customer ID" onChange={handleChange} disabled />
-                </div>
+                </div> */}
 
                 <div className="col-double">
                   <div className="form-group">
@@ -272,33 +275,18 @@ function Profile() {
 
 
             ) :
-              <>
-                <div className="form-group">
-                  <label htmlFor="store">My Store Name</label>
-                  <input type="text" name="store" id="store" defaultValue={user.store}
-                    placeholder="Your store name" onChange={handleChange} />
-                </div>
-
-
-
-                <div className="form-group">
-                  <label htmlFor="storeWebsite">Store Website</label>
-                  <input type="text" name="storeWebsite" id="storeWebsite" defaultValue={storeWebsite || user.storeWebsite}
-                    placeholder="Store Website" onChange={handleChange} />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
-                  <input type="email" name="email" id="email" defaultValue={user.email}
-                    placeholder="Your email address" disabled />
-                </div>
-
-                <div className="col-double">
+              user.profile ? (
+                <>
                   <div className="form-group">
-                    <label htmlFor="phone">Phone Number</label>
-                    <input type="tel" name="phone" id="phone"
-                      value={phone || ''}
-                      placeholder="(000) 000-0000" onChange={handleChange} />
+                    <label htmlFor="names">Name</label>
+                    <input type="text" name="name" id="name" defaultValue={user.name}
+                      placeholder="Your name" onChange={handleChange} />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="email">Email Address</label>
+                    <input type="email" name="email" id="email" defaultValue={user.email}
+                      placeholder="Your email address" disabled />
                   </div>
 
                   <div className="form-group">
@@ -306,34 +294,97 @@ function Profile() {
                     <input type="text" name="phone" id="phone" defaultValue={user.code}
                       placeholder="Your Fiaraa Customer ID" onChange={handleChange} disabled />
                   </div>
-                </div>
 
-                <div className="col-double">
+                  <div className="col-double">
+                    <div className="form-group">
+                      <label htmlFor="state">State</label>
+                      <select name="state" value={state || user.state} onChange={handleChange}>
+                        {
+                          getStates().sort().map(stt => {
+                            return <option key={stt} value={stt}>{stt}</option>
+                          })
+                        }
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="city">City</label>
+                      <select name="city" value={city || user.city} onChange={handleChange}>
+                        {
+                          cities.length > 0 ? cities.sort().map(cty => {
+                            return <option key={cty} value={cty}>{cty}</option>
+                          }) : <option value={user.city}>{user.city}</option>
+                        }
+                      </select>
+                    </div>
+
+                  </div>
+                </>
+              ) : (
+
+                <>
                   <div className="form-group">
-                    <label htmlFor="state">State</label>
-                    <select name="state" value={state || user.state} onChange={handleChange}>
-                      {
-                        getStates().sort().map(stt => {
-                          return <option key={stt} value={stt}>{stt}</option>
-                        })
-                      }
-                    </select>
+                    <label htmlFor="store">My Store Name</label>
+                    <input type="text" name="store" id="store" defaultValue={user.store}
+                      placeholder="Your store name" onChange={handleChange} />
+                  </div>
+
+
+
+                  <div className="form-group">
+                    <label htmlFor="storeWebsite">Store Website</label>
+                    <input type="text" name="storeWebsite" id="storeWebsite" defaultValue={storeWebsite || user.storeWebsite}
+                      placeholder="Store Website" onChange={handleChange} />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="city">City</label>
-                    <select name="city" value={city || user.city} onChange={handleChange}>
-                      {/* <option value="0">Select city</option> */}
-                      {
-                        cities.length > 0 ? cities.sort().map(cty => {
-                          return <option key={cty} value={cty}>{cty}</option>
-                        }) : <option value={user.city}>{user.city}</option>
-                      }
-                    </select>
+                    <label htmlFor="email">Email Address</label>
+                    <input type="email" name="email" id="email" defaultValue={user.email}
+                      placeholder="Your email address" disabled />
                   </div>
 
-                </div>
-              </>
+                  <div className="col-double">
+                    <div className="form-group">
+                      <label htmlFor="phone">Phone Number</label>
+                      <input type="tel" name="phone" id="phone"
+                        value={phone || ''}
+                        placeholder="(000) 000-0000" onChange={handleChange} />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="phone">Fiaraa Customer ID</label>
+                      <input type="text" name="phone" id="phone" defaultValue={user.code}
+                        placeholder="Your Fiaraa Customer ID" onChange={handleChange} disabled />
+                    </div>
+                  </div>
+
+                  <div className="col-double">
+                    <div className="form-group">
+                      <label htmlFor="state">State</label>
+                      <select name="state" value={state || user.state} onChange={handleChange}>
+                        {
+                          getStates().sort().map(stt => {
+                            return <option key={stt} value={stt}>{stt}</option>
+                          })
+                        }
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="city">City</label>
+                      <select name="city" value={city || user.city} onChange={handleChange}>
+                        {/* <option value="0">Select city</option> */}
+                        {
+                          cities.length > 0 ? cities.sort().map(cty => {
+                            return <option key={cty} value={cty}>{cty}</option>
+                          }) : <option value={user.city}>{user.city}</option>
+                        }
+                      </select>
+                    </div>
+
+                  </div>
+                </>
+              )
 
           }
 
@@ -396,48 +447,48 @@ function Profile() {
         {/* DIV @ */}
 
         {
-          isAdmin && <div className="col-right">
-            <h2>{isAdmin ? "Users" : "My Orders"}</h2>
+          // isAdmin && <div className="col-right">
+          //   <h2>{isAdmin ? "Users" : "My Orders"}</h2>
 
-            <div style={{ overflowX: "auto" }}>
-              <table className="customers">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Admin</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    users.map(user => (
-                      <tr key={user._id}>
-                        <td>{user._id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>
-                          {
-                            user.role === 1
-                              ? <i className="fas fa-check" title="Admin"></i>
-                              : <i className="fas fa-times" title="User"></i>
-                          }
-                        </td>
-                        <td>
-                          <Link to={`/edit_user/${user._id}`}>
-                            <i className="fas fa-edit" title="Edit"></i>
-                          </Link>
-                          <i className="fas fa-trash-alt" title="Remove"
-                            onClick={() => handleDelete(user._id)} ></i>
-                        </td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
-            </div>
-          </div>
+          //   <div style={{ overflowX: "auto" }}>
+          //     <table className="customers">
+          //       <thead>
+          //         <tr>
+          //           <th>ID</th>
+          //           <th>Name</th>
+          //           <th>Email</th>
+          //           <th>Admin</th>
+          //           <th>Action</th>
+          //         </tr>
+          //       </thead>
+          //       <tbody>
+          //         {
+          //           users.map(user => (
+          //             <tr key={user._id}>
+          //               <td>{user._id}</td>
+          //               <td>{user.name}</td>
+          //               <td>{user.email}</td>
+          //               <td>
+          //                 {
+          //                   user.role === 1
+          //                     ? <i className="fas fa-check" title="Admin"></i>
+          //                     : <i className="fas fa-times" title="User"></i>
+          //                 }
+          //               </td>
+          //               <td>
+          //                 <Link to={`/edit_user/${user._id}`}>
+          //                   <i className="fas fa-edit" title="Edit"></i>
+          //                 </Link>
+          //                 <i className="fas fa-trash-alt" title="Remove"
+          //                   onClick={() => handleDelete(user._id)} ></i>
+          //               </td>
+          //             </tr>
+          //           ))
+          //         }
+          //       </tbody>
+          //     </table>
+          //   </div>
+          // </div>
         }
 
 

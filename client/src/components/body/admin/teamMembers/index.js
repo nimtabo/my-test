@@ -2,11 +2,18 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BiTrash } from 'react-icons/bi'
 import { MdAdd, MdOutlineEdit } from 'react-icons/md'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 import { fetchAllUsers, dispatchGetAllUsers } from '../../../../redux/actions/usersAction'
+import Add from './Add'
+import Edit from './Edit'
 import './styles.css'
 
 const TeamMembers = () => {
   const [callback, setCallback] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [showAddPart, setShowAddPart] = useState(false)
+  const [showEdit, setShowEdit] = useState(false)
 
   const users = useSelector(state => state.users)
   const auth = useSelector(state => state.auth)
@@ -17,7 +24,6 @@ const TeamMembers = () => {
   const { user, isAdmin } = auth
 
   useEffect(() => {
-    console.log(users)
     if (isAdmin) {
       fetchAllUsers(token).then(res => {
         dispatch(dispatchGetAllUsers(res))
@@ -25,13 +31,49 @@ const TeamMembers = () => {
     }
   }, [token, isAdmin, dispatch, callback])
 
+  const handleDelete = async (id) => {
+    console.log("DELETE")
+    try {
+      if (user._id !== id) {
+        if (window.confirm("Are you sure you want to delete this account?")) {
+          setLoading(true)
+          await axios.delete(`/user/delete/${id}`, {
+            headers: { Authorization: token }
+          })
+          setLoading(false)
+          setCallback(!callback)
+        }
+      }
+      toast.error("You cannot Delete Your Admin Profile")
+
+    } catch (err) {
+      toast.error(err.response.data.msg)
+    }
+  }
+
   return (
     <div className='admin_sellers_page'>
+      <ToastContainer />
+      {loading && <h3>Loading.....</h3>}
+      <div id="add_parts_container"
+        style={showAddPart ? { display: "block" } : { display: "none", }}>
+        <Add
+          setShowAddPart={setShowAddPart}
+          showAddPart={showAddPart}
+        />
+      </div>
+      <div id="add_parts_container"
+        style={showEdit ? { display: "block" } : { display: "none", }}>
+        <Edit
+          setShowEdit={setShowEdit}
+          showEdit={showEdit}
+        />
+      </div>
       <div className='admin_sellers_page_headers buyers admin_team'>
-        <h2>Team Members <span>12 users</span></h2>
+        <h2>Team Members <span>{users.filter(u => u.role === 1).length} users</span></h2>
 
         <div className='admin_team_add'>
-          <button> <MdAdd /> Add User</button>
+          <button onClick={() => { setShowAddPart(!showAddPart) }}> <MdAdd /> Add User</button>
         </div>
       </div>
 
@@ -45,6 +87,7 @@ const TeamMembers = () => {
                 <th>Details</th>
                 <th>Role</th>
                 <th>Joined</th>
+                <th></th>
                 <th></th>
               </tr>
             </thead>
@@ -65,12 +108,13 @@ const TeamMembers = () => {
                         <td>
                           <select>
                             <option>Admin</option>
-                            <option>buyer</option>
-                            <option>seller</option>
+                            <option>Marketing</option>
+                            <option>Finance</option>
                           </select>
                         </td>
-                        <td>11-05-2022</td>
-                        <td> <BiTrash /> <MdOutlineEdit /></td>
+                        <td>{new Date(user.createdAt).toDateString()}</td>
+                        <td className='table_editors' onClick={() => handleDelete(user._id)}> <BiTrash /></td>
+                        <td onClick={() => { setShowEdit(!showEdit) }} className='table_editors'><MdOutlineEdit /></td>
                       </tr>
                   }
                 })
