@@ -232,6 +232,15 @@ const userCtrl = {
         try {
             const { avatar, phone, store, city, state, storeWebsite, email, name, profile } = req.body
 
+            let userRole = await Users.findById(req.user.id)
+
+            if (userRole.role == 1) {
+                await Users.findOneAndUpdate({ _id: req.user.id }, {
+                    avatar, name, city, state
+                })
+                return res.json({ msg: "Update Success!" })
+            }
+
             if (Number(profile) === 1) {
                 await Users.findOneAndUpdate({ _id: req.user.id }, {
                     avatar, name, city, state
@@ -261,7 +270,7 @@ const userCtrl = {
 
             res.json({ msg: "Update Success!" })
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ msg: 'Server Error' })
         }
     },
     updateUsersRole: async (req, res) => {
