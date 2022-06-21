@@ -95,7 +95,7 @@ const sendEmail = async (to, url, txt, type) => {
             </div>
             `
         }
-    } else {
+    } else if (type === 'reset') {
         mailOptions = {
             from: SENDER_EMAIL_ADDRESS,
             to: to,
@@ -130,6 +130,78 @@ const sendEmail = async (to, url, txt, type) => {
             </div>
             `
         }
+    } else if (type === 'invite') {
+        mailOptions = {
+            from: SENDER_EMAIL_ADDRESS,
+            to: to,
+            subject: "Member Invitation",
+            html: `
+            <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+            <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to Fiaraa.</h2>
+            <p>Congratulations!</p>
+
+            <p>
+            You're invited to Fiaraa. To proceed use the details below to login to your account.
+            </p>
+
+            <br></br>
+            ${txt}
+            
+            <br></br>
+            <p>
+            Once loged in, Change your password and update other informations.
+            </p>
+        
+            <div>
+            <a href=${url} style="overflow-wrap: break-word; word-wrap: break-word;"> ${url} </a>
+            </div>
+
+            <br />
+            <br />
+
+            <p>Thank you,</p>
+            <p>The Fiaraa team</p>
+            <p><a href="#">support@fiaraa.com</a></p>
+            </div>
+            `
+        }
+    } else if (type = 'update-notification') {
+        mailOptions = {
+            from: SENDER_EMAIL_ADDRESS,
+            to: to,
+            subject: "Account Update Notification",
+            html: `
+            <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+            <h2 style="text-align: center; text-transform: uppercase;color: teal;">Account Update Notification.</h2>
+            <p>Hi!</p>
+
+            <p>
+            This email was sent to notify you that your Fiaraa Account details has been Updated as shown below.
+            </p>
+
+            <br></br>
+            ${txt}
+            
+            <br></br>
+            <p>
+            If you never Requested these changes, Kindly change your account password OR contact support.
+            </p>
+        
+            <div>
+            <a href=${url} style="overflow-wrap: break-word; word-wrap: break-word;"> ${url} </a>
+            </div>
+
+            <br />
+            <br />
+
+            <p>Thank you,</p>
+            <p>The Fiaraa team</p>
+            <p><a href="#">support@fiaraa.com</a></p>
+            </div>
+            `
+        }
+    } else if (type = 'buyer') {
+
     }
 
     // const mailOptions = {

@@ -273,6 +273,91 @@ const userCtrl = {
             return res.status(500).json({ msg: 'Server Error' })
         }
     },
+    addUsersRole: async (req, res) => {
+        try {
+            const { name, email, role, department, profile } = req.body
+
+            if (!email)
+                return res.status(400).json({ msg: "Please fill in all fields." })
+
+            if (!validateEmail(email))
+                return res.status(400).json({ msg: "Invalid emails." })
+
+            const user = await Users.findOne({ email })
+            if (user) return res.status(400).json({ msg: "This email already exists." })
+
+            const passwordHash = await bcrypt.hash(email, 12)
+
+            const userData = {
+                email, password: passwordHash, role: 0
+            }
+
+            if (name) {
+                userData.name = name,
+                    userData.role = 1,
+                    userData.department = Number(department)
+            } else {
+                userData.profile = profile
+            }
+            const newUser = new Users(userData)
+            const savedUser = await newUser.save()
+
+
+            const url = `${CLIENT_URL}/login`
+            let message = `<p>Email: ${email} </p> <p>Password: ${email} </p>`;
+            sendMail(email, url, message, "invite")
+
+
+            res.json({ msg: "Register Success!Invitation Email sent to " + savedUser.email })
+
+        } catch (error) {
+            console.log(error.message)
+            return res.status(500).json({ msg: "Something went wrong" })
+        }
+    },
+    updateProfileRole: async (req, res) => {
+        try {
+            const { id, name, email, role, department } = req.body
+
+            if (!id)
+                return res.status(400).json({ msg: "Invalid Request." })
+
+            if (!email)
+                return res.status(400).json({ msg: "Please fill in all fields." })
+
+            if (!validateEmail(email))
+                return res.status(400).json({ msg: "Invalid emails." })
+
+            const user = await Users.findOne({ _id: id })
+            if (!user) return res.status(400).json({ msg: "This User Does not exists." })
+
+
+            const userData = {
+                email, role: 0
+            }
+
+            if (user.role === 1) {
+                userData.name = name,
+                    userData.role = 1,
+                    userData.department = Number(department)
+            }
+
+            const savedUser = await Users.findByIdAndUpdate(id, userData, { new: true })
+
+            if (!savedUser) {
+                return res.status(400).json({ msg: "Could Not Update User Information." })
+            }
+            const url = `${CLIENT_URL}/login`
+            let message = `<p>Email: ${email} </p> <p>Name: ${name} </p>`;
+            sendMail(email, url, message, "update-notification")
+
+            await res.json({ msg: `User Info Update Success! Notification Email sent to ${email}` })
+
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ msg: "Something went wrong" })
+        }
+    },
     updateUsersRole: async (req, res) => {
         try {
             const { role } = req.body

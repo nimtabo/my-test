@@ -42,3 +42,28 @@
 .tableFixHead.team_members table .table_editors {
   cursor: pointer;
 }
+
+.modal.admin_team .modal-content {
+  width: fit-content;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.modal.admin_team .modal-content p {
+  text-align: start;
+  font-size: 20px;
+  border-bottom: 1px solid #333333;
+}
+
+.modal.admin_team .modal-content .modal_edit_container .modal_details {
+  width: 100%;
+}
+
+.modal.admin_team .modal-content .modal_edit_container .shop_form_item label {
+  width: 20%
+}
+
+.modal.admin_team .modal-content .modal_edit_container .shop_form_item input,
+.modal.admin_team .modal-content .modal_edit_container .shop_form_item select {
+  width: 80%;
+}

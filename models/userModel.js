@@ -49,7 +49,11 @@ const userSchema = new mongoose.Schema({
     },
     profile: {
         type: Number,
-        default: 0 // 0 = seller, 1 = buyer
+        default: 0 // 0 = seller, 1 = buyer | 
+    },
+    department: {
+        type: Number,
+        default: 0 // 0 = admins, 1 = marketing | 
     },
     name: {
         type: String,

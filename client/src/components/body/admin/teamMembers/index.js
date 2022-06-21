@@ -14,6 +14,7 @@ const TeamMembers = () => {
   const [loading, setLoading] = useState(false)
   const [showAddPart, setShowAddPart] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
+  const [selectedUser, setSelectedUser] = useState(null)
 
   const users = useSelector(state => state.users)
   const auth = useSelector(state => state.auth)
@@ -51,6 +52,11 @@ const TeamMembers = () => {
     }
   }
 
+  const handleedit = (user) => {
+    setShowEdit(!showEdit)
+    setSelectedUser(user)
+  }
+
   return (
     <div className='admin_sellers_page'>
       <ToastContainer />
@@ -67,6 +73,7 @@ const TeamMembers = () => {
         <Edit
           setShowEdit={setShowEdit}
           showEdit={showEdit}
+          user={selectedUser}
         />
       </div>
       <div className='admin_sellers_page_headers buyers admin_team'>
@@ -102,7 +109,7 @@ const TeamMembers = () => {
                           <span className='team_profile_pic'>
                             <img src={user.avatar} alt='user' />
                           </span>
-                          {user.store}
+                          {user.name}
                         </td>
                         <td>{user.email} <br /> {user.phone}</td>
                         <td>
@@ -114,7 +121,7 @@ const TeamMembers = () => {
                         </td>
                         <td>{new Date(user.createdAt).toDateString()}</td>
                         <td className='table_editors' onClick={() => handleDelete(user._id)}> <BiTrash /></td>
-                        <td onClick={() => { setShowEdit(!showEdit) }} className='table_editors'><MdOutlineEdit /></td>
+                        <td onClick={() => { handleedit(user) }} className='table_editors'><MdOutlineEdit /></td>
                       </tr>
                   }
                 })

@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import DataProvider from './redux/store'
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>

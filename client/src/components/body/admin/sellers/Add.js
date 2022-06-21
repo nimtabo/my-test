@@ -1,12 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Add = ({ setShowAddPart, showAddPart }) => {
+  const [email, setEmail] = useState('')
 
-  const onSubmit = () => {
-    console.log("submit")
+  const token = useSelector(state => state.token)
+
+  const onSubmit = async () => {
+    if (!email) {
+      return toast.error("Email fields required")
+    }
+    try {
+      const user = await axios.post(`/user/add_role`,
+        { email, role: 0, profile: 0 }, {
+        headers: { Authorization: token }
+      })
+      toast.success(user.data.msg)
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
   }
   return (
-    <div className="modal">
+    <div className="modal admin_team">
       {/* product_forms_rwaper */}
       <div className="modal-content">
         <span onClick={() => { setShowAddPart(!showAddPart) }} className="close">&times;</span>
@@ -18,14 +35,14 @@ const Add = ({ setShowAddPart, showAddPart }) => {
           <div className="modal_details">
             <div className="shop_form_item">
               <label >Email </label>
-              <input type="text" name="email" />
+              <input type="text" name="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
             </div>
 
           </div>
         </form>
 
         <div className="modal_edit_submit">
-          <button>Invite Seller</button>
+          <button onClick={onSubmit}>Invite Seller</button>
         </div>
       </div>
     </div >

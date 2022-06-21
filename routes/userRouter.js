@@ -24,6 +24,8 @@ router.get('/logout', userCtrl.logout)
 
 router.patch('/update', auth, userCtrl.updateUser)
 
+router.post('/add_role', auth, authAdmin, userCtrl.addUsersRole)
+router.patch('/update_profile', auth, authAdmin, userCtrl.updateProfileRole)
 router.patch('/update_role/:id', auth, authAdmin, userCtrl.updateUsersRole)
 
 router.delete('/delete/:id', auth, authAdmin, userCtrl.deleteUser)
