@@ -24,7 +24,7 @@ const shopSchema = new mongoose.Schema({
   },
   website: {
     type: String,
-    required: [true, "Please enter store Website!"],
+    // required: [true, "Please enter store Website!"],
     trim: true,
   },
   email: {

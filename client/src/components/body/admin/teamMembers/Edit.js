@@ -26,9 +26,9 @@ const Edit = ({ setShowEdit, showEdit, user }) => {
         userData, {
         headers: { Authorization: token }
       })
-      toast.success(user.data.msg)
+      toast.success(user.data.msg, { theme: 'colored' })
     } catch (error) {
-      toast.error(error.response.data.msg)
+      toast.error(error.response.data.msg, { theme: 'colored' })
     }
   }
 

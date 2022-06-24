@@ -17,16 +17,20 @@ const { CLIENT_URL } = process.env
 const userCtrl = {
     register: async (req, res) => {
         try {
-            const { store, phone, storeWebsite, city, state, email, password } = req.body
+            const { store, phone, city, state, email, password } = req.body
 
-            if (!store || !phone || !storeWebsite || !city || !state || !email || !password)
+            if (!store || !phone || !city || !state || !email || !password) {
                 return res.status(400).json({ msg: "Please fill in all fields." })
+            }
 
-            if (!validateEmail(email))
+            if (!validateEmail(email)) {
                 return res.status(400).json({ msg: "Invalid emails." })
+            }
 
             const user = await Users.findOne({ email })
-            if (user) return res.status(400).json({ msg: "This email already exists." })
+            if (user) {
+                return res.status(400).json({ msg: "This email already exists." })
+            }
 
             if (password.length < 6)
                 return res.status(400).json({ msg: "Password must be at least 6 characters." })
@@ -34,7 +38,7 @@ const userCtrl = {
             const passwordHash = await bcrypt.hash(password, 12)
 
             const newUser = {
-                store, phone, storeWebsite, city, state, email, password: passwordHash
+                store, phone, city, state, email, password: passwordHash
             }
 
             const activation_token = createActivationToken(newUser)
@@ -45,7 +49,7 @@ const userCtrl = {
 
             res.json({ msg: "Register Success! Please activate your email to start." })
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ msg: "Oops! Something went wrong" })
         }
     },
     registerBuyer: async (req, res) => {
@@ -86,10 +90,12 @@ const userCtrl = {
             const { activation_token } = req.body
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
 
-            const { store, phone, storeWebsite, city, state, email, password, profile } = user
+            const { store, phone, city, state, email, password, profile } = user
 
             const check = await Users.findOne({ email })
-            if (check) return res.status(400).json({ msg: "This email already exists." })
+            if (check) {
+                return res.status(400).json({ msg: "This email already exists." })
+            }
 
             // RANDOM CODE GENERATOR
             const numCode = cryptoRandomString({ length: 6, type: 'numeric' });
@@ -102,12 +108,12 @@ const userCtrl = {
             // *******************
 
             const newUser = new Users({
-                store, phone, storeWebsite, city, state, email, password, code, profile
+                store, phone, city, state, email, password, code, profile
             })
 
             const savedUser = await newUser.save()
 
-            if (!store || !phone || !storeWebsite || !city || !state) {
+            if (!store || !phone || !city || !state) {
                 return res.json({ msg: "Account has been activated!" })
             }
             // ******* CREATE SHOP/STORE ************
@@ -118,7 +124,6 @@ const userCtrl = {
                 email,
                 city,
                 stateProvince: state,
-                website: storeWebsite,
                 owner: savedUser._id,
             });
 

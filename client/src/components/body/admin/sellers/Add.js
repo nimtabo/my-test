@@ -10,16 +10,16 @@ const Add = ({ setShowAddPart, showAddPart }) => {
 
   const onSubmit = async () => {
     if (!email) {
-      return toast.error("Email fields required")
+      return toast.error("Email fields required", { theme: 'styled' })
     }
     try {
       const user = await axios.post(`/user/add_role`,
         { email, role: 0, profile: 0 }, {
         headers: { Authorization: token }
       })
-      toast.success(user.data.msg)
+      toast.success(user.data.msg, { theme: 'styled' })
     } catch (error) {
-      toast.error(error.response.data.msg)
+      toast.error(error.response.data.msg, { theme: 'styled' })
     }
   }
   return (

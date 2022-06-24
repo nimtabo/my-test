@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification'
 import { isEmpty, isEmail, isLength, isMatch, validatePhone, formatPhoneNumber, is_url } from '../../utils/validation/Validation'
@@ -22,7 +22,9 @@ function Register() {
     const [user, setUser] = useState(initialState)
     const [cities, setCities] = useState([])
 
-    const { store, phone, city, state, storeWebsite, email, password, cf_password, err, success } = user
+    const history = useHistory()
+
+    const { store, phone, city, state, email, password, cf_password, err, success } = user
 
     const handleChangeInput = e => {
         const { name, value } = e.target
@@ -39,8 +41,8 @@ function Register() {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        console.log(user)
-        if (isEmpty(store) || isEmpty(phone) || isEmpty(city) || isEmpty(state) || isEmpty(storeWebsite) || isEmpty(password)) {
+
+        if (isEmpty(store) || isEmpty(phone) || isEmpty(city) || isEmpty(state) || isEmpty(password)) {
             setUser({ ...user, err: "Please fill in all fields.", success: '' })
             return setTimeout(() => {
                 setUser({ ...user, err: '', success: '' })
@@ -63,14 +65,14 @@ function Register() {
             }
         }
 
-        if (storeWebsite) {
-            if (!is_url(storeWebsite)) {
-                setUser({ ...user, err: 'Enter valid Website', success: "" })
-                return setTimeout(() => {
-                    setUser({ ...user, err: '', success: '' })
-                }, 5000);
-            }
-        }
+        // if (storeWebsite) {
+        //     if (!is_url(storeWebsite)) {
+        //         setUser({ ...user, err: 'Enter valid Website', success: "" })
+        //         return setTimeout(() => {
+        //             setUser({ ...user, err: '', success: '' })
+        //         }, 5000);
+        //     }
+        // }
 
         if (isLength(password)) {
             setUser({ ...user, err: "Password must be at least 6 characters.", success: '' })
@@ -88,12 +90,13 @@ function Register() {
 
         try {
             const res = await axios.post('/user/register', {
-                store, phone, city, state, storeWebsite, email, password
+                store, phone, city, state, email, password
             })
 
             setUser({ ...user, err: '', success: res.data.msg })
             return setTimeout(() => {
                 setUser({ ...user, err: '', success: '' })
+                history.push('/login')
             }, 5000);
         } catch (err) {
             err.response.data.msg &&
@@ -129,11 +132,11 @@ function Register() {
                         value={phone} name="phone" onChange={handleChangeInput} />
                 </div>
 
-                <div>
+                {/* <div>
                     <label htmlFor="storeWebsite">Store Website</label>
                     <input type="text" placeholder="Enter your storeWebsite if you have one" id="storeWebsite"
                         value={storeWebsite} name="storeWebsite" onChange={handleChangeInput} />
-                </div>
+                </div> */}
 
                 <div>
                     <label htmlFor="state">State</label>
