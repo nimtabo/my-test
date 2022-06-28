@@ -33,15 +33,16 @@ router.delete('/shops/:shopId/products/:productId', auth, shopCtrl.deleteProduct
 
 
 // ********* ADMIN ROUTES *******
-router.get('/:userId/shops', auth, authAdmin, shopCtrl.adminGetAllShops)
-router.get('/:userId/shops/:shopId', auth, shopCtrl.adminGetShop)
-router.patch('/:userId/shops/:shopId', auth, shopCtrl.adminUpdateShop)
-router.delete('/:userId/shops/:shopId', auth, shopCtrl.deleteShop)
+router.get('/list', auth, authAdmin, shopCtrl.adminGetAllShops)
+router.get('/:userId/shops/:shopId', auth, authAdmin, shopCtrl.adminGetShop)
+router.patch('/:userId/shops/:shopId', auth, authAdmin, shopCtrl.adminUpdateShop)
+router.delete('/:userId/shops/:shopId', auth, authAdmin, shopCtrl.deleteShop)
 
+router.get('/products', auth, authAdmin, shopCtrl.adminGetAllProducts)
 router.get('/:userId/shops/:shopId/products', auth, authAdmin, shopCtrl.adminGetAllShopProducts)
-router.get('/:userId/shops/:shopId/products/:productId', auth, shopCtrl.adminGetProduct)
-router.patch('/:userId/shops/:shopId/products/:productId', auth, shopCtrl.adminUpdateProduct)
-router.delete('/:userId/shops/:shopId/products/:productId', auth, shopCtrl.adminDeleteProduct)
+router.get('/:userId/shops/:shopId/products/:productId', auth, authAdmin, shopCtrl.adminGetProduct)
+router.patch('/:userId/shops/:shopId/products/:productId', auth, authAdmin, shopCtrl.adminUpdateProduct)
+router.delete('/:userId/shops/:shopId/products/:productId', auth, authAdmin, shopCtrl.adminDeleteProduct)
 
 
 module.exports = router

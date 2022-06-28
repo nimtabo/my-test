@@ -1,15 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { FiSearch, FiCalendar } from 'react-icons/fi'
 import { BiDotsHorizontalRounded } from 'react-icons/bi'
 import { MdAdd, MdOutlineMoreHoriz } from 'react-icons/md'
 import { GrClose } from 'react-icons/gr'
 import { IoMdArrowDropdown } from 'react-icons/io'
 import { Rating } from 'react-simple-star-rating'
+import Add from './Add'
+import Edit from './Edit'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 import './styles.css'
 
 
 const Store = () => {
   const [ratingValue, setRatingValue] = useState(0)
+  const [showAddPart, setShowAddPart] = useState(false)
+  const [showEdit, setShowEdit] = useState(false)
+  const [stores, setStores] = useState([])
+
+  const users = useSelector(state => state.users)
+  const auth = useSelector(state => state.auth)
+  const token = useSelector(state => state.token)
+
+  const { user, isAdmin } = auth
+
+  useEffect(() => {
+    if (isAdmin) {
+      getStores()
+    }
+  }, [token, isAdmin])
+
+  const getStores = async () => {
+    try {
+      const res = await axios.get('/api/shop/list', { headers: { Authorization: token } })
+      setStores([...res.data])
+      toast.success('Stores load success!', { theme: 'styled' })
+    } catch (error) {
+      toast.error(error.response.data.message, { theme: 'styled' })
+    }
+  }
 
   const handleRating = (rate) => {
     setRatingValue(rate)
@@ -21,6 +52,22 @@ const Store = () => {
 
   return (
     <div className='admin_stores_page'>
+      {/* MODALS START */}
+      <div id="add_parts_container"
+        style={showAddPart ? { display: "block" } : { display: "none", }}>
+        <Add
+          setShowAddPart={setShowAddPart}
+          showAddPart={showAddPart}
+        />
+      </div>
+      <div id="add_parts_container"
+        style={showEdit ? { display: "block" } : { display: "none", }}>
+        <Edit
+          setShowEdit={setShowEdit}
+          showEdit={showEdit}
+        />
+      </div>
+      {/* MODALS END */}
       <div className='admin_sellers_page_headers admin_stores_header'>
         <h2>Stores</h2>
 
@@ -49,7 +96,7 @@ const Store = () => {
               <FiCalendar /> <span>1 Jan 22 - 13 Jan 22</span>
             </div>
             <div className='admin_buyers_add'>
-              <button> <MdAdd /> Add seller</button>
+              <button> <MdAdd /> Add Store</button>
             </div>
           </div>
         </div>
@@ -69,71 +116,25 @@ const Store = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><input type='checkbox' /></td>
-              <td>Sam Auto Parts</td>
-              <td><span className='admin_stores_table_plan auto_shop'>Auto Shop</span></td>
-              <td>$834</td>
-              <td><Rating
-                onClick={handleRating}
-                initialValue={3.5}
-                ratingValue={ratingValue}
-                allowHalfIcon
-              /></td>
-              <td><MdOutlineMoreHoriz /></td>
-            </tr>
-            <tr>
-              <td><input type='checkbox' /></td>
-              <td>Sam Auto Parts</td>
-              <td><span className='admin_stores_table_plan auto_shop'>Auto Shop</span></td>
-              <td>$834</td>
-              <td><Rating
-                onClick={handleRating}
-                initialValue={5}
-                ratingValue={ratingValue}
-                allowHalfIcon
-              /></td>
-              <td><MdOutlineMoreHoriz /></td>
-            </tr>
-            <tr>
-              <td><input type='checkbox' /></td>
-              <td>Sam Auto Parts</td>
-              <td><span className='admin_stores_table_plan auto_shop'>Auto Shop</span></td>
-              <td>$834</td>
-              <td><Rating
-                onClick={handleRating}
-                initialValue={2.5}
-                ratingValue={ratingValue}
-                allowHalfIcon
-              /></td>
-              <td><MdOutlineMoreHoriz /></td>
-            </tr>
-            <tr>
-              <td><input type='checkbox' /></td>
-              <td>Sam Auto Parts</td>
-              <td><span className='admin_stores_table_plan auto_shop'>Auto Shop</span></td>
-              <td>$834</td>
-              <td><Rating
-                onClick={handleRating}
-                initialValue={1.5}
-                ratingValue={ratingValue}
-                allowHalfIcon
-              /></td>
-              <td><MdOutlineMoreHoriz /></td>
-            </tr>
-            <tr>
-              <td><input type='checkbox' /></td>
-              <td>Sam Auto Parts</td>
-              <td><span className='admin_stores_table_plan auto_shop'>Auto Shop</span></td>
-              <td>$834</td>
-              <td><Rating
-                onClick={handleRating}
-                initialValue={4.5}
-                ratingValue={ratingValue}
-                allowHalfIcon
-              /></td>
-              <td><MdOutlineMoreHoriz /></td>
-            </tr>
+            {
+              stores.map(store => {
+                return (
+                  <tr key={store._id}>
+                    <td><input type='checkbox' /></td>
+                    <td> <Link to={`#`}>{store.name}</Link></td>
+                    <td><span className='admin_stores_table_plan auto_shop'>Auto Shop</span></td>
+                    <td>$834</td>
+                    <td><Rating
+                      onClick={handleRating}
+                      initialValue={3.5}
+                      ratingValue={ratingValue}
+                      allowHalfIcon
+                    /></td>
+                    <td><MdOutlineMoreHoriz /></td>
+                  </tr>)
+              })
+            }
+
           </tbody>
         </table>
       </div>

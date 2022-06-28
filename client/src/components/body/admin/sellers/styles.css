@@ -147,6 +147,30 @@
   background: #eee;
 }
 
+/* General popover menu */
+.tableFixHead tr ul.popupmenu {
+  display: none;
+  position: relative;
+  background-color: #333333;
+  margin-left: -60px;
+  top: -50px;
+}
+
+.tableFixHead tr ul.popupmenu.openpop {
+  display: block;
+}
+
+.tableFixHead tr ul.popupmenu li {
+  color: #fff;
+  cursor: pointer;
+  padding: 1px 5px;
+}
+
+.tableFixHead tr ul.popupmenu li:hover {
+  background-color: #1D50A8;
+}
+
+/* PAGINATION  */
 .admin_table_pagnation {
   display: flex;
   justify-content: flex-end;

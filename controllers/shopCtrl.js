@@ -414,7 +414,7 @@ const shopCtrl = {
   // ************ ADMIN CTRL ***********
   adminGetAllShops: async (req, res) => {
     try {
-      const shops = await Shop.find({ owner: req.params.userId });
+      const shops = await Shop.find({}, { __v: 0 });
       if (!shops) {
         return res.status(400).json({
           message: "No Shop exist!",
@@ -478,6 +478,14 @@ const shopCtrl = {
     }
   },
   // ********
+  adminGetAllProducts: async (req, res) => {
+    try {
+      const products = await Product.find({}, { __v: 0 });
+      res.json(products);
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
   adminGetAllShopProducts: async (req, res) => {
     try {
       const { shopId } = req.params;

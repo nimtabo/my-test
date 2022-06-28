@@ -30,6 +30,9 @@ const Sellers = () => {
     }
   }, [token, isAdmin, dispatch, callback])
 
+  const handlePopover = (e) => {
+    e.target.classlist.toggle('openpop')
+  }
   return (
     <div className='admin_sellers_page'>
       {/* MODALS START */}
@@ -102,7 +105,7 @@ const Sellers = () => {
           <tbody>
             {
               users.map(user => {
-                return user.profile === 0 && (<tr>
+                return user.profile === 0 && (<tr key={user._id}>
                   <td><input type='checkbox' /></td>
                   <td>{user.store}</td>
                   <td>{user._id}</td>
@@ -110,6 +113,11 @@ const Sellers = () => {
                   <td>{user.phone}</td>
                   <td>plan Name</td>
                   <td><BiDotsHorizontalRounded /></td>
+                  {/* <ul className='popupmenu'>
+                    <li>Info</li>
+                    <li>Edit</li>
+                    <li>Delete</li>
+                  </ul> */}
                 </tr>)
               })
             }
