@@ -278,8 +278,8 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
                   {!(adFilter === "available") && <option value="0">Available</option>}
                   {!(adFilter === "soldout") && <option value="1">Sold Out</option>}
                   {!(adFilter === "onhold") && <option value="2">Put On-Hold</option>}
-                  {!(adFilter === "archived") && <option value="3">Archive</option>}
-                  <option value="4">Delete</option>
+                  {/* {!(adFilter === "archived") && <option value="3">Archive</option>} */}
+                  <option value="3">Delete</option>
                 </select>
               </label>
             </div>
