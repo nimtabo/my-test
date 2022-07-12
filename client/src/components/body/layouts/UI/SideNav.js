@@ -37,7 +37,7 @@ const SideNav = ({ handleOpenNav, width }) => {
       <Link to="/admin/sellers"><MdSell />Sellers</Link>
       <Link to="/admin/buyers"><FaCartPlus />Buyers</Link>
       <Link to="/admin/team"><RiTeamLine />Team</Link>
-      <Link to="#"><BiStats />Staticstics</Link>
+      <Link to="#google-analytics"><BiStats />Analytics</Link>
       <Link to="#"><MdQueryStats />Finance</Link>
       <Link to="/admin/tickets"><ImTicket />Tickets</Link>
       <Link to="#"><MdOutlineSettings />Settings</Link>

@@ -245,48 +245,53 @@
 
 .list_table .headers div:nth-child(3),
 .list_table .list_items .list_item div:nth-child(3) {
+  width: 6%;
+}
+
+.list_table .headers div:nth-child(4),
+.list_table .list_items .list_item div:nth-child(4) {
   width: 16%;
 }
 
 /* .list_table .headers div:nth-child(3), */
 /* .list_table .headers div:nth-child(4), */
-.list_table .headers div:nth-child(7),
+.list_table .headers div:nth-child(8),
 /* .list_table .list_items .list_item div:nth-child(3), */
 /* .list_table .list_items .list_item div:nth-child(4), */
-.list_table .list_items .list_item div:nth-child(7) {
+.list_table .list_items .list_item div:nth-child(8) {
   width: 6%;
 }
 
-.list_table .list_items .list_item div:nth-child(7) {
+.list_table .list_items .list_item div:nth-child(8) {
   margin-left: .2rem;
 }
 
-.list_table .list_items .list_item_a div:nth-child(4) {
+.list_table .list_items .list_item_a div:nth-child(5) {
   width: 10%;
-}
-
-.list_table .headers div:nth-child(4),
-.list_table .list_items .list_item div:nth-child(4) {
-  width: 12%;
 }
 
 .list_table .headers div:nth-child(5),
 .list_table .list_items .list_item div:nth-child(5) {
-  width: 17%;
+  width: 12%;
 }
 
 .list_table .headers div:nth-child(6),
-.list_table .list_items .list_item div:nth-child(6),
-.list_table .list_items .list_item_a div:nth-child(3) {
+.list_table .list_items .list_item div:nth-child(6) {
+  width: 17%;
+}
+
+.list_table .headers div:nth-child(7),
+.list_table .list_items .list_item div:nth-child(7),
+.list_table .list_items .list_item_a div:nth-child(4) {
   width: 30%;
 }
 
-.list_table .headers div:nth-child(8),
-.list_table .list_items .list_item div:nth-child(8) {
+.list_table .headers div:nth-child(9),
+.list_table .list_items .list_item div:nth-child(9) {
   width: 5%;
 }
 
-.list_table .list_items .list_item_a div:nth-child(5) {
+.list_table .list_items .list_item_a div:nth-child(6) {
   width: 9%;
 }
 

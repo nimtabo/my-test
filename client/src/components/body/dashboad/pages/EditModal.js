@@ -285,7 +285,6 @@ function EditModal({ product, token, shop, filterTable, deleteProduct, adFilter,
             </div>
 
 
-
           </div>
           {/* IMAGES */}
           <div className="modal_images">

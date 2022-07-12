@@ -69,7 +69,7 @@ function Services() {
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <div className="container-head">
           <h3 className="top-head">SELL YOUR USED CAR</h3>
         </div>
@@ -104,7 +104,7 @@ function Services() {
             <img src={services2} alt="services2" />
           </div>
         </div>
-      </div>
+      </div> */}
 
 
     </div>

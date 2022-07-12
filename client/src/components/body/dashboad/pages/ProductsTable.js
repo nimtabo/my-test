@@ -336,7 +336,7 @@ const ProductsTable = () => {
           <option value="available">Available</option>
           <option value="onhold">On Hold</option>
           <option value="soldout">Sold Out</option>
-          <option value="archive">Archive </option>
+          <option value="archive">Deleted </option>
         </select>
       </div>
       <table className="styled-table">

@@ -17,6 +17,7 @@ import { showErrMsg } from '../../utils/notification/Notification'
 import { getStateAbriv } from '../../utils/state_cities/index'
 import locked from "../../../img/locked.png"
 // import 'react-accessible-accordion/dist/fancy-example.css';
+import { Rating } from 'react-simple-star-rating'
 import './listing.css'
 
 const initialState = { make: '', model: '', year: '', engine: '', category: '', part: '' }
@@ -39,6 +40,7 @@ const Listing = () => {
   // const [zipcode, setZipcode] = useState("")
   const [err, setErr] = useState("")
   const [nextPage, setNextPage] = useState(1)
+  const [ratingValue, setRatingValue] = useState(0)
 
   const [data, setData] = useState(initialState)
   // const [home, setHome] = useState({ make: '', model: '', year: '', part: '' })
@@ -228,6 +230,13 @@ const Listing = () => {
       setIsLoading(false)
     }
   }
+  const handleRating = (rate) => {
+    setRatingValue(rate)
+  }
+
+  const handleReset = () => {
+    setRatingValue(2.5)
+  }
   return (
     <div className="listing_page">
       <div className="listing_left_filter">
@@ -334,6 +343,7 @@ const Listing = () => {
         <div className='headers'>
           <div>IMAGE</div>
           <div>SELLER</div>
+          <div>RATING</div>
           <div>CITY</div>
           {/* <div>STATE</div> */}
           <div>PHONE</div>
@@ -360,6 +370,15 @@ const Listing = () => {
                             <div key={prod._id} className='list_item'>
                               <div><img className='expand_img' src={prod.multiple_image[0]} /></div>
                               <div className='word_break'>{prod.shop.name}</div>
+                              <div>
+                                <p>3.5(130)</p>
+                                <Rating
+                                  onClick={handleRating}
+                                  initialValue={3.5}
+                                  ratingValue={ratingValue}
+                                  allowHalfIcon
+                                />
+                              </div>
                               <div>{`${prod.shop.city} , ${getStateAbriv(prod.shop.stateProvince)}`}</div>
                               {/* <div>{prod.shop.stateProvince}</div> */}
                               <div>{prod.shop.phone}</div>
@@ -377,6 +396,7 @@ const Listing = () => {
                             <div key={prod._id} className='list_item'>
                               <div><img src={prod.multiple_image[0]} /></div>
                               <div className='word_break'>{prod.shop.name.substring(0, 13)}...</div>
+                              <div>3.5(130)</div>
                               <div>{`${prod.shop.city} , ${getStateAbriv(prod.shop.stateProvince)}`.substring(0, 26)}</div>
                               {/* <div>{prod.shop.stateProvince}</div> */}
                               <div>{prod.shop.phone}</div>
